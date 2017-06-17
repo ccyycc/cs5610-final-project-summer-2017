@@ -10,8 +10,6 @@
             .when("/profile", {
                 templateUrl: 'views/user/templates/profile.view.client.html'
             })
-            .when("/store", {
-            })
             .when('/recipe',{
             })
             .when('/store',{

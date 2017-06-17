@@ -6,17 +6,15 @@ const https = require('https');
 
 app.post('/api/map', searchQuery);
 
-
 var latitude = -33.8670522;
 var longitude = 151.1957362;
 var radius = 500;
 var type = 'food';
 var keyword = 'supermarket';
-var key = 'AIzaSyDWDGBQg0OOggV3glE5wcNcFOXhSntbj1Y';
 
 
 var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=LATITUDE,LONGITUDE&radius=RADIUS&type=TYPE&keyword=KEYWORD&key=GOOGLE_KEY";
-var pathBase = "/maps/api/place/nearbysearch/json?location=LATITUDE,LONGITUDE&radius=RADIUS&type=TYPE&keyword=KEYWORD&key=GOOGLE_KEY";
+var pathBase = "/maps/api/place/nearbysearch/json?location=LATITUDE,LONGITUDE&radius=RADIUS&type=TYPE&keyword=KEYWORD&key=GOOGLE_API_KEY";
 
 
 function searchQuery(req, res) {
@@ -32,6 +30,7 @@ function searchQuery(req, res) {
 }
 
 function searchNearBy(coords) {
+
     var deferred = q.defer();
     https.get({
         host: 'maps.googleapis.com',
@@ -41,7 +40,7 @@ function searchNearBy(coords) {
             .replace("RADIUS",radius)
             .replace("TYPE",type)
             .replace("KEYWORD",keyword)
-            .replace("GOOGLE_KEY",key),
+            .replace("GOOGLE_API_KEY",process.env.GOOGLE_API_KEY),
         headers: {
             "Accept": "application/json"
         }
