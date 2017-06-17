@@ -1,0 +1,49 @@
+{{model.testMessage}}
+
+<div class="container-fluid">
+
+    <p>Click the button to get your coordinates.</p>
+
+    <!--<button onclick="getLocation()">Try It</button>-->
+
+    <p id="demo"></p>
+
+    <!--<script>-->
+        <!--var x = document.getElementById("demo");-->
+
+        <!--function getLocation() {-->
+            <!--if (navigator.geolocation) {-->
+                <!--navigator.geolocation.getCurrentPosition(showPosition);-->
+            <!--} else {-->
+                <!--x.innerHTML = "Geolocation is not supported by this browser.";-->
+            <!--}-->
+        <!--}-->
+
+        <!--function showPosition(position) {-->
+            <!--x.innerHTML = "Latitude: " + position.coords.latitude +-->
+                <!--"<br>Longitude: " + position.coords.longitude;-->
+        <!--}-->
+    <!--</script>-->
+
+
+    <div class="input-group">
+        <input ng-model="searchText"
+               type="text"
+               class="form-control">
+        <span class="input-group-btn">
+           <a ng-click="model.searchNearBy(searchText)"
+              class="btn btn-default" type="button">
+               <span class="glyphicon glyphicon-search"></span>
+           </a>
+       </span>
+    </div>
+
+    <div class="row">
+        <div class="clearfix col-sm-12 col-md-2" ng-repeat="place in model.places">
+            <ul>
+                <li>name:{{place.name}}</li>
+                <li>address:{{place.vicinity}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
