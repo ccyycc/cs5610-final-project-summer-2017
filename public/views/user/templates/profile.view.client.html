@@ -1,1 +1,77 @@
-<h1>Profile page</h1>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#!/profile">
+                Profile
+            </a>
+            <div class="navbar-text pull-right change-margin-right-15">
+                <a href="#!/website"
+                   class="navbar-link">
+                  <span class="glyphicon glyphicon-ok">
+                  </span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</nav>
+
+
+
+
+<div class="container-fluid main-container">
+    <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
+    <div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
+    <form>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text"
+                   class="form-control"
+                   id="username"
+                   ng-model="model.user.username"
+                   placeholder="Username">
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email"
+                   class="form-control"
+                   id="email"
+                   ng-model="model.user.email"
+                   placeholder="alice@wonderland.com">
+        </div>
+        <div class="form-group">
+            <label for="first-name">First Name</label>
+            <input type="text"
+                   class="form-control"
+                   id="first-name"
+                   ng-model="model.user.firstName"
+                   placeholder="Alice">
+        </div>
+        <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input type="text"
+                   class="form-control"
+                   id="last-name"
+                   ng-model="model.user.lastName"
+                   placeholder="Wonderland">
+        </div>
+    </form>
+
+
+    <a class="btn btn-success btn-block"
+       ng-click = "model.updateUser(model.user)">Update</a>
+    <a class="btn btn-danger  btn-block"
+       ng-click="model.logout()">Logout</a>
+    <a class="btn btn-danger btn-block"
+       ng-click = "model.unregister()">Unregister</a>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="pull-right navbar-text">
+            <a href="#!/profile" class="navbar-link">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>
