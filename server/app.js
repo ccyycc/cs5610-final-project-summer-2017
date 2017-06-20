@@ -1,8 +1,5 @@
 var mongoose = require('mongoose');
-
-var connectionString = 'mongodb://localhost/finalProject';
-
-mongoose.connect(connectionString);
 mongoose.Promise = require('q').Promise;
+mongoose.connect('mongodb://localhost/finalProject');
 
-require('./services/map.service.server');
+require('./services/user.service.server');

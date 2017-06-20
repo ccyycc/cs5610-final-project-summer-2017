@@ -93,6 +93,7 @@ function createUser(user) {
     } else if (user.roles.indexOf(',') > -1) {
         user.roles = user.roles.split(',');
     }
+    user.photo = './uploads/default_profile.png';
     return userModel.create(user);
 }
 
@@ -137,7 +138,7 @@ function updateUser(userId, user) {
 }
 
 function deleteUser(userId) {
-    var websiteModel = require('../website/website.model.server');
+    var websiteModel = require('../website/website.models.server');
 
     return userModel
         .remove({_id: userId})

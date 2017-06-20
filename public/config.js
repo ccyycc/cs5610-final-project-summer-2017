@@ -5,6 +5,10 @@
 
     function config($routeProvider) {
         $routeProvider
+            .when('/',{
+                templateUrl:'./views/home/templates/home.view.client.html',
+                // controller:''
+            })
             .when('/login', {
                 templateUrl: './views/user/templates/login.view.client.html',
                 controller: 'loginController',
@@ -23,7 +27,7 @@
                     currentUser: checkLoggedin
                 }
             })
-            .when('/photo', {
+            .when('/account/photo', {
                 templateUrl: './views/user/templates/photo.view.client.html',
                 controller: 'photoController',
                 controllerAs: 'model',

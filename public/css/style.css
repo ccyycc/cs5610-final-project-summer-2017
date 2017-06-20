@@ -9,13 +9,23 @@ body {
 
 }
 
+.textToCenter {
+    display: block;
+    text-align: center;
+}
+
+.imageToCenter {
+    display: block;
+    margin: auto;
+}
+
 .row {
     margin-left: 0;
     margin-right: 0;
 }
 
 nav.navbar-default {
-    color:white;
+    color: white;
     /*background-color: #9acfea;*/
 }
 
@@ -28,16 +38,17 @@ nav.navbar-default {
 }
 
 .change-margin-left-15 {
-    margin-left:15px;
+    margin-left: 15px;
 }
 
 .change-margin-right-30 {
-    margin-right:30px;
+    margin-right: 30px;
 }
 
 .margin-top-15 {
-    margin-top:10px;
+    margin-top: 10px;
 }
+
 .description {
     display: inline;
 
@@ -47,7 +58,7 @@ nav.navbar-default {
     border: 0;
 }
 
-a:hover  {
+a:hover {
     text-decoration: none;
 }
 
@@ -60,10 +71,8 @@ a:visited {
 }
 
 .border-1 {
-    border:6px;
+    border: 6px;
 }
-
-
 
 /*.widget > .widget-toolbar {*/
 /*position:absolute;*/
@@ -79,10 +88,10 @@ a:visited {
     opacity: 0.9;
     padding: 5px;
     border-bottom-left-radius: 10px;
-    z-index:1;
+    z-index: 1;
 }
 
-.widget > image{
+.widget > image {
     width: 100%;
 }
 
@@ -97,7 +106,9 @@ a:visited {
 .video-container {
     position: relative;
     padding-bottom: 56.25%;
-    padding-top: 30px; height: 0; overflow: hidden;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
 }
 
 .video-container iframe,
@@ -114,11 +125,12 @@ a:visited {
 
     white-space: nowrap;
 }
+
 .list-header {
     background-color: #c4e3f3;
     /*border-color: #c4e3f3;*/
 
-    border-left:0;
-    border-right:0;
+    border-left: 0;
+    border-right: 0;
 }
 
