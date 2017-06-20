@@ -28,7 +28,7 @@
                 }
             })
             .when('/account/photo', {
-                templateUrl: './views/user/templates/photo.view.client.html',
+                templateUrl: './views/user/templates/snippets/photo.view.client.html',
                 controller: 'photoController',
                 controllerAs: 'model',
                 resolve: {

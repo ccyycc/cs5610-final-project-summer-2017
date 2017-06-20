@@ -9,16 +9,16 @@ body {
 
 }
 
-.textToCenter {
-    display: block;
-    text-align: center;
+#follow-button {
+    position: absolute;
+    bottom: -30px;
 }
 
-.imageToCenter {
-    display: block;
-    margin: auto;
+#followerNfollowing {
+    padding-top:20px;
 }
 
+/*-----------------------------------------------------------------------*/
 .row {
     margin-left: 0;
     margin-right: 0;
@@ -29,9 +29,34 @@ nav.navbar-default {
     /*background-color: #9acfea;*/
 }
 
+
 .main-container {
     margin-top: 50px;
 }
+
+
+/*------------------------------------------------------------------------*/
+.textToCenter {
+    display: block;
+    text-align: center;
+}
+
+.imageToCenter {
+    display: block;
+    margin: auto;
+}
+
+
+.textToTop {
+    margin-top: 0;
+    vertical-align: top ;
+}
+
+.toBottom {
+    vertical-align: bottom;
+}
+
+
 
 .change-margin-right-15 {
     margin-right: 15px;
@@ -81,6 +106,8 @@ a:visited {
 /*opacity:0.8;*/
 /*}*/
 
+
+/*----------------------------------------------------------------------------*/
 .widget-toolbar {
     position: absolute;
     right: 15px;

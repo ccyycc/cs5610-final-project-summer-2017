@@ -3,61 +3,28 @@
         .module('FinalProject')
         .controller('profileController', profileController);
 
-    function profileController($routeParams, userService, $location, currentUser, $rootScope) {
+    function profileController($routeParams, userService, $location, currentUser) {
 
         var model = this;
 
-        model.userId = currentUser.userId;
-        model.updateUser = updateUser;
-        // models.deleteUser = deleteUser;
-        model.logout = logout;
-        model.unregister = unregister;
+        model.render = render;
 
         function init() {
-            renderUser(currentUser)
-                // .error(userError());
+            model.userId = currentUser._id;
+            console.log(model.userId);
+            render(model.userId);
+
+            model.recipeOrProduct = 'RECIPE';
         }
         init();
 
-        function logout() {
+        function render(userId) {
             userService
-                .logout()
-                .then(function () {
-                    $rootScope.currentUser = null;
-                    $location.url('/login');
-                });
+                .populateRecipesAndProducts(userId)
+                .then(function (user) {
+                    model.user = user;
+                })
         }
-
-        function unregister(user) {
-            userService
-                .unregister()
-                .then(function () {
-                    $location.url('/');
-                });
-        }
-
-        function renderUser(response) {
-            model.user = response;
-        }
-
-        function updateUser(newUser) {
-            userService
-                .updateProfile(newUser)
-                .then(function () {
-                    model.message = "User updated successfully";
-                });
-        }
-
-        function userError() {
-            model.error = "User not found";
-        }
-
-        // models.user = userService.findUserById(models.userId);
-        var promise = userService.findUserById(model.userId);
-
-        promise.then(function (user) {
-            model.user = user;
-        });
     }
 })();
 

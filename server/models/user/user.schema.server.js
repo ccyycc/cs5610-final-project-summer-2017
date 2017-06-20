@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
-    username: {type: String, require: true, unique: true},
-    password: {type: String, require: true},
+    username: {type: String, required: true, unique: true},
+    password: {type: String},
     firstName: String,
     lastName: String,
     email: String,
@@ -19,10 +19,14 @@ var userSchema = mongoose.Schema({
         token: String
     },
 
+    dailyCalorieBurned: Number,
+
+    messages:[{type: mongoose.Schema.ObjectId, ref: 'messageModel'}],
+
     followers: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}],
     followings: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}],
-    likedRecipes: [{type: mongoose.Schema.ObjectId, ref: 'recipeModel'}],
-    productsCollection: [{type: mongoose.Schema.ObjectId, ref: 'productModel'}]
+    // likedRecipes: [{type: mongoose.Schema.ObjectId, ref: 'recipeModel'}],
+    // collectedProducts: [{type: mongoose.Schema.ObjectId, ref: 'productModel'}]
 }, {collection: "user"});
 
 
