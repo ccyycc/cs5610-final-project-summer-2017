@@ -5,11 +5,19 @@
 
     function mapService($http) {
 
-        this.searchOnMap = search;
+        this.searchWithCoords = searchWithCoords;
+        this.searchWithAddress = searchWithAddress;
 
-        function search(coords) {
-            var url = "/api/map";
-            return $http.post(url,coords)
+
+        function searchWithAddress(address) {
+            var url = "/api/map/searchWithAddress/"+address;
+            return $http.get(url)
+                .then(extractData);
+        }
+
+        function searchWithCoords(coords) {
+            var url = "/api/map/searchWithCoords";
+            return $http.post(url, coords)
                 .then(extractData);
         }
 

@@ -5,32 +5,49 @@
 
     function storeSearchController($routeParams, $location, MapService, $window) {
         var model = this;
-
-
-        function getLocation() {
-            if ($window.navigator.geolocation) {
-                $window.navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
-            }
-        }
-
-        function showPosition(position) {
-            var currentLocation = {latitude: position.coords.latitude, longitude: position.coords.longitude};
-            MapService.searchOnMap(currentLocation).then(
-                function (res) {
-                    model.places = res.results;
-                }
-            );
-            model.tmpLocation = position;
-        }
+        this.searchWithCoords = searchWithCoords;
+        this.searchWithAddress = searchWithAddress;
 
 
         function init() {
-            getLocation();
-
+            model.address = {};
         }
 
         init();
+
+
+        function searchWithCoords() {
+            if ($window.navigator.geolocation) {
+                return $window.navigator.geolocation.getCurrentPosition(requestSearchWithCoords);
+            } else {
+                return undefined;
+            }
+        }
+
+        function searchWithAddress() {
+            var fullAddress = model.address.street
+                + "+" +model.address.city
+                + "+" +model.address.state
+                + "+" +model.address.zip;
+            fullAddress = fullAddress.replace(/\s/g, '+');
+            MapService.searchWithAddress(fullAddress)
+                .then(
+                    function (res) {
+                        model.places = res.results;
+                    }
+                );
+        }
+
+        function requestSearchWithCoords(position) {
+            var currentCoords = {latitude: position.coords.latitude, longitude: position.coords.longitude};
+            MapService.searchWithCoords(currentCoords)
+                .then(
+                    function (res) {
+                        model.places = res.results;
+                    }
+                );
+        }
+
+
     }
 })();
