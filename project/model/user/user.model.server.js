@@ -12,6 +12,7 @@ userModel.findUserByCredentials = findUserByCredentials;
 userModel.findAllUsers = findAllUsers;
 userModel.findUserByGoogleId = findUserByGoogleId;
 userModel.findUserByFacebookId = findUserByFacebookId;
+userModel.uploadImage = uploadImage;
 
 userModel.addFollower = addFollower;
 userModel.deleteFollower = deleteFollower;
@@ -143,5 +144,15 @@ function deleteUser(userId) {
         .then(function (status) {
             return websiteModel
                 .deleteWebsitesForUser(userId);
+        })
+}
+
+function uploadImage(userId, filename) {
+
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            user.photo = '/uploads/' + filename;
+            return user.save();
         })
 }

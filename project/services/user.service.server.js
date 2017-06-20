@@ -1,4 +1,6 @@
 const app = require('../../express');
+var multer = require('multer'); // npm install multer --save
+var upload = multer({dest: __dirname + '/../../public/assignment/uploads'});
 var userModel = require('../model/user/user.model.server');
 var passport = require('passport');
 var bcrypt = require("bcrypt-nodejs");
@@ -28,18 +30,15 @@ passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 // passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
 
-
 // start all url with '/aps' ('/rest' is also popular)
 // :userId: path params
 app.get('/api/user/:userId', findUserById);
+app.get('/api/checkname', findUserByName);
 app.get('/api/user', isAdmin, findAllUsers);
 
 app.post('/api/user', isAdmin, createUser);
 app.put('/api/user/:userId', isAdmin, updateUser);
 app.delete('/api/user/:userId', isAdmin, deleteUser);
-app.get('/api', function (req, res) {
-    res.send('123');
-});
 
 app.post('/api/login', passport.authenticate('local'), login);
 app.get('/api/loggedin', loggedin);
@@ -48,6 +47,9 @@ app.post('/api/register', register);
 app.get('/api/checkAdmin', checkAdmin);
 app.delete('/api/unregister', unregister);
 app.put('/api/update', updateProfile);
+
+app.post('/api/upload', upload.single('myFile'), uploadImage);
+
 
 app.get('/auth/google',
     passport.authenticate('google', {scope: ['profile', 'email']}));
@@ -75,6 +77,19 @@ function isAdmin(req, res, next) {
 
 
 //////////actural function/////////////////
+
+
+function findUserByName(req, res) {
+    userModel
+        .findUserByUsername(req.query.username)
+        .then(function (user) {
+            if (user) {
+                res.json(user)
+            } else {
+            }
+            res.sendStatus(404);
+        })
+}
 
 function unregister(req, res) {
     userModel
@@ -282,7 +297,7 @@ function googleStrategy(token, refreshToken, profile, done) {
                         lastName: profile.name.familyName,
                         email: email,
                         google: {
-                            id:    profile.id,
+                            id: profile.id,
                             token: token
 
                         }
@@ -321,4 +336,19 @@ function facebookStrategy(token, refreshToken, profile, done) {
                 }
             }
         )
+}
+
+function uploadImage(req, res) {
+    var myFile = req.file;
+    var userId = req.body.userId;
+
+    var filename = myFile.filename;
+    userModel
+        .uploadImage(filename)
+        .then(function (status) {
+            var callbackUrl = "/#!/account";
+            res.redirect(callbackUrl);
+        });
+
+
 }

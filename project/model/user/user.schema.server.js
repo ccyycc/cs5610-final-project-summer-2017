@@ -6,6 +6,7 @@ var userSchema = mongoose.Schema({
     firstName: String,
     lastName: String,
     email: String,
+    photo: String,
 
     roles: [{
         type: String,
@@ -18,10 +19,10 @@ var userSchema = mongoose.Schema({
         token: String
     },
 
-    followers: [{type: mongoose.Schema.ObjectId, ref:'userModel'}],
-    followings: [{type: mongoose.Schema.ObjectId, ref:'userModel'}],
-    likedRecipes:[{type:mongoose.Schema.ObjectId, ref:'recipeModel'}],
-    productsCollection:[{type:mongoose.Schema.ObjectId, ref:'productModel'}]
+    followers: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}],
+    followings: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}],
+    likedRecipes: [{type: mongoose.Schema.ObjectId, ref: 'recipeModel'}],
+    productsCollection: [{type: mongoose.Schema.ObjectId, ref: 'productModel'}]
 }, {collection: "user"});
 
 

@@ -15,6 +15,22 @@
                 controller: 'registerController',
                 controllerAs: 'model'
             })
+            .when('/account', {
+                templateUrl: './views/user/templates/account.view.client.html',
+                controller: 'accountController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
+            })
+            .when('/photo', {
+                templateUrl: './views/user/templates/photo.view.client.html',
+                controller: 'photoController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
+            })
             .when('/profile', {
                 templateUrl: './views/user/templates/profile.view.client.html',
                 controller: 'profileController',
