@@ -11,7 +11,8 @@
     <!--loading angular framework-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js"></script>
-
+    <script src="vendor/JavaScript/angular/angular.min.js"></script>
+    <script src="vendor/JavaScript/angular/angular-route.min.js"></script>
     <!---------------------------------------------angular------------------------------------------------------------->
     <!--angular app & configs-->
     <script src="app.js"></script>
@@ -20,15 +21,19 @@
     <!---------------------------------------------services------------------------------------------------------------>
     <script src="services/map.service.client.js"></script>
 
-    <!--loading service -->
+    <!--loadservicesvice -->
 
     <!---------------------------------------------controller---------------------------------------------------------->
 
     <script src="views/store/controllers/store.controller.client.js"></script>
     <!--loading controller-->
 
-
-
+    <script src="views/user/controllers/login.controller.client.js"></script>
+    <script src="views/user/controllers/register.controller.client.js"></script>
+    <script src="views/user/controllers/profile.controller.client.js"></script>
+    <script src="views/user/controllers/account.controller.client.js"></script>
+    <script src="views/user/controllers/photo.controller.client.js"></script>
+    <script src="services/user.service.client.js"></script>
 
 
     <!---------------------------------------------CSS----------------------------------------------------------------->
@@ -37,6 +42,9 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+          href="vendor/css/bootstrap/css/bootstrap.css">
     <!--<link href="vendor/bootstrap/dist/css/bootstrap.css"-->
     <!--rel="stylesheet">-->
 
@@ -46,12 +54,9 @@
 
 </head>
 <body>
-<h1>CS 5610 final project</h1>
-<h1>Index page</h1>
 <div ng-view>
 </div>
-
-
+</body>
 
 
 <!--jquery javascript -->
