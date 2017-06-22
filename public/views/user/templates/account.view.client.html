@@ -18,10 +18,15 @@
 
 
 <div class="container-fluid main-container">
-    <a href="photo.view.client.html">
-        <img id="photo" ng-src="{{model.user.photo}}" width="50%"/>
-        <label for="photo">upload photo</label>
-    </a>
+    <div id="photoBlock">
+        <a href="#!/account/photo">
+            <img id="photo"
+                 class="imageToCenter"
+                 ng-src="{{model.user.photo}}" width="100px"/>
+            <label for="photo" class="textToCenter">upload photo</label>
+        </a>
+    </div>
+
     <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
     <div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
 
@@ -73,31 +78,31 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-4">
-                <a href="#!/account" class="navbar-link">
+            <div class="col-xs-3">
+                <a href="#!/account" class="navbar-link align-middle">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-3">
                 <a href="#!/" class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-3">
                 <a href="#!/account" class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-3">
                 <a href="#!/account" class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </div>
         </div>
-        <div class="pull-right navbar-text">
-            <a href="#!/account" class="navbar-link">
-                <span class="glyphicon glyphicon-user"></span>
-            </a>
-        </div>
+        <!--<div class="pull-right navbar-text">-->
+        <!--<a href="#!/account" class="navbar-link">-->
+        <!--<span class="glyphicon glyphicon-user"></span>-->
+        <!--</a>-->
+        <!--</div>-->
     </div>
 </nav>

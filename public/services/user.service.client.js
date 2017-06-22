@@ -10,6 +10,7 @@
             findUserById: findUserById,
             findAllUsers: findAllUsers,
             findUserByUsername: findUserByUsername,
+            populateRecipesAndProducts: populateRecipesAndProducts,
             findUserByCredentials: findUserByCredentials,
             updateUser: updateUser,
             deleteUser: deleteUser,
@@ -149,6 +150,14 @@
 
         function findAllUsers() {
             var url='/api/user';
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function populateRecipesAndProducts(userId) {
+            var url = '/api/userpop/' + userId;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;

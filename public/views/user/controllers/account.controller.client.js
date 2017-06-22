@@ -9,7 +9,7 @@
 
         model.userId = currentUser.userId;
         model.updateUser = updateUser;
-        // model.deleteUser = deleteUser;
+        // models.deleteUser = deleteUser;
         model.logout = logout;
         model.unregister = unregister;
 
@@ -52,7 +52,7 @@
             model.error = "User not found";
         }
 
-        // model.user = userService.findUserById(model.userId);
+        // models.user = userService.findUserById(models.userId);
         var promise = userService.findUserById(model.userId);
 
         promise.then(function (user) {

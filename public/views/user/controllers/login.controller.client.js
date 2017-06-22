@@ -14,7 +14,7 @@
             userService
                 .login(username, password)
                 .then(function (found) {
-                    $location.url('/account');
+                    $location.url('/profile');
 
                 }, function (error) {
                     model.message = "login " + username + " unsuccessfully," +
