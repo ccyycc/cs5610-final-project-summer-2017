@@ -1,9 +1,12 @@
 const app = require('../../express');
-var multer = require('multer'); // npm install multer --save
-var upload = multer({dest: __dirname + '/../../public/assignment/uploads'});
+var multer = require('multer');
+var upload = multer({dest: __dirname + '/../../public/uploads'});
+
 var userModel = require('../models/user/user.model.server');
+
 var passport = require('passport');
 var bcrypt = require("bcrypt-nodejs");
+
 var LocalStrategy = require('passport-local').Strategy;
 
 passport.use(new LocalStrategy(localStrategy));
@@ -20,19 +23,9 @@ var googleConfig = {
 
 passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 
-// var FacebookStrategy = require('passport-facebook').Strategy;
-// var facebookConfig = {
-//     clientID     : process.env.FACEBOOK_CLIENT_ID,
-//     clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-//     callbackURL  : process.env.FACEBOOK_CALLBACK_URL
-// };
-//
-// passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
-
-
-// start all url with '/aps' ('/rest' is also popular)
 // :userId: path params
 app.get('/api/user/:userId', findUserById);
+app.get('/api/userpop/:userId', popUserById);
 app.get('/api/checkname', findUserByName);
 app.get('/api/user', isAdmin, findAllUsers);
 
@@ -58,14 +51,6 @@ app.get('/auth/google/callback',
         successRedirect: '/assignment/index.html#!/profile',
         failureRedirect: '/assignment/index.html#!/login'
     }));
-
-// app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-// app.get('/auth/facebook/callback',
-//     passport.authenticate('facebook', {
-//         successRedirect: '/#/user',
-//         failureRedirect: '/#/login'
-//     }));
-
 
 function isAdmin(req, res, next) {
     if (req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {
@@ -192,8 +177,6 @@ function updateProfile(req, res) {
         .then(function (status) {
             res.send(status);
         })
-
-
 }
 
 
@@ -217,6 +200,19 @@ function findUserById(req, res) {
 
     userModel
         .findUserById(userId)
+        .then(function (user) {
+            res.json(user);
+        });
+}
+
+function popUserById(req, res) {
+    var userId = req.params.userId;
+
+    userModel
+        .findById(userId)
+        .populate('likedRecipes')
+        .populate('collectedProducts')
+        .exec()
         .then(function (user) {
             res.json(user);
         });
@@ -323,31 +319,17 @@ function googleStrategy(token, refreshToken, profile, done) {
         );
 }
 
-
-function facebookStrategy(token, refreshToken, profile, done) {
-    developerModel
-        .findUserByFacebookId(profile.id)
-        .then(
-            function (user) {
-                if (user) {
-                    return done(null, user);
-                } else {
-                    console.log(profile);
-                }
-            }
-        )
-}
-
 function uploadImage(req, res) {
     var myFile = req.file;
     var userId = req.body.userId;
 
     var filename = myFile.filename;
+
     userModel
-        .uploadImage(filename)
+        .uploadImage(userId,filename)
         .then(function (status) {
-            var callbackUrl = "/#!/account";
-            res.redirect(callbackUrl);
+            var callbackUrl = "/#!/account";;
+            res.redirect(callbackUrl)
         });
 
 

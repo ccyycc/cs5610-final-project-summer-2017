@@ -9,7 +9,7 @@
 
         model.register = register;
 
-        function register(username, password, password2) {
+        function register(username, password, password2, role) {
 
             if (username === null || username === '' || typeof username === 'undefined') {
                 model.error = 'username is required';
@@ -31,7 +31,8 @@
                     function () {
                         var newUser = {
                             username: username,
-                            password: password
+                            password: password,
+                            roles: role
                         };
                         return userService
                             .register(newUser)

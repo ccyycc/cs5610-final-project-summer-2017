@@ -2,48 +2,35 @@ var mongoose = require('mongoose');
 var commentSchema = require('./comment.schema.server');
 var commentModel = mongoose.model('commentModel', commentSchema);
 
-
 commentModel.createComment = createComment;
-commentModel.findAllCommentsForSeller = findAllCommentsForSeller;
-commentModel.findCommentById = findCommentById;
-commentModel.updateComment = updateComment;
 commentModel.deleteComment = deleteComment;
-
+commentModel.findCommentById = findCommentById;
+commentModel.findAllComments = findAllComments;
 
 module.exports = commentModel;
 
 
-function createComment(user, comment) {
-    comment._user = user;
-    comment.dateCreated = Date.now();
-    comment.dateUpdated = Date.now();   
+
+function deleteComment(commentId) {
     return commentModel
-        .create(comment)
-        .then(function (comment) {
-            return comment;
+        .remove(commentId)
+        .then(function (status) {
+            return status;
+        })
+        .catch(function (status) {
+            console.log(status);
         })
 }
 
-
-function findAllCommentsForSeller(user) {
+function createComment(comment) {
     return commentModel
-        .find({_user: user})
-        .exec();
+        .create(comment);
 }
 
 function findCommentById(commentId) {
     return commentModel.findById(commentId);
 }
 
-
-function updateComment(commentId, comment) {
-    comment.dateUpdated = Date.now();
-    return commentModel.update({_id: commentId}, {$set: comment});
+function findAllComments() {
+    return commentModel.find();
 }
-
-function deleteComment(commentId) {
-    return commentModel.remove({_id:commentId}).exec();
-}
-
-
-

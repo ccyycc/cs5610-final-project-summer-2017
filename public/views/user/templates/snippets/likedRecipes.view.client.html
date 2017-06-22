@@ -1,0 +1,12 @@
+<div ng-repeat="recipe in model.user.likedRecipes">
+    <div class="row">
+        <div class="col-xs-6">
+            <img id="photo" class="imageToCenter"
+                 ng-src="{{recipe.image}}" width="150px"/>
+        </div>
+        <div class="col-xs-6">
+            <h3>{{recipe.name}}</h3>
+            <p>{{recipe.likedUsers.length}} people liked this recipe</p>
+        </div>
+    </div>
+</div>

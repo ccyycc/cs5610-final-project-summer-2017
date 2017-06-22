@@ -1,0 +1,91 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#!/profile">
+                Profile
+            </a>
+            <div class="navbar-text pull-right change-margin-right-15">
+                <a href="#!/"
+                   class="navbar-link">
+                  <span class="glyphicon glyphicon-ok">
+                  </span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</nav>
+
+
+<div class="container-fluid main-container">
+    <!--<div>-->
+        <form>
+            <div class="row">
+                <div class="col-xs-6">
+                    <h1 class="textToTop textToCenter">{{model.user.username}}</h1>
+                    <div ng-show="model.user.roles.indexOf('USER') > -1" class="row" id="followerNfollowing">
+                        <div class="col-xs-6 textToCenter">
+                            <p>follower<br>{{model.user.followers.length}}</p>
+                        </div>
+                        <div ng-show="model.user.roles.indexOf('USER') > -1" class="col-xs-6 textToCenter">
+                            <p>following<br>{{model.user.followings.length}}</p>
+                        </div>
+                    </div>
+                    <div class="btn btn-success toBottom form-control" >
+                        Follow
+                    </div>
+                    <div class="margin-top-15">
+                        <div class="btn btn-success " >
+                            Leave me a message!
+                        </div>
+
+                        <input class="form-control">
+                    </div>
+
+
+                </div>
+                <div id="photoBlock" class="col-xs-6">
+                    <img id="photo" class="imageToCenter"
+                         ng-src="{{model.user.photo}}" width="150px"/>
+                </div>
+            </div>
+        </form>
+    <!--</div>-->
+
+</div>
+
+<div ng-switch="model.user.roles">
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="row textToCenter">
+            <div class="col-xs-3">
+                <a href="#!/account" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a href="#!/" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a href="#!/account" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a href="#!/account" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </div>
+        </div>
+        <!--<div class="pull-right navbar-text">-->
+        <!--<a href="#!/account" class="navbar-link">-->
+        <!--<span class="glyphicon glyphicon-user"></span>-->
+        <!--</a>-->
+        <!--</div>-->
+    </div>
+</nav>
