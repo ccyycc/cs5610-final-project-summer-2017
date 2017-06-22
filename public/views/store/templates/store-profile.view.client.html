@@ -1,0 +1,32 @@
+<h1>Store profile Page</h1>
+
+<h1>store picture</h1>
+{{model.store.image}}
+<h1>store name</h1>
+{{model.store.name}}
+<h1>store description</h1>
+{{model.store.description}}
+
+<h1>store hour</h1>
+<ul>
+    <li ng-repeat="hour in model.store.hours track by $index"
+        class="list-group-item row">
+        <div class="col-xs-4">
+            {{model.days[$index]}}
+        </div>
+        <div class="col-xs-8">
+        {{hour.open | date:'hh:mma'}} to {{hour.close | date:'hh:mma'}}
+        </div>
+    </li>
+</ul>
+<h1>store address & map</h1>
+<div>{{model.store.address}}</div>
+<iframe class="map-bottom"
+        width="598"
+        height="450"
+        ng-src="{{model.store.addressUrl}}"
+        allowfullscreen="">
+</iframe>
+
+<a ng-click="model.editStoreProfile()"
+   class="btn btn-block btn-primary">Edit</a>

@@ -1,7 +1,7 @@
 (function () {
     angular
         .module('FinalProject')
-        .service('MerchandiseService', MerchandiseService);
+        .service('merchandiseService', MerchandiseService);
 
     function MerchandiseService($http) {
 

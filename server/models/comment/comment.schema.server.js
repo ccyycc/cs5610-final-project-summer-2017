@@ -5,7 +5,11 @@ var merchandiseSchema = mongoose.Schema({
     //     ref: "UserModel",
     //     required:true
     // },
-    _seller: {
+    _source: {
+        type: String,
+        default:"123"
+    },
+    _target: {
         type: String,
         default:"123"
     },
@@ -14,7 +18,24 @@ var merchandiseSchema = mongoose.Schema({
     image:String,
     price: Number,
     unit:String,
-    comments: [{type:String}],
+    comments: [{
+        user: {
+            type: mongoose.Schema.ObjectId,
+            ref: "UserModel",
+            required: true
+        },
+        content: {
+            type: String,
+            required: true},
+        dateCreated: {
+            type: Date,
+            default: Date.now
+        },
+        dateUpdated: {
+            type: Date,
+            default: Date.now
+        }
+    }],
     dateCreated: {type: Date, default: Date.now, required:true}
 }, {collection: "merchandise"});
 

@@ -1,0 +1,72 @@
+<h1>Store profile {{model.mode}} Page</h1>
+{{model.store}}
+<a ng-if="model.mode === 'edit'"
+   ng-click="model.updateStore()"
+   class="btn btn-block btn-primary">update</a>
+<a
+        ng-if="model.mode === 'new'"
+        ng-click="model.createStore()"
+        class="btn btn-block btn-success">create</a>
+
+<label for="name">Name</label>
+<input class="form-control"
+       placeholder="name"
+       ng-model="model.store.name"
+       id="name"/>
+
+
+<label for="description">Description</label>
+<textarea ng-model="model.store.description"
+          id="description"
+          rows="5"
+          placeholder="enter description here"
+          class="form-control">
+    {{model.store.description}}
+</textarea>
+
+
+<form>
+    <label for="streeAddress">Street Address</label>
+    <input id="streeAddress"
+           ng-model="model.store.address.street"
+           type="text"
+           class="form-control"/>
+    <label for="city">City</label>
+    <input id="city"
+           ng-model="model.store.address.city"
+           type="text"
+           class="form-control"/>
+    <label for="state">State</label>
+    <input id="state"
+           ng-model="model.store.address.state"
+           type="text"
+           class="form-control"/>
+    <label for="zip">Zip Code</label>
+    <input id="zip"
+           ng-model="model.store.address.zip"
+           type="text"
+           class="form-control"/>
+</form>
+
+
+<label for="hours">Hours</label>
+<table id="hours" class="table table-striped">
+    <thead>
+    <tr class="list-group-item-info">
+        <th>#</th>
+        <th>Open</th>
+        <th>Close</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="hour in model.store.hours track by $index">
+        <!--TODO USE NG-REPEAT RENDER THE FORM-->
+        <td>{{model.days[$index]}}</td>
+        <td><input type=time min=0:00 max=23:59 ng-model="hour.open" step=900></td>
+        <td><input type=time min=0:00 max=23:59 ng-model="hour.close" step=900></td>
+    </tr>
+    </tbody>
+</table>
+
+
+

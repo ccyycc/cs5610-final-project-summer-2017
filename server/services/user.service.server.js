@@ -1,7 +1,7 @@
 const app = require('../../express');
 var multer = require('multer'); // npm install multer --save
 var upload = multer({dest: __dirname + '/../../public/assignment/uploads'});
-var userModel = require('../model/user/user.model.server');
+var userModel = require('../models/user/user.model.server');
 var passport = require('passport');
 var bcrypt = require("bcrypt-nodejs");
 var LocalStrategy = require('passport-local').Strategy;
