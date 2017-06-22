@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-xs-6">
                     <h1 class="textToTop textToCenter">{{model.user.username}}</h1>
-                    <div class="row" id="followerNfollowing">
+                    <div ng-show="model.user.roles.indexOf('USER') > -1" class="row" id="followerNfollowing">
                         <div class="col-xs-6 textToCenter">
                             <p>follower<br>{{model.user.followers.length}}</p>
                         </div>
@@ -54,28 +54,9 @@
 
 </div>
 
-<nav class="navbar navbar-default margin-top-15">
-    <div class="container-fluid textToCenter">
-        <div class="col-xs-6 navbar-brand active">
-            Liked Recipes
-        </div>
-        <div class="col-xs-6 navbar-brand">
-            Collected Products
-        </div>
-    </div>
-</nav>
+<div ng-switch="model.user.roles">
 
-<!--<div ng-switch="model.recipeOrProduct"-->
-     <!--class="container-fluid main-container">-->
-    <!--<div ng-switch-when="RECIPE">-->
-        <!--<ng-include-->
-                <!--src="views/user/templates/snippets/likedRecipes.view.client.html"></ng-include>-->
-    <!--</div>-->
-    <!--<div ng-switch-when="PRODUCT">-->
-        <!--<ng-include-->
-                <!--src="views/user/templates/snippets/collectedProducts.view.client.html"></ng-include>-->
-    <!--</div>-->
-<!--</div>-->
+</div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
