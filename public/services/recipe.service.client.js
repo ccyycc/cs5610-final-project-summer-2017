@@ -15,11 +15,20 @@
         this.tempYummlyRecipe = tempYummlyRecipe;
         this.getTempYummlyRecipe = getTempYummlyRecipe;
         this.createYummlyLocalRecipeCopy = createYummlyLocalRecipeCopy;
+        this.findYummlyRecipeCopyByYummlyId = findYummlyRecipeCopyByYummlyId;
 
         var recipe = {};
 
-        function createYummlyLocalRecipeCopy(yummlyRecipeId, recipe) {
-            var url = '/api/yummlyRecipe/' + yummlyRecipeId;
+        function findYummlyRecipeCopyByYummlyId(recipeId) {
+            var url = '/api/yummly/recipeCopy/' + recipeId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function createYummlyLocalRecipeCopy(recipe) {
+            var url = '/api/yummly/recipeCopy';
             return $http.post(url, recipe)
                 .then(function (response) {
                     return response.data;

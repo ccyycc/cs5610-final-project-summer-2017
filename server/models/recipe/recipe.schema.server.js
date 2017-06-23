@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var recipeSchema = mongoose.Schema({
     _creator: {type: mongoose.Schema.ObjectId, ref: 'userModel'},
     name: {type: String, required: true},
-    yummlyId: String,
+    yummlyId: {type: String, unique: true},
     source: {type: String, default:'LOCAL', enum:['LOCAL', 'YUMMLY']},
     numberOfServings: Number,
     description: String,
