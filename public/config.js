@@ -43,6 +43,30 @@
                     currentUser: checkLoggedin
                 }
             })
+            .when("/recipe_list", {
+                templateUrl: "views/recipe/templates/recipe-list.view.client.html",
+                controller: "recipeListController",
+                controllerAs: "model"
+                //TODO:no need to log in to view this page
+            })
+            .when('/recipe_list/:recipeId', {
+                //TODO: permission?
+                templateUrl: 'views/recipe/templates/otherUser/recipe-detail.view.client.html',
+                controller: 'recipeDetailController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
+            })
+            .when('/recipe_list/:recipeId/ingredient/:ingredientName', {
+                templateUrl: 'views/recipe/templates/otherUser/ingredient-detail.view.client.html',
+                controller: 'ingredientDetailController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
+            })
+            //TODO: could be the profile page of recipe provider
             .when('/store/:storeId/merchandise',{
                 templateUrl: './views/merchandise/templates/merchandise-list.view.client.html',
                 controller: 'merchandiseListController',
@@ -55,6 +79,20 @@
             })
 
             .when('/recipe',{
+                templateUrl: 'views/recipe/templates/creator/recipe-list-by-creator.view.client.html',
+                controller: 'recipeListByCreatorController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
+            })
+            .when('/recipe/:recipeId', {
+                templateUrl: 'views/recipe/templates/creator/recipe-edit.view.client.html',
+                controller: 'recipeEditController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
             })
             .when('/store/:storeId',{
                 templateUrl: 'views/store/templates/store-profile.view.client.html',

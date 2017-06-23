@@ -30,7 +30,9 @@ app.get('/api/checkname', findUserByName);
 app.get('/api/user', isAdmin, findAllUsers);
 
 app.post('/api/user', isAdmin, createUser);
-app.put('/api/user/:userId', isAdmin, updateUser);
+//TODO:changed the updateUser, without check isAdmin
+app.put('/api/user/:userId', updateUser);
+
 app.delete('/api/user/:userId', isAdmin, deleteUser);
 
 app.post('/api/login', passport.authenticate('local'), login);
@@ -180,7 +182,6 @@ function deleteUser(req, res) {
 
 function updateUser(req, res) {
     var user = req.body;
-    console.log(user);
     var userId = req.params.userId;
 
     userModel
@@ -353,7 +354,7 @@ function uploadImage(req, res) {
     userModel
         .uploadImage(userId,filename)
         .then(function (status) {
-            var callbackUrl = "/#!/account";;
+            var callbackUrl = "/#!/account";
             res.redirect(callbackUrl)
         });
 

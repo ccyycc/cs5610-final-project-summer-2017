@@ -1,4 +1,7 @@
-input.form-control {
+
+input.form-control,
+textarea.form-control,
+select.form-control {
     margin-bottom: 5px;
 }
 
@@ -141,6 +144,7 @@ a:visited {
 .video-container iframe,
 .video-container object,
 .video-container embed {
+
     position: absolute;
     top: 0;
     left: 0;
@@ -160,4 +164,3 @@ a:visited {
     border-left: 0;
     border-right: 0;
 }
-

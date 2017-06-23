@@ -1,0 +1,77 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <button type="button"
+                class="navbar-toggle collapsed"
+                data-toggle="collapse"
+                data-target="#navbar"
+                aria-expanded="false"
+                aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <span class="current-brand navbar-brand hover-focus-disable"
+              href="">Assignment 6</span>
+    </div>
+    <div id="navbar"
+         class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="">Home</a></li>
+            <li><a ng-if="model.currentUser.role === 'ADMIN'" href="#!/admin">Admin</a></li>
+            <li ng-show="!model.userId"><a href="#!/login">Login</a></li>
+            <li ng-show="!model.userId"><a href="#!/register">Register</a></li>
+            <li ng-show="model.userId"><a href="#!/profile">Profile</a></li>
+            <li ng-show="model.userId"><a ng-click="model.logout()">Logout</a></li>
+        </ul>
+    </div><!--/.navbar-collapse -->
+</nav>
+
+<div class="container-fluid" style="margin-top: 50px">
+    <div class="input-group">
+        <input ng-model="searchText"
+               type="text"
+               placeholder="Search recipes"
+               class="form-control">
+        <span class="input-group-btn">
+        <a ng-click="model.searchRecipes(searchText)" class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+        </a>
+    </span>
+    </div>
+    <div class="row">
+        <!--{{model.yummlyRecipes}}-->
+        <!--<div id="filckrImage" class="col-xs-6 col-sm-3 col-md-2 text-center" ng-repeat="recipe in model.recipes">-->
+        <div class="col-xs-4 text-center" id="yummlyImage" ng-repeat="yummlyRecipe in model.yummlyRecipes">
+            <!--{{yummlyRecipe}}-->
+            <!--{{recipe}}<br><br>-->
+            <!--{{yummlyRecipe.smallImageUrls[0]}}-->
+            {{yummlyRecipe.ingredients}}<br>
+            {{yummlyRecipe.ingredientLines}}<br>
+            <img ng-src="{{yummlyRecipe.smallImageUrls[0]}}"/><br>
+            <!--{{recipe.imageUrlsBySize['90']}}<br><br>-->
+            <!--{{recipe.id}}-->
+            <a ng-click="model.goToDetail(yummlyRecipe, yummlyRecipe.id)">{{yummlyRecipe.recipeName}}</a>
+            <!--{{recipe.ingredients}}<br><br>-->
+            <!--<img ng-click="model.selectPhoto(recipe)"-->
+            <!--ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_q.jpg"/>-->
+        </div>
+        <div class="col-xs-4 text-center" id="yummlyImage" ng-repeat="localRecipe in model.localRecipes">
+
+            <!--{{localRecipe}}<br><br>-->
+            <img ng-src="{{localRecipe.image}}"/><br>
+            <!--{{recipe.imageUrlsBySize['90']}}<br><br>-->
+            <!--{{recipe.id}}-->
+            <a ng-click="model.goToDetail(localRecipe, localRecipe._id)">{{localRecipe.name}}</a>
+            <!--{{recipe.ingredients}}<br><br>-->
+            <!--<img ng-click="model.selectPhoto(recipe)"-->
+            <!--ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_q.jpg"/>-->
+        </div>
+        <!--<div ng-repeat="photo in model.photos">-->
+
+        <!--{{photo}}-->
+        <!--</div>-->
+</div>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>
