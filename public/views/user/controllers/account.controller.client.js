@@ -53,11 +53,11 @@
         }
 
         // models.user = userService.findUserById(models.userId);
-        var promise = userService.findUserById(model.userId);
-
-        promise.then(function (user) {
-            model.user = user;
-        });
+        // var promise = userService.findUserById(model.userId);
+        //
+        // promise.then(function (user) {
+        //     model.user = user;
+        // });
     }
 })();
 

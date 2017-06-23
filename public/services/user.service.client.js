@@ -8,9 +8,9 @@
         var api = {
             createUser: createUser,
             findUserById: findUserById,
+            findMe: findMe,
             findAllUsers: findAllUsers,
             findUserByUsername: findUserByUsername,
-            populateRecipesAndProducts: populateRecipesAndProducts,
             findUserByCredentials: findUserByCredentials,
             updateUser: updateUser,
             deleteUser: deleteUser,
@@ -21,10 +21,41 @@
             loggedin: loggedin,
             register: register,
             checkAdmin: checkAdmin,
-            unregister: unregister
+            unregister: unregister,
+
+            populateRecipesAndProducts: populateRecipesAndProducts,
+            follow: follow,
+            unfollow: unfollow,
+            sendMessage: sendMessage
         };
         return api;
 
+        function sendMessage(userId, message) {
+            var url='/api/message/' + userId;
+            return $http.put(url, message)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function follow(followingId) {
+            var url='/api/follow/' + followingId;
+
+            console.log("begin-user.service.client-follow()" + "url: " + url);
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function unfollow(followingId) {
+            var url='/api/unfollow/' + followingId;
+
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
 
         function unregister() {
             var url = "/api/unregister";
@@ -37,6 +68,7 @@
 
         function register(user) {
             var url = "/api/register";
+            console.log('user.service.client user: ' + user);
             return $http.post(url, user)
                 .then(function (response) {
                     return response.data;
@@ -94,6 +126,14 @@
                     // console.log(response);
                     return response.data;
                 });
+        }
+
+        function findMe() {
+            var url = '/api/user/findme';
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
         }
 
         function findUserById(userId) {

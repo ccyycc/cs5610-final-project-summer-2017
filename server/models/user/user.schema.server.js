@@ -8,11 +8,11 @@ var userSchema = mongoose.Schema({
     email: String,
     photo: String,
 
-    roles: [{
+    role: {
         type: String,
         default: 'USER',
         enum: ['USER', 'ADMIN', 'RECIPEPRO', 'MERCHANT']
-    }],
+    },
 
     google: {
         id: String,
@@ -21,13 +21,15 @@ var userSchema = mongoose.Schema({
 
     dailyCalorieBurned: Number,
 
-    messages:[{type: mongoose.Schema.ObjectId, ref: 'messageModel'}],
+    messages: [{type: mongoose.Schema.ObjectId, ref: 'commentModel'}],
 
     followers: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}],
-    followings: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}],
-    // likedRecipes: [{type: mongoose.Schema.ObjectId, ref: 'recipeModel'}],
-    // collectedProducts: [{type: mongoose.Schema.ObjectId, ref: 'productModel'}]
+    followings: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}]
+
 }, {collection: "user"});
 
 
 module.exports = userSchema;
+
+// likedRecipes: [{type: mongoose.Schema.ObjectId, ref: 'recipeModel'}]
+//     collectedProducts: [{type: mongoose.Schema.ObjectId, ref: 'productModel'}]

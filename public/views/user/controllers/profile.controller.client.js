@@ -7,10 +7,22 @@
 
         var model = this;
         model.sectionTitle = "Profile";
+
         model.render = render;
+        model.follow = follow;
+        model.unfollow = unfollow;
+        model.sendMessage = sendMessage;
 
         function init() {
-            console.log(currentUser.roles.indexOf("MERCHANT"));
+            if ($routeParams.uid) {
+                model.userId = $routeParams.uid;
+            } else {
+                model.userId = currentUser._id;
+            }
+
+            // console.log(model.userId);
+
+            // console.log(currentUser.roles.indexOf("MERCHANT"));
             if(currentUser.roles.indexOf("MERCHANT") > -1){
                 //TODO CHANGE TO FOLLOWING WHEN SCHEMA IS FIXED
                 // if(currentUser.roles.indexOf("MERCHANT") > -1){
@@ -23,12 +35,10 @@
                             $location.url('/store/'+data[0]._id);
                         }
                         }
-                    )
+                    );
                 return;
             }
 
-            model.userId = currentUser._id;
-            console.log(currentUser);
             render(model.userId);
 
             model.recipeOrProduct = 'RECIPE';
@@ -46,6 +56,37 @@
                 .populateRecipesAndProducts(userId)
                 .then(function (user) {
                     model.user = user;
+
+                    if (model.user.followers.indexOf(currentUser._id) > -1) {
+                        model.followed = true;
+                    } else {
+                        model.followed = false;
+                    }
+                    console.log(model.user.role);
+                })
+        }
+
+        function follow() {
+            userService
+                .follow(model.userId)
+                .then(function (user) {
+                    model.render(model.userId);
+                })
+        }
+
+        function unfollow() {
+            userService
+                .unfollow(model.userId)
+                .then(function (user) {
+                    model.render(model.userId);
+                })
+        }
+
+        function sendMessage(message) {
+            userService
+                .sendMessage(model.userId, [message])
+                .then(function (user) {
+                    model.message="";
                 })
         }
     }

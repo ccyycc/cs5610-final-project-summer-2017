@@ -1,0 +1,60 @@
+<div class="container-fluid main-container">
+    <div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-sm-3">
+                    WebsiteName
+                </div>
+                <div class="col-sm-3">
+                    Descriptions
+                </div>
+                <div class="col-sm-2">
+                    UserName
+                </div>
+                <div class="col-sm-4">
+                    Page Number
+                </div>
+            </div>
+        </li>
+
+        <li class="list-group-item" ng-show="model.website">
+            <div class="row">
+                <div class="col-sm-3">
+                    <input ng-model="model.website.name"
+                           class="form-control">
+                </div>
+                <div class="col-sm-8">
+                    <input ng-model="model.website.description"
+                           class="form-control">
+                </div>
+                <div class="col-sm-1">
+                    <span ng-click="model.updateWebsite(model.website)"class="glyphicon glyphicon-ok pull-right"></span>
+                </div>
+            </div>
+        </li>
+
+        <li ng-repeat="website in model.websites" class="list-group-item">
+
+            <div class="row">
+                <div class="col-sm-3">
+                    {{website.name}}
+                </div>
+                <div class="col-sm-3">
+                    {{website.description}}
+                </div>
+                <div class="col-sm-2">
+                    {{website._user.name}}
+                </div>
+                <div class="col-sm-3">
+                    {{website.pages.length}}
+                </div>
+                <div class="col-sm-1 pull-right">
+                    <span ng-click="model.deleteWebsite(website)" class="glyphicon glyphicon-remove pull-right"></span>
+                    <span ng-click="model.selectWebsite(website)" class="glyphicon glyphicon-pencil"></span>
+
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

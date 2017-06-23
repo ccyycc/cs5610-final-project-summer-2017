@@ -25,6 +25,7 @@ passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 
 // :userId: path params
 app.get('/api/user/:userId', findUserById);
+app.get('/api/user/findme', findMe);
 app.get('/api/userpop/:userId', popUserById);
 app.get('/api/checkname', findUserByName);
 app.get('/api/user', isAdmin, findAllUsers);
@@ -44,6 +45,10 @@ app.delete('/api/unregister', unregister);
 app.put('/api/update', updateProfile);
 
 app.post('/api/upload', upload.single('myFile'), uploadImage);
+
+app.get('/api/follow/:followingId', follow);
+app.get('/api/unfollow/:followingId', unfollow);
+app.put('/api/message/:userId', sendMessage);
 
 
 app.get('/auth/google',
@@ -80,7 +85,7 @@ function isMerchant(req, res, next) {
 }
 
 function isAdmin(req, res, next) {
-    if (req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {
+    if (req.isAuthenticated() && req.user.role.indexOf('ADMIN') > -1) {
         next();
     } else {
         res.sendStatus(401);
@@ -90,6 +95,13 @@ function isAdmin(req, res, next) {
 
 //////////actural function/////////////////
 
+function findMe(req, res) {
+    userModel
+        .findUserById(req.user._id)
+        .then(function (user) {
+            res.json(user);
+        })
+}
 
 function findUserByName(req, res) {
     userModel
@@ -115,12 +127,13 @@ function unregister(req, res) {
 function register(req, res) {
     var user = req.body;
     user.password = bcrypt.hashSync(user.password);
+    // console.log('user.service.server user: ');
     // user.password = passw
     userModel
         .createUser(user)
         .then(function (user) {
-            req
-                .login(user, function (status) {
+            console.log('create user success -- user.server');
+            req.login(user, function (status) {
                     res.send(status);
                 });
         });
@@ -142,7 +155,7 @@ function loggedin(req, res) {
 
 function checkAdmin(req, res) {
     // console.log(req.user);
-    if (req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {
+    if (req.isAuthenticated() && req.user.role.indexOf('ADMIN') > -1) {
         res.json(req.user);
     } else {
         res.send('0');
@@ -243,6 +256,48 @@ function popUserById(req, res) {
             res.json(user);
         });
 }
+
+function follow(req, res) {
+    var followingId = req.params.followingId;
+    var followerId = req.user._id;
+    console.log("begin-user.service.server-follow " + followingId + " " + followerId);
+
+    userModel
+        .follow(followerId, followingId)
+        .then(function (user) {
+            res.json(user);
+        })
+
+}
+
+function unfollow(req, res) {
+    var followingId = req.params.followingId;
+    var followerId = req.user._id;
+    // console.log("begin-user.service.server-follow " + followingId + " " + followerId);
+
+    userModel
+        .unfollow(followerId, followingId)
+        .then(function (user) {
+            res.json(user);
+        })
+
+}
+
+function sendMessage(req, res) {
+    var userId = req.params.userId;
+    var message = req.body;
+    var myId = req.user._id;
+
+    console.log("sendMessage-user.service.server userId: " + userId +" myId: " + myId + "  message: " + message);
+
+    userModel
+        .sendMessage(myId, userId, message)
+        .then(function (user) {
+            res.json(user);
+        });
+
+}
+
 
 function findAllUsers(req, res) {
     var username = req.query.username;

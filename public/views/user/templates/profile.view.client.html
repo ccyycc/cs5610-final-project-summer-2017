@@ -4,37 +4,45 @@
 
 <div class="container-fluid main-container">
     <!--<div>-->
-        <form>
-            <div class="row">
-                <div class="col-xs-6">
-                    <h1 class="textToTop textToCenter">{{model.user.username}}</h1>
-                    <div ng-show="model.user.roles.indexOf('USER') > -1" class="row" id="followerNfollowing">
-                        <div class="col-xs-6 textToCenter">
-                            <p>follower<br>{{model.user.followers.length}}</p>
-                        </div>
-                        <div ng-show="model.user.roles.indexOf('USER') > -1" class="col-xs-6 textToCenter">
-                            <p>following<br>{{model.user.followings.length}}</p>
-                        </div>
+    <form>
+        <div class="row">
+            <div class="col-xs-6">
+                <h1 class="textToTop textToCenter">{{model.user.username}}</h1>
+                <div ng-show="model.user.role.indexOf('USER') > -1" class="row" id="followerNfollowing">
+                    <div class="col-xs-6 textToCenter">
+                        <p>follower<br>{{model.user.followers.length}}</p>
                     </div>
-                    <div class="btn btn-success toBottom form-control" >
-                        Follow
+                    <div ng-show="model.user.role.indexOf('USER') > -1" class="col-xs-6 textToCenter">
+                        <p>following<br>{{model.user.followings.length}}</p>
                     </div>
-                    <div class="margin-top-15">
-                        <div class="btn btn-success " >
-                            Leave me a message!
-                        </div>
-
-                        <input class="form-control">
-                    </div>
-
-
                 </div>
-                <div id="photoBlock" class="col-xs-6">
-                    <img id="photo" class="imageToCenter"
-                         ng-src="{{model.user.photo}}" width="150px"/>
+                <a class="btn btn-success toBottom form-control"
+                   ng-show="model.followed == false"
+                   ng-click="model.follow()">
+                    Follow
+                </a>
+                <a class="btn btn-default toBottom form-control"
+                   ng-show="model.followed == true"
+                   ng-click="model.unfollow()">
+                    Unfollow
+                </a>
+                <div class="margin-top-15">
+                    <a ng-click="model.sendMessage(model.message)"
+                       class="btn btn-success ">
+                        Leave me a message!
+                    </a>
+
+                    <input class="form-control" ng-model="model.message">
                 </div>
+
+
             </div>
-        </form>
+            <div id="photoBlock" class="col-xs-6">
+                <img id="photo" class="imageToCenter"
+                     ng-src="{{model.user.photo}}" height="90%" width="90%"/>
+            </div>
+        </div>
+    </form>
     <!--</div>-->
 
     <!--TODO:TEST-->
@@ -48,9 +56,16 @@
 
 </div>
 
-<div ng-switch="model.user.roles">
 
-</div>
+<!--to show the likedRecipe/collectedProducts(regular user) or createdRecipes(recipeProvider)-->
+<!--<div ng-switch="model.user.role">-->
+<!--<div ng-switch-when='USER'>-->
+<!--<ng-include src="./views/user/templates/snippets/user-profile.view.client.html"></ng-include>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<ng-include src="./views/user/templates/snippets/user-profile.view.client.html"></ng-include>-->
+
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
