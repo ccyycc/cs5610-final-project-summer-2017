@@ -7,4 +7,5 @@ ehthumbs.db
 Thumbs.db
 .idea
 data
+data/db
 node_modules
