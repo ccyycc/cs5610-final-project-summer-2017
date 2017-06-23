@@ -3,11 +3,11 @@
         .module("FinalProject")
         .controller("recipeEditController", RecipeEditController);
 
-    function RecipeEditController($routeParams, $location, recipeService) {
+    function RecipeEditController($routeParams, $location, currentUser, recipeService) {
 
         var model = this;
 
-        model.creatorId = $routeParams.userId;
+        model.creatorId = currentUser._id;
         model.recipeId = $routeParams.recipeId;
 
         model.tempIngredient = "";
@@ -22,11 +22,16 @@
         model.deleteRecipe = deleteRecipe;
 
         function init() {
+            if (currentUser.roles.indexOf('RECIPEPRO') === -1) {
+                $location.url('/account')
+                //TODO: a trans page? Or directly go back to somewhere
+            }
             recipeService
                 .findAllRecipesForCreator(model.creatorId)
                 .then(function (recipes) {
                     model.recipes = recipes;
                 });
+            //TODO: is it possible to have a list of recipe of one person and the editing recipe of another?
             recipeService
                 .findRecipeById(model.recipeId)
                 .then(function (recipe) {

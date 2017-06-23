@@ -5,14 +5,6 @@
 
     function config($routeProvider) {
         $routeProvider
-            .when("/user/recipe", {
-                templateUrl: "views/recipe/templates/recipe-list.view.client.html",
-                controller: "recipeListController",
-                controllerAs: "model"
-                // resolve: {
-                //     currentUser: checkCurrentUser
-                // }
-            })
             .when('/login', {
                 templateUrl: './views/user/templates/login.view.client.html',
                 controller: 'loginController',
@@ -47,33 +39,45 @@
                     currentUser: checkLoggedin
                 }
             })
-            .when('/user/recipe/:recipeId', {
+            .when("/recipe_list", {
+                templateUrl: "views/recipe/templates/recipe-list.view.client.html",
+                controller: "recipeListController",
+                controllerAs: "model"
+                //TODO:no need to log in to view this page
+            })
+            .when('/recipe_list/:recipeId', {
+                //TODO: permission?
                 templateUrl: 'views/recipe/templates/otherUser/recipe-detail.view.client.html',
                 controller: 'recipeDetailController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
             })
-
-            //TODO: will have userId in currentUser
-            .when('/user/:userId/recipe',{
-                templateUrl: 'views/recipe/templates/creator/recipe-list-by-creator.view.client.html',
-                controller: 'recipeListByCreatorController',
-                controllerAs: 'model'
-                // resolve: {
-                //     currentUser: checkLoggedIn
-                // }
-            })
-            .when('/user/:userId/recipe/:recipeId', {
-                templateUrl: 'views/recipe/templates/creator/recipe-edit.view.client.html',
-                controller: 'recipeEditController',
-                controllerAs: 'model'
-                // resolve: {
-                //     currentUser: checkLoggedIn
-                // }
-            })
-            .when('/ingredient/:ingredientName', {
+            .when('/recipe_list/:recipeId/ingredient/:ingredientName', {
                 templateUrl: 'views/recipe/templates/otherUser/ingredient-detail.view.client.html',
                 controller: 'ingredientDetailController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
+            })
+            //TODO: could be the profile page of recipe provider
+            .when('/recipe',{
+                templateUrl: 'views/recipe/templates/creator/recipe-list-by-creator.view.client.html',
+                controller: 'recipeListByCreatorController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
+            })
+            .when('/recipe/:recipeId', {
+                templateUrl: 'views/recipe/templates/creator/recipe-edit.view.client.html',
+                controller: 'recipeEditController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
             })
             .when("/store", {
             })

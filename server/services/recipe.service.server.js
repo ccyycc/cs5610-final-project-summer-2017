@@ -11,14 +11,31 @@ app.get('/api/recipe/:recipeId', findRecipeById);
 app.put('/api/recipe/:recipeId', updateRecipe);
 app.delete('/api/recipe/:recipeId', deleteRecipe);
 app.get('/api/recipe', findRecipeByCriteria);
-app.post('/api/upload', upload.single('myFile'), uploadImage);
+app.post('/api/recipe/upload', upload.single('myFile'), uploadImage);
+app.post('/api/recipe/:yummlyRecipeId', createYummlyLocalRecipeCopy);
+
+//TODO:legal issue?
+
+function createYummlyLocalRecipeCopy(req, res) {
+    var yummlyRecipeId = req.params.yummlyRecipeId;
+    // console.log(yummlyRecipeId);
+    var recipe = req.body;
+    // console.log(recipe);
+    recipeModel
+        .createYummlyLocalRecipeCopy(yummlyRecipeId, recipe)
+        .then(function (recipe) {
+            res.json(recipe);
+        }, function () {
+            res.sendStatus(500);
+        })
+}
 
 function createRecipe(req, res) {
     var userId = req.params.userId;
     var recipe = req.body;
     recipeModel
         .createRecipe(userId, recipe)
-        .then(function () {
+        .then(function (recipe) {
             res.json(recipe);
         }, function () {
             res.sendStatus(500);
@@ -87,7 +104,7 @@ function uploadImage(req, res) {
     var myFile = req.file;
     var userId = req.body.userId;
 
-    var callbackUrl = "/index.html#!/user/" + userId + "/recipe/" + recipeId;
+    var callbackUrl = "/index.html#!/recipe/" + recipeId;
 
     if (!myFile) {
         res.redirect(callbackUrl);

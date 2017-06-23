@@ -21,7 +21,12 @@
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">{{model.recipe.name}}</h1>
+            <h1 class="page-header">{{model.recipe.name}}
+                <!--TODO:like-full heart, unlike-empty hear-->
+                <a class="btn pull-right" ng-click="model.likeARecipe()">
+                <span class="glyphicon glyphicon-heart"></span>
+                </a>
+            </h1>
             <span>total time: {{model.recipe.totalTime}}</span><br>
             <span>number of servings: {{model.recipe.numberOfServings}}</span>
             <!--{{model.recipe}}-->
@@ -43,9 +48,9 @@
                    <!--target="embedded-content">-->
                     <!--Open instruction below-->
                 <!--</a>-->
-                <iframe sandbox="allow-same-origin allow-scripts"
-                        src="{{model.trust(model.recipe.source.sourceRecipeUrl)}}"
-                        class="responsive" name="embedded-content"></iframe>
+                <!--<iframe sandbox="allow-same-origin allow-scripts"-->
+                        <!--src="{{model.trust(model.recipe.source.sourceRecipeUrl)}}"-->
+                        <!--class="responsive" name="embedded-content"></iframe>-->
             </div>
 
             <h2 class="sub-header">Related Recipe</h2>

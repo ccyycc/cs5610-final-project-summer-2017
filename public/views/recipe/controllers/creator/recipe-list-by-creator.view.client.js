@@ -3,17 +3,21 @@
         .module("FinalProject")
         .controller("recipeListByCreatorController", RecipeListByCreatorController);
 
-    function RecipeListByCreatorController($routeParams, $location, recipeService) {
+    function RecipeListByCreatorController($routeParams, $location, currentUser,recipeService) {
 
         var model = this;
 
-        model.creatorId = $routeParams.userId;
+        model.creatorId = currentUser._id;
         model.goToDetail = goToDetail;
         model.createRecipe = createRecipe;
         // userId = currentUser._id;
 
         function init() {
 
+            if (currentUser.roles.indexOf('RECIPEPRO') === -1) {
+                $location.url('/account')
+                //TODO: a trans page? Or directly go back to somewhere
+            }
             recipeService
                 .findAllRecipesForCreator(model.creatorId)
                 .then(function (recipes) {

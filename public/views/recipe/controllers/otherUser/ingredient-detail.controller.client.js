@@ -13,6 +13,7 @@
             edamamService
                 .getIngredientDetail(model.ingredientName)
                 .then(function (ingredient) {
+                    // console.log(ingredient);
                     model.ingredient = ingredient;
                 });
         }

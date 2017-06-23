@@ -14,8 +14,18 @@
         this.findRecipeByCriteria = findRecipeByCriteria;
         this.tempYummlyRecipe = tempYummlyRecipe;
         this.getTempYummlyRecipe = getTempYummlyRecipe;
+        this.createYummlyLocalRecipeCopy = createYummlyLocalRecipeCopy;
 
         var recipe = {};
+
+        function createYummlyLocalRecipeCopy(yummlyRecipeId, recipe) {
+            // console.log(recipe);
+            var url = '/api/recipe/' + yummlyRecipeId;
+            return $http.post(url, recipe)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
 
         function createRecipe(userId, recipe) {
             var url = '/api/user/' + userId + '/recipe';

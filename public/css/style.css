@@ -1,0 +1,118 @@
+input.form-control,
+textarea.form-control,
+select.form-control {
+    margin-bottom: 5px;
+}
+
+body {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+.jumbotron {
+    margin-top: -10px;
+}
+li.list-group-item > div.row > div {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.current-brand {
+    padding-left: 0;
+}
+
+.right-align-btn {
+    right: 16px;
+}
+
+.navigating-btn {
+    top: 17px;
+    color: whitesmoke;
+}
+
+.navigating-btn:hover,
+.navigating-btn:focus {
+    color: orchid;
+}
+
+.navbar {
+    background-color: darkslateblue;
+    display: inline;
+}
+
+@media (min-width: 768px) {
+    .navbar > .container-fluid .navbar-brand {
+        margin-left: 0;
+    }
+
+    .navbar {
+        height: 50px;
+    }
+
+    .navbar-inverse .navbar-collapse {
+        float: right;
+        display: inline-block;
+    }
+
+    .navbar-inverse .container-fluid {
+        display: inline-block;
+    }
+}
+
+.navbar .navbar-brand {
+    color: whitesmoke;
+}
+
+a:focus, a:hover {
+    text-decoration: none;
+}
+
+.navbar .hover-focus-disable:hover,
+.navbar .hover-focus-disable:focus {
+    color: whitesmoke;
+    cursor: default;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe, .video-container object, .video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.wd-widget {
+    min-height: 30px;
+    margin-bottom: 10px;
+}
+
+.wd-widget > img {
+    width: 100%;
+}
+
+.wd-widget > .wd-widget-toolbar {
+    position: absolute;
+    right: 15px;
+    background: white;
+    opacity: 0.6;
+    padding: 5px;
+    border-bottom-left-radius: 10px;
+    z-index: 1;
+}
+
+.wd-widget a:hover,
+.wd-widget a:focus {
+    color: #23527c;
+}
+
+#filckrImage {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

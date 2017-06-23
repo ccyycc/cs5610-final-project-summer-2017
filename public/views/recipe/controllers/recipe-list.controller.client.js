@@ -37,7 +37,7 @@
         function goToDetail(recipe, recipeId) {
             recipeService
                 .tempYummlyRecipe(recipe.ingredients, recipeId);
-            $location.url("/user/recipe/" + recipeId + "#" + recipe.source);
+            $location.url("/recipe_list/" + recipeId + "#" + recipe.source);
         }
     }
 })();

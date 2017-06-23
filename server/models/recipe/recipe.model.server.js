@@ -10,13 +10,27 @@ recipeModel.findRecipeById = findRecipeById;
 recipeModel.updateRecipe = updateRecipe;
 recipeModel.deleteRecipe = deleteRecipe;
 recipeModel.findRecipeByCriteria = findRecipeByCriteria;
+recipeModel.createYummlyLocalRecipeCopy = createYummlyLocalRecipeCopy;
 // recipeModel.findRecipeByName = findRecipeByName;
 // recipeModel.findRecipeByIngredient = findRecipeByIngredient;
 
 module.exports = recipeModel;
 
+function createYummlyLocalRecipeCopy(yummlyRecipeId, recipe) {
+    recipe.source = 'YUMMLY';
+    recipe.yummlyId = yummlyRecipeId;
+    console.log(recipe);
+    return recipeModel
+        .create(recipe)
+        .then(function (recipe) {
+            console.log(recipe);
+            return recipe;
+        })
+}
+
 function createRecipe(userId, recipe) {
     recipe._creator = userId;
+
     return recipeModel
         .create(recipe)
         .then(function (recipe) {

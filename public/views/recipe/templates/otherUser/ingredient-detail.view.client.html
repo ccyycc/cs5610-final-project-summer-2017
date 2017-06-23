@@ -1,6 +1,12 @@
+<div class="container-fluid">
 <h1>Ingredient Detail Page</h1>
-<div>
-    <ul class="list-group">
+
+    <!--{{model.ingredient}}-->
+    <div ng-show="!model.ingredient.ingredients[0].text">
+        Sorry, the food is not found.
+    </div>
+    <ul ng-show="model.ingredient.ingredients[0].text"
+        class="list-group">
         <li class="list-group-item">
             Name: {{model.ingredient.ingredients[0].parsed[0].foodMatch}}
         </li>
@@ -8,7 +14,8 @@
             Description: {{model.ingredient.ingredients[0].parsed[0].food}}
         </li>
     </ul>
-    <section class="performance-facts">
+    <section ng-show="model.ingredient.ingredients[0].text"
+             class="performance-facts">
         <header class="performance-facts__header">
             <h1 class="performance-facts__title">Nutrition Facts</h1>
             <p>Serving Size {{model.ingredient.ingredients[0].parsed[0].quantity}} {{model.ingredient.ingredients[0].parsed[0].measure}}
@@ -236,6 +243,9 @@
             Protein 4
         </p>
     </section>
-</div>
 
-<h2>Find Ingredient from Local</h2>
+    <div>
+        <h2>Find Ingredient from Local</h2>
+
+    </div>
+</div>

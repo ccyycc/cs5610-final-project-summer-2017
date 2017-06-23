@@ -3,12 +3,15 @@
         .module("FinalProject")
         .controller("recipeDetailController", RecipeDetailController);
     
-    function RecipeDetailController($sce, $location, $routeParams, recipeService, yummlyService) {
+    function RecipeDetailController($sce, currentUser,
+                                    $location, $routeParams, recipeService, yummlyService, userService) {
 
         var model = this;
 
         model.trust = trust;
         model.goToIngredientDetal = goToIngredientDetal;
+        model.likeARecipe = likeARecipe;
+
         // userId = currentUser._id;
         model.recipeId = $routeParams.recipeId;
 
@@ -65,9 +68,37 @@
             }
         }
 
+        function likeARecipe() {
+            if (!model.ifLocal) {
+                var newRecipe = {
+                    name: model.recipe.name,
+                    totalTime: model.recipe.totalTime,
+                    numberOfServings: model.recipe.numberOfServings,
+                    ingredients: model.recipe.ingredients
+                };
+                recipeService
+                    .createYummlyLocalRecipeCopy(model.recipeId, newRecipe)
+                    .then(function (recipe) {
+                        model.recipeLocalId = recipe._id;
+                    })
+
+            } else {
+                model.recipeLocalId = model.recipeId;
+            }
+            userService
+                .findUserById(currentUser._id)
+                .then(function (user) {
+                    console.log(user);
+                    user.likedRecipes.push(model.recipeLocalId);
+                    userService
+                        .updateUser(currentUser._id, user);
+                });
+
+        }
+
         function goToIngredientDetal(ingredientName) {
             // console.log(ingredientName);
-            $location.url('/ingredient/' + ingredientName);
+            $location.url('/recipe_list/' + model.recipeId + '/ingredient/' + ingredientName);
         }
     }
 })();
