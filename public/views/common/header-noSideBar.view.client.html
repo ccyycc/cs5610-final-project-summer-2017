@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-10">
+                <a ng-click="model.goBack()"
+                   class="navbar-btn">
+                    <span class="navigating-btn glyphicon glyphicon-chevron-left pull-left"></span>
+                </a>
+                <span class="navbar-brand hover-focus-disable">{{model.currentName}}</span>
+            </div>
+            <div class="col-xs-2">
+                <a ng-show="model.funcButtonPattern"
+                   ng-click="model.funcButton()"
+                   class="navbar-btn">
+                    <span class="right-align-btn navigating-btn {{model.funcButtonPattern}} pull-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

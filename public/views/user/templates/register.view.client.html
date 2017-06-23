@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <h1>Register</h1>
+
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+
+    <label for="username">Username</label>
+    <input type="text"
+           id="username"
+           ng-model="username"
+           class="form-control"
+           placeholder="username"/>
+    <label for="password">Password</label>
+    <input type="password"
+           id="password"
+           ng-model="password"
+           class="form-control"
+           placeholder="password"/>
+    <label for="password2">Confirm Password</label>
+    <input type="password"
+           id="password2"
+           ng-model="password2"
+           class="form-control"
+           placeholder="verify password"/>
+    <div class="margin-top-15">
+        Register as:
+        <input type="radio" ng-model="role" value="USER" > User
+        <input type="radio" ng-model="role" value="RECIPEPRO">Recipe provider
+        <input type="radio" ng-model="role" value="MERCHANT">Merchant
+        <span class="glyphicon glyphicon-question-sign pull-right change-margin-right-15"></span>
+    </div>
+    <a ng-click="model.register(username, password, password2, role)" class="btn btn-primary btn-block margin-top-15">
+        Register
+    </a>
+    <a class="btn btn-danger  btn-block"
+       href="#!/login">Cancel</a>
+</div>

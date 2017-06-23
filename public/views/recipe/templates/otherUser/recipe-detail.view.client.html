@@ -1,0 +1,124 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="#">Analytics</a></li>
+                <li><a href="#">Export</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">Nav item</a></li>
+                <li><a href="">Nav item again</a></li>
+                <li><a href="">One more nav</a></li>
+                <li><a href="">Another nav item</a></li>
+                <li><a href="">More navigation</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">Nav item again</a></li>
+                <li><a href="">One more nav</a></li>
+                <li><a href="">Another nav item</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">{{model.recipe.name}}</h1>
+            <span>total time: {{model.recipe.totalTime}}</span><br>
+            <span>number of servings: {{model.recipe.numberOfServings}}</span>
+            <!--{{model.recipe}}-->
+            <h2 class="sub-header">Ingredients</h2>
+            <!--{{ingredient.description}}-->
+            <!--{{model.recipe.ingredients}}-->
+            <div ng-repeat="ingredient in model.recipe.ingredients">
+                <ul class="list-unstyled">
+                    <li><a ng-click="model.goToIngredientDetal(ingredient.name)">{{ingredient.name}}</a> : {{ingredient.description}}</li>
+                </ul>
+            </div>
+
+            <h2 class="sub-header">Directions</h2>
+
+            <!--TODO: copyright-->
+            {{model.recipe.source.sourceRecipeUrl}}
+            <div ng-if="!model.ifLocal">
+                <!--<a href=model.trust("{{model.recipe.source.sourceRecipeUrl}}")-->
+                   <!--target="embedded-content">-->
+                    <!--Open instruction below-->
+                <!--</a>-->
+                <iframe sandbox="allow-same-origin allow-scripts"
+                        src="{{model.trust(model.recipe.source.sourceRecipeUrl)}}"
+                        class="responsive" name="embedded-content"></iframe>
+            </div>
+
+            <h2 class="sub-header">Related Recipe</h2>
+            <div class="placeholders" >
+                <div class="placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4 class="text-center">Label</h4>
+                    <span class="text-center text-muted">Something else</span>
+                </div>
+                <div class="placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4 class="text-center">Label</h4>
+                    <span class="text-center text-muted">Something else</span>
+                </div>
+                <div class="placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4 class="text-center">Label</h4>
+                    <span class="text-center text-muted">Something else</span>
+                </div>
+                <div class="placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4 class="text-center">Label</h4>
+                    <span class="text-center text-muted">Something else</span>
+                </div>
+                <div class="placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4 class="text-center">Label</h4>
+                    <span class="text-center text-muted">Something else</span>
+                </div>
+                <div class="placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4 class="text-center">Label</h4>
+                    <span class="text-center text-muted">Something else</span>
+                </div>
+            </div>
+
+            <h2 class="sub-header">More from ...</h2>
+            <div class="placeholders" >
+                <div class="placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4 class="text-center">Label</h4>
+                    <span class="text-center text-muted">Something else</span>
+                </div>
+                <div class="placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4 class="text-center">Label</h4>
+                    <span class="text-center text-muted">Something else</span>
+                </div>
+                <div class="placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4 class="text-center">Label</h4>
+                    <span class="text-center text-muted">Something else</span>
+                </div>
+                <div class="placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4 class="text-center">Label</h4>
+                    <span class="text-center text-muted">Something else</span>
+                </div>
+                <div class="placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4 class="text-center">Label</h4>
+                    <span class="text-center text-muted">Something else</span>
+                </div>
+                <div class="placeholder">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4 class="text-center">Label</h4>
+                    <span class="text-center text-muted">Something else</span>
+                </div>
+            </div>
+            <div>
+                <h2>Comments</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
