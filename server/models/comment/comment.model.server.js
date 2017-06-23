@@ -6,10 +6,14 @@ commentModel.createComment = createComment;
 commentModel.deleteComment = deleteComment;
 commentModel.findCommentById = findCommentById;
 commentModel.findAllComments = findAllComments;
+commentModel.findAllRecipeReview = findAllRecipeReview;
 
 module.exports = commentModel;
 
-
+function findAllRecipeReview(recipeId) {
+    return commentModel
+        .find({toRecipe: recipeId});
+}
 
 function deleteComment(commentId) {
     return commentModel
@@ -24,7 +28,10 @@ function deleteComment(commentId) {
 
 function createComment(comment) {
     return commentModel
-        .create(comment);
+        .create(comment)
+        .then(function (comment) {
+            return comment;
+        })
 }
 
 function findCommentById(commentId) {

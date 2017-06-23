@@ -3,15 +3,16 @@
         .module("FinalProject")
         .controller("recipeDetailController", RecipeDetailController);
     
-    function RecipeDetailController($sce, currentUser,
-                                    $location, $routeParams, recipeService, yummlyService, userService) {
+    function RecipeDetailController($sce, currentUser, $location, $routeParams,
+                                    recipeService, yummlyService, userService, commentService) {
 
         var model = this;
 
         model.trust = trust;
         model.goToIngredientDetal = goToIngredientDetal;
-        model.likeARecipe = likeARecipe;
-
+        model.likeRecipe = likeRecipe;
+        model.createComment = createComment;
+        model.submitComment = submitComment;
         // userId = currentUser._id;
         model.recipeId = $routeParams.recipeId;
 
@@ -26,6 +27,11 @@
                     .then(function (recipe) {
                         model.recipe = recipe;
                     });
+                commentService
+                    .findAllRecipeReview(model.recipeId)
+                    .then(function (reviews) {
+                        model.reviews = reviews;
+                    })
             } else {
 
                 yummlyService
@@ -42,6 +48,8 @@
                         // model.recipe.ingredients = recipe.ingredientLines;
                     });
             }
+            //TODO:recipe review for recipe from online?
+
         }
 
         init();
@@ -68,7 +76,7 @@
             }
         }
 
-        function likeARecipe() {
+        function likeRecipe() {
             if (!model.ifLocal) {
                 var newRecipe = {
                     name: model.recipe.name,
@@ -94,6 +102,23 @@
                         .updateUser(currentUser._id, user);
                 });
 
+        }
+
+        function createComment() {
+            model.newComment = {};
+        }
+
+        function submitComment() {
+            var newComment = {
+                content: model.newComment.content,
+                fromWhom: currentUser._id,
+                toRecipe:  model.recipeId
+            };
+            commentService
+                .createComment(newComment)
+                .then(function (comment) {
+
+                })
         }
 
         function goToIngredientDetal(ingredientName) {

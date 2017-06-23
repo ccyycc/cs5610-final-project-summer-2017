@@ -20,11 +20,17 @@ function createYummlyLocalRecipeCopy(yummlyRecipeId, recipe) {
     recipe.source = 'YUMMLY';
     recipe.yummlyId = yummlyRecipeId;
     console.log(recipe);
+    // recipe.save();
+    // var newRecipe = {};
     return recipeModel
         .create(recipe)
         .then(function (recipe) {
-            console.log(recipe);
+            // recipeModel
+            //     .updateRecipe(newRecipe._id, recipe);
+            console.log(newRecipe);
             return recipe;
+        }, function () {
+            console.log('unsuccessful');
         })
 }
 

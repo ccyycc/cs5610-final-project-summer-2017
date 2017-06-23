@@ -122,6 +122,14 @@
             </div>
             <div>
                 <h2>Comments</h2>
+                {{model.reviews}}
+                <a class="btn pull-right" ng-click="model.createComment()">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+                <input class="form-control" ng-show="model.newComment" ng-model="model.newComment.content"/>
+                <a class="btn pull-right" ng-click="model.submitComment()">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
             </div>
         </div>
     </div>
