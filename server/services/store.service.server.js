@@ -1,13 +1,17 @@
 var app = require('../../express');
 var storeModel = require('../models/store/store.model.server');
 
+var passport = require('./user.service.server');
+
 app.post('/api/owner/:ownerId/store', createStore);
 app.get('/api/owner/:ownerId/store', findAllStoresForOwner);
-app.get('/api/store/:storeId', findStoreById);
+app.get('/api/store/:storeId', passport.isMerchant,findStoreById);
 app.put('/api/store/:storeId', updateStore);
 app.delete('/api/store/:storeId', deleteStore);
 
+
 function createStore(req, res) {
+
     var store = req.body;
     var ownerId = req.params.ownerId;
     storeModel
@@ -43,6 +47,7 @@ function findStoreById(req, res) {
         .findStoreById(storeId)
         .then(
             function (store) {
+                var tmp = store;
                 res.status(200).send(store);
             },
             function () {

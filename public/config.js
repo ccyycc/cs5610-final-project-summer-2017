@@ -43,39 +43,44 @@
                     currentUser: checkLoggedin
                 }
             })
-            .when('/merchandise',{
+            .when('/store/:storeId/merchandise',{
                 templateUrl: './views/merchandise/templates/merchandise-list.view.client.html',
                 controller: 'merchandiseListController',
                 controllerAs: 'model'
             })
-            .when('/merchandise/new',{
-                templateUrl: './views/merchandise/templates/merchandise-new.view.client.html',
-                controller: 'merchandiseNewController',
-                controllerAs: 'model'
-            })
-            .when('/merchandise/edit',{
+            .when('/store/:storeId/merchandise/:merchandiseId/:mode',{
                 templateUrl: './views/merchandise/templates/merchandise-edit.view.client.html',
                 controller: 'merchandiseEditController',
                 controllerAs: 'model'
             })
-
 
             .when('/recipe',{
             })
             .when('/store/:storeId',{
                 templateUrl: 'views/store/templates/store-profile.view.client.html',
                 controller: 'storeProfileController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
             })
             .when('/store/:storeId/:mode',{
                 templateUrl: 'views/store/templates/store-profile-edit.view.client.html',
                 controller: 'storeProfileEditController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
             })
+
+
             .when('/store-search',{
                 templateUrl: 'views/store/templates/store-search.view.client.html',
                 controller: 'StoreSearchController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
             })
             .otherwise({redirectTo : '/'})
     }

@@ -4,7 +4,7 @@ var merchandiseModel = mongoose.model('merchandiseModel', merchandiseSchema);
 
 
 merchandiseModel.createMerchandise = createMerchandise;
-merchandiseModel.findAllMerchandisesForSeller = findAllMerchandisesForSeller;
+merchandiseModel.findAllMerchandisesForStore = findAllMerchandisesForStore;
 merchandiseModel.findMerchandiseById = findMerchandiseById;
 merchandiseModel.updateMerchandise = updateMerchandise;
 merchandiseModel.deleteMerchandise = deleteMerchandise;
@@ -13,8 +13,8 @@ merchandiseModel.deleteMerchandise = deleteMerchandise;
 module.exports = merchandiseModel;
 
 
-function createMerchandise(seller, merchandise) {
-    merchandise._seller = seller;
+function createMerchandise(store, merchandise) {
+    merchandise._store = store;
     merchandise.dateCreated = Date.now();
     merchandise.dateUpdated = Date.now();
     return merchandiseModel
@@ -25,9 +25,9 @@ function createMerchandise(seller, merchandise) {
 }
 
 
-function findAllMerchandisesForSeller(seller) {
+function findAllMerchandisesForStore(store) {
     return merchandiseModel
-        .find({_seller: seller})
+        .find({_store: store})
         .exec();
 }
 

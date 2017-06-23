@@ -1,8 +1,8 @@
 // https://developer.oxforddictionaries.com/documentation
 
 var q = require('q');
-const app = require('../../express');
-const https = require('https');
+var app = require('../../express');
+var https = require('https');
 
 app.post('/api/map/searchWithCoords', searchWithCoords);
 app.get('/api/map/searchWithAddress/:currentAddress', searchWithAddress);

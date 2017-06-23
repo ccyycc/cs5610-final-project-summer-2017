@@ -14,9 +14,9 @@
 
             model.store = {};
             storeService
-                .findAllStoresForOwner("currentUser")
+                .findStoreById(model.storeId)
                 .then(function (res) {
-                    model.store = res[0];
+                    model.store = res;
                     model.store.addressUrl = trust("https://www.google.com"
                                                    + "/maps/embed/v1/place?"
                                                    + "key=AIzaSyA0oVg3fT3ZdLkEExxVyC0jkciGfmaYBcI&q="

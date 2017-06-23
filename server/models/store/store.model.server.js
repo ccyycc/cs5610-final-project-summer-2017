@@ -27,7 +27,10 @@ function createStore(owner, store) {
 function findAllStoresForOwner(owner) {
     return storeModel
         .find({_owner: owner})
-        .exec();
+        .then(function(data){
+            var tmp = data;
+            return data;
+        })
 }
 
 function findStoreById(storeId) {

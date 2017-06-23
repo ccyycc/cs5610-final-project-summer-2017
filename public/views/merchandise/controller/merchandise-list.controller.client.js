@@ -6,37 +6,27 @@
     function merchandiseListController($location, $routeParams, merchandiseService) {
         var model = this;
         //event handler
-        model.newMerchandise = newMerchandise;
+        model.createMerchandise = createMerchandise;
 
         init();
 
         function init() {
-            // model.sellerId = currentUser._id;
-            model.sellerId = $routeParams['sellerId'];
-            //TODO REMOVE DEFAULT USERNAME
-            model.sellerId ="123";
-
-            // model.sellerId = $routeParams['wid'];
-            model.merchandises = merchandiseService.findMerchandiseBySellerId(model.sellerId)
+            model.storeId = $routeParams['storeId'];
+            model.merchandises = [];
+            model.merchandises = merchandiseService.findMerchandiseByStoreId(model.storeId)
                 .then(
                     function(merchandises){
                         model.merchandises=merchandises;
                     },
                     function(){
                         alert("cannot find merchandises for users");
-                        $location.url('/user');
+                        $location.url('/store/'+model.storeId);
                     }
                 );
-
-            //header
-            model.header = "Merchandise List";
-            model.back = "#!/user/";
-            model.topRightOperationIcon = 'glyphicon glyphicon-plus';
-            model.topRightOperation = model.newMerchandise;
         }
 
-        function newMerchandise() {
-            $location.url('/user/' + model.sellerId + "/merchandise/new");
+        function createMerchandise() {
+            $location.url("/store/"+model.storeId+"/merchandise/undefined/new");
         }
 
     }

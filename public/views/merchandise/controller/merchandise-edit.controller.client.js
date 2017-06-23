@@ -6,49 +6,72 @@
     function merchandiseEditController($location, $routeParams, merchandiseService) {
         var model = this;
         //event handler.
+        model.createMerchandise = createMerchandise;
         model.updateMerchandise = updateMerchandise;
         model.deleteMerchandise = deleteMerchandise;
 
         init();
 
         function init() {
-            model.sellerId = $routeParams['sellerId'];
+            // model.sellerId = $routeParams[''];
             //TODO REMOVE DEFAULT USERNAME
-            model.sellerId ="123";
-
+            model.storeId = $routeParams['storeId'];
+            model.merchandiseId = $routeParams['merchandiseId'];
+            model.mode = $routeParams['mode'];
             model.merchandiseNameStyle = "";
-            merchandiseService.findMerchandiseByUserId(model.sellerId)
+
+            model.merchandises = merchandiseService.findMerchandiseByStoreId(model.storeId)
                 .then(
-                    function (merchandises) {
-                        model.merchandises = merchandises;
+                    function(merchandises){
+                        model.merchandises=merchandises;
                     },
-                    function () {
-                        alert("cannot find merchandises with user id");
-                        navToUser();
-                    }
-                );
-            merchandiseService.findMerchandiseById(model.merchandiseId)
-                .then(
-                    function (merchandise) {
-                        model.merchandise = merchandise;
-                    },
-                    function () {
-                        alert("cannot find merchandise with merchandise id");
-                        navToMerchandise();
+                    function(){
+                        alert("cannot find merchandises for users");
+                        $location.url('/store/'+model.storeId);
                     }
                 );
 
-            //header
-            //left panel
-            model.leftHeader = "Merchandise List";
-            model.leftBack = "#!/user/" + model.sellerId + "/merchandise";
+            if(model.mode === "new"){
+                model.merchandise = {}
+            }else{
+                merchandiseService.findMerchandiseById(model.merchandiseId)
+                    .then(
+                        function (merchandise) {
+                            model.merchandise = merchandise;
+                        },
+                        function () {
+                            alert("cannot find merchandise with merchandise id");
+                            navToMerchandise();
+                        }
+                    );
+            }
 
-            //right panel
-            model.rightHeader = "Edit merchandise ";
-            model.rightBack = "#!/user/" + model.sellerId + "/merchandise";
-            model.rightTopRightOperationIcon = 'glyphicon glyphicon-ok';
-            model.rightTopRightOperation = updateMerchandise;
+            // merchandiseService.findMerchandiseBySellerId(model.sellerId)
+            //     .then(
+            //         function (merchandises) {
+            //             model.merchandises = merchandises;
+            //         },
+            //         function () {
+            //             alert("cannot find merchandises with user id");
+            //             navToUser();
+            //         }
+            //     );
         }
+
+
+        function createMerchandise() {
+            model.merchandiseNameStyle = "";
+            if (model.merchandise.name) {
+                merchandiseService.createMerchandise(model.storeId, model.merchandise)
+                    .then(navToMerchandise, function () {
+                        alert("fail to create a merchandise, please try again.")
+                    });
+            } else {
+                model.errorMessage = "merchandise name is require";
+                model.merchandiseNameStyle = "has-error";
+            }
+        }
+
 
         function updateMerchandise() {
             model.merchandiseNameStyle = "";
@@ -68,7 +91,7 @@
 
 
         function navToMerchandise() {
-            $location.url("/user/" + model.sellerId + "/merchandise");
+            $location.url("/store/" + model.storeId + "/merchandise");
         }
 
         function navToUser() {

@@ -1,17 +1,17 @@
 var app = require('../../express');
 var merchandiseModel = require('../models/merchandise/merchandise.model.server');
 
-app.post('/api/seller/:sellerId/merchandise', createMerchandise);
-app.get('/api/seller/:sellerId/merchandise', findAllMerchandisesForSeller);
+app.post('/api/store/:storeId/merchandise', createMerchandise);
+app.get('/api/store/:storeId/merchandise', findAllMerchandisesForStore);
 app.get('/api/merchandise/:merchandiseId', findMerchandiseById);
 app.put('/api/merchandise/:merchandiseId', updateMerchandise);
 app.delete('/api/merchandise/:merchandiseId', deleteMerchandise);
 
 function createMerchandise(req, res) {
     var merchandise = req.body;
-    var sellerId = req.params.sellerId;
+    var storeId = req.params.storeId;
     merchandiseModel
-        .createMerchandise(sellerId, merchandise)
+        .createMerchandise(storeId, merchandise)
         .then(function (merchandise) {
                 res.status(200).json(merchandise);
             },
@@ -21,11 +21,11 @@ function createMerchandise(req, res) {
         )
 }
 
-function findAllMerchandisesForSeller(req, res) {
-    var sellerId = req.params.sellerId + "";
+function findAllMerchandisesForStore(req, res) {
+    var storeId = req.params.storeId + "";
 
     merchandiseModel
-        .findAllMerchandisesForSeller(sellerId)
+        .findAllMerchandisesForStore(storeId)
         .then(function (merchandises) {
                 res.status(200).send(merchandises);
 

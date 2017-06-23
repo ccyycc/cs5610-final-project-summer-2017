@@ -31,7 +31,7 @@
                         <li ng-repeat="merchandise in model.merchandises" class="list-group-item">
                             <div class="row ">
                                 <div class="col-lg-4 col-md-7 col-xs-10 ">
-                                    <a href="#!/user/{{model.sellerId}}/merchandise/{{merchandise._id}}/widget">
+                                    <a href="">
                                         {{merchandise.name}}
                                     </a>
                                 </div>
@@ -39,10 +39,10 @@
                                     {{merchandise.dateCreated | date}}
                                 </div>
                                 <div class="col-md-3 hidden-sm hidden-xs">
-                                    {{merchandise.dateAccessed | date}}
+                                    {{merchandise.dateUpdated | date}}
                                 </div>
                                 <div class="col-xs-2">
-                                    <a href="#!/user/{{model.sellerId}}/merchandise/{{merchandise._id}}">
+                                    <a href="#!/store/{{model.storeId}}/merchandise/{{merchandise._id}}/edit">
                                         <span class="glyphicon glyphicon-cog pull-right"></span>
                                     </a>
                                 </div>
@@ -54,6 +54,7 @@
         </div>
         <!--right panel-->
         <div class="col-xs-12 col-sm-8 ">
+            {{model.merchandise}}
             <!--right panel body-->
             <div class="container-fluid">
                 <div ng-show="model.errorMessage"
@@ -75,9 +76,19 @@
                           ng-model="model.merchandise.description"
                           placeholder="Description"
                           class="form-control"></textarea>
+
+
                 <!--delete button -->
-                <a ng-click="model.deletePage()"
-                   href="#!/user/{{model.sellerId}}/merchandise"
+                <a ng-if="model.mode === 'new'"
+                   ng-click="model.createMerchandise()"
+                   class="btn btn-block btn-primary">Create</a>
+                <!--delete button -->
+                <a ng-if="model.mode === 'edit'"
+                   ng-click="model.updateMerchandise()"
+                   class="btn btn-block btn-success">update</a>
+                <!--delete button -->
+                <a ng-if="model.mode === 'edit'"
+                   ng-click="model.deleteMerchandise()"
                    class="btn btn-block btn-danger">Delete</a>
             </div>
         </div>

@@ -3,7 +3,7 @@
         .module('FinalProject')
         .controller('storeProfileEditController', storeProfileEditController);
 
-    function storeProfileEditController($routeParams, $location, storeService, $sce) {
+    function storeProfileEditController($routeParams, $location, storeService, $sce,currentUser) {
         var model = this;
         model.updateStore = updateStore;
         model.createStore = createStore;
@@ -13,14 +13,13 @@
         function init() {
             model.storeId = $routeParams['storeId'];
             model.mode = $routeParams['mode'];
-            model.user = "currentUser";
+            console.log(model);
+            model.user = currentUser;
             model.store = {};
-            model.storeId = $routeParams['storeId'];
             // model.store = storeService.findStoreById(model.storeId);
             model.days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
             if (model.mode === "new") {
                 model.store = {
-                    _owner: "",
                     name: "",
                     description: "",
                     hours: [
@@ -38,7 +37,7 @@
                 };
             } else if (model.mode ==="edit"){
                 storeService
-                    .findAllStoresForOwner(model.storeId)
+                    .findAllStoresForOwner(currentUser._id)
                     .then(function (data) {
                         model.store=data[0];
                         populateDateObject(model.store);
@@ -70,13 +69,17 @@
         function updateStore() {
             storeService
                 .updateStore(model.store._id, model.store)
-                .then(navToStoreProfile);
+                .then(function (store) {
+                    $location.url('/store/'+model.store._id);
+                });
         }
 
         function createStore() {
             storeService
-                .createStore(model.user, model.store)
-                .then(navToStoreProfile);
+                .createStore(model.user._id, model.store)
+                .then(function (store) {
+                    $location.url('/store/'+store._id);
+                });
         }
 
         function getStoreAddress() {
@@ -86,9 +89,6 @@
                    + " " + model.address.zip;
         }
 
-        function navToStoreProfile(res) {
-            $location.url('/store/'+model.storeId);
-        }
 
         function populateDateObject(store){
             for(var i = 0; i < store.hours.length;i++){
