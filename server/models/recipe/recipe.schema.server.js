@@ -17,6 +17,7 @@ var recipeSchema = mongoose.Schema({
     image: String,
     likedUsers: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}],
     rating: {type: Number, default: 0},
+    //TODO: store comment in recipe?
     comments: {type: mongoose.Schema.ObjectId, ref: 'commentModel'},
     dateCreated: {type: Date, default: Date.now},
     dateModified: {type: Date, default: Date.now}

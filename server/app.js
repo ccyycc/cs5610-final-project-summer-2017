@@ -7,4 +7,4 @@ mongoose.Promise = require('q').Promise;
 
 require('./services/user.service.server');
 require('./services/recipe.service.server');
-
+require('./services/comment.service.server');

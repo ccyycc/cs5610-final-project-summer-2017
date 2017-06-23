@@ -5,7 +5,8 @@ var upload = multer({dest: __dirname + '/../../public/uploads'});
 
 var commentModel = require('../models/comment/comment.model.server');
 
-app.post('/api/comment', createComment);
+
+app.post('/api/from/:userId/to/:recipeId/comment', createRecipeReview);
 app.get('/api/comment/recipe_review/:recipeId', findAllRecipeReview);
 
 function findAllRecipeReview(req, res) {
@@ -19,10 +20,12 @@ function findAllRecipeReview(req, res) {
         })
 }
 
-function createComment(req, res) {
+function createRecipeReview(req, res) {
+    var userId = req.params.userId;
+    var recipeId = req.params.recipeId;
     var comment = req.body;
     commentModel
-        .createComment(comment)
+        .createRecipeReview(userId, recipeId, comment)
         .then(function (comment) {
             res.json(comment);
         }, function () {

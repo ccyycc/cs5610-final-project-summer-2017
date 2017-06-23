@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var commentSchema = require('./comment.schema.server');
 var commentModel = mongoose.model('commentModel', commentSchema);
 
-commentModel.createComment = createComment;
+commentModel.createRecipeReview = createRecipeReview;
 commentModel.deleteComment = deleteComment;
 commentModel.findCommentById = findCommentById;
 commentModel.findAllComments = findAllComments;
@@ -27,7 +27,10 @@ function deleteComment(commentId) {
         })
 }
 
-function createComment(comment) {
+function createRecipeReview(userId, recipeId, comment) {
+    comment.fromWhom = userId;
+    comment.toRecipe = recipeId;
+    console.log(comment);
     return commentModel
         .create(comment)
         .then(function (comment) {
