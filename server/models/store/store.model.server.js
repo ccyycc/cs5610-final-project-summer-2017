@@ -9,6 +9,8 @@ storeModel.findStoreById = findStoreById;
 storeModel.updateStore = updateStore;
 storeModel.deleteStore = deleteStore;
 
+storeModel.uploadImage = uploadImage;
+
 
 module.exports = storeModel;
 
@@ -47,5 +49,11 @@ function deleteStore(storeId) {
     return storeModel.remove({_id:storeId}).exec();
 }
 
+
+function uploadImage(storeId, filename) {
+
+    return storeModel.update({_id: storeId}, {$set: {image: '/uploads/store/profile/' + filename}});
+
+}
 
 

@@ -1,4 +1,7 @@
 var app = require('../../express');
+var multer = require('multer');
+var upload = multer({dest: __dirname + '/../../public/uploads/store/profile'});
+
 var storeModel = require('../models/store/store.model.server');
 
 var passport = require('./user.service.server');
@@ -8,6 +11,29 @@ app.get('/api/owner/:ownerId/store', findAllStoresForOwner);
 app.get('/api/store/:storeId', passport.isMerchant,findStoreById);
 app.put('/api/store/:storeId', updateStore);
 app.delete('/api/store/:storeId', deleteStore);
+
+app.post('/api/upload/store/profile', upload.single('myFile'), uploadImage);
+
+
+function uploadImage(req, res) {
+    if (req.file === undefined) {
+        res.status(404);
+        return;
+    }
+
+    var myFile = req.file;
+    var storeId = req.body.storeId;
+    var filename = myFile.filename;
+
+    storeModel
+        .uploadImage(storeId,filename)
+        .then(function (status) {
+            var callbackUrl = "/#!/store/"+storeId;
+            res.redirect(callbackUrl)
+        });
+
+
+}
 
 
 function createStore(req, res) {

@@ -6,7 +6,7 @@ var upload = multer({dest: __dirname + '/../../public/uploads'});
 var associationModel = require('../models/association/association.model.server');
 
 
-app.post('/api/from/:userId/to/:recipeId/association', createRecipeReview);
+app.post('/api/association/from/:userId/to/:recipeId', createRecipeReview);
 app.get('/api/association/recipe_review/:recipeId', findAllRecipeReview);
 
 function findAllRecipeReview(req, res) {

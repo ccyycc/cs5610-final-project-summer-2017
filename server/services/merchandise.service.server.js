@@ -1,4 +1,7 @@
 var app = require('../../express');
+var multer = require('multer');
+var upload = multer({dest: __dirname + '/../../public/uploads/merchandise/picture'});
+
 var merchandiseModel = require('../models/merchandise/merchandise.model.server');
 
 app.post('/api/store/:storeId/merchandise', createMerchandise);
@@ -6,6 +9,11 @@ app.get('/api/store/:storeId/merchandise', findAllMerchandisesForStore);
 app.get('/api/merchandise/:merchandiseId', findMerchandiseById);
 app.put('/api/merchandise/:merchandiseId', updateMerchandise);
 app.delete('/api/merchandise/:merchandiseId', deleteMerchandise);
+
+// app.post('/api/upload/merchandise/picture', upload.single('myFile'), uploadImage);
+
+
+
 
 function createMerchandise(req, res) {
     var merchandise = req.body;

@@ -9,6 +9,27 @@
         ng-click="model.createStore()"
         class="btn btn-block btn-success">create</a>
 
+
+
+<img id="photo"
+     class="imageToCenter"
+     ng-src="{{model.user.photo}}" width="50%"/>
+
+
+<Label>photo</Label>
+<form action="/api/upload/store/profile"
+      method="post"
+      enctype="multipart/form-data"
+      class="margin-top-15">
+    <input name="myFile" type="file" class="form-control"/>
+    <input name="storeId" value="{{model.storeId}}" style="display: none"/>
+    <button type="submit"
+            class="btn btn-block btn-primary">
+        Upload Photo
+    </button>
+</form>
+
+
 <label for="name">Name</label>
 <input class="form-control"
        placeholder="name"
