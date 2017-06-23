@@ -11,8 +11,10 @@
     <!--loading angular framework-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js"></script>
-    <script src="vendor/JavaScript/angular/angular.min.js"></script>
-    <script src="vendor/JavaScript/angular/angular-route.min.js"></script>
+
+    <!--<script src="vendor/JavaScript/angular/angular.min.js"></script>-->
+    <!--<script src="vendor/JavaScript/angular/angular-route.min.js"></script>-->
+
     <!---------------------------------------------angular------------------------------------------------------------->
     <!--angular app & configs-->
     <script src="app.js"></script>
@@ -23,10 +25,21 @@
 
     <!--loadservicesvice -->
 
+    <!--recipe service-->
+    <script src="services/user.service.client.js"></script>
+    <script src="services/recipe.service.client.js"></script>
+    <script src="services/yummly.service.client.js"></script>
+    <script src="services/edamam.service.client.js"></script>
+    <script src="services/comment.service.client.js"></script>
+
     <!---------------------------------------------controller---------------------------------------------------------->
 
     <script src="views/store/controllers/store.controller.client.js"></script>
     <!--loading controller-->
+
+    <!--home controller-->
+    <script src="views/home/controllers/main.controller.client.js"></script>
+
 
     <script src="views/user/controllers/login.controller.client.js"></script>
     <script src="views/user/controllers/register.controller.client.js"></script>
@@ -36,20 +49,35 @@
     <script src="services/user.service.client.js"></script>
 
 
+    <!--recipe Controller-->
+    <script src="views/recipe/controllers/creator/recipe-edit.controller.client.js"></script>
+    <script src="views/recipe/controllers/creator/recipe-list-by-creator.view.client.js"></script>
+    <script src="views/recipe/controllers/otherUser/recipe-detail.controller.client.js"></script>
+    <script src="views/recipe/controllers/recipe-list.controller.client.js"></script>
+    <script src="views/recipe/controllers/otherUser/ingredient-detail.controller.client.js"></script>
+
+
     <!---------------------------------------------CSS----------------------------------------------------------------->
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+
     <link rel="stylesheet"
-          href="vendor/css/bootstrap/css/bootstrap.css">
+          href="vendor/bootstrap/dist/css/bootstrap.css">
+
     <!--<link href="vendor/bootstrap/dist/css/bootstrap.css"-->
     <!--rel="stylesheet">-->
 
     <!--font-awesome-->
     <script src="https://use.fontawesome.com/464c737455.js"></script>
+    <link rel="stylesheet"
+          href="css/dashboard.css">
+    <link rel="stylesheet"
+          href="css/nutritionChart.css">
+    <link rel="stylesheet" href="css/style.css">
+
 
 
 </head>
