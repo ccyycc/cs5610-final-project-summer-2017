@@ -5,17 +5,19 @@
 
     function CommentService($http) {
 
-        this.createComment = createComment;
+        this.createRecipeReview = createRecipeReview;
         this.findAllRecipeReview = findAllRecipeReview;
 
 
-        function createComment(comment) {
-            var url = '/api/comment';
+        function createRecipeReview(userId, recipeId, comment) {
+            var url = '/api/from/'+ userId + '/to/' + recipeId + '/comment';
+            console.log(comment);
             return $http.post(url, comment)
                 .then(function (response) {
                     return response.data;
                 });
         }
+
         function findAllRecipeReview(recipeId) {
             var url = '/api/comment/recipe_review/' + recipeId;
             return $http.get(url)

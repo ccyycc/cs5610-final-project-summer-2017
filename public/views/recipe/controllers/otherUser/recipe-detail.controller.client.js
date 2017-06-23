@@ -16,7 +16,7 @@
         // userId = currentUser._id;
         model.recipeId = $routeParams.recipeId;
 
-        console.log(model.recipeId);
+        // console.log(model.recipeId);
 
         function init() {
             // console.log($location.hash());
@@ -109,15 +109,16 @@
         }
 
         function submitComment() {
-            var newComment = {
-                content: model.newComment.content,
-                fromWhom: currentUser._id,
-                toRecipe:  model.recipeId
-            };
+            // console.log(model.newComment.content);
+            // var newComment = {
+            //     content: model.newComment.content,
+            //     fromWhom: currentUser._id,
+            //     toRecipe:  model.recipeId
+            // };
             commentService
-                .createComment(newComment)
+                .createComment(currentUser._id, model.recipeId, model.newComment)
                 .then(function (comment) {
-
+                    model.reviews.push(comment);
                 })
         }
 
