@@ -5,7 +5,6 @@
 
     function config($routeProvider) {
         $routeProvider
-
             .when('/',{
                 templateUrl:'./views/home/templates/home.view.client.html',
                 // controller:''
@@ -68,6 +67,17 @@
                 }
             })
             //TODO: could be the profile page of recipe provider
+            .when('/store/:storeId/merchandise',{
+                templateUrl: './views/merchandise/templates/merchandise-list.view.client.html',
+                controller: 'merchandiseListController',
+                controllerAs: 'model'
+            })
+            .when('/store/:storeId/merchandise/:merchandiseId/:mode',{
+                templateUrl: './views/merchandise/templates/merchandise-edit.view.client.html',
+                controller: 'merchandiseEditController',
+                controllerAs: 'model'
+            })
+
             .when('/recipe',{
                 templateUrl: 'views/recipe/templates/creator/recipe-list-by-creator.view.client.html',
                 controller: 'recipeListByCreatorController',
@@ -84,10 +94,31 @@
                     currentUser: checkLoggedin
                 }
             })
-            .when('/store', {
+            .when('/store/:storeId',{
+                templateUrl: 'views/store/templates/store-profile.view.client.html',
+                controller: 'storeProfileController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
+            })
+            .when('/store/:storeId/:mode',{
+                templateUrl: 'views/store/templates/store-profile-edit.view.client.html',
+                controller: 'storeProfileEditController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
+            })
+
+
+            .when('/store-search',{
                 templateUrl: 'views/store/templates/store-search.view.client.html',
                 controller: 'StoreSearchController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
             })
             .otherwise({redirectTo : '/'})
     }
@@ -135,6 +166,4 @@
             });
         return deferred.promise;
     }
-
 })();
-

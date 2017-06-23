@@ -1,29 +1,31 @@
-{{model.testMessage}}
-
 <div class="container-fluid">
 
-    <p>Click the button to get your coordinates.</p>
+    <p>Search with current location</p>
+    <form>
+        <label for="streeAddress">Street Address</label>
+        <input id="streeAddress"
+               ng-model = "model.address.street"
+               type="text"
+               class="form-control"/>
+        <label for="city">City</label>
+        <input id="city"
+               ng-model = "model.address.city"
+               type="text"
+               class="form-control"/>
+        <label for="state">State</label>
+        <input id="state"
+               ng-model = "model.address.state"
+               type="text"
+               class="form-control"/>
+        <label for="zip">Zip Code</label>
+        <input id="zip"
+               ng-model = "model.address.zip"
+               type="text"
+               class="form-control"/>
+        <button ng-click = "model.searchWithAddress()"
+                class="btn btn-block btn-primary">Upload Image & Save </button>
+    </form>
 
-    <!--<button onclick="getLocation()">Try It</button>-->
-
-    <p id="demo"></p>
-
-    <!--<script>-->
-        <!--var x = document.getElementById("demo");-->
-
-        <!--function getLocation() {-->
-            <!--if (navigator.geolocation) {-->
-                <!--navigator.geolocation.getCurrentPosition(showPosition);-->
-            <!--} else {-->
-                <!--x.innerHTML = "Geolocation is not supported by this browser.";-->
-            <!--}-->
-        <!--}-->
-
-        <!--function showPosition(position) {-->
-            <!--x.innerHTML = "Latitude: " + position.coords.latitude +-->
-                <!--"<br>Longitude: " + position.coords.longitude;-->
-        <!--}-->
-    <!--</script>-->
 
 
     <div class="input-group">
@@ -31,12 +33,20 @@
                type="text"
                class="form-control">
         <span class="input-group-btn">
-           <a ng-click="model.searchNearBy(searchText)"
+           <a ng-click="model.searchWithCoords()"
               class="btn btn-default" type="button">
                <span class="glyphicon glyphicon-search"></span>
            </a>
        </span>
     </div>
+
+    <span class="input-group-btn">
+           <a ng-click="model.searchWithCoords()"
+              class="btn btn-default" type="button">
+               <span class="glyphicon glyphicon-map-marker"></span>
+           </a>
+       </span>
+
 
     <div class="row">
         <div class="clearfix col-sm-12 col-md-2" ng-repeat="place in model.places">

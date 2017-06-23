@@ -1,10 +1,10 @@
-const app = require('../../express');
+var app = require('../../express');
 var multer = require('multer');
 var upload = multer({dest: __dirname + '/../../public/uploads'});
 
 var userModel = require('../models/user/user.model.server');
 
-var passport = require('passport');
+const passport = require('passport');
 var bcrypt = require("bcrypt-nodejs");
 
 var LocalStrategy = require('passport-local').Strategy;
@@ -53,6 +53,31 @@ app.get('/auth/google/callback',
         successRedirect: '/assignment/index.html#!/profile',
         failureRedirect: '/assignment/index.html#!/login'
     }));
+
+
+passport.isAdmin = isAdmin;
+passport.isMerchant = isMerchant;
+passport.isRecipePro = isRecipePro;
+
+
+module.exports = passport;
+
+function isRecipePro(req, res, next) {
+    if (req.isAuthenticated() && req.user.roles.indexOf('RECIPEPRO') > -1) {
+        next();
+    } else {
+        res.sendStatus(401);
+    }
+}
+
+
+function isMerchant(req, res, next) {
+    if (req.isAuthenticated() && req.user.roles.indexOf('MERCHANT') > -1) {
+        next();
+    } else {
+        res.sendStatus(401);
+    }
+}
 
 function isAdmin(req, res, next) {
     if (req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {
