@@ -19,8 +19,7 @@
         var recipe = {};
 
         function createYummlyLocalRecipeCopy(yummlyRecipeId, recipe) {
-            // console.log(recipe);
-            var url = '/api/recipe/' + yummlyRecipeId;
+            var url = '/api/yummlyRecipe/' + yummlyRecipeId;
             return $http.post(url, recipe)
                 .then(function (response) {
                     return response.data;

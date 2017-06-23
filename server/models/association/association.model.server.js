@@ -1,23 +1,23 @@
 var mongoose = require('mongoose');
-var commentSchema = require('./comment.schema.server');
-var commentModel = mongoose.model('commentModel', commentSchema);
+var associationSchema = require('./association.schema.server');
+var associationModel = mongoose.model('associationModel', associationSchema);
 
-commentModel.createRecipeReview = createRecipeReview;
-commentModel.deleteComment = deleteComment;
-commentModel.findCommentById = findCommentById;
-commentModel.findAllComments = findAllComments;
-commentModel.findAllRecipeReview = findAllRecipeReview;
+associationModel.createRecipeReview = createRecipeReview;
+associationModel.deleteComment = deleteComment;
+associationModel.findCommentById = findCommentById;
+associationModel.findAllComments = findAllComments;
+associationModel.findAllRecipeReview = findAllRecipeReview;
 
-module.exports = commentModel;
+module.exports = associationModel;
 
 function findAllRecipeReview(recipeId) {
-    return commentModel
+    return associationModel
         .find({toRecipe: recipeId});
 }
 
 
 function deleteComment(commentId) {
-    return commentModel
+    return associationModel
         .remove(commentId)
         .then(function (status) {
             return status;
@@ -31,7 +31,7 @@ function createRecipeReview(userId, recipeId, comment) {
     comment.fromWhom = userId;
     comment.toRecipe = recipeId;
     console.log(comment);
-    return commentModel
+    return associationModel
         .create(comment)
         .then(function (comment) {
             return comment;
@@ -40,9 +40,9 @@ function createRecipeReview(userId, recipeId, comment) {
 }
 
 function findCommentById(commentId) {
-    return commentModel.findById(commentId);
+    return associationModel.findById(commentId);
 }
 
 function findAllComments() {
-    return commentModel.find();
+    return associationModel.find();
 }

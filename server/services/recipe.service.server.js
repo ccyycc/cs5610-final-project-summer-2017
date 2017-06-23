@@ -12,15 +12,13 @@ app.put('/api/recipe/:recipeId', updateRecipe);
 app.delete('/api/recipe/:recipeId', deleteRecipe);
 app.get('/api/recipe', findRecipeByCriteria);
 app.post('/api/recipe/upload', upload.single('myFile'), uploadImage);
-app.post('/api/recipe/:yummlyRecipeId', createYummlyLocalRecipeCopy);
+app.post('/api/yummlyRecipe/:yummlyRecipeId', createYummlyLocalRecipeCopy);
 
 //TODO:legal issue?
 
 function createYummlyLocalRecipeCopy(req, res) {
     var yummlyRecipeId = req.params.yummlyRecipeId;
-    // console.log(yummlyRecipeId);
     var recipe = req.body;
-    // console.log(recipe);
     recipeModel
         .createYummlyLocalRecipeCopy(yummlyRecipeId, recipe)
         .then(function (recipe) {

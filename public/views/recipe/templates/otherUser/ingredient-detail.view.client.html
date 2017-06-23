@@ -2,10 +2,10 @@
 <h1>Ingredient Detail Page</h1>
 
     <!--{{model.ingredient}}-->
-    <div ng-show="!model.ingredient.ingredients[0].text">
+    <div ng-show="!model.ingredient.ingredients[0].parsed[0].foodMatch">
         Sorry, the food is not found.
     </div>
-    <ul ng-show="model.ingredient.ingredients[0].text"
+    <ul ng-show="model.ingredient.ingredients[0].parsed[0].foodMatch"
         class="list-group">
         <li class="list-group-item">
             Name: {{model.ingredient.ingredients[0].parsed[0].foodMatch}}
@@ -14,12 +14,12 @@
             Description: {{model.ingredient.ingredients[0].parsed[0].food}}
         </li>
     </ul>
-    <section ng-show="model.ingredient.ingredients[0].text"
+    <section ng-show="model.ingredient.ingredients[0].parsed[0].foodMatch"
              class="performance-facts">
         <header class="performance-facts__header">
             <h1 class="performance-facts__title">Nutrition Facts</h1>
-            <p>Serving Size {{model.ingredient.ingredients[0].parsed[0].quantity}} {{model.ingredient.ingredients[0].parsed[0].measure}}
-               (about {{model.ingredient.totalWeight}}g)
+            <p>Serving Size {{model.ingredient.ingredients[0].parsed[0].quantity| number : 0}} {{model.ingredient.ingredients[0].parsed[0].measure}}
+               (about {{model.ingredient.totalWeight| number : 0}}g)
             <p>Serving Per Container 1</p>
         </header>
         <table class="performance-facts__table">

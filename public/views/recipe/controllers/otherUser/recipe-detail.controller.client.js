@@ -4,7 +4,7 @@
         .controller("recipeDetailController", RecipeDetailController);
     
     function RecipeDetailController($sce, currentUser, $location, $routeParams,
-                                    recipeService, yummlyService, userService, commentService) {
+                                    recipeService, yummlyService, userService, associationService) {
 
         var model = this;
 
@@ -27,7 +27,7 @@
                     .then(function (recipe) {
                         model.recipe = recipe;
                     });
-                commentService
+                associationService
                     .findAllRecipeReview(model.recipeId)
                     .then(function (reviews) {
                         model.reviews = reviews;
@@ -78,18 +78,18 @@
 
         function likeRecipe() {
             if (!model.ifLocal) {
-                var newRecipe = {
-                    name: model.recipe.name,
-                    totalTime: model.recipe.totalTime,
-                    numberOfServings: model.recipe.numberOfServings,
-                    ingredients: model.recipe.ingredients
-                };
+                // var recipeCopy = {
+                //     name: model.recipe.name,
+                //     totalTime: parseInt(model.recipe.totalTime),
+                //     numberOfServings: parseInt(model.recipe.numberOfServings),
+                //     ingredients: model.recipe.ingredients
+                // };
+
                 recipeService
-                    .createYummlyLocalRecipeCopy(model.recipeId, newRecipe)
+                    .createYummlyLocalRecipeCopy(model.recipeId, recipeCopy)
                     .then(function (recipe) {
                         model.recipeLocalId = recipe._id;
                     })
-
             } else {
                 model.recipeLocalId = model.recipeId;
             }
@@ -115,8 +115,8 @@
             //     fromWhom: currentUser._id,
             //     toRecipe:  model.recipeId
             // };
-            commentService
-                .createComment(currentUser._id, model.recipeId, model.newComment)
+            associationService
+                .createRecipeReview(currentUser._id, model.recipeId, model.newComment)
                 .then(function (comment) {
                     model.reviews.push(comment);
                 })
