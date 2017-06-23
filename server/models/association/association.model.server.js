@@ -2,19 +2,32 @@ var mongoose = require('mongoose');
 var associationSchema = require('./association.schema.server');
 var associationModel = mongoose.model('associationModel', associationSchema);
 
-associationModel.createRecipeReview = createRecipeReview;
+associationModel.createAssociation = createAssociation;
+associationModel.findAllRecipeReview = findAllRecipeReview;
 associationModel.deleteComment = deleteComment;
 associationModel.findCommentById = findCommentById;
 associationModel.findAllComments = findAllComments;
-associationModel.findAllRecipeReview = findAllRecipeReview;
+associationModel.deleteRecipeLike = deleteRecipeLike;
 
 module.exports = associationModel;
+
+function deleteRecipeLike(userId, recipeId) {
+    return associationModel
+        .findOneAndRemove({$and: [{fromWhom: userId}, {toRecipe: recipeId}]});
+}
 
 function findAllRecipeReview(recipeId) {
     return associationModel
         .find({toRecipe: recipeId});
 }
 
+function createAssociation(comment) {
+    return associationModel
+        .create(comment)
+        .then(function (comment) {
+            return comment;
+        })
+}
 
 function deleteComment(commentId) {
     return associationModel
@@ -27,17 +40,6 @@ function deleteComment(commentId) {
         })
 }
 
-function createRecipeReview(userId, recipeId, comment) {
-    comment.fromWhom = userId;
-    comment.toRecipe = recipeId;
-    console.log(comment);
-    return associationModel
-        .create(comment)
-        .then(function (comment) {
-            return comment;
-        })
-
-}
 
 function findCommentById(commentId) {
     return associationModel.findById(commentId);

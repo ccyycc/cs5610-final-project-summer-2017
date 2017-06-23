@@ -1,7 +1,7 @@
 var app = require('../../express');
 
 var multer = require('multer'); // npm install multer --save
-var upload = multer({dest: __dirname + '/../../public/uploads'});
+var upload = multer({dest: __dirname + '/../../public/uploads/recipe'});
 
 var recipeModel = require('../models/recipe/recipe.model.server');
 
@@ -12,15 +12,26 @@ app.put('/api/recipe/:recipeId', updateRecipe);
 app.delete('/api/recipe/:recipeId', deleteRecipe);
 app.get('/api/recipe', findRecipeByCriteria);
 app.post('/api/recipe/upload', upload.single('myFile'), uploadImage);
-app.post('/api/yummlyRecipe/:yummlyRecipeId', createYummlyLocalRecipeCopy);
+app.post('/api/yummly/recipeCopy', createYummlyLocalRecipeCopy);
+app.get('/api/yummly/recipeCopy/:recipeId', findYummlyRecipeCopyByYummlyId);
 
-//TODO:legal issue?
+
+function findYummlyRecipeCopyByYummlyId(req, res) {
+    var recipeId = req.params.recipeId;
+    recipeModel
+        .findYummlyRecipeCopyByYummlyId(recipeId)
+        .then(function (recipe) {
+            res.json(recipe);
+        }, function () {
+            res.sendStatus(500);
+        })
+}
 
 function createYummlyLocalRecipeCopy(req, res) {
-    var yummlyRecipeId = req.params.yummlyRecipeId;
+    // var yummlyRecipeId = req.body.yummlyRecipeId;
     var recipe = req.body;
     recipeModel
-        .createYummlyLocalRecipeCopy(yummlyRecipeId, recipe)
+        .createYummlyLocalRecipeCopy(recipe)
         .then(function (recipe) {
             res.json(recipe);
         }, function () {
@@ -124,7 +135,7 @@ function changeImageForRecipe(recipeId, filename) {
     recipeModel
         .findRecipeById(recipeId)
         .then(function (recipe) {
-            recipe.image = '/uploads/' + filename;
+            recipe.image = '/uploads/recipe' + filename;
             return recipeModel
                 .updateRecipe(recipeId, recipe);
         });

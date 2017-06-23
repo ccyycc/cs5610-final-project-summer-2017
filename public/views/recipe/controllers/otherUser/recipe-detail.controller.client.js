@@ -9,8 +9,9 @@
         var model = this;
 
         model.trust = trust;
-        model.goToIngredientDetal = goToIngredientDetal;
+        model.goToIngredientDetail = goToIngredientDetail;
         model.likeRecipe = likeRecipe;
+        model.unlikeRecipe = unlikeRecipe;
         model.createComment = createComment;
         model.submitComment = submitComment;
         // userId = currentUser._id;
@@ -25,13 +26,16 @@
                 recipeService
                     .findRecipeById(model.recipeId)
                     .then(function (recipe) {
+                        model.recipeLocalId = recipe._id;
                         model.recipe = recipe;
-                    });
-                associationService
-                    .findAllRecipeReview(model.recipeId)
-                    .then(function (reviews) {
-                        model.reviews = reviews;
                     })
+                    .then(function () {
+                        associationService
+                            .findAllReviewByRecipeId(model.recipeLocalId)
+                            .then(function (reviews) {
+                                model.reviews = reviews;
+                            })
+                    });
             } else {
 
                 yummlyService
@@ -40,6 +44,19 @@
                         // console.log(recipe);
                         model.recipe = recipe;
                         combineIngredientAndDescription();
+                        recipeService
+                            .findYummlyRecipeCopyByYummlyId(model.recipeId)
+                            .then(function (recipe) {
+                                if (recipe) {
+                                    model.recipeLocalId = recipe._id;
+                                    associationService
+                                        .findAllRecipeReview(model.recipeLocalId)
+                                        .then(function (reviews) {
+                                            model.reviews = reviews;
+                                        })
+                                }
+                            });
+
                         // console.log(recipe.ingredients);
                         // console.log(recipe.ingredientLines);
 
@@ -47,9 +64,8 @@
 
                         // model.recipe.ingredients = recipe.ingredientLines;
                     });
-            }
-            //TODO:recipe review for recipe from online?
 
+            }
         }
 
         init();
@@ -61,68 +77,80 @@
         }
 
         function combineIngredientAndDescription() {
-            //ingredients[i] model.recipe.ingredientLines[i];
             var ingredients = recipeService
                 .getTempYummlyRecipe(model.recipeId);
-            // console.log(ingredients);
             model.recipe.ingredients = [];
             for (var i in model.recipe.ingredientLines) {
                 model.recipe.ingredients.push({
                     name: ingredients[i],
                     description: model.recipe.ingredientLines[i]
                 });
-                // console.log(model.recipe.ingredients);
-
             }
         }
 
-        function likeRecipe() {
-            if (!model.ifLocal) {
-                // var recipeCopy = {
-                //     name: model.recipe.name,
-                //     totalTime: parseInt(model.recipe.totalTime),
-                //     numberOfServings: parseInt(model.recipe.numberOfServings),
-                //     ingredients: model.recipe.ingredients
-                // };
+        function createYummlyRecipeCopy() {
+            var recipeCopy = {
+                name: model.recipe.name,
+                yummlyId: model.recipeId,
+                source: 'YUMMLY'
+            };
 
-                recipeService
-                    .createYummlyLocalRecipeCopy(model.recipeId, recipeCopy)
-                    .then(function (recipe) {
-                        model.recipeLocalId = recipe._id;
-                    })
-            } else {
-                model.recipeLocalId = model.recipeId;
+            recipeService
+                .createYummlyLocalRecipeCopy(recipeCopy)
+                .then(function (recipe) {
+                    model.recipeLocalId = recipe._id;
+                })
+        }
+
+        function likeRecipe() {
+            if(!model.recipeLocalId) {
+                createYummlyRecipeCopy();
             }
-            userService
-                .findUserById(currentUser._id)
-                .then(function (user) {
-                    console.log(user);
-                    user.likedRecipes.push(model.recipeLocalId);
-                    userService
-                        .updateUser(currentUser._id, user);
+            var like = {
+                fromWhom : currentUser._id,
+                toRecipe : model.recipeLocalId,
+                type: 'LIKE'
+            };
+
+            associationService
+                .createLike(like)
+                .then(function () {
+                    model.likeThis = true;
+                });
+
+        }
+
+        function unlikeRecipe() {
+            associationService
+                .deleteRecipeLike(currentUser._id, model.recipeLocalId)
+                .then(function () {
+                    model.likeThis = true;
                 });
 
         }
 
         function createComment() {
+            model.reviews = [];
             model.newComment = {};
         }
 
         function submitComment() {
-            // console.log(model.newComment.content);
-            // var newComment = {
-            //     content: model.newComment.content,
-            //     fromWhom: currentUser._id,
-            //     toRecipe:  model.recipeId
-            // };
+            if(!model.recipeLocalId) {
+                createYummlyRecipeCopy();
+            }
+            // console.log(model.recipeLocalId);
+            model.newComment.fromWhom = currentUser._id;
+            model.newComment.toRecipe = model.recipeLocalId;
+            model.newComment.type =  'COMMENT';
             associationService
-                .createRecipeReview(currentUser._id, model.recipeId, model.newComment)
+                .createComment(model.newComment)
                 .then(function (comment) {
+                    // console.log(comment);
                     model.reviews.push(comment);
                 })
         }
 
-        function goToIngredientDetal(ingredientName) {
+        function goToIngredientDetail(ingredientName) {
             // console.log(ingredientName);
             $location.url('/recipe_list/' + model.recipeId + '/ingredient/' + ingredientName);
         }

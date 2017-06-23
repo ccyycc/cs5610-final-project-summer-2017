@@ -11,19 +11,24 @@ recipeModel.updateRecipe = updateRecipe;
 recipeModel.deleteRecipe = deleteRecipe;
 recipeModel.findRecipeByCriteria = findRecipeByCriteria;
 recipeModel.createYummlyLocalRecipeCopy = createYummlyLocalRecipeCopy;
+recipeModel.findYummlyRecipeCopyByYummlyId = findYummlyRecipeCopyByYummlyId;
 // recipeModel.findRecipeByName = findRecipeByName;
 // recipeModel.findRecipeByIngredient = findRecipeByIngredient;
 
 module.exports = recipeModel;
 
-function createYummlyLocalRecipeCopy(yummlyRecipeId, recipe) {
-    recipe.source = 'YUMMLY';
-    recipe.yummlyId = yummlyRecipeId;
+function findYummlyRecipeCopyByYummlyId(recipeId) {
+    return recipeModel
+        .findOne({yummlyId: recipeId});
+}
 
+function createYummlyLocalRecipeCopy(recipe) {
+    // recipe.source = 'YUMMLY';
+    // recipe.yummlyId = yummlyRecipeId;
     return recipeModel
         .create(recipe)
         .then(function (recipe) {
-            console.log(recipe);
+            // console.log(recipe);
             return recipe;
         })
 }
@@ -74,7 +79,8 @@ function findRecipeByCriteria(searchTerm) {
     // console.log(searchTerm);
     return recipeModel
         // .find({ingredients: {$in: [new RegExp(searchTerm, "i")]}});
-        .find({$or: [{name: new RegExp(searchTerm, "i")}, {ingredients: new RegExp(searchTerm, "i")}]});
+        .find({$and: [{source: 'LOCAL'},
+            {$or: [{name: new RegExp(searchTerm, "i")}, {ingredients: new RegExp(searchTerm, "i")}]}]});
         // .then(function (recipes) {
         //     console.log(recipes);
         // })

@@ -5,25 +5,42 @@
 
     function AssociationService($http) {
 
-        this.createRecipeReview = createRecipeReview;
-        this.findAllRecipeReview = findAllRecipeReview;
+        this.createLike = createLike;
+        this.createComment = createComment;
+        this.findAllReviewByRecipeId = findAllReviewByRecipeId;
+        this.deleteRecipeLike = deleteRecipeLike;
 
+        function createLike(like) {
+            var url = '/api/association/like';
+            return $http.post(url, like)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
 
-        function createRecipeReview(userId, recipeId, comment) {
-            var url = '/api/from/'+ userId + '/to/' + recipeId + '/association';
-            console.log(comment);
+        function createComment(comment) {
+            var url = '/api/association/comment';
+            // console.log(comment);
             return $http.post(url, comment)
                 .then(function (response) {
                     return response.data;
                 });
         }
 
-        function findAllRecipeReview(recipeId) {
-            var url = '/api/association/recipe_review/' + recipeId;
+        function findAllReviewByRecipeId(recipeId) {
+            var url = '/api/association/comment/recipe/' + recipeId;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
                 });
+        }
+
+        function deleteRecipeLike(userId, recipeId) {
+            var url = '/api/association/like/from/'+ userId + '/to/' + recipeId;
+            return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                })
         }
     }
 })();
