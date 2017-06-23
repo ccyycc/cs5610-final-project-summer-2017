@@ -10,9 +10,28 @@ app.get('/api/merchandise/:merchandiseId', findMerchandiseById);
 app.put('/api/merchandise/:merchandiseId', updateMerchandise);
 app.delete('/api/merchandise/:merchandiseId', deleteMerchandise);
 
-// app.post('/api/upload/merchandise/picture', upload.single('myFile'), uploadImage);
+ app.post('/api/upload/merchandise/picture', upload.single('myFile'), uploadImage);
 
 
+
+function uploadImage(req, res) {
+    if (req.file === undefined) {
+        res.status(404);
+        return;
+    }
+
+    var myFile = req.file;
+    var storeId = req.body.storeId;
+    var merchandiseId = req.body.merchandiseId;
+    var filename = myFile.filename;
+
+    merchandiseModel
+        .uploadImage(merchandiseId,filename)
+        .then(function (status) {
+            var callbackUrl = "/#!/store/"+storeId+"/merchandise/"+merchandiseId;
+            res.redirect(callbackUrl)
+        });
+}
 
 
 function createMerchandise(req, res) {

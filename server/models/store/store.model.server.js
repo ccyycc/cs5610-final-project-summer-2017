@@ -51,9 +51,7 @@ function deleteStore(storeId) {
 
 
 function uploadImage(storeId, filename) {
-
     return storeModel.update({_id: storeId}, {$set: {image: '/uploads/store/profile/' + filename}});
-
 }
 
 

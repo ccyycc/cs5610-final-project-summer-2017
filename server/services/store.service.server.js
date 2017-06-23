@@ -31,8 +31,6 @@ function uploadImage(req, res) {
             var callbackUrl = "/#!/store/"+storeId;
             res.redirect(callbackUrl)
         });
-
-
 }
 
 

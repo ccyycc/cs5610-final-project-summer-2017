@@ -9,8 +9,15 @@ merchandiseModel.findMerchandiseById = findMerchandiseById;
 merchandiseModel.updateMerchandise = updateMerchandise;
 merchandiseModel.deleteMerchandise = deleteMerchandise;
 
+merchandiseModel.uploadImage = uploadImage;
 
 module.exports = merchandiseModel;
+
+
+function uploadImage(merchandiseId, filename) {
+    return merchandiseModel.update({_id: merchandiseId}, {$set: {image: '/uploads/merchandise/picture/' + filename}});
+}
+
 
 
 function createMerchandise(store, merchandise) {
