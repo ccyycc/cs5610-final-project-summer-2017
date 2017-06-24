@@ -12,6 +12,7 @@ select.form-control {
 body {
     padding-top: 60px;
     padding-bottom: 60px;
+    background-color: #ffefd0;
 }
 .jumbotron {
     margin-top: -10px;
@@ -40,7 +41,7 @@ li.list-group-item > div.row > div {
 }
 
 .navbar {
-    background-color: orange;
+    background-color: #fcaa19;
     display: inline;
     height:50px;
 }
@@ -118,9 +119,10 @@ a:focus, a:hover {
     color: #23527c;
 }
 
-#recipeListImages {
+.recipeListImages {
     padding-top: 10px;
     padding-bottom: 10px;
+
 }
 
 .recipeListImage {

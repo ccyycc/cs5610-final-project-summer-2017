@@ -1,67 +1,74 @@
 <div ng-include="'./views/common/header.view.client.html'"></div>
 <div class="container-fluid">
     <div class="row">
-        <div id="recipeListImages"
-             class="col-xs-12 col-sm-6 col-md-4 text-center"
+        <div class="col-xs-12 col-sm-6 col-md-4 text-center recipeListImages"
              ng-repeat="recipe in model.recipes">
             <div class="wd-widget-toolbar">
                 <a ng-show="model.ifCreator()"
-                   ng-click="model.goToEdit(recipe._id)">
+                   href="#!/creator/{{model.creatorId}}/recipe/{{recipe._id}}">
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
             </div>
+
             <img class="recipeListImage"
-                 ng-click="model.goToRecipeDetail(recipe._id)"
                  ng-src="{{recipe.image}}"
                  onerror="this.onerror=null; this.src='/uploads/recipe/placeholder-image10.jpg'"/>
-            <p class="text-on-image">{{recipe.name}}</p>
+            <a href="#!/recipe_list/{{recipe._id}}">
+                <p class="text-on-image">{{recipe.name}}</p>
+            </a>
         </div>
-        <img class="recipeListImage"
-             ng-click="model.goToRecipeDetail(recipe._id)"
-             src="/uploads/recipe/addphoto.png"/>
-        <p class="text-on-image">Add New Recipe!</p>
+        <div ng-show="model.ifCreator()"
+             class="col-xs-12 col-sm-6 col-md-4 text-center recipeListImages">
+            <img class="recipeListImage"
+                 src="/uploads/recipe/addphoto.png"/>
+            <a href="">
+                <p ng-click="model.createRecipe()"
+                   class="text-on-image">Add New Recipe!</p>
+            </a>
+        </div>
     </div>
 </div>
-<div class="container-fluid">
-    <ul class="list-group">
-        <li class="list-group-item active">
-            <div class="row">
-                <div class="col-md-4 col-sm-7 col-xs-10">
-                    Name
-                </div>
-                <div class="col-md-3 visible-md visible-lg">
-                    Created
-                </div>
-                <div class="col-sm-3 hidden-xs">
-                    Accessed
-                </div>
-                <div class="col-xs-2"></div>
-            </div>
-        </li>
-        <!--{{model.recipes}}-->
-        <li ng-repeat="recipe in model.recipes"
-            class="list-group-item">
-            <div class="row">
-                <div class="col-md-4 col-sm-7 col-xs-10">
-                        {{recipe.name}}
-                </div>
-                <div class="col-md-3 visible-md visible-lg">
-                    {{recipe.dateCreated | date}}
-                </div>
-                <div class="col-sm-3 hidden-xs">
-                    {{recipe.dateModified | date}}
-                </div>
-                <div class="col-xs-2">
-                    <a href="#!/recipe/{{recipe._id}}">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                    </a>
-                </div>
-            </div>
-        </li>
-    </ul>
-    <a class="btn btn-primary btn-block" ng-click="model.createRecipe()">
-        <span class="glyphicon glyphicon-plus"></span>
-    </a>
-</div>
+
+<!--<div class="container-fluid">-->
+    <!--<ul class="list-group">-->
+        <!--<li class="list-group-item active">-->
+            <!--<div class="row">-->
+                <!--<div class="col-md-4 col-sm-7 col-xs-10">-->
+                    <!--Name-->
+                <!--</div>-->
+                <!--<div class="col-md-3 visible-md visible-lg">-->
+                    <!--Created-->
+                <!--</div>-->
+                <!--<div class="col-sm-3 hidden-xs">-->
+                    <!--Accessed-->
+                <!--</div>-->
+                <!--<div class="col-xs-2"></div>-->
+            <!--</div>-->
+        <!--</li>-->
+        <!--&lt;!&ndash;{{model.recipes}}&ndash;&gt;-->
+        <!--<li ng-repeat="recipe in model.recipes"-->
+            <!--class="list-group-item">-->
+            <!--<div class="row">-->
+                <!--<div class="col-md-4 col-sm-7 col-xs-10">-->
+                        <!--{{recipe.name}}-->
+                <!--</div>-->
+                <!--<div class="col-md-3 visible-md visible-lg">-->
+                    <!--{{recipe.dateCreated | date}}-->
+                <!--</div>-->
+                <!--<div class="col-sm-3 hidden-xs">-->
+                    <!--{{recipe.dateModified | date}}-->
+                <!--</div>-->
+                <!--<div class="col-xs-2">-->
+                    <!--<a href="#!/recipe/{{recipe._id}}">-->
+                        <!--<span class="glyphicon glyphicon-cog pull-right"></span>-->
+                    <!--</a>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</li>-->
+    <!--</ul>-->
+    <!--<a class="btn btn-primary btn-block" ng-click="model.createRecipe()">-->
+        <!--<span class="glyphicon glyphicon-plus"></span>-->
+    <!--</a>-->
+<!--</div>-->
 
 <div ng-include="'views/common/footer.view.client.html'"></div>
