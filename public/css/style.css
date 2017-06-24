@@ -37,6 +37,7 @@ li.list-group-item > div.row > div {
 .navbar {
     background-color: darkslateblue;
     display: inline;
+    height:50px;
 }
 
 @media (min-width: 768px) {
@@ -116,3 +117,12 @@ a:focus, a:hover {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+.home-search-bar{
+    width: 100%;
+    height: 50px;
+    background-color: #0f0f0f;
+    display: inline-block;
+
+}
+

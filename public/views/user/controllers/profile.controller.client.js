@@ -6,7 +6,7 @@
     function profileController($routeParams, userService, $location, currentUser,storeService) {
 
         var model = this;
-
+        model.sectionTitle = "Profile";
         model.render = render;
 
         function init() {

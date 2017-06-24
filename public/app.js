@@ -1,4 +1,4 @@
 (function () {
     angular
-        .module("FinalProject", ['ngRoute']);
+        .module("FinalProject", ['ngRoute','ui.router']);
 })();
