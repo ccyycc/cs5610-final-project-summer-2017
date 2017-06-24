@@ -23,11 +23,11 @@ var userSchema = mongoose.Schema({
 
     messages: [{type: mongoose.Schema.ObjectId, ref: 'commentModel'}],
 
-    followers: {type: [String], default:[]},
-    followings: {type: [String], default:[]}
+    // followers: [String],
+    // followings: [String]
 
-    // followers: [{type: mongoose.Schema.ObjectId, ref:'userModel'}],
-    // followings: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}]
+    followers: [{type: mongoose.Schema.ObjectId, ref:'userModel'}],
+    followings: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}]
 
 }, {collection: "user"});
 

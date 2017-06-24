@@ -133,8 +133,9 @@ function register(req, res) {
         .createUser(user)
         .then(function (user) {
             console.log('create user success -- user.server');
+            // res.send(user);
             req.login(user, function (status) {
-                    res.send(status);
+                    res.send(user);
                 });
         });
 }

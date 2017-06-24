@@ -8,11 +8,11 @@
         <div class="row">
             <div class="col-xs-6">
                 <h1 class="textToTop textToCenter">{{model.user.username}}</h1>
-                <div ng-show="model.user.role.indexOf('USER') > -1" class="row" id="followerNfollowing">
+                <div class="row" id="followerNfollowing">
                     <div class="col-xs-6 textToCenter">
                         <p>follower<br>{{model.user.followers.length}}</p>
                     </div>
-                    <div ng-show="model.user.role.indexOf('USER') > -1" class="col-xs-6 textToCenter">
+                    <div ng-show="model.user.role == 'USER'" class="col-xs-6 textToCenter">
                         <p>following<br>{{model.user.followings.length}}</p>
                     </div>
                 </div>
