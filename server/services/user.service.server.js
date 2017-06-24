@@ -55,8 +55,8 @@ app.get('/auth/google',
     passport.authenticate('google', {scope: ['profile', 'email']}));
 app.get('/auth/google/callback',
     passport.authenticate('google', {
-        successRedirect: '/assignment/index.html#!/profile',
-        failureRedirect: '/assignment/index.html#!/login'
+        successRedirect: '/index.html#!/profile',
+        failureRedirect: '/index.html#!/login'
     }));
 
 
@@ -259,11 +259,11 @@ function popUserById(req, res) {
 
 function follow(req, res) {
     var followingId = req.params.followingId;
-    var followerId = req.user._id;
-    console.log("begin-user.service.server-follow " + followingId + " " + followerId);
+    var myId = req.user._id;
+    console.log("begin-user.service.server-follow " + followingId + " " + myId);
 
     userModel
-        .follow(followerId, followingId)
+        .follow(myId, followingId)
         .then(function (user) {
             res.json(user);
         })

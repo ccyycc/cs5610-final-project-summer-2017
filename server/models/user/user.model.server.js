@@ -34,11 +34,7 @@ userModel.deleteMessage = deleteMessage;
 userModel.sendMessage = sendMessage;
 
 
-
-
-
 module.exports = userModel;
-
 
 
 function deleteFromCollections(userId, itemId, collectionName) {
@@ -84,7 +80,14 @@ function deleteFollower(userId, fId) {
 }
 
 function addFollower(userId, fId) {
-    return addToCollections(userId, fId, 'followers');
+    return addToCollections(userId, fId, 'followers')
+        .then(function (status) {
+            console.log(userId + " followed by " + fId + " success");
+
+        })
+        .catch(function (err) {
+            console.log('addFollower Error: ' + err);
+        })
 }
 
 function deleteFollowing(userId, fId) {
@@ -92,7 +95,13 @@ function deleteFollowing(userId, fId) {
 }
 
 function addFollowing(userId, fId) {
-    return addToCollections(userId, fId, 'followings');
+    return addToCollections(userId, fId, 'followings')
+        .then(function (status) {
+            console.log(userId + " follow " + fId + " success");
+        })
+        .catch(function (err) {
+            console.log('addFollowing Error: ' + err);
+        })
 }
 
 function addMessage(userId, messageId) {
@@ -103,18 +112,18 @@ function deleteMessage(userId, messageId) {
     return deleteFromCollections(userId, messageId, 'messages');
 }
 
-function follow(followerId, followingId) {
+function follow(myId, followingId) {
     return userModel
-        .addFollowing(followerId, followingId)
-        .then(function(user) {
-            return userModel.addFollower(followingId, followerId);
+        .addFollowing(myId, followingId)
+        .then(function (user) {
+            return userModel.addFollower(followingId, myId);
         })
 }
 
 function unfollow(followerId, followingId) {
     return userModel
         .deleteFollowing(followerId, followingId)
-        .then(function(user) {
+        .then(function (user) {
             return userModel.deleteFollower(followingId, followerId);
         })
 }
@@ -140,8 +149,10 @@ function createUser(user) {
         user.role = 'USER';
     }
     user.photo = './uploads/default_profile.png';
+    // user.followers = [];
+    // user.followings = [];
 
-    console.log('createUser user.model.server ' + user.followers);
+    console.log('createUser user.model.server ' + user);
     return userModel
         .create(user)
         .then(function (user) {
