@@ -1,3 +1,8 @@
+#home {
+    background-image: url(../vendor/pics/food-wallpapers-high-quality-resolution-For-Desktop-Wallpaper.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 input.form-control,
 textarea.form-control,
 select.form-control {
@@ -35,7 +40,7 @@ li.list-group-item > div.row > div {
 }
 
 .navbar {
-    background-color: darkslateblue;
+    background-color: orange;
     display: inline;
 }
 

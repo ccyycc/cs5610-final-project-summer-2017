@@ -4,7 +4,7 @@
         .controller("recipeDetailController", RecipeDetailController);
     
     function RecipeDetailController($sce, currentUser, $location, $routeParams,
-                                    recipeService, yummlyService, userService, associationService) {
+                                    recipeService, yummlyService, associationService) {
 
         var model = this;
 
@@ -16,6 +16,7 @@
         model.submitComment = submitComment;
         // userId = currentUser._id;
         model.recipeId = $routeParams.recipeId;
+        model.like = false;
 
         // console.log(model.recipeId);
 
@@ -30,11 +31,7 @@
                         model.recipe = recipe;
                     })
                     .then(function () {
-                        associationService
-                            .findAllReviewByRecipeId(model.recipeLocalId)
-                            .then(function (reviews) {
-                                model.reviews = reviews;
-                            })
+                        findAllAssociation();
                     });
             } else {
 
@@ -49,20 +46,9 @@
                             .then(function (recipe) {
                                 if (recipe) {
                                     model.recipeLocalId = recipe._id;
-                                    associationService
-                                        .findAllRecipeReview(model.recipeLocalId)
-                                        .then(function (reviews) {
-                                            model.reviews = reviews;
-                                        })
+                                    findAllAssociation();
                                 }
                             });
-
-                        // console.log(recipe.ingredients);
-                        // console.log(recipe.ingredientLines);
-
-                        // console.log(model.recipe.ingredients);
-
-                        // model.recipe.ingredients = recipe.ingredientLines;
                     });
 
             }
@@ -73,7 +59,20 @@
         function trust(url) {
             // scrubbing the html
             return $sce.trustAsResourceUrl(url);
-            // return $sce.trustAsUrl(url);
+        }
+
+        function findAllAssociation() {
+            associationService
+                .findAllRecipeReview(model.recipeLocalId)
+                .then(function (reviews) {
+                    model.reviews = reviews;
+                });
+            associationService
+                .findLikeForRecipe(currentUser._id, model.recipeLocalId)
+                .then(function (like) {
+                    model.likeId = like._id;
+                    model.like = true;
+                })
         }
 
         function combineIngredientAndDescription() {
@@ -95,7 +94,7 @@
                 source: 'YUMMLY'
             };
 
-            recipeService
+            return recipeService
                 .createYummlyLocalRecipeCopy(recipeCopy)
                 .then(function (recipe) {
                     model.recipeLocalId = recipe._id;
@@ -104,8 +103,16 @@
 
         function likeRecipe() {
             if(!model.recipeLocalId) {
-                createYummlyRecipeCopy();
+                createYummlyRecipeCopy()
+                    .then(function () {
+                       likeHelper();
+                    })
+            } else {
+                likeHelper();
             }
+        }
+
+        function likeHelper() {
             var like = {
                 fromWhom : currentUser._id,
                 toRecipe : model.recipeLocalId,
@@ -114,19 +121,18 @@
 
             associationService
                 .createLike(like)
-                .then(function () {
-                    model.likeThis = true;
+                .then(function (like) {
+                    model.likeId = like._id;
+                    model.like = true;
                 });
-
         }
 
         function unlikeRecipe() {
             associationService
-                .deleteRecipeLike(currentUser._id, model.recipeLocalId)
+                .deleteRecipeLike(model.likeId)
                 .then(function () {
-                    model.likeThis = true;
+                    model.like = false;
                 });
-
         }
 
         function createComment() {
@@ -136,16 +142,22 @@
 
         function submitComment() {
             if(!model.recipeLocalId) {
-                createYummlyRecipeCopy();
+                createYummlyRecipeCopy()
+                    .then(function () {
+                        commentHelper();
+                    })
+            } else {
+                commentHelper();
             }
-            // console.log(model.recipeLocalId);
+        }
+
+        function commentHelper() {
             model.newComment.fromWhom = currentUser._id;
             model.newComment.toRecipe = model.recipeLocalId;
             model.newComment.type =  'COMMENT';
             associationService
                 .createComment(model.newComment)
                 .then(function (comment) {
-                    // console.log(comment);
                     model.reviews.push(comment);
                 })
         }

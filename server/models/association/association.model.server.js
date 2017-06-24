@@ -8,12 +8,18 @@ associationModel.deleteComment = deleteComment;
 associationModel.findCommentById = findCommentById;
 associationModel.findAllComments = findAllComments;
 associationModel.deleteRecipeLike = deleteRecipeLike;
+associationModel.findLikeForRecipe = findLikeForRecipe;
 
 module.exports = associationModel;
 
-function deleteRecipeLike(userId, recipeId) {
+function findLikeForRecipe(userId, recipeId) {
     return associationModel
-        .findOneAndRemove({$and: [{fromWhom: userId}, {toRecipe: recipeId}]});
+        .findOne({$and: [{fromWhom: userId}, {toRecipe: recipeId}]});
+}
+
+function deleteRecipeLike(likeId) {
+    return associationModel
+        .findByIdAndRemove(likeId);
 }
 
 function findAllRecipeReview(recipeId) {

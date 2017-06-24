@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var recipeSchema = require('./recipe.schema.server');
 var recipeModel = mongoose.model('recipeModel', recipeSchema);
-var userModel = require('../user/user.model.server');
+
 
 recipeModel.createRecipe = createRecipe;
 recipeModel.findAllRecipesForCreator = findAllRecipesForCreator;
@@ -23,29 +23,19 @@ function findYummlyRecipeCopyByYummlyId(recipeId) {
 }
 
 function createYummlyLocalRecipeCopy(recipe) {
-    // recipe.source = 'YUMMLY';
-    // recipe.yummlyId = yummlyRecipeId;
     return recipeModel
         .create(recipe)
         .then(function (recipe) {
-            // console.log(recipe);
             return recipe;
         })
 }
 
 function createRecipe(userId, recipe) {
     recipe._creator = userId;
-
     return recipeModel
         .create(recipe)
         .then(function (recipe) {
             return recipe;
-            //TODO: add back
-            // return userModel
-            //     .addRecipe(recipe._id, userId)
-            //     .then(function () {
-            //         return recipe;
-            //     });
         });
 }
 
@@ -67,16 +57,10 @@ function updateRecipe(recipeId, recipe) {
 
 function deleteRecipe(recipeId) {
     return recipeModel
-        .findByIdAndRemove(recipeId)
-        .then(function (recipe) {
-            //TODO:need this!
-            // return userModel
-            //     .deleteRecipe(recipeId, recipe._creator);
-        })
+        .findByIdAndRemove(recipeId);
 }
 
 function findRecipeByCriteria(searchTerm) {
-    // console.log(searchTerm);
     return recipeModel
         // .find({ingredients: {$in: [new RegExp(searchTerm, "i")]}});
         .find({$and: [{source: 'LOCAL'},
