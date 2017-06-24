@@ -6,7 +6,7 @@
     function accountController($routeParams, userService, $location, currentUser, $rootScope) {
 
         var model = this;
-
+        model.sectionTitle = "Account";
         model.userId = currentUser.userId;
         model.updateUser = updateUser;
         // models.deleteUser = deleteUser;

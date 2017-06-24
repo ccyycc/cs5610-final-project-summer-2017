@@ -11,6 +11,7 @@
         init();
 
         function init() {
+            model.sectionPage = "New Product";
             model.merchandise = {};
 
             // model.sellerId = currentUser._id;

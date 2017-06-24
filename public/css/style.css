@@ -42,6 +42,7 @@ li.list-group-item > div.row > div {
 .navbar {
     background-color: orange;
     display: inline;
+    height:50px;
 }
 
 @media (min-width: 768px) {
@@ -124,4 +125,21 @@ a:focus, a:hover {
 
 .recipeListImage {
     width: 100%;
+}
+
+.home-search-bar{
+    width: 100%;
+    height: 50px;
+    background-color: #0f0f0f;
+    display: inline-block;
+
+}
+
+.text-on-image {
+    position: relative;
+    bottom: 33px;
+    font-size:24px;
+    width:100%;
+    text-align:center;
+    background:rgba(251,251,251,0.7)
 }

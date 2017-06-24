@@ -1,13 +1,14 @@
-<div ng-include="'views/common/header-noSideBar.view.client.html'"></div>
+<div ng-include="'./views/common/header.view.client.html'"></div>
 <div class="container-fluid">
     <div class="row">
         <div id="recipeListImages"
-             class="col-xs-6 col-sm-3 col-md-2 text-center"
+             class="col-xs-12 col-sm-6 col-md-4 text-center"
              ng-repeat="recipe in model.recipes">
             <img class="recipeListImage"
                  ng-click="model.goToDetail(recipe, recipe._id)"
                  ng-src="{{recipe.image}}"
                  onerror="this.onerror=null; this.src='/uploads/recipe/placeholder-image10.jpg'"/>
+            <p class="text-on-image">{{recipe.name}}</p>
 
         </div>
     </div>

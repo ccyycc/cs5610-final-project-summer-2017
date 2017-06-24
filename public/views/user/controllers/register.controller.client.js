@@ -6,7 +6,7 @@
     function registerController($location, userService) {
 
         var model = this;
-
+        model.sectionTitle = "Register";
         model.register = register;
 
         function register(username, password, password2, role) {

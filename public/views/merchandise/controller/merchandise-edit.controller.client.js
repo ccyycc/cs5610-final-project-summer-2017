@@ -13,6 +13,7 @@
         init();
 
         function init() {
+            model.sectionPage = "Product Edit";
             // model.sellerId = $routeParams[''];
             //TODO REMOVE DEFAULT USERNAME
             model.storeId = $routeParams['storeId'];

@@ -11,6 +11,7 @@
         init();
 
         function init() {
+            model.sectionPage = "Product List";
             model.storeId = $routeParams['storeId'];
             model.merchandises = [];
             model.merchandises = merchandiseService.findMerchandiseByStoreId(model.storeId)
