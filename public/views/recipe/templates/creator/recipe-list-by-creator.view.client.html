@@ -4,8 +4,14 @@
         <div id="recipeListImages"
              class="col-xs-12 col-sm-6 col-md-4 text-center"
              ng-repeat="recipe in model.recipes">
+            <div class="wd-widget-toolbar">
+                <a ng-show="model.ifCreator()"
+                   ng-click="model.goToEdit(recipe._id)">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
+            </div>
             <img class="recipeListImage"
-                 ng-click="model.goToDetail(recipe, recipe._id)"
+                 ng-click="model.goToRecipeDetail(recipe._id)"
                  ng-src="{{recipe.image}}"
                  onerror="this.onerror=null; this.src='/uploads/recipe/placeholder-image10.jpg'"/>
             <p class="text-on-image">{{recipe.name}}</p>

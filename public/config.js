@@ -74,7 +74,7 @@
                 }
             })
             //TODO: could be the profile page of recipe provider
-            .when('/recipe',{
+            .when('/creator/:creatorId/recipe',{
                 templateUrl: 'views/recipe/templates/creator/recipe-list-by-creator.view.client.html',
                 controller: 'recipeListByCreatorController',
                 controllerAs: 'model',
@@ -82,7 +82,7 @@
                     currentUser: checkLoggedin
                 }
             })
-            .when('/recipe/:recipeId', {
+            .when('/creator/:creatorId/recipe/:recipeId', {
                 templateUrl: 'views/recipe/templates/creator/recipe-edit.view.client.html',
                 controller: 'recipeEditController',
                 controllerAs: 'model',

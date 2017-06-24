@@ -1,6 +1,6 @@
 #home {
     background-image: url(../vendor/pics/food-wallpapers-high-quality-resolution-For-Desktop-Wallpaper.jpg);
-    background-size: cover;
+    background-size: auto;
     background-repeat: no-repeat;
 }
 input.form-control,
@@ -103,7 +103,7 @@ a:focus, a:hover {
     width: 100%;
 }
 
-.wd-widget > .wd-widget-toolbar {
+.wd-widget-toolbar {
     position: absolute;
     right: 15px;
     background: white;

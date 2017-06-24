@@ -3,7 +3,7 @@
         .module('FinalProject')
         .controller('profileController', profileController);
 
-    function profileController($routeParams, userService, $location, currentUser,storeService) {
+    function profileController($routeParams, userService, $location, currentUser, storeService) {
 
         var model = this;
         model.sectionTitle = "Profile";
@@ -32,6 +32,12 @@
             render(model.userId);
 
             model.recipeOrProduct = 'RECIPE';
+
+            // TODO: TEST
+            if (currentUser.roles.indexOf('RECIPEPRO') !== -1) {
+                model.isRecipeProvider = true;
+            }
+            //TODO: END OF TEST
         }
         init();
 

@@ -39,12 +39,9 @@
             </ul>
         </div><!--/.navbar-collapse -->
     </div>
-
-    <input ng-model="searchText"
-           type="text"
-           class="form-control">
     <div class="input-group">
-        <span class="input-group-btn form-group" style="width:80px">
+
+    <span class="input-group-btn form-group" style="width:80px">
                 <label for="exampleSelect1">Example select</label>
                 <select class="form-control" id="exampleSelect1">
                     <option>Recipe</option>
@@ -54,6 +51,10 @@
                     <option>Local grocery store</option>
                 </select>
         </span>
+    <input ng-model="searchText"
+           type="text"
+           class="form-control">
+
         <span class="input-group-btn">
            <a ng-click="model.searchWithCoords()"
               class="btn btn-default" type="button">

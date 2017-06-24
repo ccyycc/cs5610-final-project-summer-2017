@@ -28,6 +28,7 @@ function findAllRecipeReview(recipeId) {
 }
 
 function createAssociation(comment) {
+    //TODO:check role and association type
     return associationModel
         .create(comment)
         .then(function (comment) {
