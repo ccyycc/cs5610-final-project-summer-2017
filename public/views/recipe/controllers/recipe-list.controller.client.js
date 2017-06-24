@@ -11,10 +11,23 @@
 
         // userId = currentUser._id;
 
-        function searchRecipes(searchText) {
+        init()
 
+        function init(){
+
+            var preSearch = $location.search();
+            if(preSearch &&preSearch.search.length>0){
+                model.searchText = preSearch.search;
+                searchRecipes();
+            }
+        }
+
+
+
+
+        function searchRecipes() {
             yummlyService
-                .searchRecipes(searchText)
+                .searchRecipes(model.searchText )
                 .then(function (recipes) {
                     // model.yummlyRecipes = response.data;
                     model.yummlyRecipes = recipes;
@@ -23,7 +36,7 @@
                 });
 
             recipeService
-                .findRecipeByCriteria(searchText)
+                .findRecipeByCriteria(model.searchText)
                 .then(function (recipes) {
                     model.localRecipes = recipes;
                 })

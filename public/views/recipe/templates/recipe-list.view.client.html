@@ -2,12 +2,13 @@
 
 <div class="container-fluid" style="margin-top: 50px">
     <div class="input-group">
-        <input ng-model="searchText"
+        <input ng-model="model.searchText"
                type="text"
                placeholder="Search recipes"
-               class="form-control">
+               class="form-control"
+       >
         <span class="input-group-btn">
-        <a ng-click="model.searchRecipes(searchText)" class="btn btn-default" type="button">
+        <a ng-click="model.searchRecipes()" class="btn btn-default" type="button">
             <span class="glyphicon glyphicon-search"></span>
         </a>
     </span>

@@ -28,32 +28,25 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="nav nav-pill nav-justified">
-        <div id="home-search-navbar">
-            <ul class="nav navbar-nav">
-                <li><a href="">Recipe</a></li>
-                <li><a href="">User</a></li>
-                <li><a href="">Store</a></li>
-                <li><a href="">Product</a></li>
-                <li><a href="">Local grocery store</a></li>
-            </ul>
-        </div><!--/.navbar-collapse -->
-    </div>
     <div class="input-group">
 
     <span class="input-group-btn form-group" style="width:80px">
-                <label for="exampleSelect1">Example select</label>
-                <select class="form-control" id="exampleSelect1">
-                    <option>Recipe</option>
-                    <option>User</option>
-                    <option>Store</option>
-                    <option>Product</option>
-                    <option>Local grocery store</option>
-                </select>
-        </span>
-    <input ng-model="searchText"
-           type="text"
-           class="form-control">
+                <!--<label for="exampleSelect1">Example select</label>-->
+                <!--<select class="form-control" id="exampleSelect1">-->
+                <!--<option>Recipe</option>-->
+                <!--<option>User</option>-->
+                <!--<option>Store</option>-->
+                <!--<option>Product</option>-->
+                <!--<option>Local grocery store</option>-->
+                <!--</select>-->
+        <select ng-model="model.searchType"
+                class="form-control"
+                ng-options="searchOption.value as searchOption.label for searchOption in model.searchOptions"
+                ng-init="model.model.searchOptions[0].value"></select>
+    </span>
+        <input ng-model="model.searchContent"
+               type="text"
+               class="form-control">
 
         <span class="input-group-btn">
            <a ng-click="model.searchWithCoords()"

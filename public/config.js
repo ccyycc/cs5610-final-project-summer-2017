@@ -119,10 +119,7 @@
             .when('/store-search',{
                 templateUrl: 'views/store/templates/store-search.view.client.html',
                 controller: 'StoreSearchController',
-                controllerAs: 'model',
-                resolve: {
-                    currentUser: checkLoggedin
-                }
+                controllerAs: 'model'
             })
             .otherwise({redirectTo : '/'})
     }
