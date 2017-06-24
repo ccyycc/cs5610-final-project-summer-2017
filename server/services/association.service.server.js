@@ -34,6 +34,7 @@ function deleteRecipeLike(req, res) {
             res.sendStatus(500);
         })
 }
+
 function findAllRecipeReview(req, res) {
     var recipeId = req.params.recipeId;
     associationModel
