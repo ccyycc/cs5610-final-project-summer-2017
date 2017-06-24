@@ -49,6 +49,9 @@ app.post('/api/upload', upload.single('myFile'), uploadImage);
 app.get('/api/follow/:followingId', follow);
 app.get('/api/unfollow/:followingId', unfollow);
 app.put('/api/message/:userId', sendMessage);
+app.get('/api/user/populate/:arrName/:userId', populateArr);
+// app.get('/api/showFollowings/:userId', showFollowings);
+// app.get('/api/showFollowers/:userId', showFollowers);
 
 
 app.get('/auth/google',
@@ -297,6 +300,21 @@ function sendMessage(req, res) {
             res.json(user);
         });
 
+}
+
+
+function populateArr(req, res) {
+    var userId = req.params.userId;
+    var arrName = req.params.arrName;
+    userModel
+        .populateArr(userId,arrName)
+        .then(function (arr) {
+            console.log(arr);
+            res.json(arr[arrName]);
+        })
+        .catch(function (err) {
+            console.log(err);
+        })
 }
 
 

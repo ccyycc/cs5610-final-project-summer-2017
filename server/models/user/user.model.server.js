@@ -33,6 +33,8 @@ userModel.addMessage = addMessage;
 userModel.deleteMessage = deleteMessage;
 userModel.sendMessage = sendMessage;
 
+userModel.populateArr = populateArr;
+
 
 module.exports = userModel;
 
@@ -140,6 +142,18 @@ function sendMessage(myId, userId, message) {
                     return user;
                 })
         })
+}
+
+function populateArr(userId, arrName) {
+    console.log(userId + " " + arrName + " user.model.server--populateArr");
+    return userModel
+        .findById(userId)
+        .populate(arrName)
+        .exec()
+        // .then(function (user) {
+        //     console.log(user[arrName]);
+        //     return user[arrName];
+        // })
 }
 
 

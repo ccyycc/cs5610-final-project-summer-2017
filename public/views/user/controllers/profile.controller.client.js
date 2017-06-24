@@ -12,6 +12,10 @@
         model.follow = follow;
         model.unfollow = unfollow;
         model.sendMessage = sendMessage;
+        model.showFollowers = showFollowers;
+        model.showFollowings = showFollowings;
+        model.renderLikedRecipes = renderLikedRecipes;
+        model.renderCollectedProducts = renderCollectedProducts;
 
         function init() {
             if ($routeParams.uid) {
@@ -40,6 +44,7 @@
             }
 
             render(model.userId);
+            renderLikedRecipes();
 
             model.recipeOrProduct = 'RECIPE';
 
@@ -49,11 +54,12 @@
             }
             //TODO: END OF TEST
         }
+
         init();
 
         function render(userId) {
             userService
-                .populateRecipesAndProducts(userId)
+                .findUserById(userId)
                 .then(function (user) {
                     model.user = user;
 
@@ -63,6 +69,22 @@
                         model.followed = false;
                     }
                     console.log(model.user.role);
+                })
+        }
+
+        function renderLikedRecipes() {
+            userService
+                .populateArr(model.userId, 'likedRecipes')
+                .then(function (likedRecipes) {
+                    model.likedRecipes = likedRecipes;
+                })
+        }
+
+        function renderCollectedProducts() {
+            userService
+                .populateArr(model.userId, 'collectedProducts')
+                .then(function (products) {
+                    model.collectedProducts = products;
                 })
         }
 
@@ -86,7 +108,29 @@
             userService
                 .sendMessage(model.userId, [message])
                 .then(function (user) {
-                    model.message="";
+                    model.message = "";
+                })
+        }
+
+        function showFollowings() {
+            userService
+                .populateArr(model.userId, 'followings')
+                .then(function (followings) {
+                    model.follows = followings;
+                    console.log(model.follows);
+                    $location.url = "#followDetail";
+                    $("#followDetail").collapse('toggle');
+
+                })
+        }
+
+        function showFollowers() {
+            userService
+                .populateArr(model.userId, 'followers')
+                .then(function (followers) {
+                    model.follows = followers;
+                    $location.url = "#followDetail";
+                    $("#followDetail").collapse('toggle');
                 })
         }
     }

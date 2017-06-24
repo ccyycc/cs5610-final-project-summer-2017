@@ -23,10 +23,13 @@
             checkAdmin: checkAdmin,
             unregister: unregister,
 
-            populateRecipesAndProducts: populateRecipesAndProducts,
+            // populateRecipesAndProducts: populateRecipesAndProducts,
             follow: follow,
             unfollow: unfollow,
-            sendMessage: sendMessage
+            sendMessage: sendMessage,
+            populateArr: populateArr
+            // showFollowings: showFollowings,
+            // showFollowers: showFollowers
         };
         return api;
 
@@ -51,6 +54,22 @@
         function unfollow(followingId) {
             var url='/api/unfollow/' + followingId;
 
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function showFollowings(userId) {
+            var url='/api/showFollowings/' + userId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function showFollowers(userId) {
+            var url='/api/showFollowers/' + userId;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
@@ -198,6 +217,14 @@
 
         function populateRecipesAndProducts(userId) {
             var url = '/api/userpop/' + userId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function populateArr(userId, arrName) {
+            var url = '/api/user/populate/' + arrName +'/' + userId;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
