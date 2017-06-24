@@ -182,15 +182,25 @@
                            value="{{model.recipeId}}"
                            style="display: none"/>
                     <button type="submit"
+                            onclick="window.alert('Changes are automatically saved.')"
+                            ng-click = "model.updateRecipe()"
                             class="btn btn-warning btn-block">Upload Image
                     </button>
                 </form>
             </div>
 
-            <a ng-click="model.updateRecipe()"
+            <a ng-show="!model.ifNewRecipe"
+               ng-click="model.updateRecipe()"
                class="btn btn-block btn-primary">Update</a>
-            <a ng-click="model.deleteRecipe()"
+            <a ng-show="model.ifNewRecipe"
+               ng-click="model.updateRecipe()"
+               class="btn btn-block btn-primary">Create</a>
+            <a ng-show="!model.ifNewRecipe"
+               ng-click="model.deleteRecipe()"
                class="btn btn-block btn-danger">Delete</a>
+            <a ng-show="model.ifNewRecipe"
+               ng-click="model.deleteRecipe()"
+               class="btn btn-block btn-danger">Cancel</a>
         </div>
     </div>
 </div>

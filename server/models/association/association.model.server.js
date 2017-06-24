@@ -4,11 +4,11 @@ var associationModel = mongoose.model('associationModel', associationSchema);
 
 associationModel.createAssociation = createAssociation;
 associationModel.findAllRecipeReview = findAllRecipeReview;
+associationModel.deleteRecipeLike = deleteRecipeLike;
+associationModel.findLikeForRecipe = findLikeForRecipe;
 associationModel.deleteComment = deleteComment;
 associationModel.findCommentById = findCommentById;
 associationModel.findAllComments = findAllComments;
-associationModel.deleteRecipeLike = deleteRecipeLike;
-associationModel.findLikeForRecipe = findLikeForRecipe;
 
 module.exports = associationModel;
 

@@ -17,11 +17,6 @@ recipeModel.findYummlyRecipeCopyByYummlyId = findYummlyRecipeCopyByYummlyId;
 
 module.exports = recipeModel;
 
-function findYummlyRecipeCopyByYummlyId(recipeId) {
-    return recipeModel
-        .findOne({yummlyId: recipeId});
-}
-
 function createYummlyLocalRecipeCopy(recipe) {
     return recipeModel
         .create(recipe)
@@ -30,11 +25,21 @@ function createYummlyLocalRecipeCopy(recipe) {
         })
 }
 
+function findYummlyRecipeCopyByYummlyId(recipeId) {
+    return recipeModel
+        .findOne({yummlyId: recipeId});
+}
+
+
+//TODO: DELETE YUMMLY RECIPE COPY
+//TODO: FIND ALL RECIPE FOR ADMIN
+
 function createRecipe(userId, recipe) {
     recipe._creator = userId;
     return recipeModel
         .create(recipe)
         .then(function (recipe) {
+            console.log(recipe);
             return recipe;
         });
 }

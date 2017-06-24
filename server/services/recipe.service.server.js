@@ -135,7 +135,7 @@ function changeImageForRecipe(recipeId, filename) {
     recipeModel
         .findRecipeById(recipeId)
         .then(function (recipe) {
-            recipe.image = '/uploads/recipe' + filename;
+            recipe.image = '/uploads/recipe/' + filename;
             return recipeModel
                 .updateRecipe(recipeId, recipe);
         });

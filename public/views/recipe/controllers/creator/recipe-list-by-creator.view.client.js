@@ -10,7 +10,6 @@
         model.creatorId = currentUser._id;
         model.goToDetail = goToDetail;
         model.createRecipe = createRecipe;
-        // userId = currentUser._id;
 
         function init() {
 
@@ -40,11 +39,10 @@
             recipeService
                 .createRecipe(model.creatorId, newRecipe)
                 .then(function (recipe) {
-                    $location.url("/recipe/" + recipe._id);
+                    $location.url("/recipe/" + recipe._id + '#NEW');
                 }, function () {
                     model.error = "can't create new recipe at this time, please try again";
                 })
-
         }
 
         function goToDetail(recipe, recipeId) {

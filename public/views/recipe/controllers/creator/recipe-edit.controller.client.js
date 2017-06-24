@@ -26,6 +26,7 @@
                 $location.url('/account')
                 //TODO: a trans page? Or directly go back to somewhere
             }
+            ifNewRecipe();
             recipeService
                 .findAllRecipesForCreator(model.creatorId)
                 .then(function (recipes) {
@@ -41,6 +42,9 @@
 
         init();
 
+        function ifNewRecipe() {
+            return $location.hash()? model.ifNewRecipe = true:model.ifNewRecipe = false;
+        }
         function createSingleIngredient() {
             model.ifNewIngredient = true;
             model.newIngredient = {};
@@ -101,11 +105,12 @@
                     model.error = "can't update at this time, please try later.";
                 })
         }
+
         function deleteRecipe() {
             recipeService
                 .deleteRecipe(model.recipeId)
                 .then(function () {
-                    $location.url("/user/" + model.creatorId + "/recipe/");
+                    $location.url("/recipe/");
                 })
         }
 

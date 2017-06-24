@@ -1,5 +1,17 @@
 <div ng-include="'views/common/header-noSideBar.view.client.html'"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div id="recipeListImages"
+             class="col-xs-6 col-sm-3 col-md-2 text-center"
+             ng-repeat="recipe in model.recipes">
+            <img class="recipeListImage"
+                 ng-click="model.goToDetail(recipe, recipe._id)"
+                 ng-src="{{recipe.image}}"
+                 onerror="this.onerror=null; this.src='/uploads/recipe/placeholder-image10.jpg'"/>
 
+        </div>
+    </div>
+</div>
 <div class="container-fluid">
     <ul class="list-group">
         <li class="list-group-item active">
