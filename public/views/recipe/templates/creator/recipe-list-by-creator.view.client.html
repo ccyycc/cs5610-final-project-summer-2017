@@ -15,8 +15,11 @@
                  ng-src="{{recipe.image}}"
                  onerror="this.onerror=null; this.src='/uploads/recipe/placeholder-image10.jpg'"/>
             <p class="text-on-image">{{recipe.name}}</p>
-
         </div>
+        <img class="recipeListImage"
+             ng-click="model.goToRecipeDetail(recipe._id)"
+             src="/uploads/recipe/addphoto.png"/>
+        <p class="text-on-image">Add New Recipe!</p>
     </div>
 </div>
 <div class="container-fluid">
