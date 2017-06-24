@@ -17,8 +17,14 @@
         }
         init();
 
-        function countCalorie() {
-            
+        function countCalorie(user) {
+            model.calorie = 'haha';
+            if (user.gender === 'male') {
+                model.calorie = 66 + (6.23 * user.weight) + 12.7 * user.heigth - 6.8 * user.age;
+            } else {
+                model.calorie = 655 + 4.35 * user.weight + 4.7 * user.height - 4.7 * user.age;
+            }
+            console.log(model.calorie);
         }
         
         function renderUser(response) {

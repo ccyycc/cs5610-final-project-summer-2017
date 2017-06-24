@@ -1,12 +1,4 @@
 <div class="container-fluid main-container">
-    <div id="photoBlock">
-        <a href="#!/account/photo">
-            <img id="photo"
-                 class="imageToCenter"
-                 ng-src="{{model.user.photo}}" width="30%"/>
-            <label for="photo" class="textToCenter">upload photo</label>
-        </a>
-    </div>
 
     <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
     <div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
@@ -14,44 +6,38 @@
 
     <form>
         <div class="form-group">
-            <label for="username">Username</label>
+            <label for="weight">Weight in pounds</label>
             <input type="text"
                    class="form-control"
-                   id="username"
-                   ng-model="model.user.username"
-                   placeholder="Username">
+                   id="weight"
+                   ng-model="model.user.weight"
+                   placeholder="140">
         </div>
         <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email"
-                   class="form-control"
-                   id="email"
-                   ng-model="model.user.email"
-                   placeholder="alice@wonderland.com">
+            <label for="height">Height in inches</label>
+            <input type="text"
+                    class="form-control"
+                   id="height"
+                   ng-model="model.user.height"
+                   placeholder="5.8">
         </div>
         <div class="form-group">
-            <label for="first-name">First Name</label>
+            <label for="age">Age</label>
             <input type="text"
                    class="form-control"
-                   id="first-name"
-                   ng-model="model.user.firstName"
-                   placeholder="Alice">
+                   id="age"
+                   ng-model="model.user.age"
+                   placeholder="30">
         </div>
         <div class="form-group">
-            <label for="last-name">Last Name</label>
-            <input type="text"
-                   class="form-control"
-                   id="last-name"
-                   ng-model="model.user.lastName"
-                   placeholder="Wonderland">
+           Gender:
+            <input type="radio" ng-model="model.user.gender" value="male" > Male
+            <input type="radio" ng-model="model.user.gender" value="female"> Female
         </div>
     </form>
-
-
     <a class="btn btn-success btn-block"
-       ng-click="model.updateUser(model.user)">Update</a>
-    <a class="btn btn-danger  btn-block"
-       ng-click="model.logout()">Logout</a>
-    <a class="btn btn-danger btn-block"
-       ng-click="model.unregister()">Unregister</a>
+       ng-click="model.countCalorie(model.user)">Count my daily calorie burned</a>
+
+    <div ng-show="model.calorie"
+    class="alert alert-info"> Your BMR is {{model.calorie}}</div>
 </div>
