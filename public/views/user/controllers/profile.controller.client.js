@@ -117,10 +117,15 @@
                 .populateArr(model.userId, 'followings')
                 .then(function (followings) {
                     model.follows = followings;
-                    console.log(model.follows);
                     $location.url = "#followDetail";
-                    $("#followDetail").collapse('toggle');
 
+                    if (model.followType === 'followers') {
+                        $("#followDetail").collapse('show');
+                    } else {
+                        $("#followDetail").collapse('toggle');
+                    }
+                    model.followType = 'followings';
+                    // console.log(model.follows);
                 })
         }
 
@@ -130,7 +135,13 @@
                 .then(function (followers) {
                     model.follows = followers;
                     $location.url = "#followDetail";
-                    $("#followDetail").collapse('toggle');
+                    if (model.followType === 'followings') {
+                        $("#followDetail").collapse('show');
+                    } else {
+                        $("#followDetail").collapse('toggle');
+                    }
+                    model.followType = 'followers';
+
                 })
         }
     }
