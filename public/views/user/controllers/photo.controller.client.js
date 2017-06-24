@@ -5,7 +5,7 @@
 
     function photoController($routeParams, $location, currentUser) {
         var model = this;
-
+        model.sectionTitle = "Photo";
         model.user = currentUser;
         model.userId = currentUser._id;
 

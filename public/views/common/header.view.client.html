@@ -2,13 +2,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-10">
-                <a ng-click="model.goBack()"
+                <a onclick="history.back()"
                    class="navbar-btn">
                     <span class="navigating-btn glyphicon glyphicon-chevron-left pull-left"></span>
                 </a>
-                <span class="navbar-brand hover-focus-disable">{{model.currentName}}</span>
+                <span class="navbar-brand hover-focus-disable">{{model.sectionTitle}}</span>
             </div>
             <div class="col-xs-2">
+                <!--TODO MAYNEED TO DELETE-->
                 <a ng-show="model.funcButtonPattern"
                    ng-click="model.funcButton()"
                    class="navbar-btn">

@@ -7,12 +7,19 @@
         $routeProvider
             .when('/',{
                 templateUrl:'./views/home/templates/home.view.client.html',
-                // controller:''
+                controller: 'homeController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
             })
             .when('/login', {
                 templateUrl: './views/user/templates/login.view.client.html',
                 controller: 'loginController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
             })
             .when('/register', {
                 templateUrl: './views/user/templates/register.view.client.html',
