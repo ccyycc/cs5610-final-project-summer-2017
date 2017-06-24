@@ -5,7 +5,6 @@
 
     function RecipeService($http) {
 
-
         this.createRecipe = createRecipe;
         this.findAllRecipesForCreator = findAllRecipesForCreator;
         this.findRecipeById = findRecipeById;

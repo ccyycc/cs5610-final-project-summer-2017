@@ -14,11 +14,11 @@ var recipeSchema = mongoose.Schema({
     }],
     instruction: [String],
     totalTime: Number,
-    image: String,
-    likedUsers: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}],
+    image: {type: String, default: '/uploads/recipe/..'},
+    // likedUsers: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}],
     // rating: {type: Number, default: 0},
     //TODO: store association in recipe?
-    comments: {type: mongoose.Schema.ObjectId, ref: 'commentModel'},
+    // comments: {type: mongoose.Schema.ObjectId, ref: 'commentModel'},
     dateCreated: {type: Date, default: Date.now},
     dateModified: {type: Date, default: Date.now}
 }, {collection: 'recipe'});

@@ -18,7 +18,7 @@
                 .then(function (recipes) {
                     // model.yummlyRecipes = response.data;
                     model.yummlyRecipes = recipes;
-                    console.log(model.yummlyRecipes);
+                    // console.log(model.yummlyRecipes);
 
                 });
 
@@ -27,13 +27,8 @@
                 .then(function (recipes) {
                     model.localRecipes = recipes;
                 })
-
-            // recipeService
-            //     .findAllRecipesForCreator(userId)
-            //     .then(function (recipes) {
-            //         model.recipes = recipes;
-            //     })
         }
+
         function goToDetail(recipe, recipeId) {
             recipeService
                 .tempYummlyRecipe(recipe.ingredients, recipeId);

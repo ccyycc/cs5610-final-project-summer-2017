@@ -7,8 +7,9 @@
 
         this.createLike = createLike;
         this.createComment = createComment;
-        this.findAllReviewByRecipeId = findAllReviewByRecipeId;
+        this.findAllRecipeReview = findAllRecipeReview;
         this.deleteRecipeLike = deleteRecipeLike;
+        this.findLikeForRecipe = findLikeForRecipe;
 
         function createLike(like) {
             var url = '/api/association/like';
@@ -27,7 +28,7 @@
                 });
         }
 
-        function findAllReviewByRecipeId(recipeId) {
+        function findAllRecipeReview(recipeId) {
             var url = '/api/association/comment/recipe/' + recipeId;
             return $http.get(url)
                 .then(function (response) {
@@ -35,9 +36,17 @@
                 });
         }
 
-        function deleteRecipeLike(userId, recipeId) {
-            var url = '/api/association/like/from/'+ userId + '/to/' + recipeId;
+        function deleteRecipeLike(likeId) {
+            var url = '/api/association/like/' + likeId;
             return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function findLikeForRecipe(userId, recipeId) {
+            var url = '/api/association/like/from/'+ userId + '/to/' + recipeId;
+            return $http.get(url)
                 .then(function (response) {
                     return response.data;
                 })

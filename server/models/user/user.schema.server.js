@@ -25,7 +25,7 @@ var userSchema = mongoose.Schema({
 
     followers: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}],
     followings: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}],
-    likedRecipes: [{type: mongoose.Schema.ObjectId, ref: 'recipeModel'}],
+    // likedRecipes: [{type: mongoose.Schema.ObjectId, ref: 'recipeModel'}],
     // collectedProducts: [{type: mongoose.Schema.ObjectId, ref: 'productModel'}]
 }, {collection: "user"});
 

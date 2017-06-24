@@ -1,3 +1,8 @@
+#home {
+    background-image: url(../vendor/pics/food-wallpapers-high-quality-resolution-For-Desktop-Wallpaper.jpg);
+    background-size: auto;
+    background-repeat: no-repeat;
+}
 input.form-control,
 textarea.form-control,
 select.form-control {
@@ -35,7 +40,7 @@ li.list-group-item > div.row > div {
 }
 
 .navbar {
-    background-color: darkslateblue;
+    background-color: orange;
     display: inline;
     height:50px;
 }
@@ -98,7 +103,7 @@ a:focus, a:hover {
     width: 100%;
 }
 
-.wd-widget > .wd-widget-toolbar {
+.wd-widget-toolbar {
     position: absolute;
     right: 15px;
     background: white;
@@ -113,9 +118,13 @@ a:focus, a:hover {
     color: #23527c;
 }
 
-#filckrImage {
+#recipeListImages {
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.recipeListImage {
+    width: 100%;
 }
 
 .home-search-bar{
@@ -126,3 +135,11 @@ a:focus, a:hover {
 
 }
 
+.text-on-image {
+    position: relative;
+    bottom: 33px;
+    font-size:24px;
+    width:100%;
+    text-align:center;
+    background:rgba(251,251,251,0.7)
+}
