@@ -11,8 +11,8 @@ select.form-control {
 }
 
 body {
-    padding-top: 60px;
-    padding-bottom: 60px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     background-color: #ffefd0;
 }
 
@@ -25,14 +25,6 @@ li.list-group-item > div.row > div {
     overflow: hidden;
 }
 
-.current-brand {
-    padding-left: 0;
-}
-
-.right-align-btn {
-    right: 16px;
-}
-
 .navigating-btn {
     top: 17px;
     color: whitesmoke;
@@ -40,7 +32,7 @@ li.list-group-item > div.row > div {
 
 .navigating-btn:hover,
 .navigating-btn:focus {
-    color: orchid;
+    color: #7C540C;
 }
 
 .navbar {
@@ -49,24 +41,25 @@ li.list-group-item > div.row > div {
     height: 50px;
 }
 
-@media (min-width: 768px) {
-    .navbar > .container-fluid .navbar-brand {
-        margin-left: 0;
-    }
 
-    .navbar {
-        height: 50px;
-    }
+/*@media (min-width: 768px) {*/
+    /*.navbar > .container-fluid .navbar-brand {*/
+        /*margin-left: 0;*/
+    /*}*/
 
-    .navbar-inverse .navbar-collapse {
-        float: right;
-        display: inline-block;
-    }
+    /*.navbar {*/
+        /*height: 50px;*/
+    /*}*/
 
-    .navbar-inverse .container-fluid {
-        display: inline-block;
-    }
-}
+    /*.navbar-inverse .navbar-collapse {*/
+        /*float: right;*/
+        /*display: inline-block;*/
+    /*}*/
+
+    /*.navbar-inverse .container-fluid {*/
+        /*display: inline-block;*/
+    /*}*/
+/*}*/
 
 .navbar .navbar-brand {
     color: whitesmoke;
@@ -98,15 +91,6 @@ a:focus, a:hover {
     height: 100%;
 }
 
-.wd-widget {
-    min-height: 30px;
-    margin-bottom: 10px;
-}
-
-.wd-widget > img {
-    width: 100%;
-}
-
 .wd-widget-toolbar {
     position: absolute;
     right: 15px;
@@ -117,11 +101,6 @@ a:focus, a:hover {
     z-index: 1;
 }
 
-.wd-widget a:hover,
-.wd-widget a:focus {
-    color: #23527c;
-}
-
 .recipeListImages {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -130,6 +109,9 @@ a:focus, a:hover {
 
 .recipeListImage {
     width: 100%;
+    height: 250px;
+    background-position: center;
+    background-size: cover;
 }
 
 .home-search-bar {
@@ -183,4 +165,22 @@ a:focus, a:hover {
 .card-view-list-group-item-content {
     color: white;
     font-size: 12px;
+}
+
+.sidebar {
+    background-color: #CCBFA6;
+    border-right-color: #998F7C;
+}
+
+.sub-header{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #998F7C;
+}
+
+.page-header {
+    border-bottom-color: #998F7C;
+}
+
+#smallProfileImage {
+    padding-bottom: 20px;
 }

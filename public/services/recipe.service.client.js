@@ -11,12 +11,12 @@
         this.updateRecipe = updateRecipe;
         this.deleteRecipe = deleteRecipe;
         this.findRecipeByCriteria = findRecipeByCriteria;
-        this.tempYummlyRecipe = tempYummlyRecipe;
-        this.getTempYummlyRecipe = getTempYummlyRecipe;
+        this.tempYummlyIngredients = tempYummlyIngredients;
+        this.getTempYummlyIngredients = getTempYummlyIngredients;
         this.createYummlyLocalRecipeCopy = createYummlyLocalRecipeCopy;
         this.findYummlyRecipeCopyByYummlyId = findYummlyRecipeCopyByYummlyId;
 
-        var recipe = {};
+        var tempIngredients = {};
 
         function findYummlyRecipeCopyByYummlyId(recipeId) {
             var url = '/api/yummly/recipeCopy/' + recipeId;
@@ -83,13 +83,13 @@
                 });
         }
 
-        function tempYummlyRecipe(ingredients, recipeId) {
-            recipe = ingredients;
+        function tempYummlyIngredients(ingredients) {
+            tempIngredients = ingredients;
             // console.log(recipe);
         }
 
-        function getTempYummlyRecipe(recipeId) {
-            return recipe;
+        function getTempYummlyIngredients() {
+            return tempIngredients;
         }
     }
 })();

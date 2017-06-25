@@ -14,9 +14,9 @@
         model.unlikeRecipe = unlikeRecipe;
         model.createComment = createComment;
         model.submitComment = submitComment;
+        model.footerButtonFunc = footerButtonFunc;
         // userId = currentUser._id;
         model.recipeId = $routeParams.recipeId;
-        model.like = false;
 
         // console.log(model.recipeId);
 
@@ -29,12 +29,12 @@
                     .then(function (recipe) {
                         model.recipeLocalId = recipe._id;
                         model.recipe = recipe;
+                        model.recipeCreator = recipe._creator;
                     })
                     .then(function () {
                         findAllAssociation();
                     });
             } else {
-
                 yummlyService
                     .detailRecipe(model.recipeId)
                     .then(function (recipe) {
@@ -56,6 +56,14 @@
 
         init();
 
+        function footerButtonFunc() {
+            if (model.like) {
+                unlikeRecipe();
+            } else {
+                likeRecipe();
+            }
+        }
+
         function trust(url) {
             // scrubbing the html
             return $sce.trustAsResourceUrl(url);
@@ -70,14 +78,19 @@
             associationService
                 .findLikeForRecipe(currentUser._id, model.recipeLocalId)
                 .then(function (like) {
+                    console.log(like);
                     model.likeId = like._id;
                     model.like = true;
+                    model.footerButton = "glyphicon glyphicon-heart";
+                }, function () {
+                    model.like = false;
+                    model.footerButton = "glyphicon glyphicon-heart-empty";
                 })
         }
 
         function combineIngredientAndDescription() {
             var ingredients = recipeService
-                .getTempYummlyRecipe(model.recipeId);
+                .getTempYummlyIngredients();
             model.recipe.ingredients = [];
             for (var i in model.recipe.ingredientLines) {
                 model.recipe.ingredients.push({
@@ -124,6 +137,7 @@
                 .then(function (like) {
                     model.likeId = like._id;
                     model.like = true;
+                    model.footerButton = "glyphicon glyphicon-heart";
                 });
         }
 
@@ -132,6 +146,7 @@
                 .deleteRecipeLike(model.likeId)
                 .then(function () {
                     model.like = false;
+                    model.footerButton = "glyphicon glyphicon-heart-empty";
                 });
         }
 

@@ -1,17 +1,23 @@
 <!-- footer -->
-<nav class="navbar navbar-fixed-bottom">
-    <li class="row container-fluid">
-        <div class="col-xs-3 text-center">
-            <a href="#!/profile"><span class="glyphicon glyphicon-user"></span></a>
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-3 text-center">
+                <a class="navbar-btn"
+                   href="#!/"><span class="navigating-btn glyphicon glyphicon-home"></span></a>
+            </div>
+            <div class="col-xs-3 text-center">
+                <a class="navbar-btn"
+                   href="#!/store-search"><span class="navigating-btn glyphicon glyphicon-map-marker"></span></a>
+            </div>
+            <div class="col-xs-3 text-center">
+                <a class="navbar-btn"
+                   ng-click="model.footerButtonFunc()"><span class="navigating-btn {{model.footerButton}}"></span></a>
+            </div>
+            <div class="col-xs-3 text-center">
+                <a class="navbar-btn"
+                   href="#!/profile"><span class="navigating-btn glyphicon glyphicon-user"></span></a>
+            </div>
         </div>
-        <div class="col-xs-3 text-center">
-            <a href="#!/"><span class="fa fa-user-plus">&nbsp;&nbsp;&nbsp;like</span></a>
-        </div>
-        <div class="col-xs-3 text-center">
-            <a href="#!/"><span class="fa fa-user-times">&nbsp;&nbsp;&nbsp;like</span></a>
-        </div>
-        <div class="col-xs-3 text-center">
-            <a href="#!/"><span class="glyphicon glyphicon-home"></span></a>
-        </div>
-    </li>
+    </div>
 </nav>

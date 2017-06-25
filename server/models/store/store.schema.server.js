@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var merchandiseSchema = mongoose.Schema({
+var storeSchema = mongoose.Schema({
     _owner: {type: mongoose.Schema.ObjectId, ref: 'userModel', required: true},
     name: {type: String, required: true},
     description: String,
@@ -14,7 +14,7 @@ var merchandiseSchema = mongoose.Schema({
     dateCreated: {type: Date, default: Date.now, required: true}
 }, {collection: "store"});
 
-module.exports = merchandiseSchema;
+module.exports = storeSchema;
 
 // comments: [{
 //     user: {

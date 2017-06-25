@@ -51,7 +51,9 @@ function findAllRecipesForCreator(userId) {
 
 function findRecipeById(recipeId) {
     return recipeModel
-        .findById(recipeId);
+        .findById(recipeId)
+        .populate('_creator')
+        .exec();
 }
 
 function updateRecipe(recipeId, recipe) {

@@ -5,6 +5,25 @@
 
 <!------------------------------------------------ upload Image ------------------------------------------------------>
 
+<img id="photo"
+     class="imageToCenter"
+     ng-src="{{model.merchandise.image}}" width="50%"/>
+
+
+<Label>photo</Label>
+<form action="/api/upload/merchandise/picture"
+      method="post"
+      enctype="multipart/form-data"
+      class="margin-top-15"
+ng-if="model.mode==='edit'">
+    <input name="myFile" type="file" class="form-control"/>
+    <input name="storeId" value="{{model.storeId}}" style="display: none"/>
+    <input name="merchandiseId" value="{{model.merchandiseId}}" style="display: none"/>
+    <button type="submit"
+            class="btn btn-block btn-primary">
+        Upload Photo
+    </button>
+</form>
 
 
 <div class="container-fluid">

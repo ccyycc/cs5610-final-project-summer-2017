@@ -24,7 +24,7 @@
                     label: "Store"
                 }, {
                     value: "merchandise",
-                    label: "Products"
+                    label: "Product"
                 }
                 // TODO ADDED TO FOOTER
                 // {

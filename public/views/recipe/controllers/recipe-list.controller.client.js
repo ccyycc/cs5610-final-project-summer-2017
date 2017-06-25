@@ -11,8 +11,6 @@
 
         // userId = currentUser._id;
 
-        init()
-
         function init(){
 
             var preSearch = $location.search();
@@ -22,8 +20,7 @@
             }
         }
 
-
-
+        init();
 
         function searchRecipes() {
             yummlyService
@@ -44,7 +41,7 @@
 
         function goToDetail(recipe, recipeId) {
             recipeService
-                .tempYummlyRecipe(recipe.ingredients, recipeId);
+                .tempYummlyIngredients(recipe.ingredients);
             $location.url("/recipe_list/" + recipeId + "#" + recipe.source);
         }
     }
