@@ -1,4 +1,5 @@
-var app = require('../../express');
+const app = require('../../express');
+var unirest = require('unirest');
 var multer = require('multer');
 var upload = multer({dest: __dirname + '/../../public/uploads'});
 
@@ -31,8 +32,8 @@ app.get('/api/checkname', findUserByName);
 app.get('/api/user', isAdmin, findAllUsers);
 
 app.post('/api/user', isAdmin, createUser);
-//TODO:changed the updateUser, without check isAdmin
-app.put('/api/user/:userId', updateUser);
+// TODO:changed the updateUser, without check isAdmin
+app.put('/api/user/:userId', isAdmin, updateUser);
 
 app.delete('/api/user/:userId', isAdmin, deleteUser);
 
@@ -52,6 +53,7 @@ app.put('/api/message/:userId', sendMessage);
 app.get('/api/user/populate/:arrName/:userId', populateArr);
 // app.get('/api/showFollowings/:userId', showFollowings);
 // app.get('/api/showFollowers/:userId', showFollowers);
+app.post('/api/account/bmiCal', bmiCal);
 
 
 app.get('/auth/google',
@@ -138,8 +140,8 @@ function register(req, res) {
             console.log('create user success -- user.server');
             // res.send(user);
             req.login(user, function (status) {
-                    res.send(user);
-                });
+                res.send(user);
+            });
         });
 }
 
@@ -292,7 +294,7 @@ function sendMessage(req, res) {
     var message = req.body;
     var myId = req.user._id;
 
-    console.log("sendMessage-user.service.server userId: " + userId +" myId: " + myId + "  message: " + message);
+    // console.log("sendMessage-user.service.server userId: " + userId +" myId: " + myId + "  message: " + message);
 
     userModel
         .sendMessage(myId, userId, message)
@@ -307,7 +309,7 @@ function populateArr(req, res) {
     var userId = req.params.userId;
     var arrName = req.params.arrName;
     userModel
-        .populateArr(userId,arrName)
+        .populateArr(userId, arrName)
         .then(function (arr) {
             console.log(arr);
             res.json(arr[arrName]);
@@ -315,6 +317,43 @@ function populateArr(req, res) {
         .catch(function (err) {
             console.log(err);
         })
+}
+
+function bmiCal(req, res) {
+    var weight = req.body.weight;
+    var height = req.body.height * 2.54;
+    console.log(weight + " " + height);
+
+    var sendJson = {
+        "weight": {"value": weight, "unit": "lb"},
+        "height": {"value": height.toFixed(2), "unit": 'cm'},
+        "sex": req.body.gender,
+        "age": req.body.age,
+        "waist": "35.00",
+        "hip": "46.00"
+    };
+    // console.log(sendJson);
+
+    unirest.post("https://bmi.p.mashape.com/")
+        .header("X-Mashape-Key", "XW5gPJqz7PmshypQe1SzDbLzDIxvp1Bf6F7jsntRZbPSjSpS2V")
+        .header("Content-Type", "application/json")
+        .header("Accept", "application/json")
+        .send(sendJson)
+        .end(function (result) {
+            // console.log(result);
+            res.send(result);
+            userModel
+                .addbmr(req.user._id, result.body.bmr.value);
+        });
+
+    // unirest.post("https://bmi.p.mashape.com/")
+    //     .header("X-Mashape-Key", "XW5gPJqz7PmshypQe1SzDbLzDIxvp1Bf6F7jsntRZbPSjSpS2V")
+    //     .header("Content-Type", "application/json")
+    //     .header("Accept", "application/json")
+    //     .send(sendJson)
+    //     .end(function (result) {
+    //         console.log(result);
+    //     });
 }
 
 
@@ -426,7 +465,7 @@ function uploadImage(req, res) {
     var filename = myFile.filename;
 
     userModel
-        .uploadImage(userId,filename)
+        .uploadImage(userId, filename)
         .then(function (status) {
             var callbackUrl = "/#!/account";
             res.redirect(callbackUrl)

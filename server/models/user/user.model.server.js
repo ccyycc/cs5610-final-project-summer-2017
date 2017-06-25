@@ -34,6 +34,7 @@ userModel.deleteMessage = deleteMessage;
 userModel.sendMessage = sendMessage;
 
 userModel.populateArr = populateArr;
+userModel.addbmr = addbmr;
 
 
 module.exports = userModel;
@@ -204,6 +205,15 @@ function findUserByCredentials(username) {
         .findOne({username: username})
         .then(function (user) {
             return user;
+        })
+}
+
+function addbmr(userId, bmr) {
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            user.bmr = bmr;
+            return user.save();
         })
 }
 

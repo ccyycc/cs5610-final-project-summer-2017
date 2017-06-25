@@ -27,7 +27,8 @@
             follow: follow,
             unfollow: unfollow,
             sendMessage: sendMessage,
-            populateArr: populateArr
+            populateArr: populateArr,
+            countBmi: countBmi
             // showFollowings: showFollowings,
             // showFollowers: showFollowers
         };
@@ -226,6 +227,14 @@
         function populateArr(userId, arrName) {
             var url = '/api/user/populate/' + arrName +'/' + userId;
             return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function countBmi(figure) {
+            // console.log(figure);
+            return $http.post('/api/account/bmiCal', figure)
                 .then(function (response) {
                     return response.data;
                 })

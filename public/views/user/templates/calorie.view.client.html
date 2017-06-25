@@ -16,10 +16,10 @@
         <div class="form-group">
             <label for="height">Height in inches</label>
             <input type="text"
-                    class="form-control"
+                   class="form-control"
                    id="height"
                    ng-model="model.user.height"
-                   placeholder="5.8">
+                   placeholder="78">
         </div>
         <div class="form-group">
             <label for="age">Age</label>
@@ -30,14 +30,32 @@
                    placeholder="30">
         </div>
         <div class="form-group">
-           Gender:
-            <input type="radio" ng-model="model.user.gender" value="male" > Male
+            Gender:
+            <input type="radio" ng-model="model.user.gender" value="male"> Male
             <input type="radio" ng-model="model.user.gender" value="female"> Female
         </div>
     </form>
-    <a class="btn btn-success btn-block"
-       ng-click="model.countCalorie(model.user)">Count my daily calorie burned</a>
+    <a class="btn btn-primary btn-block form-control"
+       ng-click="model.countCalorie(model.user)">Count my daily calorie burned and BMI</a>
 
-    <div ng-show="model.calorie"
-    class="alert alert-info"> Your BMR is {{model.calorie}}</div>
+    <div ng-show="model.calorie" class="alert alert-info">
+        <div class="row">
+            <div class="col-sm-8">
+                <h3>Your BMR (Basal Metabolic Rate) is {{model.calorie}}</h3>
+                <h3>Your BMI (Body Mass Index) is {{model.bmi.bmi.value}}.</h3><br>
+                Your healthy status is {{model.bmi.bmi.status.toLowerCase()}}. <br>
+                You have {{model.bmi.bmi.risk.toLowerCase()}} <br>
+                Your ideal wight is {{model.bmi.ideal_weight}}.
+                <br><br>
+            </div>
+            <div class="col-sm-4 hidden-xs">
+                <p><b>BMI Categories:</b><br>
+                    Underweight = <18.5<br>
+                    Normal weight = 18.5 – 24.9<br>
+                    Overweight = 25 – 29.9<br>
+                    Obesity = BMI of 30 or greater</p>
+            </div>
+        </div>
+
+    </div>
 </div>
