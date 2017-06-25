@@ -10,10 +10,8 @@
         model.createStore = createStore;
         model.selectStore = selectStore;
         model.updateStore = updateStore;
-        // model.currentStore = currentStore;
 
         function init() {
-            // console.log('admin-store.controller');
 
             findAllStores();
         }
@@ -36,11 +34,11 @@
                         model.error = 'User is not a merchant';
                     }else {
                         var storeId = store._id;
-                        // delete store[_id];
                         store._owner = thisuser._id;
                         storeService
                             .updateStore(storeId, store)
                             .then(findAllStores());
+
                         model.store = {};
                         model.username = '';
                     }
@@ -68,20 +66,17 @@
                 .findUserByUsername(username)
                 .then(function (user) {
                     thisuser = user;
-                    // console.log('user after findUserByUsername: ' );
-                    // console.log(user);
                     if (thisuser === 'undefined') {
                         model.error = "Username does not exist";
                     } else if (thisuser.role !== 'MERCHANT') {
                         model.error = 'User is not a merchant';
                     } else {
-                        // var storeId = store._id;
-                        // delete store[_id];
                         store._owner = thisuser.id;
-                        console.log('admin-stores.controller--create store: ' + store);
+
                         storeService
                             .createStore(thisuser._id, store)
                             .then(findAllStores());
+
                         model.store = {};
                         model.username = '';
                     }
