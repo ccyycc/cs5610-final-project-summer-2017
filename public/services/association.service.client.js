@@ -5,51 +5,65 @@
 
     function AssociationService($http) {
 
-        this.createLike = createLike;
-        this.createComment = createComment;
-        this.findAllRecipeReview = findAllRecipeReview;
-        this.deleteRecipeLike = deleteRecipeLike;
-        this.findLikeForRecipe = findLikeForRecipe;
 
-        function createLike(like) {
-            var url = '/api/association/like';
-            return $http.post(url, like)
-                .then(function (response) {
-                    return response.data;
-                })
+        this.createAssociation = createAssociation;
+        this.updateAssociation = updateAssociation;
+        this.deleteAssociationById = deleteAssociationById;
+
+        this.findAssociationById = findAssociationById;
+        this.findAllAssociationByType = findAllAssociationByType;
+        this.findAssociationForSource = findAssociationForSource;
+        this.findAssociationForTarget = findAssociationForTarget;
+        this.findAssociationForSourceTarget = findAssociationForSourceTarget;
+
+
+        function createAssociation(association){
+                var url = '/api/association/';
+                return $http.post(url, association)
+                    .then(extractData)
         }
 
-        function createComment(comment) {
-            var url = '/api/association/comment';
-            // console.log(comment);
-            return $http.post(url, comment)
-                .then(function (response) {
-                    return response.data;
-                });
+        function updateAssociation(associationId,association) {
+            var url = '/api/association/'+associationId
+            return $http.put(url, association)
+                .then(extractData)
         }
-
-        function findAllRecipeReview(recipeId) {
-            var url = '/api/association/comment/recipe/' + recipeId;
-            return $http.get(url)
-                .then(function (response) {
-                    return response.data;
-                });
-        }
-
-        function deleteRecipeLike(likeId) {
-            var url = '/api/association/like/' + likeId;
+        function deleteAssociationById(associationId) {
+            var url = '/api/association/'+associationId
             return $http.delete(url)
-                .then(function (response) {
-                    return response.data;
-                })
+                .then(extractData)
         }
 
-        function findLikeForRecipe(userId, recipeId) {
-            var url = '/api/association/like/from/'+ userId + '/to/' + recipeId;
+
+        function findAssociationById(associationId) {
+            var url = '/api/association/find/id/'+associationId
             return $http.get(url)
-                .then(function (response) {
-                    return response.data;
-                })
+                .then(extractData)
+        }
+        function findAllAssociationByType(associationType) {
+            var url = '/api/association/find/type/'+associationType
+            return $http.get(url)
+                .then(extractData)
+        }
+
+        function findAssociationForSource(associationType,sourceId) {
+            var url = '/api/association/find/type/'+associationType+'/from/'+sourceId;
+            return $http.get(url)
+                .then(extractData)
+        }
+        function findAssociationForTarget(associationType,targetType,targetId) {
+            var url = '/api/association/find/type/'+associationType+'/to/'+targetType+'/'+targetId;
+            return $http.get(url)
+                .then(extractData)
+        }
+        function findAssociationForSourceTarget(associationType,sourceId,targetType,targetId) {
+            var url = '/api/association/find/type/'+associationType+'/from/'+sourceId+'/to/'+targetType+'/'+targetId;
+            return $http.get(url)
+                .then(extractData)
+        }
+
+        function extractData(response) {
+            return response.data;
         }
     }
 })();

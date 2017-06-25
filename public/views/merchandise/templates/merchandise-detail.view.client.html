@@ -1,121 +1,38 @@
-<div ng-include="'./views/common/header.view.client.html'"></div>
-
-<!--body-->
-
-
-<!------------------------------------------------ upload Image ------------------------------------------------------>
-<img id="photo"
-     class="imageToCenter"
-     ng-src="{{model.merchandise.image}}" width="50%"/>
-
-
-<Label>photo</Label>
-<form action="/api/upload/merchandise/picture"
-      method="post"
-      enctype="multipart/form-data"
-      class="margin-top-15">
-    <input name="myFile" type="file" class="form-control"/>
-    <input name="storeId" value="{{model.storeId}}" style="display: none"/>
-    <input name="merchandiseId" value="{{model.merchandiseId}}" style="display: none"/>
-    <button type="submit"
-            class="btn btn-block btn-primary">
-        Upload Photo
-    </button>
-</form>
-
-
-
-
 <div class="container-fluid">
-    <div class="row ">
-        <!--left panel-->
-        <div class="col-xs-4 hidden-xs">
-            <div class="container-fluid">
-                <!--left panel body-->
-                <div class=" theme-showcase first-row"
-                     role="main">
-                    <ul class="list-group nowarp">
-                        <li class="list-group-item active">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-7 col-xs-10">
-                                    Name
-                                </div>
-                                <div class="col-lg-3 visible-lg">
-                                    Created
-                                </div>
-                                <div class="col-md-3 hidden-sm hidden-xs">
-                                    Accessed
-                                </div>
-                                <div class="col-xs-2">
-
-                                </div>
-                            </div>
-                        </li>
-                        <li ng-repeat="merchandise in model.merchandises" class="list-group-item">
-                            <div class="row ">
-                                <div class="col-lg-4 col-md-7 col-xs-10 ">
-                                    <a href="">
-                                        {{merchandise.name}}
-                                    </a>
-                                </div>
-                                <div class="col-lg-3 visible-lg">
-                                    {{merchandise.dateCreated | date}}
-                                </div>
-                                <div class="col-md-3 hidden-sm hidden-xs">
-                                    {{merchandise.dateUpdated | date}}
-                                </div>
-                                <div class="col-xs-2">
-                                    <a href="#!/store/{{model.storeId}}/merchandise/{{merchandise._id}}/edit">
-                                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+    <div class="row">
+        <div class="col-sm-2 sidebar">
+            <div class="nav nav-sidebar">
+                <h4>Recipe Provider:</h4>
+                < img id="smallProfileImage" class="img-responsive" ng-src="{{model.recipeCreator.photo}}"/>
+                <label for="username">Username</label>
+                <p id="username">{{model.recipeCreator.username}}</p >
+                <label for="name">Name</label>
+                <p id="name">{{model.recipeCreator.firstName}} {{model.recipeCreator.lastName}}</p >
+                <label for="email">Email</label>
+                <p id="email">{{model.recipeCreator.email}}</p >
+                <a class="btn btn-block btn-primary" href=" ">Find more</a >
             </div>
+
         </div>
-        <!--right panel-->
-        <div class="col-xs-12 col-sm-8 ">
-            {{model.merchandise}}
-            <!--right panel body-->
-            <div class="container-fluid">
-                <div ng-show="model.errorMessage"
-                     class="alert alert-danger">
-                    {{model.errorMessage}}
-                </div>
-                <!--edit merchandise name-->
-                <div class="form-group" ng-class="model.merchandiseNameStyle">
-                    <label for="name-edit">Name</label>
-                    <input class="form-control"
-                           ng-model="model.merchandise.name"
-                           placeholder="Name"
-                           id="name-edit"/>
-                </div>
-                <!--edit merchandise description-->
-                <label for="description-edit">Description</label>
-                <textarea id="description-edit"
-                          rows="5"
-                          ng-model="model.merchandise.description"
-                          placeholder="Description"
-                          class="form-control"></textarea>
-
-
-                <!--delete button -->
-                <a ng-if="model.mode === 'new'"
-                   ng-click="model.createMerchandise()"
-                   class="btn btn-block btn-primary">Create</a>
-                <!--delete button -->
-                <a ng-if="model.mode === 'edit'"
-                   ng-click="model.updateMerchandise()"
-                   class="btn btn-block btn-success">update</a>
-                <!--delete button -->
-                <a ng-if="model.mode === 'edit'"
-                   ng-click="model.deleteMerchandise()"
-                   class="btn btn-block btn-danger">Delete</a>
+        <div class="col-sm-10 col-sm-offset-2 main">
+            <h2 class="page-header">{{model.recipe.name}}
+                <a class="btn pull-right" ng-show="model.like" ng-click="model.unlikeRecipe()">
+                    <span class="glyphicon glyphicon-heart"></span>
+                </a >
+                <a class="btn pull-right" ng-show="!model.like" ng-click="model.likeRecipe()">
+                    <span class="glyphicon glyphicon-heart-empty"></span>
+                </a >
+            </h2>
+            <span>total time: {{model.recipe.totalTime}}</span><br>
+            <span>number of servings: {{model.recipe.numberOfServings}}</span>
+            <!--{{model.recipe}}-->
+            <h3 class="sub-header">Ingredients</h3>
+            <!--{{ingredient.description}}-->
+            <!--{{model.recipe.ingredients}}-->
+            <div ng-repeat="ingredient in model.recipe.ingredients">
+                <ul class="list-unstyled">
+                    <li><a ng-click="model.goToIngredientDetail(ingredient.name)">{{ingredient.name}}</a > : {{ingredient.description}}</li>
+                </ul>
             </div>
-        </div>
-    </div>
-</div>
 
-<div ng-include="'./views/common/footer.view.client.html'"></div>
+            <h3 class="sub-header">Instructions</h3>

@@ -108,10 +108,10 @@
             .when('/store/:storeId',{
                 templateUrl: 'views/store/templates/store-profile.view.client.html',
                 controller: 'storeProfileController',
-                controllerAs: 'model'
-                // resolve: {
-                //     currentUser: checkLoggedin
-                // }
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
             })
             .when('/store/:storeId/:mode',{
                 templateUrl: 'views/store/templates/store-profile-edit.view.client.html',
