@@ -5,7 +5,10 @@
 
     function storeProfileController($routeParams, $location, storeService, $sce, associationService, currentUser) {
         var model = this;
+
         model.editStoreProfile = editStoreProfile;
+        model.goToProductList = goToProductList;
+
         model.createComment = createComment;
         model.deleteComment = deleteComment;
         model.likeStore = likeStore;
@@ -34,10 +37,10 @@
                 .findStoreById(model.storeId)
                 .then(function (res) {
                     model.store = res;
-                    // model.store.addressUrl = trust("https://www.google.com"
-                    //                                + "/maps/embed/v1/place?"
-                    //                                + "key=AIzaSyA0oVg3fT3ZdLkEExxVyC0jkciGfmaYBcI&q="
-                    //                                + getStoreURLAddress(model.store));
+                    model.store.addressUrl = trust("https://www.google.com"
+                                                   + "/maps/embed/v1/place?"
+                                                   + "key=AIzaSyA0oVg3fT3ZdLkEExxVyC0jkciGfmaYBcI&q="
+                                                   + getStoreURLAddress(model.store));
                     associationService
                         .findAssociationForTarget( "COMMENT","store", model.storeId)
                         .then(function (comments) {
@@ -118,6 +121,10 @@
                     model.like=false;
                     delete model.likeAssociation[_id];
                 });
+        }
+
+        function goToProductList(){
+            $location.url('/store/' + model.storeId +'/merchandise');
         }
 
 
