@@ -24,7 +24,9 @@ function deleteRecipeLike(likeId) {
 
 function findAllRecipeReview(recipeId) {
     return associationModel
-        .find({toRecipe: recipeId});
+        .find({toRecipe: recipeId})
+        .populate('fromWhom')
+        .exec();
 }
 
 function createAssociation(comment) {

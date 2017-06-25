@@ -21,7 +21,9 @@
         // console.log(model.recipeId);
 
         function init() {
+            model.reviews =[];
             // console.log($location.hash());
+
             if ($location.hash() === "LOCAL") {
                 model.ifLocal = true;
                 recipeService
@@ -78,19 +80,20 @@
             associationService
                 .findLikeForRecipe(currentUser._id, model.recipeLocalId)
                 .then(function (like) {
-                    console.log(like);
-                    model.likeId = like._id;
-                    model.like = true;
-                    model.footerButton = "glyphicon glyphicon-heart";
-                }, function () {
-                    model.like = false;
-                    model.footerButton = "glyphicon glyphicon-heart-empty";
+                    if(like) {
+                        console.log(like);
+                        model.likeId = like._id;
+                        model.like = true;
+                        model.footerButton = "glyphicon glyphicon-heart";
+                    } else {
+                        model.like = false;
+                        model.footerButton = "glyphicon glyphicon-heart-empty";
+                    }
                 })
         }
 
         function combineIngredientAndDescription() {
-            var ingredients = recipeService
-                .getTempYummlyIngredients();
+            var ingredients = recipeService.getTempYummlyIngredients();
             model.recipe.ingredients = [];
             for (var i in model.recipe.ingredientLines) {
                 model.recipe.ingredients.push({
@@ -151,7 +154,6 @@
         }
 
         function createComment() {
-            model.reviews = [];
             model.newComment = {};
         }
 
@@ -173,12 +175,15 @@
             associationService
                 .createComment(model.newComment)
                 .then(function (comment) {
+                    comment.fromWhom = {
+                        username : currentUser.username
+                    };
                     model.reviews.push(comment);
+                    model.newComment = null;
                 })
         }
 
         function goToIngredientDetail(ingredientName) {
-            // console.log(ingredientName);
             $location.url('/recipe_list/' + model.recipeId + '/ingredient/' + ingredientName);
         }
     }

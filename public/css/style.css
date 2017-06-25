@@ -37,25 +37,9 @@ li.list-group-item > div.row > div {
     height:50px;
 }
 
-
-/*@media (min-width: 768px) {*/
-    /*.navbar > .container-fluid .navbar-brand {*/
-        /*margin-left: 0;*/
-    /*}*/
-
-    /*.navbar {*/
-        /*height: 50px;*/
-    /*}*/
-
-    /*.navbar-inverse .navbar-collapse {*/
-        /*float: right;*/
-        /*display: inline-block;*/
-    /*}*/
-
-    /*.navbar-inverse .container-fluid {*/
-        /*display: inline-block;*/
-    /*}*/
-/*}*/
+.list-name-sidebar {
+    padding: 0;
+}
 
 .navbar .navbar-brand {
     color: whitesmoke;
@@ -108,23 +92,25 @@ a:focus, a:hover {
     height: 250px;
     background-position: center;
     background-size: cover;
-}
-
-.home-search-bar{
-    width: 100%;
-    height: 50px;
-    background-color: #0f0f0f;
-    display: inline-block;
 
 }
+
+/*.home-search-bar{*/
+    /*width: 100%;*/
+    /*height: 50px;*/
+    /*background-color: #0f0f0f;*/
+    /*display: inline-block;*/
+
+/*}*/
 
 .text-on-image {
     position: relative;
-    bottom: 33px;
-    font-size:24px;
+    bottom: 0px;
+    font-size:20px;
     width:100%;
     text-align:center;
-    background:rgba(251,251,251,0.7)
+    color: black;
+    background:rgba(251,251,251,0.6)
 }
 
 .sidebar {
@@ -143,4 +129,32 @@ a:focus, a:hover {
 
 #smallProfileImage {
     padding-bottom: 20px;
+}
+
+.home-search-bar{
+    padding: 250px 0 150px 0;
+}
+
+.home-search-bar .select-button {
+    width: 90px;
+}
+
+@media (min-width: 768px) {
+    .navbar > .container-fluid .navbar-brand {
+        margin-left: 0;
+    }
+
+    .navbar {
+        height: 50px;
+    }
+
+    .navbar-inverse .navbar-collapse {
+        float: right;
+        display: inline-block;
+    }
+
+    .navbar-inverse .container-fluid {
+        display: inline-block;
+    }
+
 }

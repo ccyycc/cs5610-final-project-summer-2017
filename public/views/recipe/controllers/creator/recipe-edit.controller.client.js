@@ -10,14 +10,13 @@
         model.creatorId = currentUser._id;
         model.recipeId = $routeParams.recipeId;
 
-        model.tempIngredient = "";
+        model.sectionTitle = "Edit Recipe";
 
         model.createSingleIngredient = createSingleIngredient;
-        model.addSingleIngredient = addSingleIngredient;
         model.selectSingleIngredient = selectSingleIngredient;
         model.editSingleIngredient = editSingleIngredient;
         model.deleteSingleIngredient = deleteSingleIngredient;
-
+        model.clearSingleIngredient = clearSingleIngredient;
         model.updateRecipe = updateRecipe;
         model.deleteRecipe = deleteRecipe;
 
@@ -26,6 +25,7 @@
                 $location.url('/account')
                 //TODO: a trans page? Or directly go back to somewhere
             }
+            model.newIngredient = {};
             ifNewRecipe();
             recipeService
                 .findAllRecipesForCreator(model.creatorId)
@@ -45,55 +45,39 @@
         function ifNewRecipe() {
             return $location.hash()? model.ifNewRecipe = true:model.ifNewRecipe = false;
         }
-        function createSingleIngredient() {
-            model.ifNewIngredient = true;
-            model.newIngredient = {};
-        }
 
-        function addSingleIngredient() {
-            // console.log(model.newIngredient.name);
-            // console.log(ingredient);
-            // console.log(name, description);
-            // model.recipe.ingredients.push(model.tempIngredient);
+        function createSingleIngredient() {
             if (model.newIngredient.name) {
-                // console.log(model.newIngredient.name);
                 model.recipe.ingredients.push(model.newIngredient);
                 model.error = "";
-                model.ifNewIngredient = false;
                 model.newIngredient = {};
             } else {
                 model.error = "New ingredient name can't be empty.";
             }
+        }
 
-            // model.recipe.ingredients.push({
-            //     name: model.tempIngredient.name,
-            //     description: model.tempIngredient.description
-            // });
-            // model.tempIngredient = "";
-            // console.log(model.recipe.ingredients);
+        function clearSingleIngredient() {
+            model.error = "";
+            model.newIngredient={};
         }
 
         function selectSingleIngredient(ingredient) {
             model.editIngredient = ingredient;
-            // model.tempIngredient.name = ingredient.name;
-            // model.tempIngredient.description = ingredient.description;
-            // model.tempIngredient = ingredient;
         }
 
-        function editSingleIngredient() {
-            // console.log(ingredient);
-            model.editIngredient = {};
+        function editSingleIngredient(ingredient) {
+            if (ingredient.name) {
+                model.editIngredient = {};
+                model.error = "";
+            } else {
+                model.error = "Ingredient name can't be empty.";
+            }
         }
 
         function deleteSingleIngredient(ingredient) {
-            if (model.ifNewIngredient) {
-                model.error = "";
-                model.ifNewIngredient = false;
-                model.newIngredient = {};
-            } else {
-                var index = model.recipe.ingredients.indexOf(ingredient);
-                model.recipe.ingredients.splice(index, 1);
-            }
+            var index = model.recipe.ingredients.indexOf(ingredient);
+            model.recipe.ingredients.splice(index, 1);
+            model.error = "";
         }
 
         function updateRecipe() {
@@ -110,7 +94,9 @@
             recipeService
                 .deleteRecipe(model.recipeId)
                 .then(function () {
-                    $location.url("/recipe/");
+                    $location.url("/creator/" + model.creatorId + "/recipe/");
+                }, function () {
+                    model.error = "can't delete at this time, please try later.";
                 })
         }
 

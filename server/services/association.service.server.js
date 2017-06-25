@@ -17,8 +17,8 @@ function findLikeForRecipe(req, res) {
     var recipeId = req.params.recipeId;
     associationModel
         .findLikeForRecipe(userId, recipeId)
-        .then(function () {
-            res.sendStatus(200);
+        .then(function (like) {
+            res.json(like)
         }, function () {
             res.sendStatus(500);
         })
