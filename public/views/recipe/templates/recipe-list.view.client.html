@@ -1,6 +1,6 @@
 <div ng-include="'./views/common/header.view.client.html'"></div>
 
-<div class="container-fluid" style="margin-top: 50px">
+<div class="container-fluid">
     <div class="input-group">
         <input ng-model="model.searchText"
                type="text"
@@ -13,38 +13,59 @@
         </a>
     </span>
     </div>
-    <div class="row">
-        <!--{{model.yummlyRecipes}}-->
-        <!--<div id="filckrImage" class="col-xs-6 col-sm-3 col-md-2 text-center" ng-repeat="recipe in model.recipes">-->
-        <div class="col-xs-4 text-center" id="yummlyImage" ng-repeat="yummlyRecipe in model.yummlyRecipes">
-            <!--{{yummlyRecipe}}-->
-            <!--{{recipe}}<br><br>-->
-            <!--{{yummlyRecipe.smallImageUrls[0]}}-->
-            {{yummlyRecipe.ingredients}}<br>
-            {{yummlyRecipe.ingredientLines}}<br>
-            <img ng-src="{{yummlyRecipe.smallImageUrls[0]}}"/><br>
-            <!--{{recipe.imageUrlsBySize['90']}}<br><br>-->
-            <!--{{recipe.id}}-->
-            <a ng-click="model.goToDetail(yummlyRecipe, yummlyRecipe.id)">{{yummlyRecipe.recipeName}}</a>
-            <!--{{recipe.ingredients}}<br><br>-->
-            <!--<img ng-click="model.selectPhoto(recipe)"-->
-            <!--ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_q.jpg"/>-->
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 text-center recipeListImages"
+                 ng-repeat="yummlyRecipe in model.yummlyRecipes">
+                <img class="recipeListImage"
+                     ng-src="{{yummlyRecipe.smallImageUrls[0]}}"
+                     onerror="this.onerror=null; this.src='/resource/defaultPics/placeholder-image10.jpg'"/>
+                <a ng-click="model.goToDetail(yummlyRecipe, yummlyRecipe.id)">
+                    <p class="text-on-image">{{yummlyRecipe.recipeName}}</p>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 text-center recipeListImages"
+                 ng-repeat="localRecipe in model.localRecipes">
+                <img class="recipeListImage"
+                     ng-src="{{localRecipe.image}}"
+                     onerror="this.onerror=null; this.src='/resource/defaultPics/placeholder-image10.jpg'"/>
+                <a ng-click="model.goToDetail(localRecipe, localRecipe._id)">
+                    <p class="text-on-image">{{localRecipe.name}}</p>
+                </a>
+            </div>
         </div>
-        <div class="col-xs-4 text-center" id="yummlyImage" ng-repeat="localRecipe in model.localRecipes">
 
-            <!--{{localRecipe}}<br><br>-->
-            <img ng-src="{{localRecipe.image}}"/><br>
-            <!--{{recipe.imageUrlsBySize['90']}}<br><br>-->
-            <!--{{recipe.id}}-->
-            <a ng-click="model.goToDetail(localRecipe, localRecipe._id)">{{localRecipe.name}}</a>
-            <!--{{recipe.ingredients}}<br><br>-->
-            <!--<img ng-click="model.selectPhoto(recipe)"-->
-            <!--ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_q.jpg"/>-->
-        </div>
-        <!--<div ng-repeat="photo in model.photos">-->
-
-        <!--{{photo}}-->
+    <!--<div class="row">-->
+        <!--&lt;!&ndash;{{model.yummlyRecipes}}&ndash;&gt;-->
+        <!--&lt;!&ndash;<div id="filckrImage" class="col-xs-6 col-sm-3 col-md-2 text-center" ng-repeat="recipe in model.recipes">&ndash;&gt;-->
+        <!--<div class="col-xs-4 text-center" id="yummlyImage" ng-repeat="yummlyRecipe in model.yummlyRecipes">-->
+            <!--&lt;!&ndash;{{yummlyRecipe}}&ndash;&gt;-->
+            <!--&lt;!&ndash;{{recipe}}<br><br>&ndash;&gt;-->
+            <!--&lt;!&ndash;{{yummlyRecipe.smallImageUrls[0]}}&ndash;&gt;-->
+            <!--{{yummlyRecipe.ingredients}}<br>-->
+            <!--{{yummlyRecipe.ingredientLines}}<br>-->
+            <!--<img class="recipeListImage" ng-src="{{yummlyRecipe.smallImageUrls[0]}}"/><br>-->
+            <!--&lt;!&ndash;{{recipe.imageUrlsBySize['90']}}<br><br>&ndash;&gt;-->
+            <!--&lt;!&ndash;{{recipe.id}}&ndash;&gt;-->
+            <!--<a ng-click="model.goToDetail(yummlyRecipe, yummlyRecipe.id)">{{yummlyRecipe.recipeName}}</a>-->
+            <!--&lt;!&ndash;{{recipe.ingredients}}<br><br>&ndash;&gt;-->
+            <!--&lt;!&ndash;<img ng-click="model.selectPhoto(recipe)"&ndash;&gt;-->
+            <!--&lt;!&ndash;ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_q.jpg"/>&ndash;&gt;-->
         <!--</div>-->
+        <!--<div class="col-xs-4 text-center" id="yummlyImage" ng-repeat="localRecipe in model.localRecipes">-->
+
+            <!--&lt;!&ndash;{{localRecipe}}<br><br>&ndash;&gt;-->
+            <!--<img ng-src="{{localRecipe.image}}"/><br>-->
+            <!--&lt;!&ndash;{{recipe.imageUrlsBySize['90']}}<br><br>&ndash;&gt;-->
+            <!--&lt;!&ndash;{{recipe.id}}&ndash;&gt;-->
+            <!--<a ng-click="model.goToDetail(localRecipe, localRecipe._id)">{{localRecipe.name}}</a>-->
+            <!--&lt;!&ndash;{{recipe.ingredients}}<br><br>&ndash;&gt;-->
+            <!--&lt;!&ndash;<img ng-click="model.selectPhoto(recipe)"&ndash;&gt;-->
+            <!--&lt;!&ndash;ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_q.jpg"/>&ndash;&gt;-->
+        <!--</div>-->
+        <!--&lt;!&ndash;<div ng-repeat="photo in model.photos">&ndash;&gt;-->
+
+        <!--&lt;!&ndash;{{photo}}&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
 </div>
 </div>
 

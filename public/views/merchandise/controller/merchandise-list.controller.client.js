@@ -6,6 +6,7 @@
     function merchandiseListController($location, $routeParams, merchandiseService) {
         var model = this;
         //event handler
+
         model.createMerchandise = createMerchandise;
 
         init();

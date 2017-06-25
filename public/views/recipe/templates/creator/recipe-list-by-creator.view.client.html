@@ -12,7 +12,7 @@
 
             <img class="recipeListImage"
                  ng-src="{{recipe.image}}"
-                 onerror="this.onerror=null; this.src='/uploads/recipe/placeholder-image10.jpg'"/>
+                 onerror="this.onerror=null; this.src='/resource/defaultPics/placeholder-image10.jpg'"/>
             <a href="#!/recipe_list/{{recipe._id}}">
                 <p class="text-on-image">{{recipe.name}}</p>
             </a>
@@ -20,7 +20,7 @@
         <div ng-show="model.ifCreator()"
              class="col-xs-12 col-sm-6 col-md-4 text-center recipeListImages">
             <img class="recipeListImage"
-                 src="/uploads/recipe/addphoto.png"/>
+                 src="/resource/defaultPics/addphoto.png"/>
             <a href="">
                 <p ng-click="model.createRecipe()"
                    class="text-on-image">Add New Recipe!</p>

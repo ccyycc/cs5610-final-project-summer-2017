@@ -1,87 +1,88 @@
-<div ng-include="'./views/common/header.view.client.html'"></div>
+<!--TODO DELETE-->
+<!--<div ng-include="'./views/common/header.view.client.html'"></div>-->
 
-<!--body-->
+<!--&lt;!&ndash;body&ndash;&gt;-->
 
-<div class="container-fluid">
-    <div class="row ">
-        <!--left panel-->
-        <div class="col-xs-4 hidden-xs">
-            <div class="container-fluid">
-                <!--left panel body-->
-                <div class=" theme-showcase first-row"
-                     role="main">
-                    <ul class="list-group nowarp">
-                        <li class="list-group-item active">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-7 col-xs-10">
-                                    Name
-                                </div>
-                                <div class="col-lg-3 visible-lg">
-                                    Created
-                                </div>
-                                <div class="col-md-3 hidden-sm hidden-xs">
-                                    Accessed
-                                </div>
-                                <div class="col-xs-2">
+<!--<div class="container-fluid">-->
+    <!--<div class="row ">-->
+        <!--&lt;!&ndash;left panel&ndash;&gt;-->
+        <!--<div class="col-xs-4 hidden-xs">-->
+            <!--<div class="container-fluid">-->
+                <!--&lt;!&ndash;left panel body&ndash;&gt;-->
+                <!--<div class=" theme-showcase first-row"-->
+                     <!--role="main">-->
+                    <!--<ul class="list-group nowarp">-->
+                        <!--<li class="list-group-item active">-->
+                            <!--<div class="row">-->
+                                <!--<div class="col-lg-4 col-md-7 col-xs-10">-->
+                                    <!--Name-->
+                                <!--</div>-->
+                                <!--<div class="col-lg-3 visible-lg">-->
+                                    <!--Created-->
+                                <!--</div>-->
+                                <!--<div class="col-md-3 hidden-sm hidden-xs">-->
+                                    <!--Accessed-->
+                                <!--</div>-->
+                                <!--<div class="col-xs-2">-->
 
-                                </div>
-                            </div>
-                        </li>
-                        <li ng-repeat="merchandise in model.merchandises" class="list-group-item">
-                            <div class="row ">
-                                <div class="col-lg-4 col-md-7 col-xs-10 ">
-                                    <a href="#!/user/{{merchandise.sellId}}/merchandise/{{merchandise._id}}">
-                                        {{merchandise.name}}
-                                    </a>
-                                </div>
-                                <div class="col-lg-3 visible-lg">
-                                    {{merchandise.dateCreated | date}}
-                                </div>
-                                <div class="col-md-3 hidden-sm hidden-xs">
-                                    {{merchandise.dateAccessed | date}}
-                                </div>
-                                <div class="col-xs-2">
-                                    <a href="#!/user/{{merchandise.sellId}}/merchandise/{{merchandise._id}}/widget">
-                                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!--right panel-->
-        <div class="col-xs-12 col-sm-8 ">
-            <!--right panel body-->
-            <div class="container-fluid">
-                <div ng-show="model.errorMessage"
-                     class="alert alert-danger">
-                    {{model.errorMessage}}
-                </div>
-                <!--edit merchandise name-->
-                <div class="form-group" ng-class="model.merchandiseNameStyle">
-                    <label for="name-edit">Name</label>
-                    <input class="form-control"
-                           ng-model="model.merchandise.name"
-                           placeholder="Name"
-                           id="name-edit"/>
-                </div>
-                <!--edit merchandise description-->
-                <label for="description-edit">Description</label> <textarea id="description-edit"
-                                                                            rows="5"
-                                                                            ng-model="model.merchandise.description"
-                                                                            placeholder="Description"
-                                                                            class="form-control"></textarea>
-                <!--cancel button -->
-                <a ng-click="model.createNewMerchandise()"
-                   class="btn btn-block btn-primary">Confirm</a>
-                <!--cancel button -->
-                <a href="#!/user/{{model.sellId}}/merchandise"
-                   class="btn btn-block btn-danger">Cancel</a>
-            </div>
-        </div>
-    </div>
-</div>
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</li>-->
+                        <!--<li ng-repeat="merchandise in model.merchandises" class="list-group-item">-->
+                            <!--<div class="row ">-->
+                                <!--<div class="col-lg-4 col-md-7 col-xs-10 ">-->
+                                    <!--<a href="#!/user/{{merchandise.sellId}}/merchandise/{{merchandise._id}}">-->
+                                        <!--{{merchandise.name}}-->
+                                    <!--</a>-->
+                                <!--</div>-->
+                                <!--<div class="col-lg-3 visible-lg">-->
+                                    <!--{{merchandise.dateCreated | date}}-->
+                                <!--</div>-->
+                                <!--<div class="col-md-3 hidden-sm hidden-xs">-->
+                                    <!--{{merchandise.dateAccessed | date}}-->
+                                <!--</div>-->
+                                <!--<div class="col-xs-2">-->
+                                    <!--<a href="#!/user/{{merchandise.sellId}}/merchandise/{{merchandise._id}}/widget">-->
+                                        <!--<span class="glyphicon glyphicon-cog pull-right"></span>-->
+                                    <!--</a>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;right panel&ndash;&gt;-->
+        <!--<div class="col-xs-12 col-sm-8 ">-->
+            <!--&lt;!&ndash;right panel body&ndash;&gt;-->
+            <!--<div class="container-fluid">-->
+                <!--<div ng-show="model.errorMessage"-->
+                     <!--class="alert alert-danger">-->
+                    <!--{{model.errorMessage}}-->
+                <!--</div>-->
+                <!--&lt;!&ndash;edit merchandise name&ndash;&gt;-->
+                <!--<div class="form-group" ng-class="model.merchandiseNameStyle">-->
+                    <!--<label for="name-edit">Name</label>-->
+                    <!--<input class="form-control"-->
+                           <!--ng-model="model.merchandise.name"-->
+                           <!--placeholder="Name"-->
+                           <!--id="name-edit"/>-->
+                <!--</div>-->
+                <!--&lt;!&ndash;edit merchandise description&ndash;&gt;-->
+                <!--<label for="description-edit">Description</label> <textarea id="description-edit"-->
+                                                                            <!--rows="5"-->
+                                                                            <!--ng-model="model.merchandise.description"-->
+                                                                            <!--placeholder="Description"-->
+                                                                            <!--class="form-control"></textarea>-->
+                <!--&lt;!&ndash;cancel button &ndash;&gt;-->
+                <!--<a ng-click="model.createNewMerchandise()"-->
+                   <!--class="btn btn-block btn-primary">Confirm</a>-->
+                <!--&lt;!&ndash;cancel button &ndash;&gt;-->
+                <!--<a href="#!/user/{{model.sellId}}/merchandise"-->
+                   <!--class="btn btn-block btn-danger">Cancel</a>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 
-<div ng-include="'./views/common/footer/footer.view.client.html'"></div>
+<!--<div ng-include="'./views/common/footer/footer.view.client.html'"></div>-->
