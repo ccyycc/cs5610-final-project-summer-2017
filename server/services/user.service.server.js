@@ -336,12 +336,6 @@ function populateArr(req, res) {
         .populateArr(userId, arrName)
         .then(function (arr) {
             var temp = arr[arrName];
-            // console.log(temp.length);
-            // if (temp.length === 1) {
-            //     console.log('haha');
-            //     temp = [temp];
-            // }
-            console.log('user.service.server--- ' + temp + '---end--');
             res.json(temp);
         })
         .catch(function (err) {
