@@ -10,6 +10,8 @@ associationModel.deleteComment = deleteComment;
 associationModel.findCommentById = findCommentById;
 associationModel.findAllComments = findAllComments;
 
+associationModel.createMessage = createMessage;
+
 module.exports = associationModel;
 
 function findLikeForRecipe(userId, recipeId) {
@@ -55,3 +57,19 @@ function findCommentById(commentId) {
 function findAllComments() {
     return associationModel.find();
 }
+
+function createMessage(myId, userId, message) {
+    var comment = {
+        content: message,
+        fromWhom: myId,
+        toWhom: userId,
+        type:'COMMENT'
+    };
+    return associationModel
+        .createAssociation(comment)
+        .then(function (message) {
+            return message;
+        })
+}
+
+

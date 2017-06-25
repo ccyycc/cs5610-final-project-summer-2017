@@ -11,6 +11,8 @@
         this.updateStore = updateStore;
         this.deleteStore = deleteStore;
 
+        this.findAllStores = findAllStores;
+
         function createStore(ownerId, store) {
             var url = "/api/owner/" + ownerId + "/store";
             return $http.post(url, store)
@@ -19,6 +21,12 @@
 
         function findAllStoresForOwner(ownerId) {
             var url = "/api/owner/" + ownerId + "/store";
+            return $http.get(url)
+                .then(extractData);
+        }
+
+        function findAllStores() {
+            var url = "/api/stores";
             return $http.get(url)
                 .then(extractData);
         }

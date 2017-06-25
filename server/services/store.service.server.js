@@ -12,6 +12,8 @@ app.get('/api/store/:storeId', passport.isMerchant,findStoreById);
 app.put('/api/store/:storeId', updateStore);
 app.delete('/api/store/:storeId', deleteStore);
 
+app.get('/api/stores', isAdmin, findAllStores);
+
 app.post('/api/upload/store/profile', upload.single('myFile'), uploadImage);
 
 
@@ -38,6 +40,7 @@ function createStore(req, res) {
 
     var store = req.body;
     var ownerId = req.params.ownerId;
+
     storeModel
         .createStore(ownerId, store)
         .then(function (store) {
@@ -62,6 +65,17 @@ function findAllStoresForOwner(req, res) {
             function () {
                 res.sendStatus(500);
             });
+}
+
+function findAllStores(req, res) {
+    storeModel
+        .findAllStores()
+        .then(function (stores) {
+            res.json(stores);
+        })
+        .catch(function (err) {
+            res.send(err);
+        })
 }
 
 function findStoreById(req, res) {
@@ -112,4 +126,11 @@ function deleteStore(req, res) {
         )
 }
 
+function isAdmin(req, res, next) {
+    if (req.isAuthenticated() && req.user.role === 'ADMIN') {
+        next();
+    } else {
+        res.sendStatus(401);
+    }
+}
 

@@ -9,7 +9,7 @@ var associationSchema = mongoose.Schema({
     toMerchandise: {type: mongoose.Schema.ObjectId, ref: 'merchandiseModel'},
     time: {type: Date, default: Date.now},
     type: {
-        type: String, enum: ['COMMENT', 'LIKE','FOLLOW']
+        type: String, enum: ['COMMENT', 'LIKE', 'FOLLOW']
     }
 }, {collection: "association"});
 

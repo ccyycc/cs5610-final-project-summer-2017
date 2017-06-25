@@ -95,7 +95,7 @@ function isMerchant(req, res, next) {
 }
 
 function isAdmin(req, res, next) {
-    if (req.isAuthenticated() && req.user.role.indexOf('ADMIN') > -1) {
+    if (req.isAuthenticated() && req.user.role === 'ADMIN') {
         next();
     } else {
         res.sendStatus(401);
@@ -369,15 +369,6 @@ function bmiCal(req, res) {
             userModel
                 .addbmr(req.user._id, result.body.bmr.value);
         });
-
-    // unirest.post("https://bmi.p.mashape.com/")
-    //     .header("X-Mashape-Key", "XW5gPJqz7PmshypQe1SzDbLzDIxvp1Bf6F7jsntRZbPSjSpS2V")
-    //     .header("Content-Type", "application/json")
-    //     .header("Accept", "application/json")
-    //     .send(sendJson)
-    //     .end(function (result) {
-    //         console.log(result);
-    //     });
 }
 
 

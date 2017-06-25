@@ -157,6 +157,7 @@
 
         function findUserByUsername(username) {
             var url = "/api/checkname?username=" + username;
+            console.log(url + '--url--uesr.service.client');
             return $http.get(url)
                 .then(function (response) {
                     // console.log(response);

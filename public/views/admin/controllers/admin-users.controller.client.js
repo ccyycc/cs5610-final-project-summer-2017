@@ -26,6 +26,7 @@
             userService
                 .updateUser(user._id, user)
                 .then(findAllUsers());
+            model.user = {};
         }
 
         function selectUser(user) {

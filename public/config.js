@@ -83,6 +83,31 @@
                     currentUser: checkAdmin
                 }
             })
+            .when('/admin/stores', {
+                templateUrl: './views/admin/templates/admin-stores.view.client.html',
+                controller: 'adminStoresController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+            .when('/admin/merchandises', {
+                templateUrl: './views/admin/templates/admin-merchandises.view.client.html',
+                controller: 'adminMerchandisesController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+            .when('/admin/recipes', {
+                templateUrl: './views/admin/templates/admin-recipes.view.client.html',
+                controller: 'adminRecipesController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+
             .when("/recipe_list", {
                 templateUrl: "views/recipe/templates/recipe-list.view.client.html",
                 controller: "recipeListController",

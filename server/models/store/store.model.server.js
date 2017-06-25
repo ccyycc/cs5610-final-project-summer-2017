@@ -9,6 +9,8 @@ storeModel.findStoreById = findStoreById;
 storeModel.updateStore = updateStore;
 storeModel.deleteStore = deleteStore;
 
+storeModel.findAllStores = findAllStores;
+
 storeModel.uploadImage = uploadImage;
 
 
@@ -31,6 +33,16 @@ function findAllStoresForOwner(owner) {
         .find({_owner: owner})
         .then(function(data){
             var tmp = data;
+            return data;
+        })
+}
+
+function findAllStores() {
+    return storeModel
+        .find()
+        .populate('_owner')
+        .exec()
+        .then(function (data) {
             return data;
         })
 }

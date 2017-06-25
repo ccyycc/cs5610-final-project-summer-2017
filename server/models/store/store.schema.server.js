@@ -15,23 +15,3 @@ var storeSchema = mongoose.Schema({
 }, {collection: "store"});
 
 module.exports = storeSchema;
-
-// comments: [{
-//     user: {
-//         type: mongoose.Schema.ObjectId,
-//         ref: "UserModel",
-//         required: true
-//     },
-//     content: {
-//         type: String,
-//         required: true
-//     },
-//     dateCreated: {
-//         type: Date,
-//         default: Date.now
-//     },
-//     dateUpdated: {
-//         type: Date,
-//         default: Date.now
-//     }
-// }],

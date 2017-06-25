@@ -1,0 +1,74 @@
+<div class="container-fluid main-container">
+    <div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
+    <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
+
+    <ul class="list-group">
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-xs-3">
+                    ID
+                </div>
+                <div class="col-xs-3">
+                    Storename
+                </div>
+                <div class="col-xs-3">
+                    Ownername
+                </div>
+                <div class="col-xs-3">
+                    Description
+                </div>
+
+            </div>
+        </li>
+
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-xs-3">
+                    <div ng-model="model.store._id"
+                         class="form-control"></div>
+                </div>
+                <div class="col-xs-3">
+                    <input ng-model="model.store.name"
+                    class="form-control">
+                </div>
+                <div class="col-xs-3">
+                    <input ng-model="model.username"
+                           class="form-control">
+                </div>
+                <div class="col-xs-2">
+                    <input ng-model="model.store.description"
+                           class="form-control">
+                </div>
+
+                <div class="col-xs-1">
+                    <span ng-click="model.createStore(model.username, model.store)" class="glyphicon glyphicon-plus"></span>
+                    <span ng-click="model.updateStore(model.username, model.store)" class="glyphicon glyphicon-ok pull-right"></span>
+                </div>
+            </div>
+        </li>
+
+        <li ng-repeat="store in model.stores" class="list-group-item">
+
+            <div class="row">
+                <div class="col-xs-3">
+                    {{store._id}}
+                </div>
+                <div class="col-xs-3">
+                    {{store.name}}
+                </div>
+                <div class="col-xs-3">
+                    {{store._owner.username}}
+                </div>
+                <div class="col-xs-2">
+                    {{store.description}}
+                </div>
+
+                <div class="col-xs-1 pull-right">
+                    <span ng-click="model.deleteStore(store)" class="glyphicon glyphicon-remove pull-right"></span>
+                    <span ng-click="model.selectStore(store)"class="glyphicon glyphicon-pencil"></span>
+
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
