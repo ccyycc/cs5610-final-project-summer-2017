@@ -92,6 +92,11 @@
         <ng-include src="'./views/user/templates/snippets/user-profile.view.client.html'"></ng-include>
     </div>
 </div>
+<div ng-switch="model.user.role">
+    <div ng-switch-when='RECIPEPRO'>
+        <ng-include src="'./views/recipe/templates/creator/recipe-list-by-creator.view.client.html'"></ng-include>
+    </div>
+</div>
 
 <!--<div ng-include="'./views/user/templates/snippets/user-profile.view.client.html'"></div>-->
 
