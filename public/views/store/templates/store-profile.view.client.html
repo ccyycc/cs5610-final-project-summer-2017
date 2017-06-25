@@ -6,19 +6,31 @@
     <div class="row">
         <div class="col-sm-2 sidebar">
             <div class="nav nav-sidebar">
-                <h4>Recipe Provider:</h4>
-                < img id="smallProfileImage" class="img-responsive" ng-src="{{model.recipeCreator.photo}}"/>
-                <label for="username">Username</label>
-                <p id="username">{{model.recipeCreator.username}}</p >
-                <label for="name">Name</label>
-                <p id="name">{{model.recipeCreator.firstName}} {{model.recipeCreator.lastName}}</p >
-                <label for="email">Email</label>
-                <p id="email">{{model.recipeCreator.email}}</p >
-                <a class="btn btn-block btn-primary" href=" ">Find more</a >
+                <h4>Store Info</h4>
+                <img id="smallProfileImage" class="img-responsive" ng-src="{{model.seller.image}}"/>
+
+                <label for="username">UserName</label>
+                <p id="username">{{model.seller.username}}</p >
+
+                <div ng-show="model.seller.firstName">
+                <label for="firstname">FirstName</label>
+                <p id="firstname">{{model.seller.firstName}}</p >
+                </div>
+
+                <div ng-show="model.seller.lastName">
+                <label for="lastname">LastName</label>
+                <p id="lastname">{{model.seller.lastName}}</p >
+                     </div>
+            </div>
+        </div>
+
+        <div class="col-sm-10 col-sm-offset-2 main">
+            <div ng-if="model.store.image">
+                <img class="img-responsive" ng-src="{{model.store.image}}"/>
             </div>
 
-        </div>
-        <div class="col-sm-10 col-sm-offset-2 main">
+
+
             <h2 class="page-header">{{model.store.name}}
                 <a class="btn pull-right" ng-show="model.like" ng-click="model.unlikeStore()">
                     <span class="glyphicon glyphicon-heart"></span>
@@ -27,9 +39,6 @@
                     <span class="glyphicon glyphicon-heart-empty"></span>
                 </a >
             </h2>
-            <!--TODO DELETE-->
-            <span>total time: {{model.store.totalTime}}</span><br>
-            <span>number of servings: {{model.recipe.numberOfServings}}</span>
 
             <h3 class="sub-header">Description</h3>
             <span>model.store.description</span>
@@ -50,7 +59,7 @@
 
             <h3 class="sub-header">store address & map</h3>
             <div>{{model.store.address}}</div>
-            <div class="google-maps">
+            <div class="google-maps" ng-if="model.store.address != null">
             <iframe class="map-bottom"
                     ng-src="{{model.store.addressUrl}}"
                     allowfullscreen="">
@@ -58,22 +67,33 @@
             </div>
             <a ng-click="model.goToProductList()"
                class="btn btn-block btn-info">Go to product List</a>
-            <a ng-click="model.editStoreProfile()"
-               class="btn btn-block btn-primary">Edit</a>
 
+            <a ng-if="model.canEdit" ng-click="model.editStoreProfile()"
+               class="btn btn-block btn-primary">Edit</a>
 
 
             <div>
                 <h3 class="sub-header">Comments
                     <a class="btn pull-right"
-                       ng-click="model.createComment()">
+                       ng-click="model.newComment={}"
+                    ng-if="!model.newComment">
                         <span class="glyphicon glyphicon-plus"></span>
                     </a >
                 </h3>
-                <input class="form-control" ng-model="model.newComment.content"/>
-                <div ng-repeat="comment in model.comments">
-                    {{comment}}
+
+
+                <p ng-if="model.comments.length===0">Be the first one to comment!</p >
+                <div>
+                    <ul class="list-group list-unstyled" ng-repeat="comment in model.comments">
+                        <li class="list-group-item-warning">
+                            <label>User {{comment.fromWhom.username}}</label>: {{comment.content}}
+                        </li>
+                    </ul>
                 </div>
+                <input class="form-control" ng-show="model.newComment" ng-model="model.newComment.content"/>
+                <a class="btn pull-right" ng-show="model.newComment" ng-click="model.createComment()">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a >
             </div>
         </div>
     </div>

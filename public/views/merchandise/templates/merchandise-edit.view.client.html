@@ -1,98 +1,102 @@
 <div ng-include="'./views/common/header.view.client.html'"></div>
-
-<!--body-->
-
-
-<!------------------------------------------------ upload Image ------------------------------------------------------>
-
-
 <div class="container-fluid">
-    <div class="row ">
-        <!--left panel-->
-        <div class="col-xs-4 hidden-xs">
-            <div class="container-fluid">
-                <!--left panel body-->
-                <div class=" theme-showcase first-row"
-                     role="main">
-                    <ul class="list-group nowarp">
-                        <li class="list-group-item active">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-7 col-xs-10">
-                                    Name
-                                </div>
-                                <div class="col-lg-3 visible-lg">
-                                    Created
-                                </div>
-                                <div class="col-md-3 hidden-sm hidden-xs">
-                                    Accessed
-                                </div>
-                                <div class="col-xs-2">
+    <div class="row">
+        <div class="list-name-sidebar col-sm-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <!--<li class=""><a>Recipe List<span class="sr-only"></span></a ></li>-->
+                <li class="list-group-item active"><h5>Recipe List</h5></li>
+                <li ng-repeat="merchandise in model.merchandises"
+                    ng-class="{active: merchandise._id === model.merchandiseId}"
+                    class="list-group-item">
+                    <!--<li ng-class="{active: merchandise._id === model.merchandiseId}"><a href=" "> {{merchandise.name}}<span class="sr-only">(current)</span></a ></li>-->
 
-                                </div>
-                            </div>
-                        </li>
-                        <li ng-repeat="merchandise in model.merchandises" class="list-group-item">
-                            <div class="row ">
-                                <div class="col-lg-4 col-md-7 col-xs-10 ">
-                                    <a href="">
-                                        {{merchandise.name}}
-                                    </a>
-                                </div>
-                                <div class="col-lg-3 visible-lg">
-                                    {{merchandise.dateCreated | date}}
-                                </div>
-                                <div class="col-md-3 hidden-sm hidden-xs">
-                                    {{merchandise.dateUpdated | date}}
-                                </div>
-                                <div class="col-xs-2">
-                                    <a href="#!/store/{{model.storeId}}/merchandise/{{merchandise._id}}/edit">
-                                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!--right panel-->
-        <div class="col-xs-12 col-sm-8 ">
-
-            {{model.merchandise}}
-            <!--right panel body-->
-            <div class="container-fluid">
-
-                <h2 class="page-header">Name</h2>
-                <input type="text" ng-model="model.merchandise.name">
-
-                <h3 class="sub-header">Description</h3>
-                <input type="text" ng-model="model.merchandise.description">
-
-                <h3 class="sub-header">Price</h3>
-                <input type="text" ng-model="model.merchandise.price">
-
-                <h3 class="sub-header">Photo</h3>
-                <input type="text" ng-model="model.merchandise.image">
-                <div>
-                    <form action="/api/upload/merchandise/picture"
-                          method="post"
-                          enctype="multipart/form-data"
-                          class="margin-top-15"
-                          ng-if="model.mode==='edit'">
-                        <input name="myFile" type="file" class="form-control"/>
-                        <input name="storeId" value="{{model.storeId}}" style="display: none"/>
-                        <input name="merchandiseId" value="{{model.merchandiseId}}" style="display: none"/>
-                        <button type="submit" class="btn btn-block btn-primary">
-                            Upload Photo
-                        </button>
-                    </form>
-                    <div ng-click="model.createMerchandise()"
-                         class="btn btn-primary">
-                        Create Product
+                    <div class="row">
+                        <div class="col-sm-8">
+                            {{merchandise.name}}
+                        </div>
+                        <div class="col-sm-4">
+                            <a ng-if="merchandise._id !== model.merchandiseId"
+                               href="#!/creator/{{model.creatorId}}/merchandise/{{merchandise._id}}">
+                                <span class="glyphicon glyphicon-cog pull-right"></span>
+                            </a >
+                        </div>
                     </div>
-
-                </div>
-            </div>
+                </li>
+            </ul>
         </div>
+        <div class="col-sm-10 col-sm-offset-2 main">
+            <div ng-show="model.message"
+                 class="alert alert-primary">{{model.message}}
+            </div>
+            <div ng-show="model.error"
+                 class="alert alert-danger">{{model.error}}
+            </div>
 
-        <div ng-include="'./views/common/footer.view.client.html'"></div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input class="form-control"
+                       ng-model="model.merchandise.name"
+                       placeholder="please enter the name of the merchandise"
+                       id="name"/>
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input class="form-control"
+                       ng-model="model.merchandise.price"
+                       placeholder="please enter the name of the merchandise"
+                       id="price"/>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description"
+                          ng-model="model.merchandise.description"
+                          rows="3"
+                          placeholder="please enter the description of the merchandise"
+                          class="form-control">
+                    </textarea>
+            </div>
+
+
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input type="url"
+                       class="form-control"
+                       ng-model="model.merchandise.image"
+                       id="image"
+                       placeholder="please upload the image of your merchandise"/>
+            </div>
+
+            <div class="form-group" ng-if="model.mode === 'edit'">
+                <form action="/api/upload/merchandise/picture"
+                      method="post"
+                      enctype="multipart/form-data"
+                      class="margin-top-15"
+                      ng-if="model.mode==='edit'">
+                    <input name="myFile" type="file" class="form-control"/>
+                    <input name="storeId" value="{{model.storeId}}" style="display: none"/>
+                    <input name="merchandiseId" value="{{model.merchandiseId}}" style="display: none"/>
+                    <button type="submit" class="btn btn-block btn-primary">
+                        Upload Photo
+                    </button>
+                </form>
+
+            </div>
+
+            <a ng-if="model.mode === 'new'"
+               ng-click="model.createMerchandise()"
+               class="btn btn-block btn-success">Create</a >
+            <a ng-if="model.mode === 'new'"
+               ng-click="model.cancelMerchandise()"
+               class="btn btn-block btn-danger">cancel</a >
+            <a ng-if="model.mode === 'edit'"
+               ng-click="model.updateMerchandise()"
+               class="btn btn-block btn-primary">Update</a >
+            <a ng-if="model.mode === 'edit'"
+               ng-click="model.deleteMerchandise()"
+               class="btn btn-block btn-danger">delete</a >
+        </div>
+    </div>
+</div>
+<div ng-include="'./views/common/footer.view.client.html'"></div>
+

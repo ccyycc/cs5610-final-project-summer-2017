@@ -3,7 +3,8 @@
         .module('FinalProject')
         .controller('storeProfileController', storeProfileController);
 
-    function storeProfileController($routeParams, $location, storeService, $sce, associationService, currentUser) {
+    function storeProfileController($routeParams, $location, $sce, currentUser,
+                                    associationService, storeService, userService) {
         var model = this;
 
         model.editStoreProfile = editStoreProfile;
@@ -19,7 +20,7 @@
             model.storeId = $routeParams['storeId'];
 
             model.comments = [];
-            model.newComment = {};
+            model.newComment = undefined;
             model.like = false;
             model.likeAssociation = {
                 fromWhom: currentUser._id,
@@ -29,7 +30,7 @@
 
             model.sectionTitle = "Store Profile";
 
-                       model.days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+            model.days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
             model.store = {};
 
@@ -37,26 +38,39 @@
                 .findStoreById(model.storeId)
                 .then(function (res) {
                     model.store = res;
+                    model.canEdit = (model.store._owner === currentUser._id);
+
                     model.store.addressUrl = trust("https://www.google.com"
                                                    + "/maps/embed/v1/place?"
                                                    + "key=AIzaSyA0oVg3fT3ZdLkEExxVyC0jkciGfmaYBcI&q="
                                                    + getStoreURLAddress(model.store));
+
+                    userService
+                        .findUserById(model.store._owner)
+                        .then(function(owner){
+                            console.log(model.store);
+                            console.log("user")
+                            console.log(owner)
+                            model.seller = owner;
+                        });
+
+
                     associationService
-                        .findAssociationForTarget( "COMMENT","store", model.storeId)
+                        .findAssociationForTarget("COMMENT", "store", model.storeId)
                         .then(function (comments) {
                             console.log('comments');
                             console.log(comments);
                             model.comments = comments;
                         });
                     associationService
-                        .findAssociationForSourceTarget( "LIKE",currentUser._id, "store",model.storeId)
+                        .findAssociationForSourceTarget("LIKE", currentUser._id, "store", model.storeId)
                         .then(function (likes) {
                             console.log(likes);
                             if (likes.length === 0) {
                                 model.like = false;
                             } else {
                                 model.like = true;
-                                model.likeAssociation=likes[0];
+                                model.likeAssociation = likes[0];
                             }
                         })
                 });
@@ -67,10 +81,13 @@
 
         function getStoreURLAddress(store) {
             var address = store.address;
-            return address.street + "+"
-                   + address.city + "+"
-                   + address.state + "+"
-                   + address.zip;
+            if (address) {
+                return address.street + "+"
+                       + address.city + "+"
+                       + address.state + "+"
+                       + address.zip;
+            }
+            return "";
         }
 
         function editStoreProfile() {
@@ -89,8 +106,10 @@
             associationService
                 .createAssociation(model.newComment)
                 .then(function (comment) {
+                    comment.fromWhom = {};
+                    comment.fromWhom.username=currentUser.username;
                     model.comments.push(comment);
-                    model.newComment = {};
+                    model.newComment = undefined;
                 });
         }
 
@@ -101,7 +120,7 @@
                     var index = model.comments.indexOf(comment);
                     model.comments.splice(index, 1);
                 });
-            model.newComment = {};
+            model.newComment = undefined;
         }
 
 
@@ -111,7 +130,7 @@
                 .createAssociation(model.likeAssociation)
                 .then(function (association) {
                     model.likeAssociation = association;
-                    model.like=true;
+                    model.like = true;
                 });
         }
 
@@ -119,13 +138,13 @@
             associationService
                 .deleteAssociationById(model.likeAssociation._id)
                 .then(function (res) {
-                    model.like=false;
+                    model.like = false;
                     delete model.likeAssociation['_id'];
                 });
         }
 
-        function goToProductList(){
-            $location.url('/store/' + model.storeId +'/merchandise');
+        function goToProductList() {
+            $location.url('/store/' + model.storeId + '/merchandise');
         }
 
 

@@ -41,7 +41,7 @@ function updateAssociation(associationId, association) {
 
 function findAssociationById(associationId) {
     return associationModel
-        .findById(associationId);
+        .findById(associationId)
 }
 function findAllAssociationByType(associationType) {
     return associationModel
@@ -54,7 +54,9 @@ function findAssociationForSource(associationType, sourceId) {
                 {"type": associationType},
                 {"fromWhom": sourceId}
             ]
-        });
+        })
+        .populate('fromWhom', 'username')
+        .exec();
 }
 
 function findAssociationForTarget(associationType, targetType, targetId) {
@@ -67,7 +69,9 @@ function findAssociationForTarget(associationType, targetType, targetId) {
                             {"type": associationType},
                             {"toWhom": targetId}
                         ]
-                    });
+                    })
+                .populate('fromWhom', 'username')
+                .exec();
             break;
         case "recipe":
             return associationModel
@@ -77,7 +81,9 @@ function findAssociationForTarget(associationType, targetType, targetId) {
                             {"type": associationType},
                             {"toRecipe": targetId}
                         ]
-                    });
+                    })
+                .populate('fromWhom', 'username')
+                .exec();
             break;
         case "store":
             return associationModel
@@ -87,7 +93,9 @@ function findAssociationForTarget(associationType, targetType, targetId) {
                             {"type": associationType},
                             {"toStore": targetId}
                         ]
-                    });
+                    })
+                .populate('fromWhom', 'username')
+                .exec();
             break;
             break;
         case "merchandise":
@@ -98,7 +106,8 @@ function findAssociationForTarget(associationType, targetType, targetId) {
                             {"type": associationType},
                             {"toMerchandise": targetId}
                         ]
-                    });
+                    })
+                .populate('fromWhom', 'username');
             break;
         default: {
             return [];

@@ -9,6 +9,7 @@
         model.createMerchandise = createMerchandise;
         model.updateMerchandise = updateMerchandise;
         model.deleteMerchandise = deleteMerchandise;
+        model.cancelMerchandise = navToMerchandise;
 
         init();
 
@@ -89,6 +90,7 @@
             merchandiseService.deleteMerchandise(model.merchandiseId)
                 .then(navToMerchandise, error);
         }
+
 
 
         function navToMerchandise() {

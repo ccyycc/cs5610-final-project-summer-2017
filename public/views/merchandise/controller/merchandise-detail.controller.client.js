@@ -3,7 +3,7 @@
         .module('FinalProject')
         .controller('merchandiseDetailController', merchandiseDetailController);
 
-    function merchandiseDetailController($location, $routeParams, merchandiseService, associationService, currentUser) {
+    function merchandiseDetailController($location, $routeParams, merchandiseService, associationService, currentUser, storeService) {
         var model = this;
         //event handler
         model.editMerchandise = editMerchandise;
@@ -22,7 +22,7 @@
             model.merchandiseId = $routeParams['merchandiseId'];
 
             model.comments = [];
-            model.newComment = {};
+            model.newComment = undefined;
             model.like = false;
             model.likeAssociation = {
                 fromWhom: currentUser._id,
@@ -34,22 +34,31 @@
 
 
 
-
             model.merchandise = merchandiseService.findMerchandiseById(model.merchandiseId)
                 .then(
                     function(merchandise){
                         model.merchandise=merchandise;
+
+                        storeService
+                            .findStoreById(model.merchandise._store)
+                            .then(function(store){
+                            model.store = store;
+                            model.canEdit=(store._owner===currentUser._id);
+                            console.log(store._owner);
+                            console.log(currentUser._id);
+                            console.log(model.canEdit);
+                        });
+
+
                         associationService
                             .findAssociationForTarget( "COMMENT","merchandise", model.merchandiseId)
                             .then(function (comments) {
-                                console.log('comments');
-                                console.log(comments);
+
                                 model.comments = comments;
                             });
                         associationService
                             .findAssociationForSourceTarget( "LIKE",currentUser._id, "merchandise",model.merchandiseId)
                             .then(function (likes) {
-                                console.log(likes);
                                 if (likes.length === 0) {
                                     model.like = false;
                                 } else {
@@ -77,7 +86,7 @@
                 .createAssociation(model.newComment)
                 .then(function (comment) {
                     model.comments.push(comment);
-                    model.newComment = {};
+                    model.newComment = undefined;
                 });
         }
 
@@ -93,7 +102,6 @@
 
 
         function likeMerchandise() {
-            console.log(model.likeAssociation);
             associationService
                 .createAssociation(model.likeAssociation)
                 .then(function (association) {
@@ -101,6 +109,7 @@
                     model.like=true;
                 });
         }
+
 
         function unlikeMerchandise() {
             associationService
