@@ -3,6 +3,7 @@
     background-size: auto;
     background-repeat: no-repeat;
 }
+
 input.form-control,
 textarea.form-control,
 select.form-control {
@@ -14,9 +15,11 @@ body {
     padding-bottom: 60px;
     background-color: #ffefd0;
 }
+
 .jumbotron {
     margin-top: -10px;
 }
+
 li.list-group-item > div.row > div {
     white-space: nowrap;
     overflow: hidden;
@@ -43,7 +46,7 @@ li.list-group-item > div.row > div {
 .navbar {
     background-color: #fcaa19;
     display: inline;
-    height:50px;
+    height: 50px;
 }
 
 @media (min-width: 768px) {
@@ -129,7 +132,7 @@ a:focus, a:hover {
     width: 100%;
 }
 
-.home-search-bar{
+.home-search-bar {
     width: 100%;
     height: 50px;
     background-color: #0f0f0f;
@@ -140,8 +143,44 @@ a:focus, a:hover {
 .text-on-image {
     position: relative;
     bottom: 33px;
-    font-size:24px;
-    width:100%;
-    text-align:center;
-    background:rgba(251,251,251,0.7)
+    font-size: 24px;
+    width: 100%;
+    text-align: center;
+    background: rgba(251, 251, 251, 0.7)
+}
+
+.card-view {
+    height: 150px;
+    overflow: hidden;
+    background-color: #B2A180;
+    margin-bottom: 40px;
+}
+.card-view:hover,.card-view:focus {
+    height: 150px;
+    overflow: hidden;
+    background-color: #CCB892;
+}
+
+.card-view-image {
+    margin-top: 30px;
+    min-width:75px;
+    max-width: 100px;
+    overflow: hidden;
+}
+
+.card-view-list-group {
+    margin: 10px 10px 10px 10px;
+    height: 130px;
+}
+
+.card-view-list-group-item-title {
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+
+}
+
+.card-view-list-group-item-content {
+    color: white;
+    font-size: 12px;
 }

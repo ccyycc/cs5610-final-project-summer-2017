@@ -103,10 +103,10 @@
             .when('/store/:storeId',{
                 templateUrl: 'views/store/templates/store-profile.view.client.html',
                 controller: 'storeProfileController',
-                controllerAs: 'model',
-                resolve: {
-                    currentUser: checkLoggedin
-                }
+                controllerAs: 'model'
+                // resolve: {
+                //     currentUser: checkLoggedin
+                // }
             })
             .when('/store/:storeId/:mode',{
                 templateUrl: 'views/store/templates/store-profile-edit.view.client.html',
@@ -119,6 +119,11 @@
             .when('/store-search',{
                 templateUrl: 'views/store/templates/store-search.view.client.html',
                 controller: 'StoreSearchController',
+                controllerAs: 'model'
+            })
+            .when('/search/store',{
+                templateUrl: 'views/store/templates/store-profile-list.view.client.html',
+                controller: 'storeProfileSearchController',
                 controllerAs: 'model'
             })
             .otherwise({redirectTo : '/'})

@@ -9,11 +9,20 @@ storeModel.findStoreById = findStoreById;
 storeModel.updateStore = updateStore;
 storeModel.deleteStore = deleteStore;
 
+storeModel.findStoreByName = findStoreByName;
+
 storeModel.uploadImage = uploadImage;
 
 
 module.exports = storeModel;
 
+
+function findStoreByName(storeName) {
+    return storeModel
+        .find({name: new RegExp(storeName, "i")})
+        .populate("_owner")
+        .exec();
+}
 
 function createStore(owner, store) {
     store._owner = owner;

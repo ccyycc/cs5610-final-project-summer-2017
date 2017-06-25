@@ -8,12 +8,25 @@ var passport = require('./user.service.server');
 
 app.post('/api/owner/:ownerId/store', createStore);
 app.get('/api/owner/:ownerId/store', findAllStoresForOwner);
-app.get('/api/store/:storeId', passport.isMerchant,findStoreById);
+app.get('/api/store/:storeId', findStoreById);
+// app.get('/api/store/:storeId', passport.isMerchant,findStoreById);
 app.put('/api/store/:storeId', updateStore);
 app.delete('/api/store/:storeId', deleteStore);
+app.get('/api/store/search/:storeName',findStoreByName);
 
 app.post('/api/upload/store/profile', upload.single('myFile'), uploadImage);
 
+
+
+function findStoreByName(req,res) {
+    var storeName = req.params['storeName'];
+    storeModel
+        .findStoreByName(storeName)
+        .then(function (data) {
+            return res.status(200).send(data);
+        });
+
+}
 
 function uploadImage(req, res) {
     if (req.file === undefined) {

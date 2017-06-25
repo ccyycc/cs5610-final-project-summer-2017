@@ -11,6 +11,14 @@
         this.updateStore = updateStore;
         this.deleteStore = deleteStore;
 
+        this.findStoreByName = findStoreByName;
+
+        function findStoreByName(storeName){
+            var url = "/api/store/search/"+storeName;
+            return $http.get(url)
+                .then(extractData);
+        }
+
         function createStore(ownerId, store) {
             var url = "/api/owner/" + ownerId + "/store";
             return $http.post(url, store)

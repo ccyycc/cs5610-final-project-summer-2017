@@ -1,0 +1,58 @@
+<div ng-include='"./views/common/header.view.client.html"'></div>
+
+<div class="container-fluid">
+
+    <div class="input-group">
+        <input ng-model="model.searchText"
+               type="text"
+               placeholder="Search recipes"
+               class="form-control">
+        <span class="input-group-btn">
+        <a ng-click="model.searchStores()" class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+        </a>
+    </span>
+    </div>
+
+    <div ng-repeat="store in model.results"
+         class="col-sm-6">
+        <a href="#!/store/{{store._id}}">
+        <div class="card-view ">
+            <div class="hidden-xs col-sm-3 ">
+                <div class="">
+                    <img ng-src="{{store.image}}" class="img-thumbnail card-view-image"/><br>
+                </div>
+            </div>
+            <div class="col-xs-9 ">
+                <ul class="list-unstyled card-view-list-group">
+                    <li class="card-view-list-group-item-title">
+                        <span>Store Name</span>
+                    </li>
+                    <li id="storeName" class="card-view-list-group-item-content">
+                        {{store.name}}
+                    </li>
+                    <li class="card-view-list-group-item-title">
+                        <span>Store Owner</span>
+                    </li>
+                    <li id="storeOwner" class="card-view-list-group-item-content">
+                        {{store._owner.username}}
+                    </li>
+                    <li class="card-view-list-group-item-title">
+                        <span>Store Address</span>
+                    </li>
+                    <li id="" class="card-view-list-group-item-content">
+                        <div>{{store.address.street}}</div>
+                        <div>{{store.address.city +" " +store.address.state +""+store.address.zip}}</div>
+
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        </a>
+    </div>
+
+
+</div>
+
+<div ng-include="'./views/common/footer.view.client.html'"></div>
