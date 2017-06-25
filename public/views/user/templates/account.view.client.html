@@ -49,8 +49,13 @@
                    ng-model="model.user.lastName"
                    placeholder="Wonderland">
         </div>
+        <div class="form-group ">
+            <b>BMR: </b> {{model.user.bmr}}
+            <a class="btn btn-default pull-right" href="#!/account/calorie">Count BMR and BMI</a>
+        </div>
     </form>
 
+    <br>
 
     <a class="btn btn-success btn-block"
        ng-click="model.updateUser(model.user)">Update</a>
