@@ -4,6 +4,25 @@
 
 
 <!------------------------------------------------ upload Image ------------------------------------------------------>
+<img id="photo"
+     class="imageToCenter"
+     ng-src="{{model.merchandise.image}}" width="50%"/>
+
+
+<Label>photo</Label>
+<form action="/api/upload/merchandise/picture"
+      method="post"
+      enctype="multipart/form-data"
+      class="margin-top-15">
+    <input name="myFile" type="file" class="form-control"/>
+    <input name="storeId" value="{{model.storeId}}" style="display: none"/>
+    <input name="merchandiseId" value="{{model.merchandiseId}}" style="display: none"/>
+    <button type="submit"
+            class="btn btn-block btn-primary">
+        Upload Photo
+    </button>
+</form>
+
 
 
 
@@ -58,28 +77,42 @@
         </div>
         <!--right panel-->
         <div class="col-xs-12 col-sm-8 ">
-            <img id="photo"
-                 class="imageToCenter"
-                 ng-src="{{model.merchandise.image}}" width="50%"/>
-            
             {{model.merchandise}}
             <!--right panel body-->
             <div class="container-fluid">
-
-                <h2 class="page-header">Name</h2>
-                <div class="form-group">
-                    {{model.merchandise.name}}
+                <div ng-show="model.errorMessage"
+                     class="alert alert-danger">
+                    {{model.errorMessage}}
                 </div>
-
-                <h3 class="sub-header">Description</h3>
-                <div class="form-group">
-                    {{model.merchandise.description}}
+                <!--edit merchandise name-->
+                <div class="form-group" ng-class="model.merchandiseNameStyle">
+                    <label for="name-edit">Name</label>
+                    <input class="form-control"
+                           ng-model="model.merchandise.name"
+                           placeholder="Name"
+                           id="name-edit"/>
                 </div>
+                <!--edit merchandise description-->
+                <label for="description-edit">Description</label>
+                <textarea id="description-edit"
+                          rows="5"
+                          ng-model="model.merchandise.description"
+                          placeholder="Description"
+                          class="form-control"></textarea>
 
-                <h3 class="sub-header">Price</h3>
-                {{model.merchandise.Price}}
 
-
+                <!--delete button -->
+                <a ng-if="model.mode === 'new'"
+                   ng-click="model.createMerchandise()"
+                   class="btn btn-block btn-primary">Create</a>
+                <!--delete button -->
+                <a ng-if="model.mode === 'edit'"
+                   ng-click="model.updateMerchandise()"
+                   class="btn btn-block btn-success">update</a>
+                <!--delete button -->
+                <a ng-if="model.mode === 'edit'"
+                   ng-click="model.deleteMerchandise()"
+                   class="btn btn-block btn-danger">Delete</a>
             </div>
         </div>
     </div>

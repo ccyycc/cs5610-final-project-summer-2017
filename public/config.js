@@ -95,6 +95,11 @@
                 controller: 'merchandiseListController',
                 controllerAs: 'model'
             })
+            .when('/store/:storeId/merchandise/:merchandiseId',{
+                templateUrl: './views/merchandise/templates/merchandise-detail.view.client.html',
+                controller: 'merchandiseDetailController',
+                controllerAs: 'model'
+            })
             .when('/store/:storeId/merchandise/:merchandiseId/:mode',{
                 templateUrl: './views/merchandise/templates/merchandise-edit.view.client.html',
                 controller: 'merchandiseEditController',
