@@ -15,24 +15,31 @@
 
         </div>
         <div class="col-sm-10 col-sm-offset-2 main">
-            <h2 class="page-header">{{model.recipe.name}}
-                <a class="btn pull-right" ng-show="model.like" ng-click="model.unlikeRecipe()">
+            {{model.likeAssociation}}
+            <h2 class="page-header">{{model.merchandise.name}}
+                <a class="btn pull-right" ng-show="model.like" ng-click="model.unlikeMerchandise()">
                     <span class="glyphicon glyphicon-heart"></span>
                 </a >
-                <a class="btn pull-right" ng-show="!model.like" ng-click="model.likeRecipe()">
+                <a class="btn pull-right" ng-show="!model.like" ng-click="model.likeMerchandise()">
                     <span class="glyphicon glyphicon-heart-empty"></span>
                 </a >
             </h2>
-            <span>total time: {{model.recipe.totalTime}}</span><br>
-            <span>number of servings: {{model.recipe.numberOfServings}}</span>
             <!--{{model.recipe}}-->
-            <h3 class="sub-header">Ingredients</h3>
-            <!--{{ingredient.description}}-->
-            <!--{{model.recipe.ingredients}}-->
-            <div ng-repeat="ingredient in model.recipe.ingredients">
-                <ul class="list-unstyled">
-                    <li><a ng-click="model.goToIngredientDetail(ingredient.name)">{{ingredient.name}}</a > : {{ingredient.description}}</li>
-                </ul>
-            </div>
+            <h3 class="sub-header">Description</h3>
+            {{model.merchandise.description}}
+            <h3 class="sub-header">Photo</h3>
+            {{model.merchandise.image}}
 
-            <h3 class="sub-header">Instructions</h3>
+
+            <div>
+                <h3 class="sub-header">Comments
+                    <a class="btn pull-right"
+                       ng-click="model.createComment()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a >
+                </h3>
+                <input class="form-control" ng-model="model.newComment.content"/>
+                <div ng-repeat="comment in model.comments">
+                    {{comment}}
+                </div>
+            </div>

@@ -42,24 +42,24 @@ li.list-group-item > div.row > div {
 }
 
 
-/*@media (min-width: 768px) {*/
-    /*.navbar > .container-fluid .navbar-brand {*/
-        /*margin-left: 0;*/
-    /*}*/
+@media (min-width: 768px) {
+    .navbar > .container-fluid .navbar-brand {
+        margin-left: 0;
+    }
 
-    /*.navbar {*/
-        /*height: 50px;*/
-    /*}*/
+    .navbar {
+        height: 50px;
+    }
 
-    /*.navbar-inverse .navbar-collapse {*/
-        /*float: right;*/
-        /*display: inline-block;*/
-    /*}*/
+    .navbar-inverse .navbar-collapse {
+        float: right;
+        display: inline-block;
+    }
 
-    /*.navbar-inverse .container-fluid {*/
-        /*display: inline-block;*/
-    /*}*/
-/*}*/
+    .navbar-inverse .container-fluid {
+        display: inline-block;
+    }
+}
 
 .navbar .navbar-brand {
     color: whitesmoke;

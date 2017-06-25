@@ -93,17 +93,26 @@
             .when('/store/:storeId/merchandise',{
                 templateUrl: './views/merchandise/templates/merchandise-list.view.client.html',
                 controller: 'merchandiseListController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
             })
             .when('/store/:storeId/merchandise/:merchandiseId',{
                 templateUrl: './views/merchandise/templates/merchandise-detail.view.client.html',
                 controller: 'merchandiseDetailController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
             })
             .when('/store/:storeId/merchandise/:merchandiseId/:mode',{
                 templateUrl: './views/merchandise/templates/merchandise-edit.view.client.html',
                 controller: 'merchandiseEditController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
             })
             .when('/store/:storeId',{
                 templateUrl: 'views/store/templates/store-profile.view.client.html',

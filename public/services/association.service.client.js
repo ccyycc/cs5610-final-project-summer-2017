@@ -18,7 +18,7 @@
 
 
         function createAssociation(association){
-                var url = '/api/association/';
+                var url = '/api/association';
                 return $http.post(url, association)
                     .then(extractData)
         }

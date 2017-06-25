@@ -89,7 +89,7 @@
             associationService
                 .createAssociation(model.newComment)
                 .then(function (comment) {
-                    model.reviews.push(comment);
+                    model.comments.push(comment);
                     model.newComment = {};
                 });
         }
@@ -98,8 +98,8 @@
             associationService
                 .deleteAssociationById(comment._id)
                 .then(function (res) {
-                    var index = model.reviews.indexOf(comment);
-                    model.reviews.splice(index, 1);
+                    var index = model.comments.indexOf(comment);
+                    model.comments.splice(index, 1);
                 });
             model.newComment = {};
         }
@@ -109,7 +109,8 @@
             console.log(model.likeAssociation);
             associationService
                 .createAssociation(model.likeAssociation)
-                .then(function (res) {
+                .then(function (association) {
+                    model.likeAssociation = association;
                     model.like=true;
                 });
         }
@@ -119,7 +120,7 @@
                 .deleteAssociationById(model.likeAssociation._id)
                 .then(function (res) {
                     model.like=false;
-                    delete model.likeAssociation[_id];
+                    delete model.likeAssociation['_id'];
                 });
         }
 
