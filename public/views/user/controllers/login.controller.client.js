@@ -22,7 +22,7 @@
             userService
                 .login(username, password)
                 .then(function (found) {
-                    $location.url('/account/calorie');
+                    $location.url('/');
 
                 }, function (error) {
                     model.message = "login " + username + " unsuccessfully," +

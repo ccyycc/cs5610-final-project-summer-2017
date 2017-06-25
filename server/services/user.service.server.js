@@ -49,6 +49,11 @@ app.post('/api/upload', upload.single('myFile'), uploadImage);
 
 app.get('/api/follow/:followingId', follow);
 app.get('/api/unfollow/:followingId', unfollow);
+
+app.get('/api/addLikedRecipe/:rId', addLikedRecipe);
+app.get('/api/deleteLikedRecipe/:rId', deleteLikedRecipe);
+
+
 app.put('/api/message/:userId', sendMessage);
 app.get('/api/user/populate/:arrName/:userId', populateArr);
 // app.get('/api/showFollowings/:userId', showFollowings);
@@ -266,23 +271,42 @@ function popUserById(req, res) {
 function follow(req, res) {
     var followingId = req.params.followingId;
     var myId = req.user._id;
-    console.log("begin-user.service.server-follow " + followingId + " " + myId);
 
     userModel
         .follow(myId, followingId)
         .then(function (user) {
             res.json(user);
         })
-
 }
 
 function unfollow(req, res) {
     var followingId = req.params.followingId;
     var followerId = req.user._id;
-    // console.log("begin-user.service.server-follow " + followingId + " " + followerId);
-
     userModel
         .unfollow(followerId, followingId)
+        .then(function (user) {
+            res.json(user);
+        })
+
+}
+
+function addLikedRecipe(req, res) {
+    var userId = req.user._id;
+    var rId = req.params.rId;
+
+    userModel
+        .addToCollections(userId, rId, 'likedRecipes')
+        .then(function (user) {
+            res.json(user);
+        })
+}
+
+function deleteLikedRecipe(req, res) {
+    var userId = req.user._id;
+    var rId = req.params.rId;
+
+    userModel
+        .deleteFromCollections(userId,rId,'likedRecipes')
         .then(function (user) {
             res.json(user);
         })

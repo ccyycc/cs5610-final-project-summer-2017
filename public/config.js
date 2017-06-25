@@ -50,6 +50,14 @@
                     currentUser: checkLoggedin
                 }
             })
+            .when('/profile', {
+                templateUrl: './views/user/templates/profile.view.client.html',
+                controller: 'profileController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
+            })
             .when('/profile/:uid', {
                 templateUrl: './views/user/templates/profile.view.client.html',
                 controller: 'profileController',

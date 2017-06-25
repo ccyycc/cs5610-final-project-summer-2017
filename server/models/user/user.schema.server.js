@@ -28,12 +28,13 @@ var userSchema = mongoose.Schema({
     // followings: [String]
 
     followers: [{type: mongoose.Schema.ObjectId, ref:'userModel'}],
-    followings: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}]
+    followings: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}],
+
+    likedRecipes: [{type: mongoose.Schema.ObjectId, ref: 'recipeModel'}],
+    collectedProducts: [{type: mongoose.Schema.ObjectId, ref: 'merchandiseModel'}]
 
 }, {collection: "user"});
 
 
 module.exports = userSchema;
 
-// likedRecipes: [{type: mongoose.Schema.ObjectId, ref: 'recipeModel'}]
-//     collectedProducts: [{type: mongoose.Schema.ObjectId, ref: 'productModel'}]

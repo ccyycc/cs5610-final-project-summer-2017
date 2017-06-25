@@ -37,11 +37,88 @@ li.list-group-item > div.row > div {
     height:50px;
 }
 
+.profile-navbar {
+    background-color: #8a6d3b;
+}
 
-/*@media (min-width: 768px) {*/
-    /*.navbar > .container-fluid .navbar-brand {*/
-        /*margin-left: 0;*/
-    /*}*/
+.textToCenter {
+    display: block;
+    text-align: center;
+}
+
+.imageToCenter {
+    display: block;
+    margin: auto;
+}
+.textToTop {
+    margin-top: 0;
+    vertical-align: top ;
+}
+
+.toBottom {
+    vertical-align: bottom;
+}
+
+.main-container {
+    margin-top: 50px;
+}
+
+#follow-button {
+    position: absolute;
+    bottom: -30px;
+}
+
+#followerNfollowing {
+    padding-top:20px;
+}
+
+.change-margin-right-15 {
+    margin-right: 15px;
+}
+
+.change-margin-left-15 {
+    margin-left: 15px;
+}
+
+.change-margin-right-30 {
+    margin-right: 30px;
+}
+
+.margin-top-15 {
+    margin-top: 10px;
+}
+
+.description {
+    display: inline;
+
+}
+
+.noborder {
+    border: 0;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+.top-padding-2 {
+    /*padding-top:2px;*/
+}
+
+.border-1 {
+    border: 6px;
+}
+
+/*.widget > .widget-toolbar {*/
+/*position:absolute;*/
+/*right: 15px;*/
+/*background-color: white;*/
+/*opacity:0.8;*/
+/*}*/
 
     /*.navbar {*/
         /*height: 50px;*/

@@ -1,5 +1,5 @@
-<nav class="navbar navbar-default margin-top-15">
-    <div class="container-fluid textToCenter">
+<nav class="navbar profile-navbar margin-top-15">
+    <div class="container-fluid textToCenter profile-navbar">
         <div class="col-xs-6 navbar-brand active">
             Liked Recipes
         </div>
@@ -9,14 +9,14 @@
     </div>
 </nav>
 
-<!--<div ng-switch="model.recipeOrProduct"-->
-<!--class="container-fluid main-container">-->
-<!--<div ng-switch-when="RECIPE">-->
-<!--<ng-include-->
-<!--src="views/user/templates/snippets/likedRecipes.view.client.html"></ng-include>-->
-<!--</div>-->
-<!--<div ng-switch-when="PRODUCT">-->
-<!--<ng-include-->
-<!--src="views/user/templates/snippets/collectedProducts.view.client.html"></ng-include>-->
-<!--</div>-->
-<!--</div>-->
+<div ng-switch="model.recipeOrProduct"
+     class="container-fluid main-container">
+    <div ng-switch-when="RECIPE">
+        <ng-include
+                src="views/user/templates/snippets/likedRecipes.view.client.html"></ng-include>
+    </div>
+    <div ng-switch-when="PRODUCT">
+        <ng-include
+                src="views/user/templates/snippets/collectedProducts.view.client.html"></ng-include>
+    </div>
+</div>

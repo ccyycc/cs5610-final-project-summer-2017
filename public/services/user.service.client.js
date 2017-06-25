@@ -26,6 +26,8 @@
             // populateRecipesAndProducts: populateRecipesAndProducts,
             follow: follow,
             unfollow: unfollow,
+            addLikedRecipe: addLikedRecipe,
+            deleteLikedRecipe: deleteLikedRecipe,
             sendMessage: sendMessage,
             populateArr: populateArr,
             countBmi: countBmi
@@ -45,7 +47,6 @@
         function follow(followingId) {
             var url='/api/follow/' + followingId;
 
-            console.log("begin-user.service.client-follow()" + "url: " + url);
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
@@ -55,6 +56,21 @@
         function unfollow(followingId) {
             var url='/api/unfollow/' + followingId;
 
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function addLikedRecipe(rId) {
+            getHelper('/api/addLikedRecipe/' + rId);
+        }
+
+        function deleteLikedRecipe(rId) {
+            getHelper('/api/deleteLikeRecipe/' + rId);
+        }
+
+        function getHelper(url) {
             return $http.get(url)
                 .then(function (response) {
                     return response.data;

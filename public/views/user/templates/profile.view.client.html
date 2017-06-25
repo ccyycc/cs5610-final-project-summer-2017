@@ -1,7 +1,6 @@
 <div ng-include="'./views/common/header.view.client.html'"></div>
 
 
-
 <div class="container-fluid main-container">
     <!--<div>-->
     <form>
@@ -25,14 +24,16 @@
                     </div>
                 </div>
 
-                <div id="followDetail" class="collapse">
+                <!--TODO: cannot click name to jump to another profile page-->
+                <div id="followDetail"
+                     class="collapse">
                     <div ng-repeat="follow in model.follows">
-                        <div class="row margin-top-15">
-                            <div class="col-sm-2">
-                                <img src="{{follow.photo}}" width ="80%"/>
+                        <div class="row margin-top-15 card card-block">
+                            <div class="col-sm-2 col-xs-6">
+                                <img src="{{follow.photo}}" width="30%"/>
                             </div>
-                            <div class="col-sm-4">
-                                {{follow.username}}
+                            <div class="col-sm-4 col-xs-6">
+                                <a ng-href="#!/profile/{{follow._id}}">{{follow.username}}</a>
                             </div>
                             <div class="col-sm-3 hidden-xs">
                                 follower: {{follow.followers.length}}
@@ -67,7 +68,7 @@
             </div>
             <div id="photoBlock" class="col-xs-6">
                 <img id="photo" class="imageToCenter"
-                     ng-src="{{model.user.photo}}" height="90%" width="90%"/>
+                     ng-src="{{model.user.photo}}" width="{{model.profilePhotoWidth}}"/>
             </div>
         </div>
     </form>
@@ -86,46 +87,46 @@
 
 
 <!--to show the likedRecipe/collectedProducts(regular user) or createdRecipes(recipeProvider)-->
-<!--<div ng-switch="model.user.role">-->
-<!--<div ng-switch-when='USER'>-->
-<!--<ng-include src="./views/user/templates/snippets/user-profile.view.client.html"></ng-include>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<ng-include src="./views/user/templates/snippets/user-profile.view.client.html"></ng-include>-->
-
-
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="row textToCenter">
-            <div class="col-xs-3">
-                <a href="#!/account" class="navbar-link">
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
-            </div>
-            <div class="col-xs-3">
-                <a href="#!/" class="navbar-link">
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
-            </div>
-            <div class="col-xs-3">
-                <a href="#!/account" class="navbar-link">
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
-            </div>
-            <div class="col-xs-3">
-                <a href="#!/account" class="navbar-link">
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
-            </div>
-        </div>
-        <!--<div class="pull-right navbar-text">-->
-        <!--<a href="#!/account" class="navbar-link">-->
-        <!--<span class="glyphicon glyphicon-user"></span>-->
-        <!--</a>-->
-        <!--</div>-->
+<div ng-switch="model.user.role">
+    <div ng-switch-when='USER'>
+        <ng-include src="'./views/user/templates/snippets/user-profile.view.client.html'"></ng-include>
     </div>
-</nav>
+</div>
+
+<!--<div ng-include="'./views/user/templates/snippets/user-profile.view.client.html'"></div>-->
+
+
+<!--<nav class="navbar navbar-default navbar-fixed-bottom">-->
+<!--<div class="container-fluid">-->
+<!--<div class="row textToCenter">-->
+<!--<div class="col-xs-3">-->
+<!--<a href="#!/account" class="navbar-link">-->
+<!--<span class="glyphicon glyphicon-user"></span>-->
+<!--</a>-->
+<!--</div>-->
+<!--<div class="col-xs-3">-->
+<!--<a href="#!/" class="navbar-link">-->
+<!--<span class="glyphicon glyphicon-user"></span>-->
+<!--</a>-->
+<!--</div>-->
+<!--<div class="col-xs-3">-->
+<!--<a href="#!/account" class="navbar-link">-->
+<!--<span class="glyphicon glyphicon-user"></span>-->
+<!--</a>-->
+<!--</div>-->
+<!--<div class="col-xs-3">-->
+<!--<a href="#!/account" class="navbar-link">-->
+<!--<span class="glyphicon glyphicon-user"></span>-->
+<!--</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash;<div class="pull-right navbar-text">&ndash;&gt;-->
+<!--&lt;!&ndash;<a href="#!/account" class="navbar-link">&ndash;&gt;-->
+<!--&lt;!&ndash;<span class="glyphicon glyphicon-user"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;</a>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--</div>-->
+<!--</nav>-->
 
 
 <div ng-include="'./views/common/footer.view.client.html'"></div>
