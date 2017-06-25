@@ -146,7 +146,7 @@ function sendMessage(myId, userId, message) {
 }
 
 function populateArr(userId, arrName) {
-    console.log(userId + " " + arrName + " user.model.server--populateArr");
+    // console.log(userId + " " + arrName + " user.model.server--populateArr");
     return userModel
         .findById(userId)
         .populate(arrName)

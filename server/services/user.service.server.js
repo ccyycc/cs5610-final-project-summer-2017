@@ -335,8 +335,14 @@ function populateArr(req, res) {
     userModel
         .populateArr(userId, arrName)
         .then(function (arr) {
-            console.log(arr);
-            res.json(arr[arrName]);
+            var temp = arr[arrName];
+            // console.log(temp.length);
+            // if (temp.length === 1) {
+            //     console.log('haha');
+            //     temp = [temp];
+            // }
+            console.log('user.service.server--- ' + temp + '---end--');
+            res.json(temp);
         })
         .catch(function (err) {
             console.log(err);

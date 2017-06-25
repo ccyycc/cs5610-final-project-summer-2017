@@ -244,6 +244,8 @@
             var url = '/api/user/populate/' + arrName +'/' + userId;
             return $http.get(url)
                 .then(function (response) {
+                    // console.log(response.data);
+                    // console.log("--- user.service.client -- populateArr(" + arrName);
                     return response.data;
                 })
         }

@@ -14,9 +14,11 @@
         model.sendMessage = sendMessage;
         model.showFollowers = showFollowers;
         model.showFollowings = showFollowings;
-        model.renderLikedRecipes = renderLikedRecipes;
-        model.renderCollectedProducts = renderCollectedProducts;
+        model.showLikedRecipes = showLikedRecipes;
+        model.showCollectedProducts = showCollectedProducts;
         model.countPhotoWidth = countPhotoWidth;
+        // model.showRecipes = showRecipes;
+        // model.showProducts = showProducts;
 
         function init() {
             if ($routeParams.uid) {
@@ -47,7 +49,7 @@
             }
 
             render(model.userId);
-            renderLikedRecipes();
+            showLikedRecipes();
 
             model.recipeOrProduct = 'RECIPE';
 
@@ -75,20 +77,26 @@
                 })
         }
 
-        function renderLikedRecipes() {
+        function showLikedRecipes() {
             userService
                 .populateArr(model.userId, 'likedRecipes')
                 .then(function (likedRecipes) {
+                    console.log(likedRecipes);
                     model.likedRecipes = likedRecipes;
-                })
+                    model.recipeOrProduct = 'RECIPE';
+                    console.log(model.likedRecipes)
+                });
+
+
         }
 
-        function renderCollectedProducts() {
+        function showCollectedProducts() {
             userService
                 .populateArr(model.userId, 'collectedProducts')
                 .then(function (products) {
                     model.collectedProducts = products;
                 })
+            model.recipeOrProduct = 'PRODUCT';
         }
 
         function follow() {

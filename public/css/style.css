@@ -39,6 +39,19 @@ li.list-group-item > div.row > div {
 
 .profile-navbar {
     background-color: #8a6d3b;
+    height: 40px;
+}
+
+.profile-navbar .navbar-link {
+    color:lightgray;
+    text-align: center;
+    vertical-align: middle;
+    margin-top:10px;
+}
+
+.profile-container {
+    margin:0;
+    background-color: #ffefde;
 }
 
 .textToCenter {
