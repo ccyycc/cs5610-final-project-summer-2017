@@ -123,6 +123,14 @@
                     currentUser: checkAdmin
                 }
             })
+            .when('/admin/comments', {
+                templateUrl: './views/admin/templates/admin-comments.view.client.html',
+                controller: 'adminCommentsController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
 
             .when("/recipe_list", {
                 templateUrl: "views/recipe/templates/recipe-list.view.client.html",
