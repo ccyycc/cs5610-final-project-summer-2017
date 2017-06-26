@@ -4,7 +4,7 @@
         .controller("recipeDetailController", RecipeDetailController);
     
     function RecipeDetailController($sce, currentUser, $location, $routeParams,
-                                    recipeService, yummlyService, associationService) {
+                                    recipeService, yummlyService, associationService, userService) {
 
         var model = this;
 
@@ -143,6 +143,9 @@
                     model.like = true;
                     model.footerButton = "glyphicon glyphicon-heart";
                 });
+
+            userService
+                .addLikedRecipe(model.recipeLocalId);
         }
 
         function unlikeRecipe() {
@@ -152,6 +155,9 @@
                     model.like = false;
                     model.footerButton = "glyphicon glyphicon-heart-empty";
                 });
+
+            userService
+                .deleteLikedRecipe(model.recipeLocalId);
         }
 
         function createComment() {

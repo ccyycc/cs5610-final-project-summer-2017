@@ -42,6 +42,14 @@
                     currentUser: checkLoggedin
                 }
             })
+            .when('/account/calorie', {
+                templateUrl: './views/user/templates/calorie.view.client.html',
+                controller: 'calorieController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
+            })
             .when('/profile', {
                 templateUrl: './views/user/templates/profile.view.client.html',
                 controller: 'profileController',
@@ -50,12 +58,38 @@
                     currentUser: checkLoggedin
                 }
             })
+            .when('/profile/:uid', {
+                templateUrl: './views/user/templates/profile.view.client.html',
+                controller: 'profileController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
+            })
+
+            .when('/admin', {
+                templateUrl: './views/admin/templates/admin.view.client.html',
+                controller: 'adminController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+            .when('/admin/users', {
+                templateUrl: './views/admin/templates/admin-users.view.client.html',
+                controller: 'adminUsersController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
             .when("/recipe_list", {
                 templateUrl: "views/recipe/templates/recipe-list.view.client.html",
                 controller: "recipeListController",
                 controllerAs: "model"
                 //TODO:no need to log in to view this page
             })
+
             .when('/recipe_list/:recipeId', {
                 //TODO: permission?
                 templateUrl: 'views/recipe/templates/otherUser/recipe-detail.view.client.html',

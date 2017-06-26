@@ -1,22 +1,26 @@
-<nav class="navbar navbar-default margin-top-15">
-    <div class="container-fluid textToCenter">
-        <div class="col-xs-6 navbar-brand active">
-            Liked Recipes
+<div class="profile-container">
+    <nav class="navbar margin-top-15 container-fluid textToCenter profile-navbar">
+        <a ng-click="model.showLikedRecipes()">
+            <div class="col-xs-6 navbar-link active">
+                Liked Recipes
+            </div>
+        </a>
+        <a ng-click="model.showCollectedProducts()">
+            <div class="col-xs-6 navbar-link">
+                Collected Products
+            </div>
+        </a>
+    </nav>
+
+    <div ng-switch="model.recipeOrProduct"
+         class="profile-container">
+        <div ng-switch-when="RECIPE">
+            <ng-include
+                    src="'./views/user/templates/snippets/likedRecipes.view.client.html'"></ng-include>
         </div>
-        <div class="col-xs-6 navbar-brand">
-            Collected Products
+        <div ng-switch-when="PRODUCT">
+            <ng-include
+                    src="'./views/user/templates/snippets/collectedProducts.view.client.html'"></ng-include>
         </div>
     </div>
-</nav>
-
-<!--<div ng-switch="model.recipeOrProduct"-->
-<!--class="container-fluid main-container">-->
-<!--<div ng-switch-when="RECIPE">-->
-<!--<ng-include-->
-<!--src="views/user/templates/snippets/likedRecipes.view.client.html"></ng-include>-->
-<!--</div>-->
-<!--<div ng-switch-when="PRODUCT">-->
-<!--<ng-include-->
-<!--src="views/user/templates/snippets/collectedProducts.view.client.html"></ng-include>-->
-<!--</div>-->
-<!--</div>-->
+</div>

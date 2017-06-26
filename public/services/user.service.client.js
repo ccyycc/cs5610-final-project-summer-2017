@@ -8,9 +8,9 @@
         var api = {
             createUser: createUser,
             findUserById: findUserById,
+            findMe: findMe,
             findAllUsers: findAllUsers,
             findUserByUsername: findUserByUsername,
-            populateRecipesAndProducts: populateRecipesAndProducts,
             findUserByCredentials: findUserByCredentials,
             updateUser: updateUser,
             deleteUser: deleteUser,
@@ -21,10 +21,77 @@
             loggedin: loggedin,
             register: register,
             checkAdmin: checkAdmin,
-            unregister: unregister
+            unregister: unregister,
+
+            // populateRecipesAndProducts: populateRecipesAndProducts,
+            follow: follow,
+            unfollow: unfollow,
+            addLikedRecipe: addLikedRecipe,
+            deleteLikedRecipe: deleteLikedRecipe,
+            sendMessage: sendMessage,
+            populateArr: populateArr,
+            countBmi: countBmi
+            // showFollowings: showFollowings,
+            // showFollowers: showFollowers
         };
         return api;
 
+        function sendMessage(userId, message) {
+            var url='/api/message/' + userId;
+            return $http.put(url, message)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function follow(followingId) {
+            var url='/api/follow/' + followingId;
+
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function unfollow(followingId) {
+            var url='/api/unfollow/' + followingId;
+
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function addLikedRecipe(rId) {
+            getHelper('/api/addLikedRecipe/' + rId);
+        }
+
+        function deleteLikedRecipe(rId) {
+            getHelper('/api/deleteLikeRecipe/' + rId);
+        }
+
+        function getHelper(url) {
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function showFollowings(userId) {
+            var url='/api/showFollowings/' + userId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function showFollowers(userId) {
+            var url='/api/showFollowers/' + userId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
 
         function unregister() {
             var url = "/api/unregister";
@@ -37,6 +104,7 @@
 
         function register(user) {
             var url = "/api/register";
+            console.log('user.service.client user: ' + user);
             return $http.post(url, user)
                 .then(function (response) {
                     return response.data;
@@ -94,6 +162,14 @@
                     // console.log(response);
                     return response.data;
                 });
+        }
+
+        function findMe() {
+            var url = '/api/user/findme';
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
         }
 
         function findUserById(userId) {
@@ -159,6 +235,24 @@
         function populateRecipesAndProducts(userId) {
             var url = '/api/userpop/' + userId;
             return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function populateArr(userId, arrName) {
+            var url = '/api/user/populate/' + arrName +'/' + userId;
+            return $http.get(url)
+                .then(function (response) {
+                    // console.log(response.data);
+                    // console.log("--- user.service.client -- populateArr(" + arrName);
+                    return response.data;
+                })
+        }
+
+        function countBmi(figure) {
+            // console.log(figure);
+            return $http.post('/api/account/bmiCal', figure)
                 .then(function (response) {
                     return response.data;
                 })

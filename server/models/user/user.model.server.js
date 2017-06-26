@@ -151,10 +151,10 @@ function populateArr(userId, arrName) {
         .findById(userId)
         .populate(arrName)
         .exec()
-    // .then(function (user) {
-    //     console.log(user[arrName]);
-    //     return user[arrName];
-    // })
+        // .then(function (user) {
+        //     console.log(user[arrName]);
+        //     return user[arrName];
+        // })
 }
 
 

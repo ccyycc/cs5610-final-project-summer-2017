@@ -17,6 +17,7 @@
     "passport-google-oauth": "^1.0.0",
     "passport-local": "^1.0.0",
     "q": "^1.5.0",
+    "unirest": "^0.5.1",
     "ui-router-ng2": "^1.0.0-beta.5"
   },
   "devDependencies": {},
@@ -24,6 +25,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "Jose G. Annunziato",
-  "license": "ISC"
+  "author": "Yuqing Zhong, Chengyang Chen, Chenwei Yin",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ccyycc/cs5610-final-project-summer-2017"
+  }
 }

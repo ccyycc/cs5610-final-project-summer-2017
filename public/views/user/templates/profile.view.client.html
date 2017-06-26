@@ -1,40 +1,77 @@
 <div ng-include="'./views/common/header.view.client.html'"></div>
 
 
-
 <div class="container-fluid main-container">
     <!--<div>-->
-        <form>
-            <div class="row">
-                <div class="col-xs-6">
-                    <h1 class="textToTop textToCenter">{{model.user.username}}</h1>
-                    <div ng-show="model.user.roles.indexOf('USER') > -1" class="row" id="followerNfollowing">
-                        <div class="col-xs-6 textToCenter">
-                            <p>follower<br>{{model.user.followers.length}}</p>
-                        </div>
-                        <div ng-show="model.user.roles.indexOf('USER') > -1" class="col-xs-6 textToCenter">
-                            <p>following<br>{{model.user.followings.length}}</p>
-                        </div>
-                    </div>
-                    <div class="btn btn-success toBottom form-control" >
-                        Follow
-                    </div>
-                    <div class="margin-top-15">
-                        <div class="btn btn-success " >
-                            Leave me a message!
-                        </div>
+    <form>
+        <div class="row">
+            <div class="col-xs-6">
+                <h1 class="textToTop textToCenter">{{model.user.username}}</h1>
 
-                        <input class="form-control">
+                <div class="row" id="followerNfollowing">
+                    <div class="col-xs-6 textToCenter">
+                        <a ng-click="model.showFollowers()">
+
+                            follower<br>
+                            {{model.user.followers.length}}</a>
                     </div>
 
-
+                    <div ng-show="model.user.role == 'USER'"
+                         class="col-xs-6 textToCenter">
+                        <a ng-click="model.showFollowings()">
+                            following<br>
+                            {{model.user.followings.length}}</a>
+                    </div>
                 </div>
-                <div id="photoBlock" class="col-xs-6">
-                    <img id="photo" class="imageToCenter"
-                         ng-src="{{model.user.photo}}" width="150px"/>
+
+                <!--TODO: cannot click name to jump to another profile page-->
+                <div id="followDetail"
+                     class="collapse">
+                    <div ng-repeat="follow in model.follows">
+                        <div class="row margin-top-15 card card-block">
+                            <div class="col-sm-2 col-xs-6">
+                                <img src="{{follow.photo}}" width="30%"/>
+                            </div>
+                            <div class="col-sm-4 col-xs-6">
+                                <a ng-href="#!/profile/{{follow._id}}">{{follow.username}}</a>
+                            </div>
+                            <div class="col-sm-3 hidden-xs">
+                                follower: {{follow.followers.length}}
+                            </div>
+                            <div class="col-sm-3 hidden-xs" ng-show="follow.role == 'USER'">
+                                following: {{follow.followings.length}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <a class="btn btn-success toBottom form-control"
+                   ng-show="model.followed == false"
+                   ng-click="model.follow()">
+                    Follow
+                </a>
+                <a class="btn btn-default toBottom form-control"
+                   ng-show="model.followed == true"
+                   ng-click="model.unfollow()">
+                    Unfollow
+                </a>
+                <div class="margin-top-15">
+                    <a ng-click="model.sendMessage(model.message)"
+                       class="btn btn-success ">
+                        Leave me a message!
+                    </a>
+
+                    <input class="form-control" ng-model="model.message">
+                </div>
+
+
             </div>
-        </form>
+            <div id="photoBlock" class="col-xs-6">
+                <img id="photo" class="imageToCenter"
+                     ng-src="{{model.user.photo}}" width="{{model.profilePhotoWidth}}"/>
+            </div>
+        </div>
+    </form>
     <!--</div>-->
 
     <!--TODO:TEST-->
@@ -48,41 +85,53 @@
 
 </div>
 
-<div ng-switch="model.user.roles">
 
+<!--to show the likedRecipe/collectedProducts(regular user) or createdRecipes(recipeProvider)-->
+<div ng-switch="model.user.role">
+    <div ng-switch-when='USER'>
+        <ng-include src="'./views/user/templates/snippets/user-profile.view.client.html'"></ng-include>
+    </div>
+</div>
+<div ng-switch="model.user.role">
+    <div ng-switch-when='RECIPEPRO'>
+        <ng-include src="'./views/recipe/templates/creator/recipe-list-by-creator.view.client.html'"></ng-include>
+    </div>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="row textToCenter">
-            <div class="col-xs-3">
-                <a href="#!/account" class="navbar-link">
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
-            </div>
-            <div class="col-xs-3">
-                <a href="#!/" class="navbar-link">
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
-            </div>
-            <div class="col-xs-3">
-                <a href="#!/account" class="navbar-link">
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
-            </div>
-            <div class="col-xs-3">
-                <a href="#!/account" class="navbar-link">
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
-            </div>
-        </div>
-        <!--<div class="pull-right navbar-text">-->
-        <!--<a href="#!/account" class="navbar-link">-->
-        <!--<span class="glyphicon glyphicon-user"></span>-->
-        <!--</a>-->
-        <!--</div>-->
-    </div>
-</nav>
+<!--<div ng-include="'./views/user/templates/snippets/user-profile.view.client.html'"></div>-->
+
+
+<!--<nav class="navbar navbar-default navbar-fixed-bottom">-->
+<!--<div class="container-fluid">-->
+<!--<div class="row textToCenter">-->
+<!--<div class="col-xs-3">-->
+<!--<a href="#!/account" class="navbar-link">-->
+<!--<span class="glyphicon glyphicon-user"></span>-->
+<!--</a>-->
+<!--</div>-->
+<!--<div class="col-xs-3">-->
+<!--<a href="#!/" class="navbar-link">-->
+<!--<span class="glyphicon glyphicon-user"></span>-->
+<!--</a>-->
+<!--</div>-->
+<!--<div class="col-xs-3">-->
+<!--<a href="#!/account" class="navbar-link">-->
+<!--<span class="glyphicon glyphicon-user"></span>-->
+<!--</a>-->
+<!--</div>-->
+<!--<div class="col-xs-3">-->
+<!--<a href="#!/account" class="navbar-link">-->
+<!--<span class="glyphicon glyphicon-user"></span>-->
+<!--</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash;<div class="pull-right navbar-text">&ndash;&gt;-->
+<!--&lt;!&ndash;<a href="#!/account" class="navbar-link">&ndash;&gt;-->
+<!--&lt;!&ndash;<span class="glyphicon glyphicon-user"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;</a>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--</div>-->
+<!--</nav>-->
 
 
 <div ng-include="'./views/common/footer.view.client.html'"></div>

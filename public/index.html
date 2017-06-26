@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1 user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+
 
     <!---------------------------------------------framework----------------------------------------------------------->
 
@@ -14,12 +14,25 @@
 
     <!--<script src="vendor/JavaScript/angular/angular.min.js"></script>-->
     <!--<script src="vendor/JavaScript/angular/angular-route.min.js"></script>-->
-
     <!---------------------------------------------angular------------------------------------------------------------->
     <!--angular app & configs-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.js"></script>
     <script src="app.js"></script>
     <script src="config.js"></script>
+    <!---------------------------------------------CSS----------------------------------------------------------------->
+    <!--jquery javascript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <script src="vendor/css/bootstrap/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/nutritionChart.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <!---------------------------------------------services------------------------------------------------------------>
     <script src="services/map.service.client.js"></script>
@@ -54,6 +67,14 @@
 
     <!--loading controller-->
 
+    <!--admin controllers-->
+    <script src="views/admin/controllers/admin.controller.client.js"></script>
+    <script src="views/admin/controllers/admin-users.controller.client.js"></script>
+
+    <!--home controllers-->
+    <script src="views/home/controllers/home.controller.client.js"></script>
+
+    <!--user controllers-->
     <!--home controller-->
     <script src="views/home/controllers/home.controller.client.js"></script>
 
@@ -63,8 +84,10 @@
     <script src="views/user/controllers/profile.controller.client.js"></script>
     <script src="views/user/controllers/account.controller.client.js"></script>
     <script src="views/user/controllers/photo.controller.client.js"></script>
-    <script src="services/user.service.client.js"></script>
+    <script src="views/user/controllers/calorie.controller.client.js"></script>
 
+    <!--user service-->
+    <script src="services/user.service.client.js"></script>
 
     <!--recipe Controller-->
     <script src="views/recipe/controllers/creator/recipe-edit.controller.client.js"></script>
@@ -72,20 +95,6 @@
     <script src="views/recipe/controllers/otherUser/recipe-detail.controller.client.js"></script>
     <script src="views/recipe/controllers/recipe-list.controller.client.js"></script>
     <script src="views/recipe/controllers/otherUser/ingredient-detail.controller.client.js"></script>
-
-
-    <!---------------------------------------------CSS----------------------------------------------------------------->
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
-
-    <link rel="stylesheet"
-          href="vendor/bootstrap/dist/css/bootstrap.css">
-
-    <!--<link href="vendor/bootstrap/dist/css/bootstrap.css"-->
-    <!--rel="stylesheet">-->
 
     <!--font-awesome-->
     <script src="https://use.fontawesome.com/464c737455.js"></script>
@@ -96,11 +105,6 @@
     <script src="js/textAngular.min.js"></script>
 
     <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
-    <link rel="stylesheet"
-          href="css/dashboard.css">
-    <link rel="stylesheet"
-          href="css/nutritionChart.css">
-    <link rel="stylesheet" href="css/style.css">
 
 
 </head>
@@ -109,11 +113,4 @@
 </div>
 </body>
 
-
-<!--jquery javascript -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!--bootstrap javascript-->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
 </html>

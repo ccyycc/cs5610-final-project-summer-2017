@@ -1,0 +1,61 @@
+<div class="container-fluid main-container">
+
+    <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
+    <div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
+
+
+    <form>
+        <div class="form-group">
+            <label for="weight">Weight in pounds</label>
+            <input type="text"
+                   class="form-control"
+                   id="weight"
+                   ng-model="model.user.weight"
+                   placeholder="140">
+        </div>
+        <div class="form-group">
+            <label for="height">Height in inches</label>
+            <input type="text"
+                   class="form-control"
+                   id="height"
+                   ng-model="model.user.height"
+                   placeholder="78">
+        </div>
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="text"
+                   class="form-control"
+                   id="age"
+                   ng-model="model.user.age"
+                   placeholder="30">
+        </div>
+        <div class="form-group">
+            Gender:
+            <input type="radio" ng-model="model.user.gender" value="male"> Male
+            <input type="radio" ng-model="model.user.gender" value="female"> Female
+        </div>
+    </form>
+    <a class="btn btn-primary btn-block form-control"
+       ng-click="model.countCalorie(model.user)">Count BMR and BMI</a>
+
+    <div ng-show="model.calorie" class="alert alert-info">
+        <div class="row">
+            <div class="col-sm-8">
+                <h3>Your BMR (Basal Metabolic Rate) is {{model.calorie}}</h3>
+                <h3>Your BMI (Body Mass Index) is {{model.bmi.bmi.value}}.</h3><br>
+                Your healthy status is {{model.bmi.bmi.status.toLowerCase()}}. <br>
+                You have {{model.bmi.bmi.risk.toLowerCase()}} <br>
+                Your ideal wight is {{model.bmi.ideal_weight}}.
+                <br><br>
+            </div>
+            <div class="col-sm-4 hidden-xs">
+                <p><b>BMI Categories:</b><br>
+                    Underweight = <18.5<br>
+                    Normal weight = 18.5 – 24.9<br>
+                    Overweight = 25 – 29.9<br>
+                    Obesity = BMI of 30 or greater</p>
+            </div>
+        </div>
+
+    </div>
+</div>

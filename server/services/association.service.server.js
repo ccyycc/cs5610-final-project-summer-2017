@@ -2,11 +2,11 @@ var app = require('../../express');
 
 var associationModel = require('../models/association/association.model.server');
 
-// app.post('/api/association/like', createLike);
-// app.post('/api/association/comment', createComment);
-// app.get('/api/association/comment/recipe/:recipeId', findAllRecipeReview);
-// app.delete('/api/association/like/:likeId', deleteRecipeLike);
-// app.get('/api/association/like/from/:userId/to/:recipeId', findLikeForRecipe);
+app.post('/api/association/like', createLike);
+app.post('/api/association/comment', createComment);
+app.get('/api/association/comment/recipe/:recipeId', findAllRecipeReview);
+app.delete('/api/association/like/:likeId', deleteRecipeLike);
+app.get('/api/association/like/from/:userId/to/:recipeId', findLikeForRecipe);
 
 //TODO TYPE TO UPPER CASE
 app.post('/api/association', createAssociation);
@@ -122,3 +122,58 @@ function deleteAssociation(req, res) {
         })
 }
 
+function findLikeForRecipe(req, res) {
+    var userId = req.params.userId;
+    var recipeId = req.params.recipeId;
+    associationModel
+        .findLikeForRecipe(userId, recipeId)
+        .then(function (like) {
+            res.json(like)
+        }, function () {
+            res.sendStatus(500);
+        })
+}
+
+function deleteRecipeLike(req, res) {
+    var likeId = req.params.likeId;
+    associationModel
+        .deleteRecipeLike(likeId)
+        .then(function () {
+            res.sendStatus(200);
+        }, function () {
+            res.sendStatus(500);
+        })
+}
+
+function findAllRecipeReview(req, res) {
+    var recipeId = req.params.recipeId;
+    associationModel
+        .findAllRecipeReview(recipeId)
+        .then(function (reviews) {
+            res.json(reviews);
+        }, function () {
+            res.sendStatus(500);
+        })
+}
+
+function createComment(req, res) {
+    var comment = req.body;
+    associationModel
+        .createAssociation(comment)
+        .then(function (comment) {
+            res.json(comment);
+        }, function () {
+            res.sendStatus(500);
+        })
+}
+
+function createLike(req, res) {
+    var like = req.body;
+    associationModel
+        .createAssociation(like)
+        .then(function (like) {
+            res.json(like);
+        }, function () {
+            res.sendStatus(500);
+        })
+}

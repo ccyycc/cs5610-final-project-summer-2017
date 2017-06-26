@@ -32,12 +32,13 @@
                         var newUser = {
                             username: username,
                             password: password,
-                            roles: role
+                            role: role
                         };
+                        console.log('register.controller user: ' + newUser);
                         return userService
                             .register(newUser)
                             .then(function (user) {
-                                $location.url('/profile');
+                                $location.url('/profile/'+user._id);
                             });
 
                     }
