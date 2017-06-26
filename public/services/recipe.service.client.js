@@ -85,11 +85,11 @@
 
         function tempYummlyIngredients(ingredients) {
             tempIngredients = ingredients;
-            // console.log(recipe);
         }
 
         function getTempYummlyIngredients() {
             return tempIngredients;
+
         }
     }
 })();

@@ -1,21 +1,21 @@
 <div ng-include="'./views/common/header.view.client.html'"></div>
 
-<div class="container-fluid">
-<h1>Ingredient Detail Page</h1>
+<div class="container-fluid main">
+<h2 class="page-header">Ingredient Detail Page</h2>
 
     <!--{{model.ingredient}}-->
     <div ng-show="!model.ingredient.ingredients[0].parsed[0].foodMatch">
         Sorry, the food is not found.
     </div>
-    <ul ng-show="model.ingredient.ingredients[0].parsed[0].foodMatch"
-        class="list-group">
-        <li class="list-group-item">
-            Name: {{model.ingredient.ingredients[0].parsed[0].foodMatch}}
-        </li>
-        <li class="list-group-item">
-            Description: {{model.ingredient.ingredients[0].parsed[0].food}}
-        </li>
-    </ul>
+    <div class="row">
+    <div ng-show="model.ingredient.ingredients[0].parsed[0].foodMatch" class="col-sm-6">
+        <h3 class="sub-header">Name</h3>
+        <p>{{model.ingredient.ingredients[0].parsed[0].foodMatch}}</p>
+        <h3 class="sub-header">Description</h3>
+        <p>{{model.ingredient.ingredients[0].parsed[0].food}}</p>
+        <h3 class="sub-header">Find Ingredient from Local</h3>
+    </div>
+    <div class="col-sm-6">
     <section ng-show="model.ingredient.ingredients[0].parsed[0].foodMatch"
              class="performance-facts">
         <header class="performance-facts__header">
@@ -245,10 +245,7 @@
             Protein 4
         </p>
     </section>
-
-    <div>
-        <h2>Find Ingredient from Local</h2>
-
+    </div>
     </div>
 </div>
 <div ng-include="'views/common/footer.view.client.html'"></div>
