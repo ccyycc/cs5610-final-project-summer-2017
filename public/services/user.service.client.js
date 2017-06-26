@@ -12,6 +12,7 @@
             findAllUsers: findAllUsers,
             findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
+            findUserByPartialUsername:findUserByPartialUsername,
             updateUser: updateUser,
             deleteUser: deleteUser,
             updateProfile: updateProfile,
@@ -184,6 +185,12 @@
                     return response.data;
                 });
         }
+        function findUserByPartialUsername(content){
+            var url = "/api/user/username/partial/"+content;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })        }
 
         function findMe() {
             var url = '/api/user/findme';

@@ -220,6 +220,14 @@
                     currentUser: checkCurrentUser
                 }
             })
+            .when('/search/user',{
+                templateUrl: 'views/user/templates/user-search.view.client.html',
+                controller: 'userSearchController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
+            })
             .when('/search/merchandise',{
                 templateUrl: 'views/merchandise/templates/merchandise-search-list.view.client.html',
                 controller: 'merchandiseSearchController',

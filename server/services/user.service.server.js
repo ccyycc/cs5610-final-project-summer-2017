@@ -30,6 +30,8 @@ app.get('/api/user/findme', findMe);
 app.get('/api/userpop/:userId', popUserById);
 app.get('/api/checkname', findUserByName);
 app.get('/api/user', isAdmin, findAllUsers);
+app.get("/api/user/username/partial/:username", findUserByPartialUsername);
+
 
 app.post('/api/user', isAdmin, createUser);
 // TODO:changed the updateUser, without check isAdmin
@@ -255,6 +257,21 @@ function findUserById(req, res) {
         .then(function (user) {
             res.json(user);
         });
+}
+
+function findUserByPartialUsername(req,res){
+    var partialUsername = req.params.username;
+
+    userModel
+        .findUserByPartialUsername(partialUsername)
+        .then(
+            function (users) {
+                res.status(200).send(users);
+            },
+            function () {
+                res.sendStatus(500);
+            }
+        )
 }
 
 function popUserById(req, res) {
