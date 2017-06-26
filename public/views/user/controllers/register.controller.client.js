@@ -34,7 +34,6 @@
                             password: password,
                             role: role
                         };
-                        console.log('register.controller user: ' + newUser);
                         return userService
                             .register(newUser)
                             .then(function (user) {

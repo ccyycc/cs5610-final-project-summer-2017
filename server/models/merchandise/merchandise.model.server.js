@@ -48,7 +48,10 @@ function findAllMerchandisesForStore(store) {
 }
 
 function findMerchandiseById(merchandiseId) {
-    return merchandiseModel.findById(merchandiseId);
+    return merchandiseModel
+        .findById(merchandiseId)
+        .populate("_store", "_owner")
+        .exec();
 }
 
 function findMerchandiseByName(merchandiseName) {

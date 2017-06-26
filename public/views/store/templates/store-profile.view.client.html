@@ -1,5 +1,3 @@
-
-
 <div ng-include="'./views/common/header.view.client.html'"></div>
 <div class="container-fluid">
     <div class="row">
@@ -9,17 +7,17 @@
                 <img id="smallProfileImage" class="img-responsive" ng-src="{{model.seller.image}}"/>
 
                 <label for="username">UserName</label>
-                <p id="username">{{model.seller.username}}</p >
+                <p id="username">{{model.seller.username}}</p>
 
                 <div ng-show="model.seller.firstName">
-                <label for="firstname">FirstName</label>
-                <p id="firstname">{{model.seller.firstName}}</p >
+                    <label for="firstname">FirstName</label>
+                    <p id="firstname">{{model.seller.firstName}}</p>
                 </div>
 
                 <div ng-show="model.seller.lastName">
-                <label for="lastname">LastName</label>
-                <p id="lastname">{{model.seller.lastName}}</p >
-                     </div>
+                    <label for="lastname">LastName</label>
+                    <p id="lastname">{{model.seller.lastName}}</p>
+                </div>
             </div>
         </div>
 
@@ -29,14 +27,13 @@
             </div>
 
 
-
             <h2 class="page-header">{{model.store.name}}
                 <a class="btn pull-right" ng-show="model.like" ng-click="model.unlikeStore()">
                     <span class="glyphicon glyphicon-heart"></span>
-                </a >
+                </a>
                 <a class="btn pull-right" ng-show="!model.like" ng-click="model.likeStore()">
                     <span class="glyphicon glyphicon-heart-empty"></span>
-                </a >
+                </a>
             </h2>
 
             <h3 class="sub-header">Description</h3>
@@ -58,10 +55,10 @@
 
             <h3 class="sub-header">Store Address & Map</h3>
             <div class="google-maps" ng-if="model.store.address != null">
-            <iframe class="map-bottom"
-                    ng-src="{{model.store.addressUrl}}"
-                    allowfullscreen="">
-            </iframe>
+                <iframe class="map-bottom"
+                        ng-src="{{model.store.addressUrl}}"
+                        allowfullscreen="">
+                </iframe>
             </div>
             <a ng-click="model.goToProductList()"
                class="btn btn-block btn-info">Go to product List</a>
@@ -70,28 +67,73 @@
                class="btn btn-block btn-primary">Edit</a>
 
 
+            <!--<div>-->
+            <!--<h3 class="sub-header">Comments-->
+            <!--<a class="btn pull-right"-->
+            <!--ng-click="model.newComment={}"-->
+            <!--ng-if="!model.newComment">-->
+            <!--<span class="glyphicon glyphicon-plus"></span>-->
+            <!--</a >-->
+            <!--</h3>-->
+
+
+            <!--<p ng-if="model.comments.length===0">Be the first one to comment!</p >-->
+            <!--<div>-->
+            <!--<ul class="list-group list-unstyled" ng-repeat="comment in model.comments">-->
+            <!--<li class="list-group-item-warning">-->
+            <!--<label>User {{comment.fromWhom.username}}</label>: {{comment.content}}-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--<input class="form-control" ng-show="model.newComment" ng-model="model.newComment.content"/>-->
+            <!--<a class="btn pull-right" ng-show="model.newComment" ng-click="model.createComment()">-->
+            <!--<span class="glyphicon glyphicon-ok"></span>-->
+            <!--</a >-->
+            <!--</div>-->
+
             <div>
                 <h3 class="sub-header">Comments
                     <a class="btn pull-right"
-                       ng-click="model.newComment={}"
-                    ng-if="!model.newComment">
+                       ng-show="!model.newComment"
+                       ng-click="model.newComment={}">
                         <span class="glyphicon glyphicon-plus"></span>
-                    </a >
+                    </a>
                 </h3>
 
 
-                <p ng-if="model.comments.length===0">Be the first one to comment!</p >
+                <p ng-if="model.comments.length===0">Be the first one to comment!</p>
+                <div class="input-group">
+                    <input class="form-control"
+                           ng-show="model.newComment"
+                           ng-model="model.newComment.content"/>
+                    <span class="input-group-btn">
+                    <a class="btn btn-default"
+                       ng-show="model.newComment"
+                       ng-click="model.createComment()">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </a>
+                    </span>
+
+                    <span class="input-group-btn">
+                    <a class="btn btn-default"
+                       ng-show="model.newComment"
+                       ng-click="model.newComment=undefined">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                    </span>
+
+
+                </div>
                 <div>
-                    <ul class="list-group list-unstyled" ng-repeat="comment in model.comments">
+                    <ul class="list-group list-unstyled"
+                        ng-repeat="comment in model.comments">
                         <li class="list-group-item-warning">
-                            <label>User {{comment.fromWhom.username}}</label>: {{comment.content}}
+                            <label><span class="glyphicon glyphicon-user"></span>User
+                                                                                 {{comment.fromWhom.username}}</label>:
+                                                                                                                      {{comment.content}}
                         </li>
                     </ul>
                 </div>
-                <input class="form-control" ng-show="model.newComment" ng-model="model.newComment.content"/>
-                <a class="btn pull-right" ng-show="model.newComment" ng-click="model.createComment()">
-                    <span class="glyphicon glyphicon-ok"></span>
-                </a >
             </div>
         </div>
     </div>

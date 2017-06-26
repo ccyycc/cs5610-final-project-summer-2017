@@ -51,9 +51,10 @@
                     $location.url('/recipe_list?search='+model.searchContent);
                     break;
                 case "UserProfile":
-                    text = "I am not a fan of orange.";
+                    $location.url('/search/user?search='+model.searchContent);
                     break;
                 case "StoreProfile":
+                    $location.url('/search/store?search='+model.searchContent);
                     break;
                 case "merchandise":
                     $location.url('/search/merchandise?search='+model.searchContent);

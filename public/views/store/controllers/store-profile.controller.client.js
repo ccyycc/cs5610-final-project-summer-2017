@@ -60,7 +60,6 @@
                     associationService
                         .findAssociationForSourceTarget("LIKE", currentUser._id, "store", model.storeId)
                         .then(function (likes) {
-                            console.log(likes);
                             if (likes.length === 0) {
                                 model.like = false;
                             } else {

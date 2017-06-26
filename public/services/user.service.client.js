@@ -51,8 +51,6 @@
 
         function deleteMessage(messageId) {
             var url='/api/association/comment/' + messageId;
-            // console.log('delete: '+ url);
-
             return $http.delete(url)
                 .then(function (response) {
                     return response.data;
@@ -128,7 +126,6 @@
 
         function register(user) {
             var url = "/api/register";
-            console.log('user.service.client user: ' + user);
             return $http.post(url, user)
                 .then(function (response) {
                     return response.data;
@@ -181,7 +178,6 @@
 
         function findUserByUsername(username) {
             var url = "/api/checkname?username=" + username;
-            console.log(url + '--url--uesr.service.client');
             return $http.get(url)
                 .then(function (response) {
                     // console.log(response);
@@ -231,7 +227,6 @@
         function updateUser(userId, user) {
             // console.log(user);
             var url = '/api/user/' + userId;
-            console.log(user);
             return $http.put(url, user)
                 .then(function (response) {
                     // console.log(response.data);

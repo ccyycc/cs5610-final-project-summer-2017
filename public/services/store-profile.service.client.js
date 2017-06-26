@@ -10,13 +10,13 @@
         this.findStoreById = findStoreById;
         this.updateStore = updateStore;
         this.deleteStore = deleteStore;
-        this.findStoreByName = findStoreByName;
+        this.findStoreByNameParams = findStoreByNameParams;
 
         this.findAllStores = findAllStores;
 
         this.findStoreByName = findStoreByName;
 
-        function findStoreByName(storeName){
+        function findStoreByNameParams(storeName){
             var url = "/api/store/search/"+storeName;
             return $http.get(url)
                 .then(extractData);

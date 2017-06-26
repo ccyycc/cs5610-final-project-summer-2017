@@ -13,7 +13,7 @@ app.get('/api/store/:storeId', findStoreById);
 app.put('/api/store/:storeId', updateStore);
 app.get('/api/store', findStoreByName);
 app.delete('/api/store/:storeId', deleteStore);
-app.get('/api/store/search/:storeName',findStoreByName);
+app.get('/api/store/search/:storeName',findStoreByNameParams);
 
 app.get('/api/stores', isAdmin, findAllStores);
 
@@ -21,10 +21,10 @@ app.post('/api/upload/store/profile', upload.single('myFile'), uploadImage);
 
 
 
-function findStoreByName(req,res) {
+function findStoreByNameParams(req,res) {
     var storeName = req.params['storeName'];
     storeModel
-        .findStoreByName(storeName)
+        .findStoreByNameParams(storeName)
         .then(function (data) {
             return res.status(200).send(data);
         });

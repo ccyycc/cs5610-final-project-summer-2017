@@ -17,6 +17,8 @@
         model.showLikedRecipes = showLikedRecipes;
         model.showCollectedProducts = showCollectedProducts;
         model.countPhotoWidth = countPhotoWidth;
+        model.navToStorePage = navToStorePage;
+
         // model.showRecipes = showRecipes;
         // model.showProducts = showProducts;
 
@@ -32,22 +34,6 @@
             // console.log(model.userId);
 
             // console.log(currentUser.roles.indexOf("MERCHANT"));
-            if(currentUser.role === "MERCHANT"){
-                //TODO CHANGE TO FOLLOWING WHEN SCHEMA IS FIXED
-                // if(currentUser.roles.indexOf("MERCHANT") > -1){
-                    storeService
-                    .findAllStoresForOwner(currentUser._id)
-                    .then(function (data) {
-                        if(data.length === 0){
-                            $location.url('/store/undefined/new');
-                        }else{
-                            $location.url('/store/'+data[0]._id);
-                        }
-                        }
-                    );
-                return;
-            }
-
             render(model.userId);
             showLikedRecipes();
 
@@ -61,6 +47,20 @@
         }
 
         init();
+        function navToStorePage(){
+            if(currentUser.role === "MERCHANT"){
+                storeService
+                    .findAllStoresForOwner(currentUser._id)
+                    .then(function (data) {
+                            if(data.length === 0){
+                                $location.url('/store/undefined/new');
+                            }else{
+                                $location.url('/store/'+data[0]._id);
+                            }
+                        }
+                    );
+            }
+        }
 
         function render(userId) {
             userService

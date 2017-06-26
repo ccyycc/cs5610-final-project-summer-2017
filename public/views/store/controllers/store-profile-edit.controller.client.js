@@ -13,7 +13,6 @@
         function init() {
             model.storeId = $routeParams['storeId'];
             model.mode = $routeParams['mode'];
-            console.log(model);
             model.user = currentUser;
             model.store = {};
             // model.store = storeService.findStoreById(model.storeId);
@@ -42,7 +41,7 @@
                     .then(function (data) {
                         model.store = data[0];
                         model.canEdit = (model.store._owner === currentUser._id || currentUser.role === "ADMIN");
-                        if(!canEdit){
+                        if(!model.canEdit){
                             $location.url('/');
                         }
                         populateDateObject(model.store);

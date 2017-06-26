@@ -31,28 +31,72 @@
                      ng-src="{{model.merchandise.image}}"/>
             </div>
 
+            <!--<div>-->
+            <!--<h3 class="sub-header">Comments-->
+            <!--<a class="btn pull-right"-->
+            <!--ng-click="model.newComment={}"-->
+            <!--ng-if="!model.newComment">-->
+            <!--<span class="glyphicon glyphicon-plus"></span>-->
+            <!--</a>-->
+            <!--</h3>-->
+
+
+            <!--<p ng-if="model.comments.length===0">Be the first one to comment!</p>-->
+            <!--<div>-->
+            <!--<ul class="list-group list-unstyled" ng-repeat="comment in model.comments">-->
+            <!--<li class="list-group-item-warning">-->
+            <!--<label>User {{comment.fromWhom.username}}</label>: {{comment.content}}-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--<input class="form-control" ng-show="model.newComment" ng-model="model.newComment.content"/>-->
+            <!--<a class="btn pull-right" ng-show="model.newComment" ng-click="model.createComment()">-->
+            <!--<span class="glyphicon glyphicon-ok"></span>-->
+            <!--</a>-->
+            <!--</div>-->
             <div>
                 <h3 class="sub-header">Comments
                     <a class="btn pull-right"
-                       ng-click="model.newComment={}"
-                       ng-if="!model.newComment">
+                       ng-show="!model.newComment"
+                       ng-click="model.newComment={}">
                         <span class="glyphicon glyphicon-plus"></span>
                     </a>
                 </h3>
 
 
                 <p ng-if="model.comments.length===0">Be the first one to comment!</p>
+                <div class="input-group">
+                    <input class="form-control"
+                           ng-show="model.newComment"
+                           ng-model="model.newComment.content"/>
+                    <span class="input-group-btn">
+                    <a class="btn btn-default"
+                       ng-show="model.newComment"
+                       ng-click="model.createComment()">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </a>
+                    </span>
+
+                    <span class="input-group-btn">
+                    <a class="btn btn-default"
+                       ng-show="model.newComment"
+                       ng-click="model.newComment=undefined">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                    </span>
+
+
+                </div>
                 <div>
-                    <ul class="list-group list-unstyled" ng-repeat="comment in model.comments">
+                    <ul class="list-group list-unstyled"
+                        ng-repeat="comment in model.comments">
                         <li class="list-group-item-warning">
-                            <label>User {{comment.fromWhom.username}}</label>: {{comment.content}}
+                            <label><span class="glyphicon glyphicon-user"></span>
+                                User {{comment.fromWhom.username}}</label>
+                            {{comment.content}}
                         </li>
                     </ul>
                 </div>
-                <input class="form-control" ng-show="model.newComment" ng-model="model.newComment.content"/>
-                <a class="btn pull-right" ng-show="model.newComment" ng-click="model.createComment()">
-                    <span class="glyphicon glyphicon-ok"></span>
-                </a>
             </div>
             <a ng-if="model.canEdit"
                ng-click="model.editMerchandise()"
