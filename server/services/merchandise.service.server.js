@@ -7,6 +7,8 @@ var merchandiseModel = require('../models/merchandise/merchandise.model.server')
 app.post('/api/store/:storeId/merchandise', createMerchandise);
 app.get('/api/store/:storeId/merchandise', findAllMerchandisesForStore);
 app.get('/api/merchandise/:merchandiseId', findMerchandiseById);
+app.get('/api/merchandises',isAdmin, findAllMerchandises);
+
 app.put('/api/merchandise/:merchandiseId', updateMerchandise);
 app.delete('/api/merchandise/:merchandiseId', deleteMerchandise);
 
@@ -62,6 +64,16 @@ function findAllMerchandisesForStore(req, res) {
             });
 }
 
+function findAllMerchandises(req, res) {
+    merchandiseModel
+        .findAllMerchandises()
+        .then(function (merchandises) {
+            console.log('find merchandises--merchandises.service.server');
+            console.log(merchandises);
+            res.status(200).send(merchandises);
+        });
+}
+
 function findMerchandiseById(req, res) {
     var merchandiseId = req.params.merchandiseId + "";
 
@@ -107,6 +119,14 @@ function deleteMerchandise(req, res) {
                 res.sendStatus(500);
             }
         )
+}
+
+function isAdmin(req, res, next) {
+    if (req.isAuthenticated() && req.user.role === 'ADMIN') {
+        next();
+    } else {
+        res.sendStatus(401);
+    }
 }
 
 

@@ -97,6 +97,7 @@
                 .findAllStores()
                 .then(function (stores) {
                     model.stores = stores;
+                    console.log();
                 })
         }
 

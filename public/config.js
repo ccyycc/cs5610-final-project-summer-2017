@@ -91,6 +91,14 @@
                     currentUser: checkAdmin
                 }
             })
+            .when('/admin/user/:userId', {
+                templateUrl: './views/admin/templates/admin-user-detail.view.client.html',
+                controller: 'adminUserDetailController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
             .when('/admin/stores', {
                 templateUrl: './views/admin/templates/admin-stores.view.client.html',
                 controller: 'adminStoresController',

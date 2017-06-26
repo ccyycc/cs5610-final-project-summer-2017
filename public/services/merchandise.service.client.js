@@ -8,6 +8,7 @@
         this.createMerchandise = createMerchandise;
         this.findMerchandiseByStoreId = findMerchandiseByStoreId;
         this.findMerchandiseById = findMerchandiseById;
+        this.findAllMerchandises = findAllMerchandises;
         this.updateMerchandise = updateMerchandise;
         this.deleteMerchandise = deleteMerchandise;
 
@@ -43,6 +44,12 @@
 
         function extractData(response) {
             return response.data;
+        }
+
+        function findAllMerchandises() {
+            var url = '/api/merchandises';
+            return $http.get(url)
+                .then(extractData);
         }
     }
 })();

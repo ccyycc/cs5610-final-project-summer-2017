@@ -15,7 +15,7 @@ app.post('/api/recipe/upload', upload.single('myFile'), uploadImage);
 app.post('/api/yummly/recipeCopy', createYummlyLocalRecipeCopy);
 app.get('/api/yummly/recipeCopy/:recipeId', findYummlyRecipeCopyByYummlyId);
 
-app.get('/api/recipes', findAllRecipes);
+app.get('/api/recipes', isAdmin, findAllRecipes);
 
 
 function findYummlyRecipeCopyByYummlyId(req, res) {
@@ -153,3 +153,10 @@ function changeImageForRecipe(recipeId, filename) {
         });
 }
 
+function isAdmin(req, res, next) {
+    if (req.isAuthenticated() && req.user.role === 'ADMIN') {
+        next();
+    } else {
+        res.sendStatus(401);
+    }
+}
