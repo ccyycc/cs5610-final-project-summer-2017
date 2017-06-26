@@ -30,15 +30,7 @@
 <div class="container-fluid">
     <div class="home-search-bar input-group">
 
-    <span class="input-group-btn form-group select-button">
-                <!--<label for="exampleSelect1">Example select</label>-->
-                <!--<select class="form-control" id="exampleSelect1">-->
-                <!--<option>Recipe</option>-->
-                <!--<option>User</option>-->
-                <!--<option>Store</option>-->
-                <!--<option>Product</option>-->
-                <!--<option>Local grocery store</option>-->
-                <!--</select>-->
+    <span class="input-group-btn form-group" style="width:80px">
         <select ng-model="model.searchType"
                 class="form-control"
                 ng-options="searchOption.value as searchOption.label for searchOption in model.searchOptions"

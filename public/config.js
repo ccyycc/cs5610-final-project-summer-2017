@@ -42,6 +42,14 @@
                     currentUser: checkLoggedin
                 }
             })
+            .when('/account/inbox', {
+                templateUrl: './views/user/templates/snippets/inbox.view.client.html',
+                controller: 'inboxController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
+            })
             .when('/account/calorie', {
                 templateUrl: './views/user/templates/calorie.view.client.html',
                 controller: 'calorieController',
@@ -83,6 +91,39 @@
                     currentUser: checkAdmin
                 }
             })
+            .when('/admin/user/:userId', {
+                templateUrl: './views/admin/templates/admin-user-detail.view.client.html',
+                controller: 'adminUserDetailController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+            .when('/admin/stores', {
+                templateUrl: './views/admin/templates/admin-stores.view.client.html',
+                controller: 'adminStoresController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+            .when('/admin/merchandises', {
+                templateUrl: './views/admin/templates/admin-merchandises.view.client.html',
+                controller: 'adminMerchandisesController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+            .when('/admin/recipes', {
+                templateUrl: './views/admin/templates/admin-recipes.view.client.html',
+                controller: 'adminRecipesController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+
             .when("/recipe_list", {
                 templateUrl: "views/recipe/templates/recipe-list.view.client.html",
                 controller: "recipeListController",
@@ -204,14 +245,19 @@
 
     function checkCurrentUser(userService, $q, $location) {
         var deferred = $q.defer();
+        console.log('hello');
         userService
             .loggedin()
             .then(function (user) {
+                console.log(user);
                 if (user === '0') {
                     deferred.resolve({});
                 } else {
                     deferred.resolve(user);
                 }
+            })
+            .catch(function (error) {
+                console.log(error);
             });
         return deferred.promise;
     }

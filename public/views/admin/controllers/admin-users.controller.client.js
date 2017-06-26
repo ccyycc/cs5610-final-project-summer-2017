@@ -25,12 +25,14 @@
             model.message = false;
             userService
                 .updateUser(user._id, user)
-                .then(findAllUsers());
+                .then(findAllUsers())
+                .then(model.user = {});
         }
 
         function selectUser(user) {
             model.user = angular.copy(user);
         }
+
 
         function createUser(user) {
             userService
@@ -38,8 +40,10 @@
                 .then(function () {
                     model.message = "The default password is 'password'";
                 })
-                .then(findAllUsers());
+                .then(findAllUsers())
+                .then(model.user = {});
         }
+
         function deleteUser(user) {
             model.message = false;
             userService

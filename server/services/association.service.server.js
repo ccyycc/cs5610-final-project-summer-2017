@@ -6,6 +6,7 @@ app.post('/api/association/like', createLike);
 app.post('/api/association/comment', createComment);
 app.get('/api/association/comment/recipe/:recipeId', findAllRecipeReview);
 app.delete('/api/association/like/:likeId', deleteRecipeLike);
+app.delete('/api/association/comment/:commentId', deleteComment);
 app.get('/api/association/like/from/:userId/to/:recipeId', findLikeForRecipe);
 
 //TODO TYPE TO UPPER CASE
@@ -122,6 +123,15 @@ function deleteAssociation(req, res) {
         })
 }
 
+function deleteComment(req, res) {
+    var commentId = req.params.commentId;
+    associationModel
+        .deleteComment(req.user._id, commentId)
+        .then(function () {
+            res.sendStatus(200);
+        })
+}
+
 function findLikeForRecipe(req, res) {
     var userId = req.params.userId;
     var recipeId = req.params.recipeId;
@@ -176,4 +186,12 @@ function createLike(req, res) {
         }, function () {
             res.sendStatus(500);
         })
+}
+
+function isAdmin(req, res, next) {
+    if (req.isAuthenticated() && req.user.role === 'ADMIN') {
+        next();
+    } else {
+        res.sendStatus(401);
+    }
 }

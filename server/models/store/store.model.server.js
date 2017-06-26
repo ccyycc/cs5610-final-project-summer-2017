@@ -9,10 +9,13 @@ storeModel.findStoreById = findStoreById;
 storeModel.updateStore = updateStore;
 storeModel.deleteStore = deleteStore;
 
+storeModel.findAllStores = findAllStores;
+
 storeModel.findStoreByName = findStoreByName;
 
 storeModel.uploadImage = uploadImage;
 
+storeModel.findStoreByName = findStoreByName;
 
 module.exports = storeModel;
 
@@ -34,12 +37,29 @@ function createStore(owner, store) {
         })
 }
 
+function findStoreByName(name) {
+    return storeModel
+        .findOne({'name': name})
+        .then(function (store) {
+            return store;
+        })
+}
 
 function findAllStoresForOwner(owner) {
     return storeModel
         .find({_owner: owner})
         .then(function(data){
             var tmp = data;
+            return data;
+        })
+}
+
+function findAllStores() {
+    return storeModel
+        .find()
+        .populate('_owner')
+        .exec()
+        .then(function (data) {
             return data;
         })
 }
