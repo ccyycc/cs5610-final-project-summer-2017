@@ -14,15 +14,15 @@ passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-
-var googleConfig = {
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK_URL
-};
-
-passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+// var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+//
+// var googleConfig = {
+//     clientID: process.env.GOOGLE_CLIENT_ID,
+//     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+//     callbackURL: process.env.GOOGLE_CALLBACK_URL
+// };
+//
+// passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 
 // :userId: path params
 app.get('/api/user/:userId', findUserById);

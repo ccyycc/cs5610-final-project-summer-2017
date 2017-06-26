@@ -1,6 +1,16 @@
 var mongoose = require('mongoose');
 mongoose.Promise = require('q').Promise;
-mongoose.connect('mongodb://localhost/finalProject');
+
+var connectionString ='mongodb://localhost/finalProject';
+
+if(process.env.MLAB_USERNAME) {
+    connectionString = process.env.MLAB_USERNAME + ":" +
+                       process.env.MLAB_PASSWORD + "@ds139322.mlab.com:39322/heroku_3mxxkrfs";
+}
+
+
+mongoose.connect(connectionString);
+
 
 require('./services/user.service.server');
 require('./services/recipe.service.server');
