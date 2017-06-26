@@ -86,8 +86,10 @@
             .when("/recipe_list", {
                 templateUrl: "views/recipe/templates/recipe-list.view.client.html",
                 controller: "recipeListController",
-                controllerAs: "model"
-                //TODO:no need to log in to view this page
+                controllerAs: "model",
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
             })
 
             .when('/recipe_list/:recipeId', {
@@ -172,7 +174,10 @@
             .when('/search/store',{
                 templateUrl: 'views/store/templates/store-profile-list.view.client.html',
                 controller: 'storeProfileSearchController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
             })
             .otherwise({redirectTo : '/'})
     }
