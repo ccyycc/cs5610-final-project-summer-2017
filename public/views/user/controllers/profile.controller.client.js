@@ -38,9 +38,6 @@
 
             countPhotoWidth();
 
-            // console.log(model.userId);
-
-            // console.log(currentUser.roles.indexOf("MERCHANT"));
             render(model.userId);
             showLikedRecipes();
 
@@ -74,6 +71,31 @@
                     break;
                 default:
                     model.generalUser = true;
+            }
+        }
+
+        function navToStorePage() {
+            if ($routeParams.uid) {
+                storeService
+                    .findAllStoresForOwner($routeParams.uid)
+                    .then(function (data) {
+                        if (data.length > 0){
+                            $location.url('/store/' + data[0]._id);
+                        }
+                    })
+            } else {
+                if (currentUser.role === "MERCHANT") {
+                    storeService
+                        .findAllStoresForOwner(currentUser._id)
+                        .then(function (data) {
+                                if (data.length === 0) {
+                                    $location.url('/store/undefined/new');
+                                } else {
+                                    $location.url('/store/' + data[0]._id);
+                                }
+                            }
+                        );
+                }
             }
         }
 
@@ -186,71 +208,6 @@
             } else {
                 model.profilePhotoWidth = '100%';
             }
-        }
-
-
-
-        function checkCurrentProfileRole() {
-            if ($routeParams.uid) {
-                userService
-                    .findUserById($routeParams.uid)
-                    .then(function (user) {
-                        identifyRole(user);
-                    });
-            } else {
-                identifyRole(currentUser);
-            }
-        }
-
-        function identifyRole(user) {
-            switch (user.role) {
-                case 'RECIPEPRO':
-                    model.isRecipeProvider = true;
-                    break;
-                case 'MERCHANT':
-                    model.isMerchant = true;
-                    break;
-                case 'ADMIN':
-                    model.isAdmin = true;
-                    break;
-                default:
-                    model.generalUser = true;
-            }
-        }
-
-        function navToRecipeListPage() {
-            if ($routeParams.uid) {
-                $location.url("/creator/" + $routeParams.uid + "/recipe_list");
-            } else {
-                $location.url("/auth_recipe_list");
-            }
-        }
-
-        function navToStorePage() {
-            if ($routeParams.uid) {
-                storeService
-                    .findAllStoresForOwner($routeParams.uid)
-                    .then(function (data) {
-                        if (data.length > 0){
-                            $location.url('/store/' + data[0]._id);
-                        }
-                    })
-            } else {
-                if (currentUser.role === "MERCHANT") {
-                    storeService
-                        .findAllStoresForOwner(currentUser._id)
-                        .then(function (data) {
-                                if (data.length === 0) {
-                                    $location.url('/store/undefined/new');
-                                } else {
-                                    $location.url('/store/' + data[0]._id);
-                                }
-                            }
-                        );
-                }
-            }
-
-
         }
     }
 })();
