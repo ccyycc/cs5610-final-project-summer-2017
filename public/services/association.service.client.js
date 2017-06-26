@@ -28,12 +28,12 @@
             return $http.put(url, association)
                 .then(extractData)
         }
+
         function deleteAssociationById(associationId) {
             var url = '/api/association/'+associationId
             return $http.delete(url)
                 .then(extractData)
         }
-
 
         function findAssociationById(associationId) {
             var url = '/api/association/find/id/'+associationId

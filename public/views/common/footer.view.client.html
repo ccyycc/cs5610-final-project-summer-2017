@@ -10,14 +10,15 @@
                 <a class="navbar-btn"
                    href="#!/store-search"><span class="navigating-btn glyphicon glyphicon-map-marker"></span></a>
             </div>
-            <div class="col-xs-3 text-center">
-                <a class="navbar-btn"
-                   ng-click="model.footerButtonFunc()"><span class="navigating-btn {{model.footerButton}}"></span></a>
-            </div>
+            <!--TODO: add inbox route-->
             <div class="col-xs-3 text-center">
                 <a class="navbar-btn"
                    ng-if="model.ifLoggedIn"
-                href="#!/profile">
+                   href="#!/"><span class="navigating-btn glyphicon glyphicon-envelope"></span></a>
+            </div>
+            <div class="col-xs-3 text-center">
+                <a class="navbar-btn"
+                   ng-if="model.ifLoggedIn"href="#!/profile">
                     <span class="navigating-btn glyphicon glyphicon-user"></span></a>
             </div>
         </div>

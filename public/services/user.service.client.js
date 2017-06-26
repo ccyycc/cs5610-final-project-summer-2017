@@ -90,7 +90,7 @@
         }
 
         function deleteLikedRecipe(rId) {
-            getHelper('/api/deleteLikeRecipe/' + rId);
+            getHelper('/api/deleteLikedRecipe/' + rId);
         }
 
         function getHelper(url) {

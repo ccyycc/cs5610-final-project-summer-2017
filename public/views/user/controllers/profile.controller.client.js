@@ -19,10 +19,17 @@
         model.countPhotoWidth = countPhotoWidth;
         model.navToStorePage = navToStorePage;
 
+        model.navToRecipeListPage = navToRecipeListPage;
         // model.showRecipes = showRecipes;
         // model.showProducts = showProducts;
 
         function init() {
+            if (currentUser._id === $routeParams.uid){
+                $location.url("/profile", false);
+            }
+
+            checkCurrentProfileRole();
+
             if ($routeParams.uid) {
                 model.userId = $routeParams.uid;
             } else {
@@ -38,15 +45,46 @@
             showLikedRecipes();
 
             model.recipeOrProduct = 'RECIPE';
-
-            // TODO: TEST
-            if (currentUser.role === 'RECIPEPRO') {
-                model.isRecipeProvider = true;
-            }
-            //TODO: END OF TEST
         }
 
         init();
+
+        function checkCurrentProfileRole() {
+            if ($routeParams.uid) {
+                userService
+                    .findUserById($routeParams.uid)
+                    .then(function (user) {
+                        identifyRole(user);
+                    });
+            } else {
+                identifyRole(currentUser);
+            }
+        }
+
+        function identifyRole(user) {
+            switch (user.role) {
+                case 'RECIPEPRO':
+                    model.isRecipeProvider = true;
+                    break;
+                case 'MERCHANT':
+                    model.isMerchant = true;
+                    break;
+                case 'ADMIN':
+                    model.isAdmin = true;
+                    break;
+                default:
+                    model.generalUser = true;
+            }
+        }
+
+        function navToRecipeListPage() {
+            if ($routeParams.uid) {
+                $location.url("/creator/" + $routeParams.uid + "/recipe_list");
+            } else {
+                $location.url("/auth_recipe_list");
+            }
+        }
+
         function render(userId) {
             userService
                 .findUserById(userId)

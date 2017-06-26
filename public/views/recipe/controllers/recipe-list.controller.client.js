@@ -6,16 +6,17 @@
     function RecipeListController($location, recipeService, yummlyService, userService, currentUser) {
 
         var model = this;
+
         model.searchRecipes = searchRecipes;
         model.goToDetail = goToDetail;
         model.getMoreYummlyRecipe = getMoreYummlyRecipe;
         model.logout = logout;
         // userId = currentUser._id;
 
-        model.sectionTitle = 'Recipe Search Result';
-        model.currentYummlyPage = 0;
-
         function init(){
+
+            model.sectionTitle = 'Recipe Search Result';
+            model.currentYummlyPage = 0;
 
             if (currentUser._id) {
                 model.ifLoggedIn = true;
