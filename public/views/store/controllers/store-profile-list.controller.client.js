@@ -29,7 +29,6 @@
                 .findStoreByName(model.searchText)
                 .then(function (data) {
                     model.results=data;
-                    console.log(model.results);
                 })
         }
 

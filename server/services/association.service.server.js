@@ -21,8 +21,6 @@ app.get('/api/association/find/type/:type/from/:sourceId/to/:targetType/:targetI
 
 
 
-
-
 function createAssociation(req, res) {
     var association = req.body;
 

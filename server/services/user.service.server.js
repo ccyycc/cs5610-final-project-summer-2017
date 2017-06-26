@@ -63,7 +63,7 @@ passport.isRecipePro = isRecipePro;
 module.exports = passport;
 
 function isRecipePro(req, res, next) {
-    if (req.isAuthenticated() && req.user.roles.indexOf('RECIPEPRO') > -1) {
+    if (req.isAuthenticated() && req.user.role === 'RECIPEPRO') {
         next();
     } else {
         res.sendStatus(401);
@@ -72,7 +72,7 @@ function isRecipePro(req, res, next) {
 
 
 function isMerchant(req, res, next) {
-    if (req.isAuthenticated() && req.user.roles.indexOf('MERCHANT') > -1) {
+    if (req.isAuthenticated() && req.user.role === 'MERCHANT') {
         next();
     } else {
         res.sendStatus(401);
@@ -80,7 +80,7 @@ function isMerchant(req, res, next) {
 }
 
 function isAdmin(req, res, next) {
-    if (req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {
+    if (req.isAuthenticated() && req.user.role === 'ADMIN') {
         next();
     } else {
         res.sendStatus(401);
@@ -142,7 +142,7 @@ function loggedin(req, res) {
 
 function checkAdmin(req, res) {
     // console.log(req.user);
-    if (req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {
+    if (req.isAuthenticated() && req.user.role === 'ADMIN') {
         res.json(req.user);
     } else {
         res.send('0');
@@ -352,7 +352,7 @@ function uploadImage(req, res) {
     var filename = myFile.filename;
 
     userModel
-        .uploadImage(userId,filename)
+        .uploadImage(userId, filename)
         .then(function (status) {
             var callbackUrl = "/#!/account";
             res.redirect(callbackUrl)

@@ -27,8 +27,17 @@ userModel.deleteCollect = deleteCollect;
 userModel.addToCollections = addToCollections;
 userModel.deleteFromCollections = deleteFromCollections;
 
-module.exports = userModel;
+userModel.follow = follow;
+userModel.unfollow = unfollow;
+userModel.addMessage = addMessage;
+userModel.deleteMessage = deleteMessage;
+userModel.sendMessage = sendMessage;
 
+userModel.populateArr = populateArr;
+userModel.addbmr = addbmr;
+
+
+module.exports = userModel;
 
 
 function deleteFromCollections(userId, itemId, collectionName) {
@@ -74,7 +83,14 @@ function deleteFollower(userId, fId) {
 }
 
 function addFollower(userId, fId) {
-    return addToCollections(userId, fId, 'followers');
+    return addToCollections(userId, fId, 'followers')
+        .then(function (status) {
+            console.log(userId + " followed by " + fId + " success");
+
+        })
+        .catch(function (err) {
+            console.log('addFollower Error: ' + err);
+        })
 }
 
 function deleteFollowing(userId, fId) {
@@ -82,19 +98,85 @@ function deleteFollowing(userId, fId) {
 }
 
 function addFollowing(userId, fId) {
-    return addToCollections(userId, fId, 'followings');
+    return addToCollections(userId, fId, 'followings')
+        .then(function (status) {
+            console.log(userId + " follow " + fId + " success");
+        })
+        .catch(function (err) {
+            console.log('addFollowing Error: ' + err);
+        })
+}
+
+function addMessage(userId, messageId) {
+    return addToCollections(userId, messageId, 'messages');
+}
+
+function deleteMessage(userId, messageId) {
+    return deleteFromCollections(userId, messageId, 'messages');
+}
+
+function follow(myId, followingId) {
+    return userModel
+        .addFollowing(myId, followingId)
+        .then(function (user) {
+            return userModel.addFollower(followingId, myId);
+        })
+}
+
+function unfollow(followerId, followingId) {
+    return userModel
+        .deleteFollowing(followerId, followingId)
+        .then(function (user) {
+            return userModel.deleteFollower(followingId, followerId);
+        })
+}
+
+function sendMessage(myId, userId, message) {
+    var messageModel = require('../comment/comment.model.server');
+
+    return messageModel
+        .createMessage(myId, userId, message)
+        .then(function (message) {
+            return userModel
+                .addMessage(userId, message._id)
+                .then(function (user) {
+                    return user;
+                })
+        })
+}
+
+function populateArr(userId, arrName) {
+    // console.log(userId + " " + arrName + " user.model.server--populateArr");
+    return userModel
+        .findById(userId)
+        .populate(arrName)
+        .exec()
+    // .then(function (user) {
+    //     console.log(user[arrName]);
+    //     return user[arrName];
+    // })
 }
 
 
 ////////////////////purely user part////////////////
 function createUser(user) {
-    if (!user.roles) {
-        user.roles = ['USER'];
-    } else if (user.roles.indexOf(',') > -1) {
-        user.roles = user.roles.split(',');
+    if (!user.role) {
+        user.role = 'USER';
     }
     user.photo = './uploads/default_profile.png';
-    return userModel.create(user);
+    // user.followers = [];
+    // user.followings = [];
+
+    console.log('createUser user.model.server ' + user);
+    return userModel
+        .create(user)
+        .then(function (user) {
+            console.log('createUser success -- user.model.server ' + user);
+            return user;
+        })
+        .catch(function (status) {
+            console.log('createUser not success --user.model ' + status);
+        })
 }
 
 function findUserById(userId) {
@@ -126,25 +208,30 @@ function findUserByCredentials(username) {
         })
 }
 
+function addbmr(userId, bmr) {
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            user.bmr = bmr;
+            return user.save();
+        })
+}
+
 function updateUser(userId, user) {
     delete user.username;
-    if (!user.roles) {
-        user.roles = ['USER'];
-    } else if (user.roles.indexOf(',') > -1) {
-        user.roles = user.roles.split(',');
+    if (!user.role) {
+        user.role = ['USER'];
     }
 
     return userModel.update({_id: userId}, {$set: user});
 }
 
 function deleteUser(userId) {
-    var websiteModel = require('../website/website.models.server');
 
     return userModel
         .remove({_id: userId})
         .then(function (status) {
-            return websiteModel
-                .deleteWebsitesForUser(userId);
+            return status;
         })
 }
 

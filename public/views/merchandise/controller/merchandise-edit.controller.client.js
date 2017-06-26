@@ -14,6 +14,10 @@
         init();
 
         function init() {
+            if(!(currentUser.role === "MERCHANT" || currentUser.role === "ADMIN")){
+                $lcoation.url('/');
+                return;
+            }
             model.sectionPage = "Product Edit";
             // model.sellerId = $routeParams[''];
             //TODO REMOVE DEFAULT USERNAME
@@ -36,28 +40,22 @@
             if(model.mode === "new"){
                 model.merchandise = {}
             }else{
-                merchandiseService.findMerchandiseById(model.merchandiseId)
-                    .then(
-                        function (merchandise) {
-                            model.merchandise = merchandise;
-                        },
-                        function () {
-                            alert("cannot find merchandise with merchandise id");
-                            navToMerchandise();
-                        }
-                    );
-            }
+                if(currentUser.role === "MERCHANT" || currentUser.role === "ADMIN") {
 
-            // merchandiseService.findMerchandiseBySellerId(model.sellerId)
-            //     .then(
-            //         function (merchandises) {
-            //             model.merchandises = merchandises;
-            //         },
-            //         function () {
-            //             alert("cannot find merchandises with user id");
-            //             navToUser();
-            //         }
-            //     );
+                    merchandiseService.findMerchandiseById(model.merchandiseId)
+                        .then(
+                            function (merchandise) {
+                                model.merchandise = merchandise;
+                            },
+                            function () {
+                                alert("cannot find merchandise with merchandise id");
+                                navToMerchandise();
+                            }
+                        );
+                }else{
+                    $location.url('/');
+                }
+            }
         }
 
 

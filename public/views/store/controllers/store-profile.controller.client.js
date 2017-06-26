@@ -38,8 +38,7 @@
                 .findStoreById(model.storeId)
                 .then(function (res) {
                     model.store = res;
-                    model.canEdit = (model.store._owner === currentUser._id);
-
+                    model.canEdit = (model.store._owner === currentUser._id || currentUser.role === "ADMIN");
                     model.store.addressUrl = trust("https://www.google.com"
                                                    + "/maps/embed/v1/place?"
                                                    + "key=AIzaSyA0oVg3fT3ZdLkEExxVyC0jkciGfmaYBcI&q="
@@ -48,9 +47,6 @@
                     userService
                         .findUserById(model.store._owner)
                         .then(function(owner){
-                            console.log(model.store);
-                            console.log("user")
-                            console.log(owner)
                             model.seller = owner;
                         });
 
@@ -58,8 +54,6 @@
                     associationService
                         .findAssociationForTarget("COMMENT", "store", model.storeId)
                         .then(function (comments) {
-                            console.log('comments');
-                            console.log(comments);
                             model.comments = comments;
                         });
                     associationService

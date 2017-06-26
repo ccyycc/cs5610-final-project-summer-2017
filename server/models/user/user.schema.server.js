@@ -7,12 +7,13 @@ var userSchema = mongoose.Schema({
     lastName: String,
     email: String,
     photo: String,
+    bmr: Number,
 
-    roles: [{
+    role: {
         type: String,
         default: 'USER',
         enum: ['USER', 'ADMIN', 'RECIPEPRO', 'MERCHANT']
-    }],
+    },
 
     google: {
         id: String,
@@ -21,12 +22,17 @@ var userSchema = mongoose.Schema({
 
     dailyCalorieBurned: Number,
 
-    messages:[{type: mongoose.Schema.ObjectId, ref: 'messageModel'}],
+    messages: [{type: mongoose.Schema.ObjectId, ref: 'commentModel'}],
 
-    followers: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}],
+    // followers: [String],
+    // followings: [String]
+
+    followers: [{type: mongoose.Schema.ObjectId, ref:'userModel'}],
     followings: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}],
-    // likedRecipes: [{type: mongoose.Schema.ObjectId, ref: 'recipeModel'}],
-    // collectedProducts: [{type: mongoose.Schema.ObjectId, ref: 'productModel'}]
+
+    likedRecipes: [{type: mongoose.Schema.ObjectId, ref: 'recipeModel'}],
+    collectedProducts: [{type: mongoose.Schema.ObjectId, ref: 'merchandiseModel'}]
+
 }, {collection: "user"});
 
 

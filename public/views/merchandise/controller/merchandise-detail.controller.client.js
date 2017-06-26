@@ -43,10 +43,7 @@
                             .findStoreById(model.merchandise._store)
                             .then(function(store){
                             model.store = store;
-                            model.canEdit=(store._owner===currentUser._id);
-                            console.log(store._owner);
-                            console.log(currentUser._id);
-                            console.log(model.canEdit);
+                            model.canEdit=(store._owner===currentUser._id ||currentUser.role ==="ADMIN");
                         });
 
 

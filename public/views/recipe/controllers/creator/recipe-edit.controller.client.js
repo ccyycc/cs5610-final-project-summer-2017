@@ -22,7 +22,7 @@
         model.deleteRecipe = deleteRecipe;
 
         function init() {
-            if (currentUser.roles.indexOf('RECIPEPRO') === -1) {
+            if (currentUser.role === 'RECIPEPRO') {
                 $location.url('/account')
                 //TODO: a trans page? Or directly go back to somewhere
             }

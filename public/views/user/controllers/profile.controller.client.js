@@ -10,8 +10,7 @@
         model.render = render;
 
         function init() {
-            console.log(currentUser.roles.indexOf("MERCHANT"));
-            if(currentUser.roles.indexOf("MERCHANT") > -1){
+            if(currentUser.role === "MERCHANT"){
                 //TODO CHANGE TO FOLLOWING WHEN SCHEMA IS FIXED
                 // if(currentUser.roles.indexOf("MERCHANT") > -1){
                     storeService
@@ -34,7 +33,7 @@
             model.recipeOrProduct = 'RECIPE';
 
             // TODO: TEST
-            if (currentUser.roles.indexOf('RECIPEPRO') !== -1) {
+            if (currentUser.role === 'RECIPEPRO') {
                 model.isRecipeProvider = true;
             }
             //TODO: END OF TEST
