@@ -5,7 +5,7 @@
              ng-repeat="recipe in model.recipes">
             <div class="wd-widget-toolbar">
                 <a ng-show="model.canEdit()"
-                   href="#!/creator/{{model.creatorId}}/recipe/{{recipe._id}}">
+                   href="#!/auth_recipe_list/{{recipe._id}}">
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
             </div>

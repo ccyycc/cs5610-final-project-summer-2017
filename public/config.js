@@ -149,7 +149,7 @@
                     currentUser: checkLoggedin
                 }
             })
-            .when('/creator/:creatorId/recipe',{
+            .when('/auth_recipe_list', {
                 templateUrl: 'views/recipe/templates/creator/recipe-list-by-creator.view.client.html',
                 controller: 'recipeListByCreatorController',
                 controllerAs: 'model',
@@ -157,7 +157,7 @@
                     currentUser: checkLoggedin
                 }
             })
-            .when('/creator/:creatorId/recipe/:recipeId', {
+            .when('/auth_recipe_list/:recipeId', {
                 templateUrl: 'views/recipe/templates/creator/recipe-edit.view.client.html',
                 controller: 'recipeEditController',
                 controllerAs: 'model',
@@ -165,6 +165,22 @@
                     currentUser: checkLoggedin
                 }
             })
+            .when('/creator/:creatorId/recipe_list',{
+                templateUrl: 'views/recipe/templates/creator/recipe-list-by-creator.view.client.html',
+                controller: 'recipeListByCreatorController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
+            })
+            // .when('/creator/:creatorId/recipe/:recipeId', {
+            //     templateUrl: 'views/recipe/templates/creator/recipe-edit.view.client.html',
+            //     controller: 'recipeEditController',
+            //     controllerAs: 'model',
+            //     resolve: {
+            //         currentUser: checkLoggedin
+            //     }
+            // })
             .when('/store/:storeId/merchandise',{
                 templateUrl: './views/merchandise/templates/merchandise-list.view.client.html',
                 controller: 'merchandiseListController',

@@ -13,24 +13,31 @@
 
         function init() {
 
-            model.sectionTitle = 'Recipe List from ' + currentUser.username;
-            model.creatorId = $routeParams.creatorId;
-
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }
 
-            recipeService
-                .findAllRecipesForCreator(model.creatorId)
-                .then(function (recipes) {
-                    model.recipes = recipes;
-                })
-
-            // recipeService
-            //     .findAllRecipesForCreator(userId)
-            //     .then(function (recipes) {
-            //         model.recipes = recipes;
-            //     })
+            if ($routeParams.creatorId) {
+                userService
+                    .findUserById($routeParams.creatorId)
+                    .then(function (user) {
+                        model.creator = user;
+                        model.sectionTitle = 'Recipe List from ' + model.creator.username;
+                        recipeService
+                            .findAllRecipesForCreator(model.creator._id)
+                            .then(function (recipes) {
+                                model.recipes = recipes;
+                            });
+                    });
+            } else {
+                model.creator = currentUser;
+                model.sectionTitle = 'Recipe List from ' + model.creator.username;
+                recipeService
+                    .findAllRecipesForCreator(model.creator._id)
+                    .then(function (recipes) {
+                        model.recipes = recipes;
+                    })
+            }
         }
 
         init();
@@ -44,7 +51,7 @@
         }
 
         function canEdit() {
-            return ((currentUser._id === model.creatorId) || (currentUser.role === 'ADMIN'));
+            return ((currentUser._id === model.creator._id) || (currentUser.role === 'ADMIN'));
         }
 
         function createRecipe() {
@@ -52,15 +59,13 @@
                 name : "New Recipe"
             };
             recipeService
-                .createRecipe(model.creatorId, newRecipe)
+                .createRecipe(model.creator._id, newRecipe)
                 .then(function (recipe) {
-                    $location.url("/creator/" + model.creatorId + "/recipe/" + recipe._id + '#NEW');
+                    $location.url("/auth_recipe_list/" + recipe._id + '#NEW');
                 }, function () {
                     model.error = "can't create new recipe at this time, please try again";
                 })
         }
-
-
     }
 })();
 

@@ -75,7 +75,7 @@
         }
 
         function goToEdit() {
-            $location.url("/creator/" + currentUser._id + "/recipe/" + model.recipeId);
+            $location.url("/auth_recipe_list/"+ model.recipeId);
         }
 
         function trust(url) {
