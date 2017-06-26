@@ -4,23 +4,29 @@
         <div class="col-sm-2 sidebar">
             <div class="nav nav-sidebar">
                 <h4>Recipe Provider:</h4>
-                <img id="smallProfileImage" class="img-responsive" ng-src="{{model.recipeCreator.photo}}"/>
+                <img id="smallProfileImage"
+                     class="img-responsive"
+                     ng-src="{{model.recipeCreator.photo}}"/>
                 <label for="username">Username</label>
                 <p id="username">{{model.recipeCreator.username}}</p>
                 <label for="name">Name</label>
                 <p id="name">{{model.recipeCreator.firstName}} {{model.recipeCreator.lastName}}</p>
                 <label for="email">Email</label>
                 <p id="email">{{model.recipeCreator.email}}</p>
-                <a class="btn btn-block btn-primary" href="/profile/{{model.recipeCreator._id}}">Find more</a>
+                <a class="btn btn-block btn-primary"
+                   href="/profile/{{model.recipeCreator._id}}">Find more</a>
             </div>
-
         </div>
         <div class="col-sm-10 col-sm-offset-2 main">
             <h2 class="page-header">{{model.recipe.name}}
-                <a class="btn pull-right" ng-show="model.like" ng-click="model.unlikeRecipe()">
-                <span class="glyphicon glyphicon-heart"></span>
+                <a class="btn pull-right"
+                   ng-show="model.like"
+                   ng-click="model.unlikeRecipe()">
+                    <span class="glyphicon glyphicon-heart"></span>
                 </a>
-                <a class="btn pull-right" ng-show="!model.like" ng-click="model.likeRecipe()">
+                <a class="btn pull-right"
+                   ng-show="!model.like"
+                   ng-click="model.likeRecipe()">
                     <span class="glyphicon glyphicon-heart-empty"></span>
                 </a>
             </h2>
@@ -32,7 +38,9 @@
             <!--{{model.recipe.ingredients}}-->
             <div ng-repeat="ingredient in model.recipe.ingredients">
                 <ul class="list-unstyled">
-                    <li><a ng-click="model.goToIngredientDetail(ingredient.name)">{{ingredient.name}}</a> : {{ingredient.description}}</li>
+                    <li><a ng-click="model.goToIngredientDetail(ingredient.name)">{{ingredient.name}}</a> :
+                                                                                                          {{ingredient.description}}
+                    </li>
                 </ul>
             </div>
 
@@ -42,50 +50,51 @@
             {{model.recipe.source.sourceRecipeUrl}}
             <div ng-if="!model.ifLocal">
                 <!--<a href=model.trust("{{model.recipe.source.sourceRecipeUrl}}")-->
-                   <!--target="embedded-content">-->
-                    <!--Open instruction below-->
+                <!--target="embedded-content">-->
+                <!--Open instruction below-->
                 <!--</a>-->
                 <!--<iframe sandbox="allow-same-origin allow-scripts"-->
-                        <!--src="{{model.trust(model.recipe.source.sourceRecipeUrl)}}"-->
-                        <!--class="responsive" name="embedded-content"></iframe>-->
+                <!--src="{{model.trust(model.recipe.source.sourceRecipeUrl)}}"-->
+                <!--class="responsive" name="embedded-content"></iframe>-->
             </div>
 
             <!--<h2 class="sub-header">More from ...</h2>-->
             <!--<div class="placeholders" >-->
-                <!--<div class="placeholder">-->
-                    <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">-->
-                    <!--<h4 class="text-center">Label</h4>-->
-                    <!--<span class="text-center text-muted">Something else</span>-->
-                <!--</div>-->
-                <!--<div class="placeholder">-->
-                    <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">-->
-                    <!--<h4 class="text-center">Label</h4>-->
-                    <!--<span class="text-center text-muted">Something else</span>-->
-                <!--</div>-->
-                <!--<div class="placeholder">-->
-                    <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">-->
-                    <!--<h4 class="text-center">Label</h4>-->
-                    <!--<span class="text-center text-muted">Something else</span>-->
-                <!--</div>-->
-                <!--<div class="placeholder">-->
-                    <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">-->
-                    <!--<h4 class="text-center">Label</h4>-->
-                    <!--<span class="text-center text-muted">Something else</span>-->
-                <!--</div>-->
-                <!--<div class="placeholder">-->
-                    <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">-->
-                    <!--<h4 class="text-center">Label</h4>-->
-                    <!--<span class="text-center text-muted">Something else</span>-->
-                <!--</div>-->
-                <!--<div class="placeholder">-->
-                    <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">-->
-                    <!--<h4 class="text-center">Label</h4>-->
-                    <!--<span class="text-center text-muted">Something else</span>-->
-                <!--</div>-->
+            <!--<div class="placeholder">-->
+            <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">-->
+            <!--<h4 class="text-center">Label</h4>-->
+            <!--<span class="text-center text-muted">Something else</span>-->
+            <!--</div>-->
+            <!--<div class="placeholder">-->
+            <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">-->
+            <!--<h4 class="text-center">Label</h4>-->
+            <!--<span class="text-center text-muted">Something else</span>-->
+            <!--</div>-->
+            <!--<div class="placeholder">-->
+            <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">-->
+            <!--<h4 class="text-center">Label</h4>-->
+            <!--<span class="text-center text-muted">Something else</span>-->
+            <!--</div>-->
+            <!--<div class="placeholder">-->
+            <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">-->
+            <!--<h4 class="text-center">Label</h4>-->
+            <!--<span class="text-center text-muted">Something else</span>-->
+            <!--</div>-->
+            <!--<div class="placeholder">-->
+            <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">-->
+            <!--<h4 class="text-center">Label</h4>-->
+            <!--<span class="text-center text-muted">Something else</span>-->
+            <!--</div>-->
+            <!--<div class="placeholder">-->
+            <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">-->
+            <!--<h4 class="text-center">Label</h4>-->
+            <!--<span class="text-center text-muted">Something else</span>-->
+            <!--</div>-->
             <!--</div>-->
             <div>
                 <h3 class="sub-header">Comments
                     <a class="btn pull-right"
+                       ng-show="!model.newComment"
                        ng-click="model.createComment()">
                         <span class="glyphicon glyphicon-plus"></span>
                     </a>
@@ -93,17 +102,36 @@
 
 
                 <p ng-if="model.reviews.length===0">Be the first one to comment!</p>
+                <div class="input-group">
+                    <input class="form-control"
+                           ng-show="model.newComment"
+                           ng-model="model.newComment.content"/>
+                    <span class="input-group-btn">
+                    <a class="btn btn-default"
+                       ng-show="model.newComment"
+                       ng-click="model.submitComment()">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </a>
+                    </span>
+
+                    <span class="input-group-btn">
+                    <a class="btn btn-default"
+                       ng-show="model.newComment"
+                       ng-click="model.clearComment()">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                    </span>
+
+
+                </div>
                 <div>
-                    <ul class="list-group list-unstyled" ng-repeat="review in model.reviews">
+                    <ul class="list-group list-unstyled"
+                        ng-repeat="review in model.reviews">
                         <li class="list-group-item-warning">
-                           <label>User {{review.fromWhom.username}}</label>: {{review.content}}
+                            <label><span class="glyphicon glyphicon-user"></span>User {{review.fromWhom.username}}</label>: {{review.content}}
                         </li>
                     </ul>
                 </div>
-                <input class="form-control" ng-show="model.newComment" ng-model="model.newComment.content"/>
-                <a class="btn pull-right" ng-show="model.newComment" ng-click="model.submitComment()">
-                    <span class="glyphicon glyphicon-ok"></span>
-                </a>
             </div>
         </div>
     </div>

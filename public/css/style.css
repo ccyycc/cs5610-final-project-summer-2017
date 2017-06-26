@@ -110,7 +110,9 @@ a:focus, a:hover {
     width:100%;
     text-align:center;
     color: black;
-    background:rgba(251,251,251,0.6)
+    background:rgba(251,251,251,0.6);
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .sidebar {

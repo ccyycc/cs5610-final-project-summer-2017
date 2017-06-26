@@ -14,6 +14,7 @@
         model.unlikeRecipe = unlikeRecipe;
         model.createComment = createComment;
         model.submitComment = submitComment;
+        model.clearComment = clearComment;
         model.footerButtonFunc = footerButtonFunc;
         // userId = currentUser._id;
         model.recipeId = $routeParams.recipeId;
@@ -157,6 +158,9 @@
             model.newComment = {};
         }
 
+        function clearComment() {
+            model.newComment = {};
+        }
         function submitComment() {
             if(!model.recipeLocalId) {
                 createYummlyRecipeCopy()

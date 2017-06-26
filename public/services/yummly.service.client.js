@@ -12,15 +12,16 @@
         var key = 'efd5ede00f6c4b4f7fd8e210a4529a9a';
 
         var urlBase = 'https://api.yummly.com/v1/api/recipes?_app_id=app-id&_app_key=app-key&q=your_search_parameters' +
-            '&maxResult=10&start=0';
+            '&maxResult=12&start=start_index';
         // '&callback=package';
 
 
-        function searchRecipes(searchTerm) {
+        function searchRecipes(searchTerm, index) {
             var url = urlBase
                 .replace("app-id", id)
                 .replace("app-key", key)
-                .replace("your_search_parameters", searchTerm);
+                .replace("your_search_parameters", searchTerm)
+                .replace("start_index", index*12);
             return $http.get(url)
                 .then(function (response) {
                     return response.data.matches;
