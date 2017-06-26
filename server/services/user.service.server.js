@@ -56,6 +56,7 @@ app.get('/api/deleteLikedRecipe/:rId', deleteLikedRecipe);
 
 app.put('/api/message/:userId', sendMessage);
 app.get('/api/user/populate/:arrName/:userId', populateArr);
+app.get('/api/renderMessage', renderMessage);
 // app.get('/api/showFollowings/:userId', showFollowings);
 // app.get('/api/showFollowers/:userId', showFollowers);
 app.post('/api/account/bmiCal', bmiCal);
@@ -341,6 +342,17 @@ function populateArr(req, res) {
         .catch(function (err) {
             console.log(err);
         })
+}
+
+function renderMessage(req, res) {
+    var userId = req.user._id;
+    var associationModel = require('../models/association/association.model.server');
+    associationModel
+        .renderMessage(userId)
+        .then(function (response) {
+            res.json(response);
+            }
+        )
 }
 
 function bmiCal(req, res) {

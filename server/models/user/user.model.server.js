@@ -152,7 +152,6 @@ function populateArr(userId, arrName) {
         .exec()
 }
 
-
 ////////////////////purely user part////////////////
 function createUser(user) {
     if (!user.role) {

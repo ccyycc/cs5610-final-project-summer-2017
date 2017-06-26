@@ -9,6 +9,7 @@ associationModel.findLikeForRecipe = findLikeForRecipe;
 associationModel.deleteComment = deleteComment;
 associationModel.findCommentById = findCommentById;
 associationModel.findAllComments = findAllComments;
+associationModel.renderMessage = renderMessage;
 
 associationModel.createMessage = createMessage;
 
@@ -38,14 +39,20 @@ function createAssociation(comment) {
         })
 }
 
-function deleteComment(commentId) {
-    return associationModel
-        .remove(commentId)
-        .then(function (status) {
-            return status;
-        })
-        .catch(function (status) {
-            console.log(status);
+function deleteComment(userId,commentId) {
+    var userModel = require('../user/user.model.server');
+    return userModel
+        .deleteMessage(userId, commentId)
+        .then(function () {
+            associationModel
+                .findByIdAndRemove(commentId)
+                .then(function (status) {
+                    // console.log('comment delete success -- ass model');
+                    return status;
+                })
+                .catch(function (status) {
+                    console.log(status);
+                })
         })
 }
 
@@ -69,6 +76,16 @@ function createMessage(myId, userId, message) {
         .createAssociation(comment)
         .then(function (message) {
             return message;
+        })
+}
+
+function renderMessage(userId) {
+    return associationModel
+        .find({toWhom: userId})
+        .populate('fromWhom')
+        .exec()
+        .then(function (messages) {
+            return messages;
         })
 }
 

@@ -16,7 +16,7 @@ app.get('/api/association/like/from/:userId/to/:recipeId', findLikeForRecipe);
 function deleteComment(req, res) {
     var commentId = req.params.commentId;
     associationModel
-        .deleteComment(commentId)
+        .deleteComment(req.user._id, commentId)
         .then(function () {
             res.sendStatus(200);
         })

@@ -21,10 +21,11 @@
         function renderMessage() {
             // console.log(model.userId);
             userService
-                .populateArr(model.userId, 'messages')
+                .renderMessage(model.userId)
                 .then(function (messages) {
                     model.messages = messages;
-                    
+                    console.log();
+                    ///do not delete the console log!
                 })
         }
 

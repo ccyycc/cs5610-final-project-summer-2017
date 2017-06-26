@@ -30,7 +30,7 @@
             deleteLikedRecipe: deleteLikedRecipe,
             sendMessage: sendMessage,
             deleteMessage: deleteMessage,
-            // renderMessage: renderMessage,
+            renderMessage: renderMessage,
             populateArr: populateArr,
             countBmi: countBmi
             // showFollowings: showFollowings,
@@ -48,8 +48,17 @@
 
         function deleteMessage(messageId) {
             var url='/api/association/comment/' + messageId;
+            // console.log('delete: '+ url);
 
             return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function renderMessage() {
+            var url = '/api/renderMessage';
+            return $http.get(url)
                 .then(function (response) {
                     return response.data;
                 })
