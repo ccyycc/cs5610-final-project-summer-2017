@@ -36,6 +36,7 @@ function findYummlyRecipeCopyByYummlyId(recipeId) {
 
 function createRecipe(userId, recipe) {
     recipe._creator = userId;
+
     return recipeModel
         .create(recipe)
         .then(function (recipe) {

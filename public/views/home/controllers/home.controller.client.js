@@ -53,10 +53,9 @@
                     text = "I am not a fan of orange.";
                     break;
                 case "StoreProfile":
-                    $location.url('/search/store?search='+model.searchContent);
                     break;
                 case "merchandise":
-                    text = "How you like them apples?";
+                    $location.url('/search/merchandise?search='+model.searchContent);
                     break;
                 default:
                     text = "I have never heard of that fruit...";

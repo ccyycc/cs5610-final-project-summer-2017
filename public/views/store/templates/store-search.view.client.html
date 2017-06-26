@@ -2,62 +2,68 @@
 
 <div class="container-fluid">
 
-    <p>Search with current location</p>
+    <h2 class="page-header">Search Nearby Grocery Store</h2>
     <form>
         <label for="streeAddress">Street Address</label>
         <input id="streeAddress"
-               ng-model = "model.address.street"
+               ng-model="model.address.street"
                type="text"
                class="form-control"/>
         <label for="city">City</label>
         <input id="city"
-               ng-model = "model.address.city"
+               ng-model="model.address.city"
                type="text"
                class="form-control"/>
         <label for="state">State</label>
         <input id="state"
-               ng-model = "model.address.state"
+               ng-model="model.address.state"
                type="text"
                class="form-control"/>
         <label for="zip">Zip Code</label>
         <input id="zip"
-               ng-model = "model.address.zip"
+               ng-model="model.address.zip"
                type="text"
                class="form-control"/>
-        <button ng-click = "model.searchWithAddress()"
-                class="btn btn-block btn-primary">Upload Image & Save </button>
+        <button ng-click="model.searchWithAddress()"
+                class="btn btn-block btn-primary">Search address
+        </button>
     </form>
 
 
-
-    <div class="input-group">
-        <input ng-model="searchText"
-               type="text"
-               class="form-control">
-        <span class="input-group-btn">
-           <a ng-click="model.searchWithCoords()"
-              class="btn btn-default" type="button">
-               <span class="glyphicon glyphicon-search"></span>
-           </a>
-       </span>
-    </div>
-
-    <span class="input-group-btn">
-           <a ng-click="model.searchWithCoords()"
-              class="btn btn-default" type="button">
-               <span class="glyphicon glyphicon-map-marker"></span>
-           </a>
-       </span>
+    <button ng-click="model.searchWithCoords()"
+            class="btn btn-block btn-primary button-top-margin">
+        <span class="glyphicon glyphicon-map-marker"></span>
+        Search current location
+    </button>
 
 
-    <div class="row">
-        <div class="clearfix col-sm-12 col-md-2" ng-repeat="place in model.places">
-            <ul>
-                <li>name:{{place.name}}</li>
-                <li>address:{{place.vicinity}}</li>
-            </ul>
-        </div>
-    </div>
+    <ul class="list-group customize-top-margin-20"
+    ng-show="model.places">
+        <li class="list-group-item active">
+            <div class="row ">
+                <div class="col-sm-6 hidden-xs">
+                    Name
+                </div>
+                <div class="col-sm-6 hidden-xs">
+                    Address
+                </div>
+                <div class="col-xs-12 visible-xs">
+                    Name & Address
+                </div>
+            </div>
+        </li>
+        <li ng-repeat="place in model.places" class="list-group-item">
+
+            <div class="row ">
+                <div class="col-sm-6">
+                    {{place.name}}
+                </div>
+                <div class="col-sm-6 ">
+                    {{place.vicinity}}
+                </div>
+            </div>
+        </li>
+    </ul>
 </div>
 
 

@@ -10,6 +10,7 @@
 
 
         function init() {
+            model.sectionTitle = "Nearby search";
             model.address = {};
         }
 

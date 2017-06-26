@@ -3,11 +3,6 @@
 <!--body-->
 
 
-<!--<h1>-->
-    <!--test-->
-    <!--{{model.merchandises}}-->
-<!--</h1>-->
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-4 text-center recipeListImages"
@@ -28,7 +23,6 @@
                 <p class="text-on-image">{{merchandise.name}}</p>
             </a>
         </div>
-        <!--TODO: ng-show="model.ifCreator()" IN THIS <div>-->
         <div
              class="col-xs-12 col-sm-6 col-md-4 text-center recipeListImages">
             <img class="recipeListImage"
@@ -41,49 +35,5 @@
     </div>
 </div>
 
-<!--<a ng-click="model.createMerchandise()"-->
-   <!--class="btn btn-block btn-primary">create</a>-->
 
-<!--<div class="container-fluid theme-showcase first-row"-->
-     <!--role="main">-->
-    <!--<ul class="list-group nowarp">-->
-        <!--<li class="list-group-item active">-->
-            <!--<div class="row">-->
-                <!--<div class="col-lg-4 col-md-7 col-xs-10">-->
-                    <!--Name-->
-                <!--</div>-->
-                <!--<div class="col-lg-3 visible-lg">-->
-                    <!--Created-->
-                <!--</div>-->
-                <!--<div class="col-md-3 hidden-sm hidden-xs">-->
-                    <!--Accessed-->
-                <!--</div>-->
-                <!--<div class="col-xs-2">-->
-
-                <!--</div>-->
-            <!--</div>-->
-        <!--</li>-->
-        <!--<li ng-repeat="merchandise in model.merchandises" class="list-group-item">-->
-            <!--<div class="row ">-->
-                <!--<div class="col-lg-4 col-md-7 col-xs-10 ">-->
-                    <!--<a href="">-->
-                        <!--{{merchandise.name}}-->
-                    <!--</a>-->
-                <!--</div>-->
-                <!--<div class="col-lg-3 visible-lg">-->
-                    <!--{{merchandise.dateCreated | date}}-->
-                <!--</div>-->
-                <!--<div class="col-md-3 hidden-sm hidden-xs">-->
-                    <!--{{merchandise.dateUpdated | date}}-->
-                <!--</div>-->
-                <!--<div class="col-xs-2">-->
-                    <!--<a href="#!/store/{{merchandise._store}}/merchandise/{{merchandise._id}}/edit">-->
-                        <!--<span class="glyphicon glyphicon-cog pull-right"></span>-->
-                    <!--</a>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</li>-->
-    <!--</ul>-->
-<!--</div>-->
-
-<div ng-include="'./views/common/footer/footer.view.client.html'"></div>
+<div ng-include="'./views/common/footer.view.client.html'"></div>

@@ -3,7 +3,7 @@
         .module('FinalProject')
         .controller('merchandiseListController', merchandiseListController);
 
-    function merchandiseListController($location, $routeParams, merchandiseService) {
+    function merchandiseListController($location, $routeParams, merchandiseService,currentUser) {
         var model = this;
         //event handler
 
@@ -12,7 +12,7 @@
         init();
 
         function init() {
-            model.sectionPage = "Product List";
+            model.sectionTitle = "Product List";
             model.storeId = $routeParams['storeId'];
             model.merchandises = [];
             model.merchandises = merchandiseService.findMerchandiseByStoreId(model.storeId)

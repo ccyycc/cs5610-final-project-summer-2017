@@ -43,6 +43,7 @@
                                                    + "/maps/embed/v1/place?"
                                                    + "key=AIzaSyA0oVg3fT3ZdLkEExxVyC0jkciGfmaYBcI&q="
                                                    + getStoreURLAddress(model.store));
+                    model.displayAddress= getDisplayAddress(model.store);
 
                     userService
                         .findUserById(model.store._owner)
@@ -141,6 +142,16 @@
             $location.url('/store/' + model.storeId + '/merchandise');
         }
 
+        function getDisplayAddress(store){
+            var address = store.address;
+            if (address) {
+                return address.street + " "
+                       + address.city + " "
+                       + address.state + " "
+                       + address.zip;
+            }
+            return "";
+        }
 
     }
 })();

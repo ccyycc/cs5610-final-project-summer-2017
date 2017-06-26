@@ -3,7 +3,7 @@
         .module('FinalProject')
         .controller('merchandiseEditController', merchandiseEditController);
 
-    function merchandiseEditController($location, $routeParams, merchandiseService) {
+    function merchandiseEditController($location, $routeParams, merchandiseService,currentUser) {
         var model = this;
         //event handler.
         model.createMerchandise = createMerchandise;
@@ -18,12 +18,13 @@
                 $lcoation.url('/');
                 return;
             }
-            model.sectionPage = "Product Edit";
-            // model.sellerId = $routeParams[''];
-            //TODO REMOVE DEFAULT USERNAME
+
             model.storeId = $routeParams['storeId'];
             model.merchandiseId = $routeParams['merchandiseId'];
             model.mode = $routeParams['mode'];
+
+            model.sectionTitle = "Product "+ model.mode;
+
             model.merchandiseNameStyle = "";
 
             model.merchandises = merchandiseService.findMerchandiseByStoreId(model.storeId)

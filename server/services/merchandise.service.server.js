@@ -7,10 +7,12 @@ var merchandiseModel = require('../models/merchandise/merchandise.model.server')
 app.post('/api/store/:storeId/merchandise', createMerchandise);
 app.get('/api/store/:storeId/merchandise', findAllMerchandisesForStore);
 app.get('/api/merchandise/:merchandiseId', findMerchandiseById);
+app.get('/api/merchandise/name/:name', findMerchandiseByName);
 app.put('/api/merchandise/:merchandiseId', updateMerchandise);
 app.delete('/api/merchandise/:merchandiseId', deleteMerchandise);
 
 app.post('/api/upload/merchandise/picture', upload.single('myFile'), uploadImage);
+
 
 
 function uploadImage(req, res) {
@@ -69,6 +71,22 @@ function findMerchandiseById(req, res) {
         .then(
             function (merchandise) {
                 res.status(200).send(merchandise);
+            },
+            function () {
+                res.sendStatus(500);
+            }
+        )
+}
+
+
+function findMerchandiseByName(req, res) {
+    var merchandiseName = req.params.name + "";
+
+    merchandiseModel
+        .findMerchandiseByName(merchandiseName)
+        .then(
+            function (merchandises) {
+                res.status(200).send(merchandises);
             },
             function () {
                 res.sendStatus(500);

@@ -7,6 +7,7 @@
 
         this.createMerchandise = createMerchandise;
         this.findMerchandiseByStoreId = findMerchandiseByStoreId;
+        this.findMerchandiseByName = findMerchandiseByName;
         this.findMerchandiseById = findMerchandiseById;
         this.updateMerchandise = updateMerchandise;
         this.deleteMerchandise = deleteMerchandise;
@@ -25,6 +26,12 @@
 
         function findMerchandiseById(merchandiseId) {
             var url = "/api/merchandise/"+merchandiseId;
+            return $http.get(url)
+                .then(extractData);
+        }
+
+        function findMerchandiseByName (content) {
+            var url = "/api/merchandise/name/"+content;
             return $http.get(url)
                 .then(extractData);
         }

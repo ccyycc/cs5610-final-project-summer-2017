@@ -6,8 +6,10 @@ var merchandiseModel = mongoose.model('merchandiseModel', merchandiseSchema);
 merchandiseModel.createMerchandise = createMerchandise;
 merchandiseModel.findAllMerchandisesForStore = findAllMerchandisesForStore;
 merchandiseModel.findMerchandiseById = findMerchandiseById;
+merchandiseModel.findMerchandiseByName =findMerchandiseByName;
 merchandiseModel.updateMerchandise = updateMerchandise;
 merchandiseModel.deleteMerchandise = deleteMerchandise;
+
 
 merchandiseModel.uploadImage = uploadImage;
 
@@ -32,6 +34,7 @@ function createMerchandise(store, merchandise) {
 }
 
 
+
 function findAllMerchandisesForStore(store) {
     return merchandiseModel
         .find({_store: store})
@@ -42,6 +45,13 @@ function findMerchandiseById(merchandiseId) {
     return merchandiseModel.findById(merchandiseId);
 }
 
+function findMerchandiseByName(merchandiseName) {
+
+    return merchandiseModel
+        .find({name: new RegExp(merchandiseName, "i")})
+        .populate("_store")
+        .exec();
+}
 
 function updateMerchandise(merchandiseId, merchandise) {
     merchandise.dateUpdated = Date.now();

@@ -142,7 +142,6 @@ function register(req, res) {
     userModel
         .createUser(user)
         .then(function (user) {
-            console.log('create user success -- user.server');
             // res.send(user);
             req.login(user, function (status) {
                 res.send(user);
@@ -339,7 +338,6 @@ function populateArr(req, res) {
             res.json(temp);
         })
         .catch(function (err) {
-            console.log(err);
         })
 }
 

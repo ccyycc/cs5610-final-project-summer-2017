@@ -1,0 +1,70 @@
+<div ng-include="'./views/common/header.view.client.html'"></div>
+
+<div class="container-fluid">
+
+    <div class="input-group">
+        <input ng-model="model.searchContent"
+               type="text"
+               placeholder="Search Product"
+               class="form-control"
+        >
+        <span class="input-group-btn">
+        <a ng-click="model.searchProduct()" class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+        </a>
+        </span>
+    </div>
+
+
+    <div class="theme-showcase first-row"
+         role="main"
+    ng-show="model.products">
+        <ul class="list-group">
+            <li class="list-group-item active">
+                <div class="row ">
+                    <div class="col-xs-6 col-md-4">
+                        Product Name
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        Price
+                    </div>
+                    <div class="col-md-4 visible-md">
+                        Store Name
+                    </div>
+                </div>
+            </li>
+            <li ng-repeat="product in model.products" class="list-group-item">
+
+                <div class="row ">
+                    <div class="col-xs-6 col-md-4">
+                        <a href="#!/store/{{product._store._id}}/merchandise/{{product._id}}">
+                            {{product.name}}
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        {{product.price}}
+                    </div>
+                    <div class="col-md-4 visible-md">
+                        {{product.store.name}}
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 text-center recipeListImages"
+             ng-repeat="product in model.products">
+
+            <img class="recipeListImage"
+                 ng-src="{{product.image}}"
+                 onerror="this.onerror=null; this.src='/resource/defaultPics/placeholder-image10.jpg'"/>
+            <a href="#!/store/{{product._store._id}}/merchandise/{{product._id}}">
+                <p class="text-on-image">{{product.name}}</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<div ng-include="'./views/common/footer.view.client.html'"></div>

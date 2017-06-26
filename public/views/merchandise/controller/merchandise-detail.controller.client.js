@@ -17,7 +17,7 @@
         init();
 
         function init() {
-            model.sectionPage = "Product Detail";
+            model.sectionTitle = "Product Detail";
             model.storeId = $routeParams['storeId'];
             model.merchandiseId = $routeParams['merchandiseId'];
 

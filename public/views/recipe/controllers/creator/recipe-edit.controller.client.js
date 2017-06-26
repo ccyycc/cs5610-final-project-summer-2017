@@ -19,12 +19,10 @@
         model.clearSingleIngredient = clearSingleIngredient;
         model.updateRecipe = updateRecipe;
         model.deleteRecipe = deleteRecipe;
+        model.saveRecipe = saveRecipe;
 
         function init() {
-            if (currentUser.role === 'RECIPEPRO') {
-                $location.url('/account')
-                //TODO: a trans page? Or directly go back to somewhere
-            }
+
             model.newIngredient = {};
             ifNewRecipe();
             recipeService
@@ -43,7 +41,7 @@
         init();
 
         function ifNewRecipe() {
-            return $location.hash()? model.ifNewRecipe = true:model.ifNewRecipe = false;
+            return $location.hash() ? model.ifNewRecipe = true : model.ifNewRecipe = false;
         }
 
         function createSingleIngredient() {
@@ -58,7 +56,7 @@
 
         function clearSingleIngredient() {
             model.error = "";
-            model.newIngredient={};
+            model.newIngredient = {};
         }
 
         function selectSingleIngredient(ingredient) {
@@ -80,14 +78,29 @@
             model.error = "";
         }
 
-        function updateRecipe() {
-            recipeService
+        function saveRecipe() {
+            return recipeService
                 .updateRecipe(model.recipeId, model.recipe)
+        }
+
+        function updateRecipe() {
+            // recipeService
+            //     .updateRecipe(model.recipeId, model.recipe)
+            //     .then(function () {
+            //         model.message = "Update successful!";
+            //         $location.url("/creator/" + model.creatorId + "/recipe/")
+            //     }, function () {
+            //         model.error = "can't update at this time, please try later.";
+            //     })
+            saveRecipe()
                 .then(function () {
                     model.message = "Update successful!";
+                    $location.url("/creator/" + model.creatorId + "/recipe/")
                 }, function () {
                     model.error = "can't update at this time, please try later.";
                 })
+
+
         }
 
         function deleteRecipe() {

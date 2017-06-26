@@ -174,6 +174,11 @@
                 controller: 'storeProfileSearchController',
                 controllerAs: 'model'
             })
+            .when('/search/merchandise',{
+                templateUrl: 'views/merchandise/templates/merchandise-search-list.view.client.html',
+                controller: 'merchandiseSearchController',
+                controllerAs: 'model'
+            })
             .otherwise({redirectTo : '/'})
     }
 
