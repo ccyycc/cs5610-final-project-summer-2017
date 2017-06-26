@@ -29,6 +29,8 @@
             addLikedRecipe: addLikedRecipe,
             deleteLikedRecipe: deleteLikedRecipe,
             sendMessage: sendMessage,
+            deleteMessage: deleteMessage,
+            renderMessage: renderMessage,
             populateArr: populateArr,
             countBmi: countBmi
             // showFollowings: showFollowings,
@@ -39,6 +41,15 @@
         function sendMessage(userId, message) {
             var url='/api/message/' + userId;
             return $http.put(url, message)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function deleteMessage(messageId) {
+            var url='/api/association/comment/' + messageId;
+
+            return $http.delete(url)
                 .then(function (response) {
                     return response.data;
                 })

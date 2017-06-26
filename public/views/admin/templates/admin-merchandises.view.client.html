@@ -4,16 +4,16 @@
         <li class="list-group-item">
             <div class="row">
                 <div class="col-xs-3">
-                    Storename
+                    Merchandise Name
                 </div>
                 <div class="col-xs-3">
-                    Ownername
+                    Store Name
                 </div>
                 <div class="col-xs-2">
-                    Lastname
+                    Price
                 </div>
                 <div class="col-xs-4">
-                    Role
+                    Description
                 </div>
             </div>
         </li>
@@ -21,46 +21,46 @@
         <li class="list-group-item">
             <div class="row">
                 <div class="col-xs-3">
-                    <input ng-model="model.store.name"
+                    <input ng-model="model.merchandise.name"
                     class="form-control">
                 </div>
                 <div class="col-xs-3">
-                    <input ng-model="model.store.firstname"
+                    <input ng-model="model.storeName"
                            class="form-control">
                 </div>
                 <div class="col-xs-2">
-                    <input ng-model="model.store.lastname"
+                    <input ng-model="model.merchandise.price"
                            class="form-control">
                 </div>
                 <div class="col-xs-3">
-                    <input ng-model="model.store.role"
+                    <input ng-model="model.merchandise.description"
                            class="form-control">
                 </div>
                 <div class="col-xs-1">
-                    <span ng-click="model.createStore(model.store)"class="glyphicon glyphicon-plus"></span>
-                    <span ng-click="model.updateStore(model.store)"class="glyphicon glyphicon-ok pull-right"></span>
+                    <span ng-click="model.createMerchandise(model.storeName, model.merchandise)"class="glyphicon glyphicon-plus"></span>
+                    <span ng-click="model.updateMerchandise(model.storeName, model.merchandise)"class="glyphicon glyphicon-ok pull-right"></span>
                 </div>
             </div>
         </li>
 
-        <li ng-repeat="store in model.stores" class="list-group-item">
+        <li ng-repeat="merchandise in model.merchandises" class="list-group-item">
 
             <div class="row">
                 <div class="col-xs-3">
-                    {{store.storename}}
+                    {{merchandise.name}}
                 </div>
                 <div class="col-xs-3">
-                    {{store.firstName}}
+                    {{merchandise._store.name}}
                 </div>
                 <div class="col-xs-2">
-                    {{store.lastName}}
+                    {{merchandise.price}}
                 </div>
                 <div class="col-xs-3">
-                    {{store.role}}
+                    {{merchandise.description}}
                 </div>
                 <div class="col-xs-1 pull-right">
-                    <span ng-click="model.deleteStore(store)" class="glyphicon glyphicon-remove pull-right"></span>
-                    <span ng-click="model.selectStore(store)"class="glyphicon glyphicon-pencil"></span>
+                    <span ng-click="model.deleteMerchandise(merchandise)" class="glyphicon glyphicon-remove pull-right"></span>
+                    <span ng-click="model.selectMerchandise(merchandise)"class="glyphicon glyphicon-pencil"></span>
 
                 </div>
             </div>

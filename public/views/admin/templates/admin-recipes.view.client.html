@@ -1,66 +1,70 @@
 <div class="container-fluid main-container">
     <div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
+    <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
+
     <ul class="list-group">
         <li class="list-group-item">
             <div class="row">
                 <div class="col-xs-3">
-                    Storename
+                    ID
                 </div>
                 <div class="col-xs-3">
-                    Ownername
+                    Recipe Name
                 </div>
-                <div class="col-xs-2">
-                    Lastname
+                <div class="col-xs-3">
+                    Creator Name
                 </div>
-                <div class="col-xs-4">
-                    Role
+                <div class="col-xs-3">
+                    Description
                 </div>
+
             </div>
         </li>
 
         <li class="list-group-item">
             <div class="row">
                 <div class="col-xs-3">
-                    <input ng-model="model.store.name"
+                    {{model.recipe._id}}
+                </div>
+                <div class="col-xs-3">
+                    <input ng-model="model.recipe.name"
                     class="form-control">
                 </div>
                 <div class="col-xs-3">
-                    <input ng-model="model.store.firstname"
+                    <input ng-model="model.username"
                            class="form-control">
                 </div>
                 <div class="col-xs-2">
-                    <input ng-model="model.store.lastname"
+                    <input ng-model="model.recipe.description"
                            class="form-control">
                 </div>
-                <div class="col-xs-3">
-                    <input ng-model="model.store.role"
-                           class="form-control">
-                </div>
+
                 <div class="col-xs-1">
-                    <span ng-click="model.createStore(model.store)"class="glyphicon glyphicon-plus"></span>
-                    <span ng-click="model.updateStore(model.store)"class="glyphicon glyphicon-ok pull-right"></span>
+                    <span ng-click="model.createRecipe(model.username, model.recipe)" class="glyphicon glyphicon-plus"></span>
+                    <span ng-click="model.updateRecipe(model.username, model.recipe)" class="glyphicon glyphicon-ok pull-right"></span>
                 </div>
             </div>
         </li>
 
-        <li ng-repeat="store in model.stores" class="list-group-item">
+        <li ng-repeat="recipe in model.recipes" class="list-group-item">
 
             <div class="row">
                 <div class="col-xs-3">
-                    {{store.storename}}
+                    {{recipe._id}}
                 </div>
                 <div class="col-xs-3">
-                    {{store.firstName}}
+                    {{recipe.name}}
+                </div>
+                <div class="col-xs-3">
+                    {{recipe._creator.username}}
                 </div>
                 <div class="col-xs-2">
-                    {{store.lastName}}
+                    {{recipe.description}}
                 </div>
-                <div class="col-xs-3">
-                    {{store.role}}
-                </div>
+
                 <div class="col-xs-1 pull-right">
-                    <span ng-click="model.deleteStore(store)" class="glyphicon glyphicon-remove pull-right"></span>
-                    <span ng-click="model.selectStore(store)"class="glyphicon glyphicon-pencil"></span>
+                    <span ng-click="model.deleteRecipe(recipe)" class="glyphicon glyphicon-remove pull-right"></span>
+                    <span ng-click="model.selectRecipe(recipe)"class="glyphicon glyphicon-pencil"></span>
 
                 </div>
             </div>

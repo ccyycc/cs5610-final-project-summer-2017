@@ -11,6 +11,7 @@
 
         init();
         function init() {
+            console.log('home controller');
 
             model.searchOptions = [
                 {

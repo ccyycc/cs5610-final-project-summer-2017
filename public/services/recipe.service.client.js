@@ -16,7 +16,17 @@
         this.createYummlyLocalRecipeCopy = createYummlyLocalRecipeCopy;
         this.findYummlyRecipeCopyByYummlyId = findYummlyRecipeCopyByYummlyId;
 
+        this.findAllRecipes = findAllRecipes;
+
         var tempIngredients = {};
+
+        function findAllRecipes() {
+            var url = '/api/recipes';
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
 
         function findYummlyRecipeCopyByYummlyId(recipeId) {
             var url = '/api/yummly/recipeCopy/' + recipeId;

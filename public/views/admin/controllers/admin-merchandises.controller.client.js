@@ -3,46 +3,90 @@
         .module('FinalProject')
         .controller('adminMerchandisesController', adminMerchandisesController);
 
-    function adminMerchandisesController(merchandiseService) {
+    function adminMerchandisesController(storeService, merchandiseService) {
         var model = this;
 
         model.deleteMerchandise = deleteMerchandise;
         model.createMerchandise = createMerchandise;
         model.selectMerchandise = selectMerchandise;
         model.updateMerchandise = updateMerchandise;
-        // model.currentMerchandise = currentMerchandise;
 
         function init() {
-            console.log('admin-merchandise.controller');
 
             findAllMerchandises();
         }
 
         init();
 
-        function updateMerchandise(merchandise) {
-            // console.log(merchandise);
+        function updateMerchandise(storename, merchandise) {
             model.message = false;
-            merchandiseService
-                .updateMerchandise(merchandise._id, merchandise)
-                .then(findAllMerchandises());
-            model.merchandise = {};
+            model.error = false;
+
+            console.log('storename: ' + storename);
+            storeService
+                .findUserByUsername(storename)
+                .then(function (user) {
+                    if (user === undefined) {
+                        model.error = "Username does not exist";
+                    } else if (user.role !== 'RECIPEPRO') {
+                        model.error = 'User is not a merchandise provider';
+                    }else {
+                        var merchandiseId = merchandise._id;
+                        merchandise._creator = user._id;
+                        merchandiseService
+                            .updateMerchandise(merchandiseId, merchandise)
+                            .then(findAllMerchandises());
+
+                        model.merchandise = {};
+                        model.storename = '';
+                    }
+                });
+
         }
 
         function selectMerchandise(merchandise) {
+            model.message = false;
+            model.error = false;
+
             model.merchandise = angular.copy(merchandise);
+            if (merchandise._creator !== undefined) {
+                model.storename = merchandise._creator.storename;
+            }
         }
 
-        function createMerchandise(merchandise) {
-            merchandiseService
-                .createMerchandise(merchandise)
-                .then(function () {
-                    model.message = "The default password is 'password'";
-                })
-                .then(findAllMerchandises());
-        }
-        function deleteMerchandise(merchandise) {
+        function createMerchandise(storename, merchandise) {
             model.message = false;
+            model.error = false;
+
+            // var user = 'undefined';
+
+            console.log('storename: ' + storename);
+
+            storeService
+                .findUserByUsername(storename)
+                .then(function (user) {
+                    if (user === undefined) {
+                        model.error = "Username does not exist";
+                    } else if (user.role !== 'RECIPEPRO') {
+                        model.error = 'User is not a merchandise provider';
+                    } else {
+                        merchandise._creator = user.id;
+
+
+                        merchandiseService
+                            .createMerchandise(user._id, merchandise)
+                            .then(findAllMerchandises());
+
+                        model.merchandise = {};
+                        model.storename = '';
+                    }
+                });
+        }
+
+        function deleteMerchandise(merchandise) {
+            model.error = false;
+            model.message = false;
+
             merchandiseService
                 .deleteMerchandise(merchandise._id)
                 .then(findAllMerchandises());
@@ -55,7 +99,6 @@
                     model.merchandises = merchandises;
                 })
         }
-
 
     }
 

@@ -13,6 +13,7 @@ storeModel.findAllStores = findAllStores;
 
 storeModel.uploadImage = uploadImage;
 
+storeModel.findStoreByName = findStoreByName;
 
 module.exports = storeModel;
 
@@ -27,6 +28,13 @@ function createStore(owner, store) {
         })
 }
 
+function findStoreByName(name) {
+    return storeModel
+        .findOne({'name': name})
+        .then(function (store) {
+            return store;
+        })
+}
 
 function findAllStoresForOwner(owner) {
     return storeModel

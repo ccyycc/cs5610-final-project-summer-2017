@@ -10,6 +10,7 @@ app.post('/api/owner/:ownerId/store', createStore);
 app.get('/api/owner/:ownerId/store', findAllStoresForOwner);
 app.get('/api/store/:storeId', passport.isMerchant,findStoreById);
 app.put('/api/store/:storeId', updateStore);
+app.get('/api/store', findStoreByName);
 app.delete('/api/store/:storeId', deleteStore);
 
 app.get('/api/stores', isAdmin, findAllStores);
@@ -35,6 +36,15 @@ function uploadImage(req, res) {
         });
 }
 
+function findStoreByName(req, res) {
+    var name = req.query.name;
+
+    storeModel
+        .findStoreByName(name)
+        .then(function (store) {
+            res.json(store);
+        })
+}
 
 function createStore(req, res) {
 

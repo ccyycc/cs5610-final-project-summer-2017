@@ -10,6 +10,7 @@
         this.findStoreById = findStoreById;
         this.updateStore = updateStore;
         this.deleteStore = deleteStore;
+        this.findStoreByName = findStoreByName;
 
         this.findAllStores = findAllStores;
 
@@ -33,6 +34,12 @@
 
         function findStoreById(storeId) {
             var url = "/api/store/" + storeId;
+            return $http.get(url)
+                .then(extractData);
+        }
+
+        function findStoreByName(name) {
+            var url='/api/store?name=' + name;
             return $http.get(url)
                 .then(extractData);
         }

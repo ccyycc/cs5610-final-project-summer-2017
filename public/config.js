@@ -42,6 +42,14 @@
                     currentUser: checkLoggedin
                 }
             })
+            .when('/account/inbox', {
+                templateUrl: './views/user/templates/snippets/inbox.view.client.html',
+                controller: 'inboxController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
+            })
             .when('/account/calorie', {
                 templateUrl: './views/user/templates/calorie.view.client.html',
                 controller: 'calorieController',
@@ -198,7 +206,7 @@
         return deferred.promise;
     }
 
-    function checkCurrentUser(userService, $q, $location) {
+    function checkCurrentUser(userService, $q) {
         var deferred = $q.defer();
         userService
             .loggedin()

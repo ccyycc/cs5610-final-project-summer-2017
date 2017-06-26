@@ -9,8 +9,18 @@ app.post('/api/association/like', createLike);
 app.post('/api/association/comment', createComment);
 app.get('/api/association/comment/recipe/:recipeId', findAllRecipeReview);
 app.delete('/api/association/like/:likeId', deleteRecipeLike);
+app.delete('/api/association/comment/:commentId', deleteComment);
 app.get('/api/association/like/from/:userId/to/:recipeId', findLikeForRecipe);
 
+
+function deleteComment(req, res) {
+    var commentId = req.params.commentId;
+    associationModel
+        .deleteComment(commentId)
+        .then(function () {
+            res.sendStatus(200);
+        })
+}
 
 function findLikeForRecipe(req, res) {
     var userId = req.params.userId;
