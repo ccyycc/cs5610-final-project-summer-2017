@@ -8,7 +8,6 @@
 
         model.updateUser = updateUser;
         model.userId = $routeParams.userId;
-        // model.currentUser = currentUser;
 
         function init() {
             findUserById();
@@ -19,7 +18,7 @@
             userService
                 .updateUser(user._id, user)
                 .then(function (user) {
-                    model.user = user;
+                    $location.url('/admin/users');
                 });
         }
 

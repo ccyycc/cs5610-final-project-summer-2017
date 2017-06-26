@@ -209,6 +209,8 @@ function updateUser(req, res) {
     var user = req.body;
     var userId = req.params.userId;
 
+    console.log('update user -- user.service.server');
+    console.log(user);
     userModel
         .updateUser(userId, user)
         .then(function (status) {
@@ -307,7 +309,7 @@ function deleteLikedRecipe(req, res) {
     var rId = req.params.rId;
 
     userModel
-        .deleteFromCollections(userId,rId,'likedRecipes')
+        .deleteFromCollections(userId, rId, 'likedRecipes')
         .then(function (user) {
             res.json(user);
         })
@@ -350,7 +352,7 @@ function renderMessage(req, res) {
     associationModel
         .renderMessage(userId)
         .then(function (response) {
-            res.json(response);
+                res.json(response);
             }
         )
 }
