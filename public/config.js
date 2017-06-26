@@ -42,7 +42,7 @@
                     currentUser: checkLoggedin
                 }
             })
-            .when('/account/inbox', {
+            .when('/account/message', {
                 templateUrl: './views/user/templates/snippets/inbox.view.client.html',
                 controller: 'inboxController',
                 controllerAs: 'model',
