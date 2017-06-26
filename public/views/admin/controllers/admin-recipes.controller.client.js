@@ -110,6 +110,7 @@
                 .findAllRecipes()
                 .then(function (recipes) {
                     model.recipes = recipes;
+                    console.log();
                 })
         }
 

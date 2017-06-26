@@ -1,4 +1,4 @@
-<div class="container-fluid main-container">
+<div class="container-fluid main-container hidden-sm-down" >
     <div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
     <ul class="list-group">
         <li class="list-group-item">
@@ -9,10 +9,10 @@
                 <div class="col-xs-3">
                     Store Name
                 </div>
-                <div class="col-xs-2">
+                <div class="col-sm-2 hidden-xs">
                     Price
                 </div>
-                <div class="col-xs-4">
+                <div class="col-sm-4 col-xs-6">
                     Description
                 </div>
             </div>
@@ -28,15 +28,15 @@
                     <input ng-model="model.storeName"
                            class="form-control">
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-2 hidden-xs">
                     <input ng-model="model.merchandise.price"
                            class="form-control">
                 </div>
-                <div class="col-xs-3">
+                <div class="col-sm-3 col-xs-4">
                     <input ng-model="model.merchandise.description"
                            class="form-control">
                 </div>
-                <div class="col-xs-1">
+                <div class="col-sm-1 col-xs-2">
                     <span ng-click="model.createMerchandise(model.storeName, model.merchandise)"class="glyphicon glyphicon-plus"></span>
                     <span ng-click="model.updateMerchandise(model.storeName, model.merchandise)"class="glyphicon glyphicon-ok pull-right"></span>
                 </div>
@@ -55,11 +55,11 @@
                 <div class="col-xs-2">
                     {{merchandise.price}}
                 </div>
-                <div class="col-xs-3">
-                    {{merchandise.description}}
+                <div class="col-sm-3 col-xs-4">
+                {{merchandise.description}}
                 </div>
-                <div class="col-xs-1 pull-right">
-                    <span ng-click="model.deleteMerchandise(merchandise)" class="glyphicon glyphicon-remove pull-right"></span>
+                <div class="col-sm-1 col-xs-2 pull-right">
+                <span ng-click="model.deleteMerchandise(merchandise)" class="glyphicon glyphicon-remove pull-right"></span>
                     <span ng-click="model.selectMerchandise(merchandise)"class="glyphicon glyphicon-pencil"></span>
 
                 </div>

@@ -33,6 +33,7 @@
             model.user = angular.copy(user);
         }
 
+
         function createUser(user) {
             userService
                 .createUser(user)

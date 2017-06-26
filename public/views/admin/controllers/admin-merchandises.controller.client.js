@@ -24,21 +24,15 @@
 
             console.log('storename: ' + storename);
             storeService
-                .findUserByUsername(storename)
-                .then(function (user) {
-                    if (user === undefined) {
-                        model.error = "Username does not exist";
-                    } else if (user.role !== 'RECIPEPRO') {
-                        model.error = 'User is not a merchandise provider';
-                    }else {
-                        var merchandiseId = merchandise._id;
-                        merchandise._creator = user._id;
+                .findStoreByName(storename)
+                .then(function (store) {
+                    if (store === undefined) {
+                        model.error = "Store does not exist";
+                    } else {
+                        merchandise._creator = store._id;
                         merchandiseService
-                            .updateMerchandise(merchandiseId, merchandise)
+                            .updateMerchandise(merchandise._id, merchandise)
                             .then(findAllMerchandises());
-
-                        model.merchandise = {};
-                        model.storename = '';
                     }
                 });
 
@@ -48,37 +42,29 @@
             model.message = false;
             model.error = false;
 
-            model.merchandise = angular.copy(merchandise);
-            if (merchandise._creator !== undefined) {
-                model.storename = merchandise._creator.storename;
-            }
+            model.merchandise = merchandise;
+            model.storeName = merchandise._store.name;
         }
 
         function createMerchandise(storename, merchandise) {
             model.message = false;
             model.error = false;
 
-            // var user = 'undefined';
+            // var store = 'undefined';
 
             console.log('storename: ' + storename);
 
             storeService
-                .findUserByUsername(storename)
-                .then(function (user) {
-                    if (user === undefined) {
-                        model.error = "Username does not exist";
-                    } else if (user.role !== 'RECIPEPRO') {
-                        model.error = 'User is not a merchandise provider';
+                .findStoreByName(storename)
+                .then(function (store) {
+                    if (store === undefined) {
+                        model.error = "Store does not exist";
                     } else {
-                        merchandise._creator = user.id;
-
-
+                        merchandise._creator = store.id;
                         merchandiseService
-                            .createMerchandise(user._id, merchandise)
+                            .createMerchandise(store._id, merchandise)
                             .then(findAllMerchandises());
 
-                        model.merchandise = {};
-                        model.storename = '';
                     }
                 });
         }
@@ -97,6 +83,8 @@
                 .findAllMerchandises()
                 .then(function (merchandises) {
                     model.merchandises = merchandises;
+                    model.merchandise = {};
+                    model.storeName = '';
                 })
         }
 

@@ -6,6 +6,7 @@ var merchandiseModel = mongoose.model('merchandiseModel', merchandiseSchema);
 merchandiseModel.createMerchandise = createMerchandise;
 merchandiseModel.findAllMerchandisesForStore = findAllMerchandisesForStore;
 merchandiseModel.findMerchandiseById = findMerchandiseById;
+merchandiseModel.findAllMerchandises = findAllMerchandises;
 merchandiseModel.updateMerchandise = updateMerchandise;
 merchandiseModel.deleteMerchandise = deleteMerchandise;
 
@@ -18,7 +19,12 @@ function uploadImage(merchandiseId, filename) {
     return merchandiseModel.update({_id: merchandiseId}, {$set: {image: '/uploads/merchandise/picture/' + filename}});
 }
 
-
+function findAllMerchandises() {
+    return merchandiseModel
+        .find()
+        .populate('_store')
+        .exec();
+}
 
 function createMerchandise(store, merchandise) {
     merchandise._store = store;

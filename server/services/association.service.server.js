@@ -187,3 +187,11 @@ function createLike(req, res) {
             res.sendStatus(500);
         })
 }
+
+function isAdmin(req, res, next) {
+    if (req.isAuthenticated() && req.user.role === 'ADMIN') {
+        next();
+    } else {
+        res.sendStatus(401);
+    }
+}
