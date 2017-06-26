@@ -6,30 +6,25 @@
     function inboxController($routeParams, userService, $location, currentUser) {
 
         var model = this;
-        model.userId = currentUser.userId;
 
         model.renderMessage = renderMessage;
         model.deleteMessage = deleteMessage;
 
 
         function init() {
-            renderUser(currentUser)
+            model.userId = currentUser._id;
+            renderMessage()
                 // .error(userError());
         }
         init();
 
         function renderMessage() {
+            // console.log(model.userId);
             userService
                 .populateArr(model.userId, 'messages')
                 .then(function (messages) {
-                    for (var m = 0; m < messages.length; m++) {
-                        userService
-                            .findUserById(messages[m].fromWhom)
-                            .then(function (user) {
-                                messages[m].fromWhom = user;
-                            })
-                    }
                     model.messages = messages;
+                    
                 })
         }
 

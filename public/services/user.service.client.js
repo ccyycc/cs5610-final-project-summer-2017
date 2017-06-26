@@ -30,7 +30,7 @@
             deleteLikedRecipe: deleteLikedRecipe,
             sendMessage: sendMessage,
             deleteMessage: deleteMessage,
-            renderMessage: renderMessage,
+            // renderMessage: renderMessage,
             populateArr: populateArr,
             countBmi: countBmi
             // showFollowings: showFollowings,
@@ -54,6 +54,7 @@
                     return response.data;
                 })
         }
+
 
         function follow(followingId) {
             var url='/api/follow/' + followingId;

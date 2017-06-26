@@ -206,16 +206,21 @@
         return deferred.promise;
     }
 
-    function checkCurrentUser(userService, $q) {
+    function checkCurrentUser(userService, $q, $location) {
         var deferred = $q.defer();
+        console.log('hello');
         userService
             .loggedin()
             .then(function (user) {
+                console.log(user);
                 if (user === '0') {
                     deferred.resolve({});
                 } else {
                     deferred.resolve(user);
                 }
+            })
+            .catch(function (error) {
+                console.log(error);
             });
         return deferred.promise;
     }

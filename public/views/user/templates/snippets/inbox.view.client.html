@@ -2,7 +2,7 @@
 
 
 <div class="container-fluid main-container">
-    <ul class="list-group" ng-repeat="message in model.messages">
+    <ul class="list-group">
         <li class="list-group-item">
             <div class="row">
                 <div class="col-xs-2">
@@ -18,25 +18,27 @@
                 </div>
             </div>
         </li>
-        <li class="list-group-item">
-            <div class="row">
-                <div class="col-xs-2">
-                    <img ng-src="{{message.fromWhom.photo}}" width="50%"/>
+        <div ng-repeat="message in model.messages">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <img ng-src="{{message.fromWhom.photo}}" width="50%"/>
+                    </div>
+                    <div class="col-xs-2">
+                        {{message.fromWhom.username}}
+                    </div>
+                    <div class="col-xs-6">
+                        {{message.content}}
+                    </div>
+                    <div class="col-xs-2">
+                        {{message.time | date}}
+                    </div>
+                    <a ng-click="model.deleteMessage(message)"
+                       class="pull-right">
+                        <span class="glyphicon glyphicon-remove"></span></a>
                 </div>
-                <div class="col-xs-2">
-                    {{message.fromWhom.username}}
-                </div>
-                <div class="col-xs-6">
-                    {{message.content}}
-                </div>
-                <div class="col-xs-2">
-                    {{message.time}}
-                </div>
-                <a ng-click="model.deleteMessage(message)"
-                   class="pull-right">
-                    <span class="glyphicon glyphicon-remove"></span></a>
-            </div>
-        </li>
+            </li>
+        </div>
 
     </ul>
 </div>
