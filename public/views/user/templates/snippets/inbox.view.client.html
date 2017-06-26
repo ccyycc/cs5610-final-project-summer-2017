@@ -25,7 +25,7 @@
                         <img ng-src="{{message.fromWhom.photo}}" width="50%"/>
                     </div>
                     <div class="col-xs-2">
-                        {{message.fromWhom.username}}
+                        <a ng-href="#!/profile/{{message.fromWhom._id}}">{{message.fromWhom.username}}</a>
                     </div>
                     <div class="col-xs-5">
                         {{message.content}}
