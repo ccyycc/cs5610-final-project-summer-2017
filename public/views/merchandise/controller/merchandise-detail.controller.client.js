@@ -40,7 +40,7 @@
                         model.merchandise=merchandise;
 
                         storeService
-                            .findStoreById(model.merchandise._store)
+                            .findStoreById(model.storeId)
                             .then(function(store){
                             model.store = store;
                             model.canEdit=(store._owner===currentUser._id ||currentUser.role ==="ADMIN");
@@ -62,6 +62,12 @@
                                     model.like = true;
                                     model.likeAssociation=likes[0];
                                 }
+                            })
+
+                        associationService
+                            .findAssociationForTarget("LIKE","merchandise", model.merchandiseId)
+                            .then(function (likes) {
+                                model.numLike = likes.length
                             })
                     },
                     function(){
@@ -104,6 +110,7 @@
                 .then(function (association) {
                     model.likeAssociation = association;
                     model.like=true;
+                    model.numLike++
                 });
         }
 
@@ -113,6 +120,7 @@
                 .deleteAssociationById(model.likeAssociation._id)
                 .then(function (res) {
                     model.like=false;
+                    model.numLike--;
                     delete model.likeAssociation['_id'];
                 });
         }

@@ -29,15 +29,15 @@
 
             <h2 class="page-header">{{model.store.name}}
                 <a class="btn pull-right" ng-show="model.like" ng-click="model.unlikeStore()">
-                    <span class="glyphicon glyphicon-heart"></span>
+                    <span class="glyphicon glyphicon-heart">{{model.numLike}}</span>
                 </a>
                 <a class="btn pull-right" ng-show="!model.like" ng-click="model.likeStore()">
-                    <span class="glyphicon glyphicon-heart-empty"></span>
+                    <span class="glyphicon glyphicon-heart-empty">{{model.numLike}}</span>
                 </a>
             </h2>
 
             <h3 class="sub-header">Description</h3>
-            <span>model.store.description</span>
+            <span>{{model.store.description}}</span>
 
 
             <h3 class="sub-header">Hours</h3>

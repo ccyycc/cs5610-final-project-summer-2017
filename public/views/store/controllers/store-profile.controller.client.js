@@ -15,9 +15,15 @@
         model.likeStore = likeStore;
         model.unlikeStore = unlikeStore;
 
+        model.logout = logout;
+
         function init() {
             //setup
             model.storeId = $routeParams['storeId'];
+
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
 
             model.comments = [];
             model.newComment = undefined;
@@ -67,11 +73,25 @@
                                 model.likeAssociation = likes[0];
                             }
                         })
+
+                    associationService
+                        .findAssociationForTarget("LIKE","store", model.storeId)
+                        .then(function (likes) {
+                            model.numLike = likes.length
+                        })
                 });
 
         }
 
         init();
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
 
         function getStoreURLAddress(store) {
             var address = store.address;
@@ -125,6 +145,7 @@
                 .then(function (association) {
                     model.likeAssociation = association;
                     model.like = true;
+                    model.numLike++;
                 });
         }
 
@@ -133,6 +154,7 @@
                 .deleteAssociationById(model.likeAssociation._id)
                 .then(function (res) {
                     model.like = false;
+                    model.numLike--;
                     delete model.likeAssociation['_id'];
                 });
         }
@@ -151,6 +173,7 @@
             }
             return "";
         }
+
 
     }
 })();
