@@ -3,16 +3,16 @@
     <ul class="list-group">
         <li class="list-group-item">
             <div class="row">
-                <div class="col-xs-3">
-                    Username
+                <div class="col-sm-3 col-xs-5">
+                Username
                 </div>
-                <div class="col-xs-3">
+                <div class="col-sm-3 hidden-xs">
                     Firstname
                 </div>
-                <div class="col-xs-2">
+                <div class="col-sm-2 hidden-xs">
                     Lastname
                 </div>
-                <div class="col-xs-4">
+                <div class="col-sm-4 col-xs-6">
                     Role
                 </div>
             </div>
@@ -20,23 +20,23 @@
 
         <li class="list-group-item">
             <div class="row">
-                <div class="col-xs-3">
+                <div class="col-sm-3 col-xs-5">
                     <input ng-model="model.user.username"
                     class="form-control">
                 </div>
-                <div class="col-xs-3">
+                <div class="col-sm-3 hidden-xs">
                     <input ng-model="model.user.firstname"
                            class="form-control">
                 </div>
-                <div class="col-xs-2">
+                <div class="col-sm-2 hidden-xs">
                     <input ng-model="model.user.lastname"
                            class="form-control">
                 </div>
-                <div class="col-xs-3">
+                <div class="col-sm-3 col-xs-5">
                     <input ng-model="model.user.role"
                            class="form-control">
                 </div>
-                <div class="col-xs-1">
+                <div class="col-sm-1 col-xs-2">
                     <span ng-click="model.createUser(model.user)"class="glyphicon glyphicon-plus"></span>
                     <span ng-click="model.updateUser(model.user)"class="glyphicon glyphicon-ok pull-right"></span>
                 </div>
@@ -46,20 +46,20 @@
         <li ng-repeat="user in model.users" class="list-group-item">
 
             <div class="row">
-                <div class="col-xs-3">
-                    {{user.username}}
+                <div class="col-sm-3 col-xs-5">
+                {{user.username}}
                 </div>
-                <div class="col-xs-3">
+                <div class="col-sm-3 hidden-xs">
                     {{user.firstName}}
                 </div>
-                <div class="col-xs-2">
+                <div class="col-sm-2 hidden-xs">
                     {{user.lastName}}
                 </div>
-                <div class="col-xs-3">
+                <div class="col-sm-3 col-xs-5">
                     {{user.role}}
                 </div>
-                <div class="col-xs-1 pull-right">
-                    <span ng-click="model.deleteUser(user)" class="glyphicon glyphicon-remove pull-right"></span>
+                <div class="col-sm-1 col-xs-2">
+                <span ng-click="model.deleteUser(user)" class="glyphicon glyphicon-remove pull-right"></span>
                     <span ng-click="model.selectUser(user)"class="glyphicon glyphicon-pencil"></span>
 
                 </div>

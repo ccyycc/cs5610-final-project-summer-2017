@@ -56,6 +56,7 @@ app.get('/api/deleteLikedRecipe/:rId', deleteLikedRecipe);
 
 app.put('/api/message/:userId', sendMessage);
 app.get('/api/user/populate/:arrName/:userId', populateArr);
+app.get('/api/renderMessage', renderMessage);
 // app.get('/api/showFollowings/:userId', showFollowings);
 // app.get('/api/showFollowers/:userId', showFollowers);
 app.post('/api/account/bmiCal', bmiCal);
@@ -343,6 +344,17 @@ function populateArr(req, res) {
         })
 }
 
+function renderMessage(req, res) {
+    var userId = req.user._id;
+    var associationModel = require('../models/association/association.model.server');
+    associationModel
+        .renderMessage(userId)
+        .then(function (response) {
+            res.json(response);
+            }
+        )
+}
+
 function bmiCal(req, res) {
     var weight = req.body.weight;
     var height = req.body.height * 2.54;
@@ -369,15 +381,6 @@ function bmiCal(req, res) {
             userModel
                 .addbmr(req.user._id, result.body.bmr.value);
         });
-
-    // unirest.post("https://bmi.p.mashape.com/")
-    //     .header("X-Mashape-Key", "XW5gPJqz7PmshypQe1SzDbLzDIxvp1Bf6F7jsntRZbPSjSpS2V")
-    //     .header("Content-Type", "application/json")
-    //     .header("Accept", "application/json")
-    //     .send(sendJson)
-    //     .end(function (result) {
-    //         console.log(result);
-    //     });
 }
 
 

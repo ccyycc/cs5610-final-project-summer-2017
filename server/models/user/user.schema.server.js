@@ -22,7 +22,7 @@ var userSchema = mongoose.Schema({
 
     dailyCalorieBurned: Number,
 
-    messages: [{type: mongoose.Schema.ObjectId, ref: 'commentModel'}],
+    messages: [{type: mongoose.Schema.ObjectId, ref: 'associationModel'}],
 
     // followers: [String],
     // followings: [String]

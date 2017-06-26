@@ -29,6 +29,8 @@
             addLikedRecipe: addLikedRecipe,
             deleteLikedRecipe: deleteLikedRecipe,
             sendMessage: sendMessage,
+            deleteMessage: deleteMessage,
+            renderMessage: renderMessage,
             populateArr: populateArr,
             countBmi: countBmi
             // showFollowings: showFollowings,
@@ -43,6 +45,25 @@
                     return response.data;
                 })
         }
+
+        function deleteMessage(messageId) {
+            var url='/api/association/comment/' + messageId;
+            // console.log('delete: '+ url);
+
+            return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function renderMessage() {
+            var url = '/api/renderMessage';
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
 
         function follow(followingId) {
             var url='/api/follow/' + followingId;
@@ -157,6 +178,7 @@
 
         function findUserByUsername(username) {
             var url = "/api/checkname?username=" + username;
+            console.log(url + '--url--uesr.service.client');
             return $http.get(url)
                 .then(function (response) {
                     // console.log(response);

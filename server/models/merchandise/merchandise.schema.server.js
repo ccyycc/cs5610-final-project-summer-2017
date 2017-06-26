@@ -5,13 +5,13 @@ var merchandiseSchema = mongoose.Schema({
     //     ref: "UserModel",
     //     required:true
     // },
-    _store:{type: mongoose.Schema.ObjectId, ref: 'storeModel'},
+    _store: {type: mongoose.Schema.ObjectId, ref: 'storeModel'},
     name: {type: String},
     description: String,
-    image:String,
+    image: String,
     price: Number,
-    unit:String,
-    comments: [{type:String}],
+    unit: String,
+    comments: [{type: String}],
     dateCreated: {type: Date, default: Date.now},
     dateUpdated: {type: Date, default: Date.now}
 }, {collection: "merchandise"});

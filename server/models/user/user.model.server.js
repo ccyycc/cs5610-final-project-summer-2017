@@ -132,9 +132,9 @@ function unfollow(followerId, followingId) {
 }
 
 function sendMessage(myId, userId, message) {
-    var messageModel = require('../comment/comment.model.server');
+    var associationModel = require('../association/association.model.server');
 
-    return messageModel
+    return associationModel
         .createMessage(myId, userId, message)
         .then(function (message) {
             return userModel
@@ -146,17 +146,11 @@ function sendMessage(myId, userId, message) {
 }
 
 function populateArr(userId, arrName) {
-    // console.log(userId + " " + arrName + " user.model.server--populateArr");
     return userModel
         .findById(userId)
         .populate(arrName)
         .exec()
-        // .then(function (user) {
-        //     console.log(user[arrName]);
-        //     return user[arrName];
-        // })
 }
-
 
 ////////////////////purely user part////////////////
 function createUser(user) {
@@ -164,8 +158,6 @@ function createUser(user) {
         user.role = 'USER';
     }
     user.photo = './uploads/default_profile.png';
-    // user.followers = [];
-    // user.followings = [];
 
     console.log('createUser user.model.server ' + user);
     return userModel

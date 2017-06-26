@@ -11,8 +11,11 @@ app.get('/api/owner/:ownerId/store', findAllStoresForOwner);
 app.get('/api/store/:storeId', findStoreById);
 // app.get('/api/store/:storeId', passport.isMerchant,findStoreById);
 app.put('/api/store/:storeId', updateStore);
+app.get('/api/store', findStoreByName);
 app.delete('/api/store/:storeId', deleteStore);
 app.get('/api/store/search/:storeName',findStoreByName);
+
+app.get('/api/stores', isAdmin, findAllStores);
 
 app.post('/api/upload/store/profile', upload.single('myFile'), uploadImage);
 
@@ -46,11 +49,21 @@ function uploadImage(req, res) {
         });
 }
 
+function findStoreByName(req, res) {
+    var name = req.query.name;
+
+    storeModel
+        .findStoreByName(name)
+        .then(function (store) {
+            res.json(store);
+        })
+}
 
 function createStore(req, res) {
 
     var store = req.body;
     var ownerId = req.params.ownerId;
+
     storeModel
         .createStore(ownerId, store)
         .then(function (store) {
@@ -75,6 +88,17 @@ function findAllStoresForOwner(req, res) {
             function () {
                 res.sendStatus(500);
             });
+}
+
+function findAllStores(req, res) {
+    storeModel
+        .findAllStores()
+        .then(function (stores) {
+            res.json(stores);
+        })
+        .catch(function (err) {
+            res.send(err);
+        })
 }
 
 function findStoreById(req, res) {
@@ -125,4 +149,11 @@ function deleteStore(req, res) {
         )
 }
 
+function isAdmin(req, res, next) {
+    if (req.isAuthenticated() && req.user.role === 'ADMIN') {
+        next();
+    } else {
+        res.sendStatus(401);
+    }
+}
 
