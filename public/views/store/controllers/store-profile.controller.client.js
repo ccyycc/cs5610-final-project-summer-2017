@@ -9,6 +9,7 @@
 
         model.editStoreProfile = editStoreProfile;
         model.goToProductList = goToProductList;
+        model.goToProfilePage = goToProfilePage;
 
         model.createComment = createComment;
         model.deleteComment = deleteComment;
@@ -172,6 +173,11 @@
                        + address.zip;
             }
             return "";
+        }
+
+        function goToProfilePage() {
+            $location.url('/profile/'+model.seller._id);
+
         }
 
 

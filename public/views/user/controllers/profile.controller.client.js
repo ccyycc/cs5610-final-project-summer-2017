@@ -150,6 +150,8 @@
             }
         }
 
+
+
         function checkCurrentProfileRole() {
             if ($routeParams.uid) {
                 userService
