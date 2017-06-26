@@ -53,7 +53,6 @@ app.get('/api/unfollow/:followingId', unfollow);
 app.get('/api/addLikedRecipe/:rId', addLikedRecipe);
 app.get('/api/deleteLikedRecipe/:rId', deleteLikedRecipe);
 
-
 app.put('/api/message/:userId', sendMessage);
 app.get('/api/user/populate/:arrName/:userId', populateArr);
 app.get('/api/renderMessage', renderMessage);

@@ -3,7 +3,8 @@
         .module('FinalProject')
         .controller('merchandiseDetailController', merchandiseDetailController);
 
-    function merchandiseDetailController($location, $routeParams, merchandiseService, associationService, currentUser, storeService) {
+    function merchandiseDetailController($location, $routeParams, merchandiseService, associationService,
+                                         currentUser, storeService) {
         var model = this;
         //event handler
         model.editMerchandise = editMerchandise;
@@ -12,11 +13,17 @@
         model.deleteComment = deleteComment;
         model.likeMerchandise = likeMerchandise;
         model.unlikeMerchandise = unlikeMerchandise;
+        model.logout = logout;
 
 
         init();
 
         function init() {
+
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
+
             model.sectionTitle = "Product Detail";
             model.storeId = $routeParams['storeId'];
             model.merchandiseId = $routeParams['merchandiseId'];
@@ -70,6 +77,15 @@
                     }
                 );
         }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
+
 
         function editMerchandise() {
             $location.url("/store/"+model.storeId+"/merchandise/"+model.merchandiseId+"/edit");

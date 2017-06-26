@@ -3,13 +3,17 @@
         .module('FinalProject')
         .controller('merchandiseEditController', merchandiseEditController);
 
-    function merchandiseEditController($location, $routeParams, merchandiseService,currentUser) {
+    function merchandiseEditController($location, $routeParams, merchandiseService,
+                                       currentUser, userService) {
+
         var model = this;
+
         //event handler.
         model.createMerchandise = createMerchandise;
         model.updateMerchandise = updateMerchandise;
         model.deleteMerchandise = deleteMerchandise;
         model.cancelMerchandise = navToMerchandise;
+        model.logout = logout;
 
         init();
 
@@ -17,6 +21,10 @@
             if(!(currentUser.role === "MERCHANT" || currentUser.role === "ADMIN")){
                 $lcoation.url('/');
                 return;
+            }
+
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
             }
 
             model.storeId = $routeParams['storeId'];
@@ -59,6 +67,13 @@
             }
         }
 
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
 
         function createMerchandise() {
             model.merchandiseNameStyle = "";

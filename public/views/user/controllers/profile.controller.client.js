@@ -21,6 +21,10 @@
         // model.showProducts = showProducts;
 
         function init() {
+            if (currentUser._id === $routeParams.uid){
+                $location.url("/profile", false);
+            }
+
             if ($routeParams.uid) {
                 model.userId = $routeParams.uid;
             } else {

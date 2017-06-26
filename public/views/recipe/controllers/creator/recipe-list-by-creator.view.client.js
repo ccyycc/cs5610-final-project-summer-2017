@@ -3,21 +3,23 @@
         .module("FinalProject")
         .controller("recipeListByCreatorController", RecipeListByCreatorController);
 
-    function RecipeListByCreatorController($routeParams, $location, recipeService, currentUser) {
+    function RecipeListByCreatorController($routeParams, $location, recipeService, currentUser, userService) {
 
         var model = this;
 
-        model.sectionTitle = 'Recipe List from ' + currentUser.username;
-        model.creatorId = $routeParams.creatorId;
-        model.ifCreator = ifCreator;
+        model.canEdit = canEdit;
         model.createRecipe = createRecipe;
+        model.logout = logout;
 
         function init() {
 
-            // if (currentUser.roles.indexOf('RECIPEPRO') === -1) {
-            //
-            //     // $location.url('/account')
-            // }
+            model.sectionTitle = 'Recipe List from ' + currentUser.username;
+            model.creatorId = $routeParams.creatorId;
+
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
+
             recipeService
                 .findAllRecipesForCreator(model.creatorId)
                 .then(function (recipes) {
@@ -33,9 +35,16 @@
 
         init();
 
-        function ifCreator() {
-            console.log(currentUser._id === model.creatorId);
-            return currentUser._id === model.creatorId;
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
+
+        function canEdit() {
+            return ((currentUser._id === model.creatorId) || (currentUser.role === 'ADMIN'));
         }
 
         function createRecipe() {

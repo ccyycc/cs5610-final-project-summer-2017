@@ -3,15 +3,22 @@
         .module('FinalProject')
         .controller('merchandiseListController', merchandiseListController);
 
-    function merchandiseListController($location, $routeParams, merchandiseService,currentUser) {
+    function merchandiseListController($location, $routeParams, merchandiseService,
+                                       currentUser, userService) {
         var model = this;
         //event handler
 
         model.createMerchandise = createMerchandise;
+        model.logout = logout;
 
         init();
 
         function init() {
+
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
+
             model.sectionTitle = "Product List";
             model.storeId = $routeParams['storeId'];
             model.merchandises = [];
@@ -25,6 +32,14 @@
                         $location.url('/store/'+model.storeId);
                     }
                 );
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
         }
 
         function createMerchandise() {

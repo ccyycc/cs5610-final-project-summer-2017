@@ -7,11 +7,6 @@
 
         var model = this;
 
-        model.creatorId = $routeParams.creatorId;
-        model.recipeId = $routeParams.recipeId;
-
-        model.sectionTitle = "Edit Recipe";
-
         model.createSingleIngredient = createSingleIngredient;
         model.selectSingleIngredient = selectSingleIngredient;
         model.editSingleIngredient = editSingleIngredient;
@@ -24,16 +19,18 @@
 
         function init() {
 
-            if ((currentUser._id !== model.creatorId) && (currentUser.role !== 'ADMIN')) {
+            model.creatorId = $routeParams.creatorId;
+            model.recipeId = $routeParams.recipeId;
+            model.sectionTitle = "Edit Recipe";
+            model.newIngredient = {};
+
+            if (!canEdit()) {
                 $location.url('/');
             }
 
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }
-
-
-            model.newIngredient = {};
 
             ifNewRecipe();
 
@@ -52,6 +49,9 @@
 
         init();
 
+        function canEdit() {
+            return ((currentUser._id === model.creatorId) || (currentUser.role === 'ADMIN'));
+        }
         function logout() {
             userService
                 .logout()
