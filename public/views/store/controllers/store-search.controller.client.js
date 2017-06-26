@@ -3,18 +3,31 @@
         .module('FinalProject')
         .controller('StoreSearchController', storeSearchController);
 
-    function storeSearchController($routeParams, $location, MapService, $window) {
+    function storeSearchController($routeParams, $location, MapService, $window,
+                                   currentUser,userService) {
         var model = this;
         this.searchWithCoords = searchWithCoords;
         this.searchWithAddress = searchWithAddress;
 
 
         function init() {
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
+
             model.sectionTitle = "Nearby search";
             model.address = {};
         }
 
         init();
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
 
 
         function searchWithCoords() {

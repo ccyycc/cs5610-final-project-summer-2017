@@ -3,10 +3,11 @@
         .module('FinalProject')
         .controller('storeProfileEditController', storeProfileEditController);
 
-    function storeProfileEditController($routeParams, $location, storeService, $sce, currentUser) {
+    function storeProfileEditController($routeParams, $location, storeService, $sce, currentUser,userService) {
         var model = this;
         model.updateStore = updateStore;
         model.createStore = createStore;
+        model.logout = logout;
 
         init();
 
@@ -15,6 +16,10 @@
             model.mode = $routeParams['mode'];
             model.user = currentUser;
             model.store = {};
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
+
             // model.store = storeService.findStoreById(model.storeId);
             model.days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
             if (model.mode === "new") {
@@ -80,6 +85,14 @@
                 store.hours[i].open = new Date(store.hours[i].open);
                 store.hours[i].close = new Date(store.hours[i].close);
             }
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
         }
     }
 })();
