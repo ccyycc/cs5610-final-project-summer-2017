@@ -28,6 +28,11 @@
 
 
             <h2 class="page-header">{{model.store.name}}
+
+
+                <a class="btn pull-right" ng-if="model.canEdit" ng-click="model.editStoreProfile()">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
                 <a class="btn pull-right" ng-show="model.like" ng-click="model.unlikeStore()">
                     <span class="glyphicon glyphicon-heart">{{model.numLike}}</span>
                 </a>
@@ -60,11 +65,11 @@
                         allowfullscreen="">
                 </iframe>
             </div>
+            <div class="section-top-margin">
             <a ng-click="model.goToProductList()"
                class="btn btn-block btn-info">Go to product List</a>
+            </div>
 
-            <a ng-if="model.canEdit" ng-click="model.editStoreProfile()"
-               class="btn btn-block btn-primary">Edit</a>
 
 
             <!--<div>-->

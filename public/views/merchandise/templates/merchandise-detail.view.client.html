@@ -12,6 +12,10 @@
         </div>
         <div class="col-sm-10 col-sm-offset-2 main">
             <h2 class="page-header">{{model.merchandise.name}}
+
+                <a class="btn pull-right" ng-if="model.canEdit" ng-click="model.editMerchandise()">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
                 <a class="btn pull-right" ng-show="model.like" ng-click="model.unlikeMerchandise()">
                     <span class="glyphicon glyphicon-heart">{{model.numLike}}</span>
                 </a>
@@ -98,9 +102,7 @@
                     </ul>
                 </div>
             </div>
-            <a ng-if="model.canEdit"
-               ng-click="model.editMerchandise()"
-               class="btn btn-block btn-primary">Edit</a>
+
         </div>
     </div>
 </div>
