@@ -3,7 +3,7 @@
         .module('FinalProject')
         .controller('accountController', accountController);
 
-    function accountController($routeParams, userService, $location, currentUser, $rootScope) {
+    function accountController($routeParams, userService, $location, currentUser) {
 
         var model = this;
         model.sectionTitle = "Account";
@@ -23,8 +23,7 @@
             userService
                 .logout()
                 .then(function () {
-                    $rootScope.currentUser = null;
-                    $location.url('/login');
+                    $location.url('/');
                 });
         }
 

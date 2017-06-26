@@ -3,11 +3,11 @@
         .module("FinalProject")
         .controller("recipeEditController", RecipeEditController);
 
-    function RecipeEditController($routeParams, $location, currentUser, recipeService) {
+    function RecipeEditController($routeParams, $location, recipeService, currentUser, userService) {
 
         var model = this;
 
-        model.creatorId = currentUser._id;
+        model.creatorId = $routeParams.creatorId;
         model.recipeId = $routeParams.recipeId;
 
         model.sectionTitle = "Edit Recipe";
@@ -20,11 +20,23 @@
         model.updateRecipe = updateRecipe;
         model.deleteRecipe = deleteRecipe;
         model.saveRecipe = saveRecipe;
+        model.logout = logout;
 
         function init() {
 
+            if ((currentUser._id !== model.creatorId) && (currentUser.role !== 'ADMIN')) {
+                $location.url('/');
+            }
+
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
+
+
             model.newIngredient = {};
+
             ifNewRecipe();
+
             recipeService
                 .findAllRecipesForCreator(model.creatorId)
                 .then(function (recipes) {
@@ -39,6 +51,14 @@
         }
 
         init();
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
 
         function ifNewRecipe() {
             return $location.hash() ? model.ifNewRecipe = true : model.ifNewRecipe = false;

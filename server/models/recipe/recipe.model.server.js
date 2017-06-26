@@ -40,7 +40,7 @@ function createRecipe(userId, recipe) {
     return recipeModel
         .create(recipe)
         .then(function (recipe) {
-            console.log(recipe);
+            // console.log(recipe);
             return recipe;
         });
 }

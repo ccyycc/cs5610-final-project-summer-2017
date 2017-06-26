@@ -3,12 +3,11 @@
         .module("FinalProject")
         .controller("recipeListByCreatorController", RecipeListByCreatorController);
 
-    function RecipeListByCreatorController($routeParams, $location, currentUser,recipeService) {
+    function RecipeListByCreatorController($routeParams, $location, recipeService, currentUser) {
 
         var model = this;
 
         model.sectionTitle = 'Recipe List from ' + currentUser.username;
-        model.currentUserId = currentUser._id;
         model.creatorId = $routeParams.creatorId;
         model.ifCreator = ifCreator;
         model.createRecipe = createRecipe;
@@ -35,7 +34,8 @@
         init();
 
         function ifCreator() {
-            return model.currentUserId === model.creatorId;
+            console.log(currentUser._id === model.creatorId);
+            return currentUser._id === model.creatorId;
         }
 
         function createRecipe() {

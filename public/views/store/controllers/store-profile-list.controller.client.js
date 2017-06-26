@@ -3,18 +3,22 @@
         .module("FinalProject")
         .controller("storeProfileSearchController", storeProfileSearchController);
 
-    function storeProfileSearchController($location, storeService) {
+    function storeProfileSearchController($location, storeService, userService, currentUser) {
 
         var model = this;
         model.searchStores = searchStores;
         model.goToDetail = goToDetail;
-
+        model.logout = logout;
         // userId = currentUser._id;
 
         init();
 
         function init() {
-            model.sectionTitle = "Store Search";
+            model.sectionTitle = "Store Search Result";
+
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
 
             var preSearch = $location.search();
             if (preSearch && preSearch.search.length > 0) {
@@ -23,6 +27,14 @@
             }
         }
 
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
 
         function searchStores() {
             storeService

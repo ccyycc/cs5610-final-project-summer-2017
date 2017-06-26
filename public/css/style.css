@@ -291,6 +291,9 @@ a:focus, a:hover {
     width: 90px;
 }
 
+.section-search-bar {
+    padding: 30px 0 10px 0;
+}
 @media (min-width: 768px) {
     .navbar > .container-fluid .navbar-brand {
         margin-left: 0;

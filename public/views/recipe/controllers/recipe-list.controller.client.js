@@ -3,16 +3,23 @@
         .module("FinalProject")
         .controller("recipeListController", RecipeListController);
 
-    function RecipeListController($location, recipeService, yummlyService) {
+    function RecipeListController($location, recipeService, yummlyService, userService, currentUser) {
 
         var model = this;
         model.searchRecipes = searchRecipes;
         model.goToDetail = goToDetail;
         model.getMoreYummlyRecipe = getMoreYummlyRecipe;
+        model.logout = logout;
         // userId = currentUser._id;
 
+        model.sectionTitle = 'Recipe Search Result';
         model.currentYummlyPage = 0;
+
         function init(){
+
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
 
             var preSearch = $location.search();
             if(preSearch &&preSearch.search.length>0){
@@ -22,6 +29,14 @@
         }
 
         init();
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
 
         function getMoreYummlyRecipe() {
             model.currentYummlyPage += 1;

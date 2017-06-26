@@ -23,7 +23,7 @@
             checkAdmin: checkAdmin,
             unregister: unregister,
 
-            // populateRecipesAndProducts: populateRecipesAndProducts,
+
             follow: follow,
             unfollow: unfollow,
             addLikedRecipe: addLikedRecipe,
@@ -31,9 +31,12 @@
             sendMessage: sendMessage,
             populateArr: populateArr,
             countBmi: countBmi
+
+            // populateRecipesAndProducts: populateRecipesAndProducts,
             // showFollowings: showFollowings,
             // showFollowers: showFollowers
         };
+
         return api;
 
         function sendMessage(userId, message) {
