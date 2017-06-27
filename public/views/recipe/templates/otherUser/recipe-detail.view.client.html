@@ -43,19 +43,20 @@
                 <a class="btn pull-right"
                    ng-if="model.like"
                    ng-click="model.unlikeRecipe()">
-                    <span class="glyphicon glyphicon-heart"></span>
+                    <span class="glyphicon glyphicon-heart">{{model.numberOfLikes}}</span>
                 </a>
                 <a class="btn pull-right"
                    ng-show="!model.like"
                    ng-click="model.likeRecipe()">
-                    <span class="glyphicon glyphicon-heart-empty"></span>
+                    <span class="glyphicon glyphicon-heart-empty">{{model.numberOfLikes}}</span>
                 </a>
             </h2>
             <div class="row">
                 <div class="col-sm-4">
                     <p>
                     <h5>Number of servings: </h5> {{model.recipe.numberOfServings}}
-                    <h5>Total time (in min):</h5> {{model.recipe.totalTime}}
+                    <h5>Total time (in min): </h5> {{model.recipe.totalTime}}
+                    <h5>Description: </h5> {{model.recipe.description}}
                     </p>
                 </div>
                 <div class="col-xs-12 col-sm-8">
@@ -76,6 +77,9 @@
             </div>
 
             <h3 class="sub-header">Instructions</h3>
+            <div ng-if="model.ifLocal">
+                <p>{{model.recipe.instruction}}</p>
+            </div>
             <div ng-if="!model.ifLocal">
                 <a href="{{model.recipe.source.sourceRecipeUrl}}"
                    target="embedded-content"

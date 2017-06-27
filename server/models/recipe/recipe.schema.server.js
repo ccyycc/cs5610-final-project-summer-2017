@@ -12,7 +12,7 @@ var recipeSchema = mongoose.Schema({
         name: String,
         description: String
     }],
-    instruction: [String],
+    instruction: String,
     totalTime: Number,
     image: {type: String, default: '/uploads/recipe/..'},
     // likedUsers: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}],

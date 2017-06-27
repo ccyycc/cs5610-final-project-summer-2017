@@ -1,26 +1,79 @@
 <div ng-include="'./views/common/header.view.client.html'"></div>
 
-
 <div class="container-fluid main-container">
-    <!--<div>-->
-    <form>
         <div class="row">
-            <div class="col-xs-6">
-                <h1 class="textToTop textToCenter">{{model.user.username}}</h1>
-
+            <div id="photoBlock" class="col-xs-12 col-sm-4">
+                <img id="photo" class="imageToCenter img-circle"
+                     ng-src="{{model.user.photo}}"/>
+                <!--to show the likedRecipe/collectedProducts(regular user) or createdRecipes(recipeProvider)-->
+                <div ng-switch="model.user.role">
+                    <div ng-switch-when='RECIPEPRO'>
+                        <a class="btn btn-info form-control"
+                           ng-click="model.navToRecipeListPage()">
+                            View all recipes
+                        </a>
+                    </div>
+                    <div ng-switch-when='MERCHANT'>
+                        <a class="btn btn-info form-control"
+                           ng-click="model.navToStorePage()">
+                            Go to store
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <h3 class="textToTop textToCenter">{{model.user.username}}</h3>
+                <p class="textToCenter"
+                   ng-if="model.isRecipeProvider">
+                    Recipe Provider</p>
+                <p class="textToCenter"
+                   ng-if="model.generalUser">
+                    General User</p>
+                <p class="textToCenter"
+                   ng-if="model.isMerchant">
+                    Store Owner</p>
+                <p class="textToCenter"
+                   ng-if="model.isAdmin">
+                    Administer</p>
+                <div class="margin-top-15 input-group">
+                    <input class="form-control" ng-model="model.message">
+                    <span class="input-group-btn">
+                        <a ng-click="model.sendMessage(model.message)"
+                           class="btn btn-success"
+                           type="button">
+                            <span>Leave me a message!</span>
+                        </a>
+                    </span>
+                </div>
+                <a class="margin-top-15 btn btn-primary toBottom form-control"
+                   ng-show="model.followed == false"
+                   ng-click="model.follow()">
+                    Follow
+                </a>
+                <a class="margin-top-15 btn btn-default toBottom form-control"
+                   ng-show="model.followed == true"
+                   ng-click="model.unfollow()">
+                    Unfollow
+                </a>
                 <div class="row" id="followerNfollowing">
                     <div class="col-xs-6 textToCenter">
+                        <label for="follower">follower</label>
                         <a ng-click="model.showFollowers()">
-
-                            follower<br>
-                            {{model.user.followers.length}}</a>
+                            <p id="follower">{{model.user.followers.length}}</p>
+                        </a>
                     </div>
 
                     <div ng-show="model.user.role == 'USER'"
                          class="col-xs-6 textToCenter">
+                        <label for="following">following</label>
                         <a ng-click="model.showFollowings()">
-                            following<br>
-                            {{model.user.followings.length}}</a>
+                            <p id="following">{{model.user.followings.length}}</p>
+                        </a>
+                    </div>
+                    <div ng-show="model.user.role != 'USER'"
+                         class="col-xs-6 textToCenter">
+                        <label for="noFollowing">following</label>
+                            <p id="noFollowing">N/A</p>
                     </div>
                 </div>
 
@@ -44,65 +97,24 @@
                         </div>
                     </div>
                 </div>
-
-                <a class="btn btn-success toBottom form-control"
-                   ng-show="model.followed == false"
-                   ng-click="model.follow()">
-                    Follow
-                </a>
-                <a class="btn btn-default toBottom form-control"
-                   ng-show="model.followed == true"
-                   ng-click="model.unfollow()">
-                    Unfollow
-                </a>
-                <div class="margin-top-15">
-                    <a ng-click="model.sendMessage(model.message)"
-                       class="btn btn-success ">
-                        Leave me a message!
-                    </a>
-
-                    <input class="form-control" ng-model="model.message">
-                </div>
-
-
-            </div>
-            <div id="photoBlock" class="col-xs-6">
-                <img id="photo" class="imageToCenter"
-                     ng-src="{{model.user.photo}}" width="{{model.profilePhotoWidth}}"/>
             </div>
         </div>
-    </form>
-    <!--</div>-->
-
-    <!--TODO:TEST-->
-    <div>
-        <a ng-show="model.isRecipeProvider"
-           ng-click="model.navToRecipeListPage()">
-            <h1>View All Recipes</h1>
-        </a>
-    </div>
-    <!--TODO: END OF TEST-->
-
-</div>
-
-
-<!--to show the likedRecipe/collectedProducts(regular user) or createdRecipes(recipeProvider)-->
-<div ng-switch="model.user.role">
-    <div ng-switch-when='USER'>
+    <div ng-if="model.user.role == 'USER'">
         <ng-include src="'./views/user/templates/snippets/user-profile.view.client.html'"></ng-include>
     </div>
-    <div ng-switch-when='RECIPEPRO'>
-        <a class="btn btn-primary form-control">
-            Click to view all recipes created by me
-        </a>
-    </div>
-    <div ng-switch-when='MERCHANT'>
-        <a class="btn btn-primary form-control"
-        ng-click="model.navToStorePage()">
-            Click to go to my store
-        </a>
-    </div>
-</div>
+    <!--</div>-->
+
+    <!--&lt;!&ndash;TODO:TEST&ndash;&gt;-->
+    <!--<div>-->
+        <!--<a ng-show="model.isRecipeProvider"-->
+           <!--ng-click="model.navToRecipeListPage()">-->
+            <!--<h1>View All Recipes</h1>-->
+        <!--</a>-->
+    <!--</div>-->
+    <!--&lt;!&ndash;TODO: END OF TEST&ndash;&gt;-->
+
+<!--</div>-->
+
 
 <!--<div ng-include="'./views/user/templates/snippets/user-profile.view.client.html'"></div>-->
 

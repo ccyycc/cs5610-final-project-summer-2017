@@ -18,9 +18,10 @@
          class="col-sm-6">
         <a href="#!/store/{{store._id}}">
         <div class="card-view ">
-            <div class="hidden-xs col-sm-3 ">
-                <div class="">
-                    <img ng-src="{{store.image}}" class="img-thumbnail card-view-image"/><br>
+            <div class="hidden-xs col-sm-3">
+                <div>
+                    <img ng-src="{{store.image}}" class="img-thumbnail card-view-image"
+                         onerror="this.onerror=null; this.src='/resource/defaultPics/placeholder-image10.jpg'"/><br>
                 </div>
             </div>
             <div class="col-xs-9 ">

@@ -4,7 +4,7 @@
         .controller('merchandiseEditController', merchandiseEditController);
 
     function merchandiseEditController($location, $routeParams, merchandiseService,
-                                       currentUser, userService) {
+                                       currentUser, userService, storeService) {
 
         var model = this;
 
