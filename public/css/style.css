@@ -16,10 +16,10 @@ body {
     background-color: #ffefd0;
 }
 
-li.list-group-item > div.row > div {
-    white-space: nowrap;
-    overflow: hidden;
-}
+/*li.list-group-item > div.row > div {*/
+    /*white-space: nowrap;*/
+    /*overflow: hidden;*/
+/*}*/
 
 .navigating-btn {
     top: 17px;
@@ -140,10 +140,10 @@ a:focus, a:hover, a:visited {
     cursor: default;
 }
 
-/*li.list-group-item > div.row > div {*/
-    /*white-space: nowrap;*/
-    /*overflow: hidden;*/
-/*}*/
+.message-content {
+    white-space: nowrap;
+    overflow: scroll;
+}
 
 .video-container {
     position: relative;
