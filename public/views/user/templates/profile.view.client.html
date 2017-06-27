@@ -102,8 +102,26 @@
                             following: {{follow.followings.length}}
                         </div>
                     </div>
+                <!--TODO: cannot click name to jump to another profile page-->
+                <div id="followDetail"
+                     class="collapse">
+                    <ul class="list-group">
+                        <li class="row list-group-item"  ng-repeat="follow in model.follows">
+                            <div class="col-sm-2 col-xs-6">
+                                <img ng-src="{{follow.photo}}" width="80%"/>
+                            </div>
+                            <div class="col-sm-2 col-xs-6">
+                                <a ng-href="#!/profile/{{follow._id}}">{{follow.username}}</a>
+                            </div>
+                            <div class="col-sm-4 hidden-xs">
+                                follower: {{follow.followers.length}}
+                            </div>
+                            <div class="col-sm-4 hidden-xs" ng-show="follow.role == 'USER'">
+                                following: {{follow.followings.length}}
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-            </div>
         </div>
     </div>
     <div ng-if="model.user.role == 'USER'">
@@ -120,31 +138,56 @@
     <!--<a href="#!/account" class="navbar-link">-->
     <!--<span class="glyphicon glyphicon-user"></span>-->
     <!--</a>-->
-    <!--</div>-->
-    <!--<div class="col-xs-3">-->
-    <!--<a href="#!/" class="navbar-link">-->
-    <!--<span class="glyphicon glyphicon-user"></span>-->
-    <!--</a>-->
-    <!--</div>-->
-    <!--<div class="col-xs-3">-->
-    <!--<a href="#!/account" class="navbar-link">-->
-    <!--<span class="glyphicon glyphicon-user"></span>-->
-    <!--</a>-->
-    <!--</div>-->
-    <!--<div class="col-xs-3">-->
-    <!--<a href="#!/account" class="navbar-link">-->
-    <!--<span class="glyphicon glyphicon-user"></span>-->
-    <!--</a>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--&lt;!&ndash;<div class="pull-right navbar-text">&ndash;&gt;-->
-    <!--&lt;!&ndash;<a href="#!/account" class="navbar-link">&ndash;&gt;-->
-    <!--&lt;!&ndash;<span class="glyphicon glyphicon-user"></span>&ndash;&gt;-->
-    <!--&lt;!&ndash;</a>&ndash;&gt;-->
-    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-    <!--</div>-->
-    <!--</nav>-->
 
+                <!--<a class="btn btn-success toBottom form-control"-->
+                   <!--ng-show="model.followed == false"-->
+                   <!--ng-click="model.follow()">-->
+                    <!--Follow-->
+                <!--</a>-->
+                <!--<a class="btn btn-default toBottom form-control"-->
+                   <!--ng-show="model.followed == true"-->
+                   <!--ng-click="model.unfollow()">-->
+                    <!--Unfollow-->
+                <!--</a>-->
+                <!--<div class="margin-top-15">-->
+                    <!--<a ng-click="model.sendMessage(model.message)"-->
+                       <!--class="btn btn-success ">-->
+                        <!--Leave me a message!-->
+                    <!--</a>-->
+
+                    <!--<input class="form-control" ng-model="model.message">-->
+                <!--</div>-->
+
+
+            <!--</div>-->
+            <!--<div id="photoBlock" class="col-xs-6">-->
+                <!--<img id="photo" class="imageToCenter"-->
+                     <!--ng-src="{{model.user.photo}}" width="{{model.profilePhotoWidth}}"/>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</form>-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;TODO:TEST&ndash;&gt;-->
+    <!--<div>-->
+        <!--<a ng-show="model.isRecipeProvider"-->
+           <!--ng-click="model.navToRecipeListPage()">-->
+            <!--<h1>View All Recipes</h1>-->
+        <!--</a>-->
+    <!--</div>-->
+    <!--<div ng-switch-when='RECIPEPRO'>-->
+        <!--<a class="btn btn-primary form-control">-->
+            <!--Click to view all recipes created by me-->
+        <!--</a>-->
+    <!--</div>-->
+    <!--<div ng-switch-when='MERCHANT'>-->
+        <!--<a class="btn btn-primary form-control"-->
+        <!--ng-click="model.navToStorePage()">-->
+            <!--Click to go to my store-->
+        <!--</a>-->
+    <!--</div>-->
+</div>
+</div>
 
     <div ng-include="'./views/common/footer.view.client.html'"></div>
 

@@ -20,6 +20,7 @@
         model.showLikedStores = showLikedStores;
         // model.countPhotoWidth = countPhotoWidth;
         model.navToStorePage = navToStorePage;
+
         model.navToRecipeListPage = navToRecipeListPage;
         // model.showRecipes = showRecipes;
         // model.showProducts = showProducts;
@@ -39,7 +40,7 @@
             }
             model.feedback={};
 
-            // countPhotoWidth();
+            countPhotoWidth();
 
             render(model.profileId);
         }
@@ -127,6 +128,11 @@
                 .then(function (likedRecipes) {
                     model.likedRecipes = likedRecipes;
                     model.recipeOrProduct = 'RECIPE';
+
+                    // console.log(model.likedRecipes)
+                    // TODO:conflict style
+                    // model.recipeActive = 'active';
+                    // model.productActive = '';
                 });
 
 
@@ -138,6 +144,10 @@
                 .then(function (products) {
                     model.collectedProducts = products;
                     model.recipeOrProduct = 'PRODUCT';
+
+                    // TODO:conflict style
+                    // model.recipeActive = '';
+                    // model.productActive = 'active';
                 });
         }
 
@@ -147,6 +157,9 @@
                 .then(function (stores) {
                     model.likedStores = stores;
                     model.recipeOrProduct = 'STORE';
+                    // model.recipeActive = '';
+                    // model.productActive = 'active';
+                    // model.recipeOrProduct = 'PRODUCT';
                 });
         }
 
