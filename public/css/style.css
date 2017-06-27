@@ -178,7 +178,7 @@ a:focus, a:hover {
 
 li.list-group-item > div.row > div {
     white-space: nowrap;
-    overflow: scroll;
+    overflow: hidden;
 }
 
 
