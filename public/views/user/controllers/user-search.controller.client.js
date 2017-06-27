@@ -5,13 +5,20 @@
 
     function userSearchController($location, $routeParams, userService) {
         var model = this;
-        //event handler
 
+        model.sectionTitle = "User Search";
+
+        model.logout = logout;
         model.searchUser=searchUser ;
+
+
         init();
 
         function init() {
-            model.sectionTitle = "User Search";
+
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
 
             var preSearch = $location.search();
             if(preSearch.search && preSearch.search.length>0){
@@ -28,6 +35,13 @@
                     model.users = users
                 })
 
+        }
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
         }
 
 

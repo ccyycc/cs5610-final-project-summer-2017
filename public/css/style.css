@@ -142,7 +142,7 @@ a:focus, a:hover, a:visited {
 
 li.list-group-item > div.row > div {
     white-space: nowrap;
-    overflow: scroll;
+    overflow: hidden;
 }
 
 .video-container {

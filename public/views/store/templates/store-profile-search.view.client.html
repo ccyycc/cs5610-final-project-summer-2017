@@ -4,7 +4,7 @@
     <div class="section-search-bar input-group">
         <input ng-model="model.searchText"
                type="text"
-               placeholder="Search recipes"
+               placeholder="Search store profile"
                class="form-control">
         <span class="input-group-btn">
         <a ng-click="model.searchStores()" class="btn btn-default" type="button">
@@ -14,6 +14,10 @@
     </div>
 
     <h3 class="sub-header">Store</h3>
+    <label ng-if = "model.results.length ===0"
+    class="alert-info">
+        Matches Not Found
+    </label>
     <div ng-repeat="store in model.results"
          class="col-sm-6">
         <a href="#!/store/{{store._id}}">
@@ -44,9 +48,7 @@
                     <li id="" class="card-view-list-group-item-content">
                         <div>{{store.address.street}}</div>
                         <div>{{store.address.city +" " +store.address.state +""+store.address.zip}}</div>
-
                     </li>
-
                 </ul>
             </div>
         </div>

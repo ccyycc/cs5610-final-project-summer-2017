@@ -1,9 +1,9 @@
 (function () {
     angular
         .module('FinalProject')
-        .controller('StoreSearchController', storeSearchController);
+        .controller('StoreSearchNearByController', StoreSearchNearByController);
 
-    function storeSearchController($routeParams, $location, MapService, $window,
+    function StoreSearchNearByController($routeParams, $location, MapService, $window,
                                    currentUser,userService) {
         var model = this;
         this.searchWithCoords = searchWithCoords;

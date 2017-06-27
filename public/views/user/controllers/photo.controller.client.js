@@ -9,7 +9,24 @@
         model.user = currentUser;
         model.userId = currentUser._id;
 
-        // models.uploadPhoto = uploadPhoto;
+        model.logout = logout;
 
+        init();
+
+        function init(){
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
+        }
+
+
+        // models.uploadPhoto = uploadPhoto;
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
     }
 })();
