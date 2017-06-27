@@ -343,3 +343,32 @@ height: 0;
 .customize-top-margin-20{
     margin-top: 20px;
 }
+
+.home-search-option-width{
+     width:80px;
+}
+.input-hidden {
+    display: none;
+}
+.navbar-inverse {
+    background-color: #fcaa19;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: #402424;
+}
+
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+    color: #fff;
+    background-color: #080808;
+}
+
+.home-picture-frame{
+    position: relative;margin-top: 30px
+}
+.home-img-width{
+    width: 100%
+}
+.home-search-bar-position{
+    position:absolute;top:40%;width: 80%;margin-left:10%;margin-right: 10%
+}
