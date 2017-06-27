@@ -36,8 +36,10 @@
 
             if ($routeParams.uid) {
                 model.userId = $routeParams.uid;
+                model.isMyProfile=false;
             } else {
                 model.userId = currentUser._id;
+                model.isMyProfile= true;
             }
 
             // countPhotoWidth();
