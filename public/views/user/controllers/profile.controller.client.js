@@ -43,6 +43,9 @@
             countPhotoWidth();
 
             render(model.profileId);
+
+            model.recipeOrProduct = 'RECIPE';
+            showLikedRecipes();
         }
 
         init();
