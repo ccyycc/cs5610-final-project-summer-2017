@@ -104,10 +104,10 @@
         }
 
         function navToRecipeListPage() {
-            if (model.profileId) {
-                $location.url("/creator/" + model.profileId + "/recipe_list");
-            } else {
+            if (model.isMyProfile) {
                 $location.url("/auth_recipe_list");
+            } else {
+                $location.url("/creator/" + model.profileId + "/recipe_list");
             }
         }
 

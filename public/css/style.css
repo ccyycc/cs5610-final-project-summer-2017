@@ -384,3 +384,13 @@ img#photo.imageToCenter {
     background-color: white;
     padding:10px;
 }
+
+a#numOfLikeShowCreator.btn{
+    color: black;
+}
+
+a#numOfLikeShowCreator.btn:hover,
+a#numOfLikeShowCreator.btn:visited{
+    color: black;
+    cursor: default;
+}

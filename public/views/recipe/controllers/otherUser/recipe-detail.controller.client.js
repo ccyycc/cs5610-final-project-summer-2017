@@ -26,7 +26,7 @@
 
             model.recipeId = $routeParams.recipeId;
             model.showYummlyInstruction = false;
-            model.reviews =[];
+            model.reviews = [];
 
             if (currentUser._id) {
                 model.ifLoggedIn = true;
@@ -63,6 +63,13 @@
                             });
                     });
 
+            }
+
+            if ((currentUser.role === 'USER') ||
+                (currentUser.role === ('RECIPEPRO' || 'MERCHANT' || 'ADMIN') && model.canEdit)) {
+                model.canCommentOrLike = true;
+            } else {
+                model.message = "Sorry, your role can only comment/like on your stuff."
             }
         }
 
@@ -103,7 +110,7 @@
                         model.like = false;
                         model.footerButton = "glyphicon glyphicon-heart-empty";
                     }
-                })
+                });
             associationService
                 .findAssociationForTarget('LIKE', 'recipe', model.recipeLocalId)
                 .then(function (likes) {
@@ -185,20 +192,25 @@
         }
 
         function createComment() {
-            model.newComment = {};
+               model.newComment = {};
         }
 
         function clearComment() {
             model.newComment = {};
         }
+
         function submitComment() {
-            if(!model.recipeLocalId) {
-                createYummlyRecipeCopy()
-                    .then(function () {
-                        commentHelper();
-                    })
+            if (model.canCommentOrLike) {
+                if (!model.recipeLocalId) {
+                    createYummlyRecipeCopy()
+                        .then(function () {
+                            commentHelper();
+                        })
+                } else {
+                    commentHelper();
+                }
             } else {
-                commentHelper();
+                model.message = "Sorry, your role can only comment/like on your stuff."
             }
         }
 
