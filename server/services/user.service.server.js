@@ -9,28 +9,28 @@ var bcrypt = require("bcrypt-nodejs");
 
 const passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-// var FacebookStrategy = require('passport-facebook').Strategy;
-// var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 
-// var facebookConfig = {
-//     clientID: process.env.FACEBOOK_CLIENT_ID,
-//     clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-//     callbackURL: process.env.FACEBOOK_CALLBACK_URL,
-//     profileFields: ['id', 'last_name', 'first_name', 'email']
-// };
-//
-// var googleConfig = {
-//     clientID: process.env.GOOGLE_CLIENT_ID,
-//     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-//     callbackURL: process.env.GOOGLE_CALLBACK_URL
-// };
+var facebookConfig = {
+    clientID: process.env.FACEBOOK_CLIENT_ID,
+    clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    callbackURL: process.env.FACEBOOK_CALLBACK_URL,
+    profileFields: ['id', 'last_name', 'first_name', 'email']
+};
+
+var googleConfig = {
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.GOOGLE_CALLBACK_URL
+};
 
 passport.use(new LocalStrategy(localStrategy));
-// passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
-// passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 
 // :userId: path params
 app.get('/api/user/:userId', findUserById);
