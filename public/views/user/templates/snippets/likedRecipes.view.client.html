@@ -1,12 +1,18 @@
 <div ng-repeat="recipe in model.likedRecipes">
-    <div class="row">
-        <div class="col-xs-4">
-            <img id="photo" class="imageToCenter"
-                 ng-src="{{recipe.image}}" width="150px"/>
-        </div>
-        <div class="col-xs-8">
-            <p><b class="description">{{recipe.name}}  </b>
-            {{recipe.likedUsers.length}} people liked this recipe</p>
-        </div>
-    </div>
+    <!--<div class="row">-->
+        <!--<div class="col-xs-4">-->
+            <!--<img id="photo" class="imageToCenter"-->
+                 <!--ng-src="{{recipe.image}}" width="150px"/>-->
+        <!--</div>-->
+        <!--<div class="col-xs-12">-->
+    <ul class="list-group">
+        <li class="list-group-item">
+            <p><b class="description"><a ng-if="recipe.yummlyId"
+                                         href="#!/recipe_list/{{recipe.yummlyId}}">{{recipe.name}}</a></b></p>
+            <p><b class="description"><a ng-if="!recipe.yummlyId"
+                                         href="#!/recipe_list/{{recipe._id}}#LOCAL">{{recipe.name}}</a></b></p>
+        </li>
+    </ul>
+        <!--</div>-->
+    <!--</div>-->
 </div>

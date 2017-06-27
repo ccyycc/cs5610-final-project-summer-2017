@@ -16,7 +16,7 @@
         model.showFollowings = showFollowings;
         model.showLikedRecipes = showLikedRecipes;
         model.showCollectedProducts = showCollectedProducts;
-        model.countPhotoWidth = countPhotoWidth;
+        // model.countPhotoWidth = countPhotoWidth;
         model.navToStorePage = navToStorePage;
 
         model.navToRecipeListPage = navToRecipeListPage;
@@ -36,7 +36,7 @@
                 model.userId = currentUser._id;
             }
 
-            countPhotoWidth();
+            // countPhotoWidth();
 
             render(model.userId);
             showLikedRecipes();
