@@ -10,11 +10,11 @@
         model.sectionTitle = "Login";
         model.login = login;
 
-        init()
+        init();
         function init() {
 
             if(currentUser._id){
-                console.log(currentUser._id)
+                // console.log(currentUser._id)
                 $location.url('/');
             }
         }

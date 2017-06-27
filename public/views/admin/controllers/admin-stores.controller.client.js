@@ -3,20 +3,33 @@
         .module('FinalProject')
         .controller('adminStoresController', adminStoresController);
 
-    function adminStoresController(userService, storeService) {
+    function adminStoresController($location,userService, storeService,currentUser) {
         var model = this;
+
+        model.sectionTitle = "Manage Store Profile";
 
         model.deleteStore = deleteStore;
         model.createStore = createStore;
         model.selectStore = selectStore;
         model.updateStore = updateStore;
+        model.logout = logout;
+
+        init();
 
         function init() {
-
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
             findAllStores();
         }
 
-        init();
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
 
         function updateStore(username, store) {
             model.message = false;

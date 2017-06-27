@@ -14,14 +14,14 @@
 
             <!--to show the likedRecipe/collectedProducts(regular user) or createdRecipes(recipeProvider)-->
             <div ng-switch="model.user.role">
-                <div ng-switch-when='RECIPEPRO'>
-                    <a class="btn btn-info form-control"
+                <div class="margin-top-15" ng-switch-when='RECIPEPRO'>
+                    <a class="btn btn-primary form-control"
                        ng-click="model.navToRecipeListPage()">
                         View all recipes
                     </a>
                 </div>
                 <div ng-switch-when='MERCHANT'>
-                    <a class="btn btn-info form-control"
+                    <a class="btn btn-primary form-control"
                        ng-click="model.navToStorePage()">
                         Go to store
                     </a>
@@ -31,16 +31,16 @@
         <div class="col-xs-12 col-sm-8">
             <h3 class="textToTop textToCenter">{{model.user.username}}</h3>
             <p class="textToCenter"
-               ng-if="model.isRecipeProvider">
+               ng-if="model.user.role === 'RECIPEPRO'">
                 Recipe Provider</p>
             <p class="textToCenter"
-               ng-if="model.generalUser">
+               ng-if="model.user.role === 'USER'">
                 General User</p>
             <p class="textToCenter"
-               ng-if="model.isMerchant">
+               ng-if="model.user.role === 'MERCHANT'">
                 Store Owner</p>
             <p class="textToCenter"
-               ng-if="model.isAdmin">
+               ng-if="model.user.role === 'ADMIN'">
                 Administer</p>
             <div class="margin-top-15 input-group">
                 <input class="form-control" ng-model="model.message">
@@ -52,7 +52,7 @@
                         </a>
                     </span>
             </div>
-            <div ng-if="!model.isMyProfile">
+            <div ng-if = "!model.isMyProfile">
                 <a class="margin-top-15 btn btn-primary toBottom form-control"
                    ng-show="model.followed == false"
                    ng-click="model.follow()">
@@ -65,13 +65,6 @@
                 </a>
             </div>
             <div class="row" id="followerNfollowing">
-                <div class="col-xs-6 textToCenter">
-                    <label for="follower">follower</label>
-                    <a ng-click="model.showFollowers()">
-                        <p id="follower">{{model.user.followers.length}}</p>
-                    </a>
-                </div>
-
                 <div ng-show="model.user.role == 'USER'"
                      class="col-xs-6 textToCenter">
                     <label for="following">following</label>
@@ -83,6 +76,12 @@
                      class="col-xs-6 textToCenter">
                     <label for="noFollowing">following</label>
                     <p id="noFollowing">N/A</p>
+                </div>
+                <div class="col-xs-6 textToCenter">
+                    <label for="follower">follower</label>
+                    <a ng-click="model.showFollowers()">
+                        <p id="follower">{{model.user.followers.length}}</p>
+                    </a>
                 </div>
             </div>
 
