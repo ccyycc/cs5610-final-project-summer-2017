@@ -16,9 +16,9 @@
         model.showFollowings = showFollowings;
         model.showLikedRecipes = showLikedRecipes;
         model.showCollectedProducts = showCollectedProducts;
+        model.showLikedStores = showLikedStores;
         // model.countPhotoWidth = countPhotoWidth;
         model.navToStorePage = navToStorePage;
-
         model.navToRecipeListPage = navToRecipeListPage;
         // model.showRecipes = showRecipes;
         // model.showProducts = showProducts;
@@ -132,10 +132,10 @@
             userService
                 .populateArr(model.userId, 'likedRecipes')
                 .then(function (likedRecipes) {
-                    console.log(likedRecipes);
+                    // console.log(likedRecipes);
                     model.likedRecipes = likedRecipes;
                     model.recipeOrProduct = 'RECIPE';
-                    console.log(model.likedRecipes)
+                    // console.log(model.likedRecipes)
                 });
 
 
@@ -145,9 +145,20 @@
             userService
                 .populateArr(model.userId, 'collectedProducts')
                 .then(function (products) {
+                    // console.log(model.collectedProducts)
                     model.collectedProducts = products;
-                })
-            model.recipeOrProduct = 'PRODUCT';
+                    model.recipeOrProduct = 'PRODUCT';
+                });
+        }
+
+        function showLikedStores() {
+            userService
+                .populateArr(model.userId, 'likedStores')
+                .then(function (stores) {
+                    // console.log(stores)
+                    model.likedStores = stores;
+                    model.recipeOrProduct = 'STORE';
+                });
         }
 
         function follow() {

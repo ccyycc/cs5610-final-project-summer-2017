@@ -147,7 +147,12 @@
                     model.likeAssociation = association;
                     model.like = true;
                     model.numLike++;
-                });
+                })
+                .then(function () {
+                    currentUser.likedStores.push(model.storeId);
+                    userService
+                        .updateProfile(currentUser);
+                })
         }
 
         function unlikeStore() {
@@ -157,7 +162,13 @@
                     model.like = false;
                     model.numLike--;
                     delete model.likeAssociation['_id'];
-                });
+                })
+                .then(function () {
+                    var index = currentUser.likedStores.indexOf(model.storeId);
+                    currentUser.likedStores.splice(index, 1);
+                    userService
+                        .updateProfile(currentUser);
+                })
         }
 
         function goToProductList() {

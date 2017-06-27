@@ -14,11 +14,8 @@ var userSchema = mongoose.Schema({
         default: 'USER',
         enum: ['USER', 'ADMIN', 'RECIPEPRO', 'MERCHANT']
     },
-
-    google: {
-        id: String,
-        token: String
-    },
+    facebook: {id: String, token: String},
+    google: {id: String, token: String},
 
     dailyCalorieBurned: Number,
 
@@ -31,7 +28,9 @@ var userSchema = mongoose.Schema({
     followings: [{type: mongoose.Schema.ObjectId, ref: 'userModel'}],
 
     likedRecipes: [{type: mongoose.Schema.ObjectId, ref: 'recipeModel'}],
-    collectedProducts: [{type: mongoose.Schema.ObjectId, ref: 'merchandiseModel'}]
+    collectedProducts: [{type: mongoose.Schema.ObjectId, ref: 'merchandiseModel'}],
+    likedStores: [{type: mongoose.Schema.ObjectId, ref: 'storeModel'}]
+
 
 }, {collection: "user"});
 

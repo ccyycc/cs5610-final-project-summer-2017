@@ -4,7 +4,7 @@
         .controller('merchandiseDetailController', merchandiseDetailController);
 
     function merchandiseDetailController($location, $routeParams, merchandiseService, associationService,
-                                         currentUser, storeService) {
+                                         currentUser, storeService, userService) {
         var model = this;
         //event handler
         model.editMerchandise = editMerchandise;
@@ -127,7 +127,12 @@
                     model.likeAssociation = association;
                     model.like=true;
                     model.numLike++
-                });
+                })
+                .then(function () {
+                    currentUser.collectedProducts.push(model.merchandiseId);
+                    userService
+                        .updateProfile(currentUser);
+                })
         }
 
 
@@ -138,7 +143,14 @@
                     model.like=false;
                     model.numLike--;
                     delete model.likeAssociation['_id'];
-                });
+                })
+                .then(function () {
+                    var index = currentUser.collectedProducts.indexOf(model.merchandiseId);
+                    currentUser.collectedProducts.splice(index, 1);
+                    userService
+                        .updateProfile(currentUser);
+                })
+
         }
 
     }

@@ -18,6 +18,8 @@
         model.logout = logout;
         model.goToEdit = goToEdit;
 
+        model.numberOfLikes = 0;
+
         function init() {
 
             model.sectionTitle = "Recipe Detail";
@@ -125,6 +127,7 @@
                 name: model.recipe.name,
                 yummlyId: model.recipeId,
                 source: 'YUMMLY',
+                ingredients: model.recipe.ingredients
             };
 
             return recipeService
@@ -157,7 +160,6 @@
                 .then(function (like) {
                     model.numberOfLikes += 1;
                     model.likeId = like._id;
-                    console.log(model.likeId)
                     model.like = true;
                     model.footerButton = "glyphicon glyphicon-heart";
                 })
@@ -169,7 +171,6 @@
         }
 
         function unlikeRecipe() {
-            console.log(model.likeId);
             associationService
                 .deleteAssociationById(model.likeId)
                 .then(function () {
