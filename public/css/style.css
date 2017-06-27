@@ -42,10 +42,11 @@ li.list-group-item > div.row > div {
     height: 40px;
 }
 
-@media (min-width: 768px) {
-    .navbar > .container-fluid .navbar-brand {
-        margin-left: 0;
-    }
+/*@media (min-width: 768px) {*/
+    /*.navbar > .container-fluid .navbar-brand {*/
+        /*margin-left: 0;*/
+    /*}*/
+/*}*/
 
     .profile-navbar .navbar-link {
         color: lightgray;
@@ -130,25 +131,28 @@ li.list-group-item > div.row > div {
         border: 6px;
     }
 
-    /*.widget > .widget-toolbar {*/
-    /*position:absolute;*/
-    /*right: 15px;*/
-    /*background-color: white;*/
-    /*opacity:0.8;*/
+/*.widget > .widget-toolbar {*/
+/*position:absolute;*/
+/*right: 15px;*/
+/*background-color: white;*/
+/*opacity:0.8;*/
+/*}*/
+
+    /*.navbar {*/
+        /*height: 50px;*/
     /*}*/
-    .navbar {
-        height: 50px;
-    }
 
-    .navbar-inverse .navbar-collapse {
-        float: right;
-        display: inline-block;
-    }
+    /*.navbar-inverse .navbar-collapse {*/
+        /*float: right;*/
+        /*display: inline-block;*/
+    /*}*/
 
-    .navbar-inverse .container-fluid {
-        display: inline-block;
-    }
-}
+    /*.navbar-inverse .container-fluid {*/
+        /*display: inline-block;*/
+    /*}*/
+
+
+
 
 .list-name-sidebar {
     padding: 0;
@@ -329,7 +333,6 @@ li.list-group-item > div.row > div {
 .google-maps {
     position: relative;
     padding-bottom: 75%;
-/ / This is the aspect ratio height: 0;
     overflow: hidden;
 }
 
@@ -385,4 +388,43 @@ li.list-group-item > div.row > div {
 }
 .home-search-bar-position{
     position:absolute;top:40%;width: 80%;margin-left:10%;margin-right: 10%
+}
+
+
+img#photo.imageToCenter {
+    display: block;
+    margin: auto;
+    margin-top:30px;
+    margin-bottom:50px;
+}
+
+@media (min-width: 768px) {
+    .navbar > .container-fluid .navbar-brand {
+        margin-left: 0;
+    }
+
+    .navbar {
+        height: 50px;
+    }
+
+    .navbar-inverse .navbar-collapse {
+        float: right;
+        display: inline-block;
+    }
+
+    .navbar-inverse .container-fluid {
+        display: inline-block;
+    }
+
+    img#photo.imageToCenter{
+        display: block;
+        margin: auto;
+        margin-bottom:50px;
+    }
+
+}
+
+.textToTop {
+    margin-top: 0;
+    vertical-align: top ;
 }

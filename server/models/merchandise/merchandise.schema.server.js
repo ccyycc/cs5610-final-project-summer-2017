@@ -8,7 +8,7 @@ var merchandiseSchema = mongoose.Schema({
     _store: {type: mongoose.Schema.ObjectId, ref: 'storeModel'},
     name: {type: String},
     description: String,
-    image: String,
+    image: {type: String, default: '/uploads/merchandise/..'},
     price: Number,
     unit: String,
     comments: [{type: String}],

@@ -29,8 +29,6 @@
 
             model.storeId = $routeParams['storeId'];
             model.merchandiseId = $routeParams['merchandiseId'];
-            console.log("MID");
-            console.log(model.merchandiseId);
             model.mode = $routeParams['mode'];
 
             model.sectionTitle = "Product " + model.mode;

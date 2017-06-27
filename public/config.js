@@ -232,7 +232,10 @@
             .when('/store-search',{
                 templateUrl: 'views/store/templates/store-search.view.client.html',
                 controller: 'StoreSearchController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
             })
             .when('/search/store',{
                 templateUrl: 'views/store/templates/store-profile-list.view.client.html',

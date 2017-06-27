@@ -124,7 +124,7 @@
             var recipeCopy = {
                 name: model.recipe.name,
                 yummlyId: model.recipeId,
-                source: 'YUMMLY'
+                source: 'YUMMLY',
             };
 
             return recipeService
