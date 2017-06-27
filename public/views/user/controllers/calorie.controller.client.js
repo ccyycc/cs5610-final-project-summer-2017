@@ -7,13 +7,18 @@
 
         var model = this;
 
+        model.sectionTitle = "BMI Calculator";
         model.userId = currentUser.userId;
+
         model.updateUser = updateUser;
         model.countCalorie = countCalorie;
+        model.logout = logout;
 
         function init() {
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
             renderUser(currentUser)
-            // .error(userError());
         }
 
         init();
@@ -51,6 +56,14 @@
                 .updateProfile(newUser)
                 .then(function () {
                     model.message = "User updated successfully";
+                });
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
                 });
         }
 

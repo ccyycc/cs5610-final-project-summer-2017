@@ -229,16 +229,16 @@
                     currentUser: checkLoggedin
                 }
             })
-            .when('/store-search',{
-                templateUrl: 'views/store/templates/store-search.view.client.html',
-                controller: 'StoreSearchController',
+            .when('/store-search-near-by',{
+                templateUrl: 'views/store/templates/store-search-near-by.view.client.html',
+                controller: 'StoreSearchNearByController',
                 controllerAs: 'model',
                 resolve: {
                     currentUser: checkCurrentUser
                 }
             })
             .when('/search/store',{
-                templateUrl: 'views/store/templates/store-profile-list.view.client.html',
+                templateUrl: 'views/store/templates/store-profile-search.view.client.html',
                 controller: 'storeProfileSearchController',
                 controllerAs: 'model',
                 resolve: {

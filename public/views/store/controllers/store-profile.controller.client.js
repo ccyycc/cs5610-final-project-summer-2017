@@ -19,8 +19,10 @@
         model.logout = logout;
 
         function init() {
+
             //setup
             model.storeId = $routeParams['storeId'];
+
 
             if (currentUser._id) {
                 model.ifLoggedIn = true;

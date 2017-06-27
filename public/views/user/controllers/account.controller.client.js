@@ -6,16 +6,19 @@
     function accountController($routeParams, userService, $location, currentUser) {
 
         var model = this;
+
         model.sectionTitle = "Account";
         model.userId = currentUser.userId;
+
         model.updateUser = updateUser;
-        // models.deleteUser = deleteUser;
         model.logout = logout;
         model.unregister = unregister;
 
         function init() {
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
             renderUser(currentUser)
-                // .error(userError());
         }
         init();
 

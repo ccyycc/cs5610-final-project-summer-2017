@@ -7,14 +7,22 @@
 
         var model = this;
 
+        model.sectionTitle = "Login"
+        model.userId = currentUser._id;
+
         // model.renderMessage = renderMessage;
         model.deleteMessage = deleteMessage;
         model.showInbox = showInbox;
         model.showOutbox = showOutbox;
+        model.logout = logout;
 
 
         function init() {
-            model.userId = currentUser._id;
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
+
+
             showInbox()
                 // .error(userError());
         }
@@ -53,6 +61,13 @@
                     } else {
                         showOutbox();
                     }
+                });
+        }
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
                 });
         }
     }
