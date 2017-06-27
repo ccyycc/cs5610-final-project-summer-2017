@@ -31,7 +31,8 @@
             deleteLikedRecipe: deleteLikedRecipe,
             sendMessage: sendMessage,
             deleteMessage: deleteMessage,
-            renderMessage: renderMessage,
+            renderInMessage: renderInMessage,
+            renderOutMessage: renderOutMessage,
             populateArr: populateArr,
             countBmi: countBmi
 
@@ -58,8 +59,16 @@
                 })
         }
 
-        function renderMessage() {
-            var url = '/api/renderMessage';
+        function renderInMessage() {
+            var url = '/api/renderInMessage';
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function renderOutMessage() {
+            var url = '/api/renderOutMessage';
             return $http.get(url)
                 .then(function (response) {
                     return response.data;

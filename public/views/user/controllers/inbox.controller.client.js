@@ -7,32 +7,53 @@
 
         var model = this;
 
-        model.renderMessage = renderMessage;
+        // model.renderMessage = renderMessage;
         model.deleteMessage = deleteMessage;
+        model.showInbox = showInbox;
+        model.showOutbox = showOutbox;
 
 
         function init() {
             model.userId = currentUser._id;
-            renderMessage()
+            showInbox()
                 // .error(userError());
         }
         init();
 
-        function renderMessage() {
+        function showInbox() {
             // console.log(model.userId);
             userService
-                .renderMessage(model.userId)
+                .renderInMessage()
                 .then(function (messages) {
                     model.messages = messages;
                     console.log();
+                    model.inboxActive = 'active';
+                    model.outboxActive = ''
                     ///do not delete the console log!
                 })
         }
 
+        function showOutbox() {
+            userService
+                .renderOutMessage()
+                .then(function (messages) {
+                    model.messages = messages;
+                    console.log();
+                    model.inboxActive = '';
+                    model.outboxActive = 'active'
+                    ///do not delete the console log!
+                })
+        }
         function deleteMessage(message) {
             userService
                 .deleteMessage(message._id)
-                .then(renderMessage());
+                .then(function () {
+                    if (model.inboxActive) {
+                        showInbox();
+                    } else {
+                        showOutbox();
+                    }
+                });
         }
     }
 })();
