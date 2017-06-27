@@ -52,7 +52,7 @@
                         </a>
                     </span>
             </div>
-            <div ng-if = "!model.isMyProfile">
+            <div ng-if="!model.isMyProfile">
                 <a class="margin-top-15 btn btn-primary toBottom form-control"
                    ng-show="model.followed == false"
                    ng-click="model.follow()">
@@ -67,8 +67,8 @@
             <div class="row" id="followerNfollowing">
                 <div ng-show="model.user.role == 'USER'"
                      class="col-xs-6 textToCenter">
-                    <label for="following">following</label>
                     <a ng-click="model.showFollowings()">
+                        <label for="following">following</label>
                         <p id="following">{{model.user.followings.length}}</p>
                     </a>
                 </div>
@@ -78,14 +78,13 @@
                     <p id="noFollowing">N/A</p>
                 </div>
                 <div class="col-xs-6 textToCenter">
-                    <label for="follower">follower</label>
                     <a ng-click="model.showFollowers()">
+                        <label for="follower">follower</label>
                         <p id="follower">{{model.user.followers.length}}</p>
                     </a>
                 </div>
             </div>
 
-            <!--TODO: cannot click name to jump to another profile page-->
             <div id="followDetail"
                  class="collapse">
                 <ul class="list-group">

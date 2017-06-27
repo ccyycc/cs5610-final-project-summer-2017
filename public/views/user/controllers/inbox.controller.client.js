@@ -7,7 +7,7 @@
 
         var model = this;
 
-        model.sectionTitle = "Login"
+        model.sectionTitle = "Login";
         model.userId = currentUser._id;
 
         // model.renderMessage = renderMessage;
