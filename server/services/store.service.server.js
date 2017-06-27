@@ -17,7 +17,7 @@ app.get('/api/store/search/:storeName',findStoreByNameParams);
 
 app.get('/api/stores', isAdmin, findAllStores);
 
-app.post('/api/upload/store/profile', upload.single('myFile'), uploadImage);
+app.post('/api/upload/store/picture', upload.single('myFile'), uploadImage);
 
 
 

@@ -15,7 +15,7 @@
               href="">Project Name</span>
     </div>
     <div id="navbar"
-         class="navbar-collapse collapse">
+         class="navbar-inverse navbar-collapse collapse">
         <ul class="nav navbar-nav">
             <li class="active"><a href="">Home</a></li>
             <li><a ng-if="model.currentUser.role === 'ADMIN'" href="#!/admin">Admin</a></li>
@@ -28,24 +28,33 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="home-search-bar input-group">
 
-    <span class="input-group-btn form-group" style="width:80px">
-        <select ng-model="model.searchType"
+
+    <div class="home-picture-frame">
+        <img src="https://media-cdn.tripadvisor.com/media/photo-s/0f/6c/f1/85/seafood-steak-set.jpg"
+             class="img-thumbnail home-img-width" >
+        <div class=" input-group home-search-bar-position">
+
+
+
+             <span class="input-group-btn form-group home-search-option-width">
+                <select ng-model="model.searchType"
                 class="form-control"
                 ng-options="searchOption.value as searchOption.label for searchOption in model.searchOptions"
                 ng-init="model.model.searchOptions[0].value"></select>
-    </span>
-        <input ng-model="model.searchContent"
-               type="text"
-               class="form-control">
+            </span>
+            <input ng-model="model.searchContent"
+                   type="text"
+                   class="form-control">
 
-        <span class="input-group-btn">
+            <span class="input-group-btn">
            <a ng-click="model.searchWithCoords()"
               class="btn btn-default" type="button">
                <span class="glyphicon glyphicon-search"></span>
            </a>
+
        </span>
+        </div>
     </div>
 </div>
 

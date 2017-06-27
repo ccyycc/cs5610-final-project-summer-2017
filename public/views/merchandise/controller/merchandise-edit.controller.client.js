@@ -4,7 +4,7 @@
         .controller('merchandiseEditController', merchandiseEditController);
 
     function merchandiseEditController($location, $routeParams, merchandiseService,
-                                       currentUser, userService) {
+                                       currentUser, userService,storeService) {
 
         var model = this;
 
@@ -29,6 +29,8 @@
 
             model.storeId = $routeParams['storeId'];
             model.merchandiseId = $routeParams['merchandiseId'];
+            console.log("MID");
+            console.log(model.merchandiseId);
             model.mode = $routeParams['mode'];
 
             model.sectionTitle = "Product " + model.mode;

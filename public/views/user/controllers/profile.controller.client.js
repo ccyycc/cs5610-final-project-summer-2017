@@ -24,6 +24,10 @@
         // model.showProducts = showProducts;
 
         function init() {
+            console.log("inprofile");
+            console.log(currentUser._id);
+            console.log($routeParams.uid);
+
             if (currentUser._id === $routeParams.uid){
                 $location.url("/profile", false);
             }
