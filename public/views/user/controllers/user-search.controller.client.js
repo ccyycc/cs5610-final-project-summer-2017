@@ -3,7 +3,7 @@
         .module('FinalProject')
         .controller('userSearchController', userSearchController);
 
-    function userSearchController($location, $routeParams, userService) {
+    function userSearchController($location, $routeParams, userService,currentUser) {
         var model = this;
 
         model.sectionTitle = "User Search";
