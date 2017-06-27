@@ -20,6 +20,7 @@
         model.showLikedStores = showLikedStores;
         // model.countPhotoWidth = countPhotoWidth;
         model.navToStorePage = navToStorePage;
+
         model.navToRecipeListPage = navToRecipeListPage;
         // model.showRecipes = showRecipes;
         // model.showProducts = showProducts;
@@ -40,8 +41,7 @@
             model.feedback={};
             checkCurrentProfileRole();
 
-
-            // countPhotoWidth();
+            countPhotoWidth();
 
             render(model.profileId);
 
@@ -124,7 +124,6 @@
                     } else {
                         model.followed = false;
                     }
-                    console.log(model.user.role);
                 })
         }
 
@@ -136,6 +135,8 @@
                     model.likedRecipes = likedRecipes;
                     model.recipeOrProduct = 'RECIPE';
                     // console.log(model.likedRecipes)
+                    model.recipeActive = 'active';
+                    model.productActive = '';
                 });
 
 
@@ -145,9 +146,10 @@
             userService
                 .populateArr(model.profileId, 'collectedProducts')
                 .then(function (products) {
-                    // console.log(model.collectedProducts)
                     model.collectedProducts = products;
                     model.recipeOrProduct = 'PRODUCT';
+                    model.recipeActive = '';
+                    model.productActive = 'active';
                 });
         }
 
@@ -158,6 +160,9 @@
                     // console.log(stores)
                     model.likedStores = stores;
                     model.recipeOrProduct = 'STORE';
+                    // model.recipeActive = '';
+                    // model.productActive = 'active';
+                    // model.recipeOrProduct = 'PRODUCT';
                 });
         }
 
@@ -220,7 +225,6 @@
         }
 
         function countPhotoWidth() {
-            console.log(screen.width);
             if (screen.width > 500) {
                 model.profilePhotoWidth = '40%';
             } else {
