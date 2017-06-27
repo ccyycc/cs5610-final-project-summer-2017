@@ -3,16 +3,33 @@
         .module('FinalProject')
         .controller('adminUserDetailController', adminUserDetailController);
 
-    function adminUserDetailController(userService, $routeParams, $location) {
+    function adminUserDetailController($location,userService, $routeParams, $location, currentUser) {
         var model = this;
 
-        model.updateUser = updateUser;
+        model.sectionTitle = "Manage User Detail";
         model.userId = $routeParams.userId;
 
+        model.logout = logout;
+        model.updateUser = updateUser;
+
+
+        init();
+
         function init() {
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
+            model.roles = ['USER', 'ADMIN', 'RECIPEPRO', 'MERCHANT']
             findUserById();
         }
-        init();
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
 
         function updateUser(user) {
             userService

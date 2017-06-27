@@ -3,22 +3,35 @@
         .module('FinalProject')
         .controller('adminUsersController', adminUsersController);
 
-    function adminUsersController(userService) {
+    function adminUsersController($location,userService,currentUser) {
         var model = this;
+
+        model.sectionTitle = "Manage User";
 
         model.deleteUser = deleteUser;
         model.createUser = createUser;
         model.selectUser = selectUser;
         model.updateUser = updateUser;
         // model.currentUser = currentUser;
+        model.logout = logout;
+
+        init();
 
         function init() {
-            console.log('admin-user.controller');
-
+            model.roles = ['USER', 'ADMIN', 'RECIPEPRO', 'MERCHANT']
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
             findAllUsers();
         }
 
-        init();
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
 
         function updateUser(user) {
             // console.log(user);

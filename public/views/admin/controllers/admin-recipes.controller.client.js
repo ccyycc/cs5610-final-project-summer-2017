@@ -3,20 +3,36 @@
         .module('FinalProject')
         .controller('adminRecipesController', adminRecipesController);
 
-    function adminRecipesController(userService, recipeService) {
+    function adminRecipesController($location,userService, recipeService,currentUser) {
         var model = this;
+
+        model.sectionTitle = "Manage Recipes";
 
         model.deleteRecipe = deleteRecipe;
         model.createRecipe = createRecipe;
         model.selectRecipe = selectRecipe;
         model.updateRecipe = updateRecipe;
 
-        function init() {
+        model.logout = logout;
 
+        init();
+
+        function init() {
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
             findAllRecipes();
         }
 
-        init();
+
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
 
         function updateRecipe(username, recipe) {
             model.message = false;

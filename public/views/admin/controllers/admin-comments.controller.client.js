@@ -3,20 +3,34 @@
         .module('FinalProject')
         .controller('adminCommentsController', adminCommentsController);
 
-    function adminCommentsController(storeService, associationService) {
+    function adminCommentsController($location,storeService, associationService,currentUser) {
         var model = this;
+
+        model.sectionTitle = "Manage Comments";
 
         model.deleteComments = deleteComments;
         model.createComments = createComments;
         model.selectComments = selectComments;
         model.updateComments = updateComments;
+        model.logout = logout;
+
+        init();
 
         function init() {
-
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
             findAllCommentss();
         }
 
-        init();
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
 
         function updateComments(storename, association) {
             model.message = false;

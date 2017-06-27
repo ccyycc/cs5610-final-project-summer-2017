@@ -48,13 +48,33 @@
                    ng-model="model.user.email">
         </li>
         <li class="input-group">
+
+
             <span class="input-group-addon" id="role">
                 Role
             </span>
-            <input type="text"
-                   class="form-control"
-                   aria-describedby="role"
-                   ng-model="model.user.role">
+
+
+            <span class="form-group">
+                <select class="form-control"
+                        aria-describedby="role"
+                        data-ng-model="model.user.role">
+                    <option ng-repeat="role in model.roles"
+                            ng-selected="model.user.role == role" value="{{role}}">
+                        {{role}}
+                    </option>
+                </select>
+            </span>
+
+            <!--<input type="text"-->
+                   <!--class="form-control"-->
+                   <!--aria-describedby="role"-->
+                   <!--ng-model="model.user.role">-->
+
+
+
+
+
         </li>
         <li class="input-group">
             <span class="input-group-addon" id="followers">

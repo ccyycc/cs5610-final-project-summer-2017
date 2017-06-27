@@ -3,20 +3,35 @@
         .module('FinalProject')
         .controller('adminMerchandisesController', adminMerchandisesController);
 
-    function adminMerchandisesController(storeService, merchandiseService) {
+    function adminMerchandisesController($location,storeService, merchandiseService,currentUser) {
         var model = this;
+
+        model.sectionTitle = "Manage Products";
 
         model.deleteMerchandise = deleteMerchandise;
         model.createMerchandise = createMerchandise;
         model.selectMerchandise = selectMerchandise;
         model.updateMerchandise = updateMerchandise;
 
-        function init() {
+        model.logout = logout;
 
+        init();
+
+        function init() {
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
             findAllMerchandises();
         }
 
-        init();
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
 
         function updateMerchandise(storename, merchandise) {
             model.message = false;
