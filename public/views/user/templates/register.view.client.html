@@ -7,30 +7,45 @@
         {{model.error}}
     </div>
 
+    <div class="form-group">
     <label for="username">Username</label>
     <input type="text"
            id="username"
            ng-model="username"
            class="form-control"
            placeholder="username"/>
+    </div>
+    <div class="form-group">
     <label for="password">Password</label>
     <input type="password"
            id="password"
            ng-model="password"
            class="form-control"
            placeholder="password"/>
+    </div>
+    <div class="form-group">
     <label for="password2">Confirm Password</label>
     <input type="password"
            id="password2"
            ng-model="password2"
            class="form-control"
            placeholder="verify password"/>
+    </div>
     <div class="margin-top-15">
         Register as:
         <input type="radio" ng-model="role" value="USER" > User
         <input type="radio" ng-model="role" value="RECIPEPRO"> Recipe provider
         <input type="radio" ng-model="role" value="MERCHANT"> Merchant
-        <span class="glyphicon glyphicon-question-sign pull-right change-margin-right-15"></span>
+        <span class="glyphicon glyphicon-question-sign change-margin-right-15 pull-right"
+              ng-click="model.showDiscription()"></span>
+        <div class="collapse" id="role-description">
+            <!--<div ng-show="model.discription">-->
+                Regular user: can view search recipes, stores and products <br>
+                Recipe provider: can create recipes and manage your recipes <br>
+                Merchant: can create and manage your store and merchandises.
+            <!--</div>-->
+        </div>
+
     </div>
     <a ng-click="model.register(username, password, password2, role)" class="btn btn-primary btn-block margin-top-15">
         Register

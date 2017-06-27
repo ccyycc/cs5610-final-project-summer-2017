@@ -111,9 +111,7 @@ function findRecipeByCriteria(req, res) {
 
 function findAllRecipes(req, res) {
     recipeModel
-        .find()
-        .populate('_creator')
-        .exec()
+        .findAllRecipes()
         .then(function (recipes) {
             res.json(recipes);
         })

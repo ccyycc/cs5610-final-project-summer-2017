@@ -140,10 +140,10 @@ a:focus, a:hover, a:visited {
     cursor: default;
 }
 
-li.list-group-item > div.row > div {
-    white-space: nowrap;
-    overflow: hidden;
-}
+/*li.list-group-item > div.row > div {*/
+    /*white-space: nowrap;*/
+    /*overflow: hidden;*/
+/*}*/
 
 .video-container {
     position: relative;
@@ -378,4 +378,9 @@ img#photo.imageToCenter {
         margin-bottom: 50px;
     }
 
+}
+
+#role-description {
+    background-color: white;
+    padding:10px;
 }
