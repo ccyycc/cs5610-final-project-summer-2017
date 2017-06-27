@@ -32,11 +32,6 @@
                     value: "merchandise",
                     label: "Product"
                 }
-                // TODO ADDED TO FOOTER
-                // {
-                //     value: "searchNear",
-                //     label: "NearbyStore"
-                // }
             ];
             model.searchType = model.searchOptions[0].value;
             model.searchContent = "";

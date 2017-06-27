@@ -12,6 +12,7 @@ recipeModel.deleteRecipe = deleteRecipe;
 recipeModel.findRecipeByCriteria = findRecipeByCriteria;
 recipeModel.createYummlyLocalRecipeCopy = createYummlyLocalRecipeCopy;
 recipeModel.findYummlyRecipeCopyByYummlyId = findYummlyRecipeCopyByYummlyId;
+recipeModel.findAllRecipes = findAllRecipes;
 // recipeModel.findRecipeByName = findRecipeByName;
 // recipeModel.findRecipeByIngredient = findRecipeByIngredient;
 
@@ -32,7 +33,6 @@ function findYummlyRecipeCopyByYummlyId(recipeId) {
 
 
 //TODO: DELETE YUMMLY RECIPE COPY
-//TODO: FIND ALL RECIPE FOR ADMIN
 
 function createRecipe(userId, recipe) {
     recipe._creator = userId;
@@ -70,11 +70,13 @@ function deleteRecipe(recipeId) {
 
 function findRecipeByCriteria(searchTerm) {
     return recipeModel
-        // .find({ingredients: {$in: [new RegExp(searchTerm, "i")]}});
         .find({$and: [{source: 'LOCAL'},
             {$or: [{name: new RegExp(searchTerm, "i")}, {ingredients: new RegExp(searchTerm, "i")}]}]});
-        // .then(function (recipes) {
-        //     console.log(recipes);
-        // })
-    // {ingredients: new RegExp(searchTerm, "i")}
+}
+
+function findAllRecipes() {
+    return recipeModel
+        .find()
+        .populate('_creator')
+        .exec();
 }

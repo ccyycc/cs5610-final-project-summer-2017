@@ -38,47 +38,41 @@
                 model.profileId = $routeParams.uid;
             }
             model.feedback={};
-            checkCurrentProfileRole();
-
 
             // countPhotoWidth();
 
             render(model.profileId);
-
-            showLikedRecipes();
-
-            model.recipeOrProduct = 'RECIPE';
         }
 
         init();
 
-        function checkCurrentProfileRole() {
-            if (model.profileId) {
-                userService
-                    .findUserById(model.profileId)
-                    .then(function (user) {
-                        identifyRole(user);
-                    });
-            } else {
-                identifyRole(currentUser);
-            }
-        }
-
-        function identifyRole(user) {
-            switch (user.role) {
-                case 'RECIPEPRO':
-                    model.isRecipeProvider = true;
-                    break;
-                case 'MERCHANT':
-                    model.isMerchant = true;
-                    break;
-                case 'ADMIN':
-                    model.isAdmin = true;
-                    break;
-                default:
-                    model.generalUser = true;
-            }
-        }
+        // function checkCurrentProfileRole() {
+        //     if (model.profileId) {
+        //         userService
+        //             .findUserById(model.profileId)
+        //             .then(function (user) {
+        //                 identifyRole(user);
+        //             });
+        //     } else {
+        //         identifyRole(currentUser);
+        //     }
+        // }
+        //
+        // function identifyRole(user) {
+        //     switch (user.role) {
+        //         case 'RECIPEPRO':
+        //             model.isRecipeProvider = true;
+        //             break;
+        //         case 'MERCHANT':
+        //             model.isMerchant = true;
+        //             break;
+        //         case 'ADMIN':
+        //             model.isAdmin = true;
+        //             break;
+        //         default:
+        //             model.generalUser = true;
+        //     }
+        // }
 
         function navToStorePage() {
             if (model.profileId) {
@@ -124,7 +118,6 @@
                     } else {
                         model.followed = false;
                     }
-                    console.log(model.user.role);
                 })
         }
 
@@ -132,10 +125,8 @@
             userService
                 .populateArr(model.profileId, 'likedRecipes')
                 .then(function (likedRecipes) {
-                    // console.log(likedRecipes);
                     model.likedRecipes = likedRecipes;
                     model.recipeOrProduct = 'RECIPE';
-                    // console.log(model.likedRecipes)
                 });
 
 
@@ -145,7 +136,6 @@
             userService
                 .populateArr(model.profileId, 'collectedProducts')
                 .then(function (products) {
-                    // console.log(model.collectedProducts)
                     model.collectedProducts = products;
                     model.recipeOrProduct = 'PRODUCT';
                 });
@@ -155,7 +145,6 @@
             userService
                 .populateArr(model.profileId, 'likedStores')
                 .then(function (stores) {
-                    // console.log(stores)
                     model.likedStores = stores;
                     model.recipeOrProduct = 'STORE';
                 });
@@ -191,7 +180,7 @@
                 .populateArr(model.profileId, 'followings')
                 .then(function (followings) {
                     model.follows = followings;
-                    $location.url = "#followDetail";
+                    // $location.url = "#followDetail";
 
                     if (model.followType === 'followers') {
                         $("#followDetail").collapse('show');
@@ -199,7 +188,6 @@
                         $("#followDetail").collapse('toggle');
                     }
                     model.followType = 'followings';
-                    // console.log(model.follows);
                 })
         }
 
@@ -208,7 +196,7 @@
                 .populateArr(model.profileId, 'followers')
                 .then(function (followers) {
                     model.follows = followers;
-                    $location.url = "#followDetail";
+                    // $location.url = "#followDetail";
                     if (model.followType === 'followings') {
                         $("#followDetail").collapse('show');
                     } else {
@@ -219,20 +207,22 @@
                 })
         }
 
-        function countPhotoWidth() {
-            console.log(screen.width);
-            if (screen.width > 500) {
-                model.profilePhotoWidth = '40%';
-            } else {
-                model.profilePhotoWidth = '100%';
-            }
-        }
         function logout() {
             userService
                 .logout()
                 .then(function () {
                     $location.url('/');
                 });
+        }
+
+
+        function countPhotoWidth() {
+            // console.log(screen.width);
+            if (screen.width > 500) {
+                model.profilePhotoWidth = '40%';
+            } else {
+                model.profilePhotoWidth = '100%';
+            }
         }
     }
 })();
