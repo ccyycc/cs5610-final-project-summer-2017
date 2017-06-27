@@ -7,11 +7,6 @@
 
         var model = this;
 
-        model.creatorId = $routeParams.creatorId;
-        model.recipeId = $routeParams.recipeId;
-
-        model.sectionTitle = "Edit Recipe";
-
         model.createSingleIngredient = createSingleIngredient;
         model.selectSingleIngredient = selectSingleIngredient;
         model.editSingleIngredient = editSingleIngredient;
@@ -24,33 +19,40 @@
 
         function init() {
 
-            if ((currentUser._id !== model.creatorId) && (currentUser.role !== 'ADMIN')) {
-                $location.url('/');
-            }
+            // model.creatorId = $routeParams.creatorId;
+            model.recipeId = $routeParams.recipeId;
+            model.newIngredient = {};
 
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }
 
-
-            model.newIngredient = {};
-
             ifNewRecipe();
 
-            recipeService
-                .findAllRecipesForCreator(model.creatorId)
-                .then(function (recipes) {
-                    model.recipes = recipes;
-                });
-            //TODO: is it possible to have a list of recipe of one person and the editing recipe of another?
             recipeService
                 .findRecipeById(model.recipeId)
                 .then(function (recipe) {
                     model.recipe = recipe;
-                })
+                    if (!canEdit()) {
+                        console.log(currentUser._id)
+                        console.log(model.recipe._creator)
+                        $location.url('/');
+                    }
+                });
+
+            recipeService
+                .findAllRecipesForCreator(currentUser._id)
+                .then(function (recipes) {
+                    model.recipes = recipes;
+                });
         }
 
         init();
+
+        function canEdit() {
+
+            return ((currentUser._id === model.recipe._creator._id) || (currentUser.role === 'ADMIN'));
+        }
 
         function logout() {
             userService
@@ -61,7 +63,13 @@
         }
 
         function ifNewRecipe() {
-            return $location.hash() ? model.ifNewRecipe = true : model.ifNewRecipe = false;
+            if ($location.hash()) {
+                model.ifNewRecipe = true;
+                model.sectionTitle = "New Recipe";
+            } else {
+                model.ifNewRecipe = false;
+                model.sectionTitle = "Edit Recipe";
+            }
         }
 
         function createSingleIngredient() {
@@ -104,30 +112,19 @@
         }
 
         function updateRecipe() {
-            // recipeService
-            //     .updateRecipe(model.recipeId, model.recipe)
-            //     .then(function () {
-            //         model.message = "Update successful!";
-            //         $location.url("/creator/" + model.creatorId + "/recipe/")
-            //     }, function () {
-            //         model.error = "can't update at this time, please try later.";
-            //     })
             saveRecipe()
                 .then(function () {
-                    model.message = "Update successful!";
-                    $location.url("/creator/" + model.creatorId + "/recipe/")
+                    $location.url("/auth_recipe_list")
                 }, function () {
                     model.error = "can't update at this time, please try later.";
                 })
-
-
         }
 
         function deleteRecipe() {
             recipeService
                 .deleteRecipe(model.recipeId)
                 .then(function () {
-                    $location.url("/creator/" + model.creatorId + "/recipe/");
+                    $location.url("/auth_recipe_list");
                 }, function () {
                     model.error = "can't delete at this time, please try later.";
                 })

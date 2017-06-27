@@ -38,7 +38,7 @@
 
         function searchStores() {
             storeService
-                .findStoreByName(model.searchText)
+                .findStoreByNameParams(model.searchText)
                 .then(function (data) {
                     model.results=data;
                 })

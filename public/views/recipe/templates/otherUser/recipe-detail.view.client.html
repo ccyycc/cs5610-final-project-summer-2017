@@ -2,7 +2,8 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-2 sidebar">
-            <div class="nav nav-sidebar">
+            <div class="nav nav-sidebar"
+                 ng-if="model.ifLocal">
                 <h4>Recipe Provider:</h4>
                 <img id="smallProfileImage"
                      class="img-responsive"
@@ -14,83 +15,84 @@
                 <label for="email">Email</label>
                 <p id="email">{{model.recipeCreator.email}}</p>
                 <a class="btn btn-block btn-primary"
-                   href="/profile/{{model.recipeCreator._id}}">Find more</a>
+                   href="#!/profile/{{model.recipeCreator._id}}">Find more</a>
+            </div>
+            <div class="nav nav-sidebar"
+                 ng-if="!model.ifLocal">
+                <h4>Recipe Provider:</h4>
+                <img id="smallYummlyProfileImage"
+                     class="img-responsive"
+                     ng-src="{{model.recipe.images[0].hostedMediumUrl}}"/>
+                <label for="recipename">Recipe Name</label>
+                <p id="recipename">{{model.recipe.name}}</p>
+                <label for="sourceSite">Source Site</label>
+                <p id="sourceSite">{{model.recipe.source.sourceDisplayName}}</p>
+                <label for="sourceURL">Source URL</label>
+                <p id="sourceURL">{{model.recipe.source.sourceRecipeUrl}}</p>
             </div>
         </div>
         <div class="col-sm-10 col-sm-offset-2 main">
-            <h2 class="page-header">{{model.recipe.name}}
+            <!--{{model.recipe}}-->
+            <h2 class="page-header">
+                {{model.recipe.name}}
                 <a class="btn pull-right"
-                   ng-show="model.like"
+                   ng-if="model.canEdit"
+                   ng-click="model.goToEdit()">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
+                <a class="btn pull-right"
+                   ng-if="model.like"
                    ng-click="model.unlikeRecipe()">
-                    <span class="glyphicon glyphicon-heart"></span>
+                    <span class="glyphicon glyphicon-heart">{{model.numberOfLikes}}</span>
                 </a>
                 <a class="btn pull-right"
                    ng-show="!model.like"
                    ng-click="model.likeRecipe()">
-                    <span class="glyphicon glyphicon-heart-empty"></span>
+                    <span class="glyphicon glyphicon-heart-empty">{{model.numberOfLikes}}</span>
                 </a>
             </h2>
-            <span>total time: {{model.recipe.totalTime}}</span><br>
-            <span>number of servings: {{model.recipe.numberOfServings}}</span>
-            <!--{{model.recipe}}-->
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>
+                    <h5>Number of servings: </h5> {{model.recipe.numberOfServings}}
+                    <h5>Total time (in min): </h5> {{model.recipe.totalTime}}
+                    <h5>Description: </h5> {{model.recipe.description}}
+                    </p>
+                </div>
+                <div class="col-xs-12 col-sm-8">
+                    <img ng-if="model.ifLocal"
+                         class="title-image img-rounded img-responsive"
+                         ng-src="{{model.recipe.image}}"
+                         onerror="this.onerror=null; this.src='/resource/defaultPics/placeholder-image10.jpg'"/>
+                </div>
+            </div>
             <h3 class="sub-header">Ingredients</h3>
-            <!--{{ingredient.description}}-->
-            <!--{{model.recipe.ingredients}}-->
             <div ng-repeat="ingredient in model.recipe.ingredients">
                 <ul class="list-unstyled">
-                    <li><a ng-click="model.goToIngredientDetail(ingredient.name)">{{ingredient.name}}</a> :
-                                                                                                          {{ingredient.description}}
+                    <li>
+                        <a ng-click="model.goToIngredientDetail(ingredient.name)">
+                            <label>{{ingredient.name}}</label></a> : {{ingredient.description}}
                     </li>
                 </ul>
             </div>
 
             <h3 class="sub-header">Instructions</h3>
-
-            <!--TODO: copyright-->
-            {{model.recipe.source.sourceRecipeUrl}}
-            <div ng-if="!model.ifLocal">
-                <!--<a href=model.trust("{{model.recipe.source.sourceRecipeUrl}}")-->
-                <!--target="embedded-content">-->
-                <!--Open instruction below-->
-                <!--</a>-->
-                <!--<iframe sandbox="allow-same-origin allow-scripts"-->
-                <!--src="{{model.trust(model.recipe.source.sourceRecipeUrl)}}"-->
-                <!--class="responsive" name="embedded-content"></iframe>-->
+            <div ng-if="model.ifLocal">
+                <p>{{model.recipe.instruction}}</p>
             </div>
-
-            <!--<h2 class="sub-header">More from ...</h2>-->
-            <!--<div class="placeholders" >-->
-            <!--<div class="placeholder">-->
-            <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">-->
-            <!--<h4 class="text-center">Label</h4>-->
-            <!--<span class="text-center text-muted">Something else</span>-->
-            <!--</div>-->
-            <!--<div class="placeholder">-->
-            <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">-->
-            <!--<h4 class="text-center">Label</h4>-->
-            <!--<span class="text-center text-muted">Something else</span>-->
-            <!--</div>-->
-            <!--<div class="placeholder">-->
-            <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">-->
-            <!--<h4 class="text-center">Label</h4>-->
-            <!--<span class="text-center text-muted">Something else</span>-->
-            <!--</div>-->
-            <!--<div class="placeholder">-->
-            <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">-->
-            <!--<h4 class="text-center">Label</h4>-->
-            <!--<span class="text-center text-muted">Something else</span>-->
-            <!--</div>-->
-            <!--<div class="placeholder">-->
-            <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">-->
-            <!--<h4 class="text-center">Label</h4>-->
-            <!--<span class="text-center text-muted">Something else</span>-->
-            <!--</div>-->
-            <!--<div class="placeholder">-->
-            <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="120" height="120" class="img-responsive" alt="Generic placeholder thumbnail">-->
-            <!--<h4 class="text-center">Label</h4>-->
-            <!--<span class="text-center text-muted">Something else</span>-->
-            <!--</div>-->
-            <!--</div>-->
+            <div ng-if="!model.ifLocal">
+                <a href="{{model.recipe.source.sourceRecipeUrl}}"
+                   target="embedded-content"
+                   ng-click="model.showYummlyInstruction = true">
+                    Open instruction below
+                </a>
+                <div class="video-container"
+                     ng-if="model.showYummlyInstruction">
+                    <iframe sandbox="allow-same-origin allow-scripts"
+                            class="embed-responsive-item"
+                            name="embedded-content"></iframe>
+                </div>
+            </div>
             <div>
                 <h3 class="sub-header">Comments
                     <a class="btn pull-right"
@@ -121,14 +123,14 @@
                         <span class="glyphicon glyphicon-remove"></span>
                     </a>
                     </span>
-
-
                 </div>
                 <div>
                     <ul class="list-group list-unstyled"
                         ng-repeat="review in model.reviews">
                         <li class="list-group-item-warning">
-                            <label><span class="glyphicon glyphicon-user"></span>User {{review.fromWhom.username}}</label>: {{review.content}}
+                            <label>
+                                <span class="glyphicon glyphicon-user"></span>User {{review.fromWhom.username}}
+                            </label> : {{review.content}}
                         </li>
                     </ul>
                 </div>

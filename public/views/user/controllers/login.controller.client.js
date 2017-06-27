@@ -12,6 +12,7 @@
 
         init()
         function init() {
+
             if(currentUser._id){
                 console.log(currentUser._id)
                 $location.url('/');

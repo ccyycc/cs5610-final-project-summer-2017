@@ -9,15 +9,24 @@
 
         model.editStoreProfile = editStoreProfile;
         model.goToProductList = goToProductList;
+        model.goToProfilePage = goToProfilePage;
 
         model.createComment = createComment;
         model.deleteComment = deleteComment;
         model.likeStore = likeStore;
         model.unlikeStore = unlikeStore;
 
+        model.logout = logout;
+
         function init() {
+
             //setup
             model.storeId = $routeParams['storeId'];
+
+
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
 
             model.comments = [];
             model.newComment = undefined;
@@ -60,7 +69,6 @@
                     associationService
                         .findAssociationForSourceTarget("LIKE", currentUser._id, "store", model.storeId)
                         .then(function (likes) {
-                            console.log(likes);
                             if (likes.length === 0) {
                                 model.like = false;
                             } else {
@@ -68,11 +76,25 @@
                                 model.likeAssociation = likes[0];
                             }
                         })
+
+                    associationService
+                        .findAssociationForTarget("LIKE","store", model.storeId)
+                        .then(function (likes) {
+                            model.numLike = likes.length
+                        })
                 });
 
         }
 
         init();
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
 
         function getStoreURLAddress(store) {
             var address = store.address;
@@ -126,7 +148,13 @@
                 .then(function (association) {
                     model.likeAssociation = association;
                     model.like = true;
-                });
+                    model.numLike++;
+                })
+                .then(function () {
+                    currentUser.likedStores.push(model.storeId);
+                    userService
+                        .updateProfile(currentUser);
+                })
         }
 
         function unlikeStore() {
@@ -134,8 +162,15 @@
                 .deleteAssociationById(model.likeAssociation._id)
                 .then(function (res) {
                     model.like = false;
+                    model.numLike--;
                     delete model.likeAssociation['_id'];
-                });
+                })
+                .then(function () {
+                    var index = currentUser.likedStores.indexOf(model.storeId);
+                    currentUser.likedStores.splice(index, 1);
+                    userService
+                        .updateProfile(currentUser);
+                })
         }
 
         function goToProductList() {
@@ -152,6 +187,12 @@
             }
             return "";
         }
+
+        function goToProfilePage() {
+            $location.url('/profile/'+model.seller._id);
+
+        }
+
 
     }
 })();

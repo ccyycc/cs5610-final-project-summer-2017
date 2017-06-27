@@ -11,7 +11,7 @@ storeModel.deleteStore = deleteStore;
 
 storeModel.findAllStores = findAllStores;
 
-storeModel.findStoreByName = findStoreByName;
+storeModel.findStoreByNameParams = findStoreByNameParams;
 
 storeModel.uploadImage = uploadImage;
 
@@ -20,7 +20,7 @@ storeModel.findStoreByName = findStoreByName;
 module.exports = storeModel;
 
 
-function findStoreByName(storeName) {
+function findStoreByNameParams(storeName) {
     return storeModel
         .find({name: new RegExp(storeName, "i")})
         .populate("_owner")

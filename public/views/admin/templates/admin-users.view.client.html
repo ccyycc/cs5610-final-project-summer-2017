@@ -1,16 +1,18 @@
+<div ng-include="'./views/common/header.view.client.html'"></div>
+
 <div class="container-fluid main-container">
     <div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
     <ul class="list-group">
         <li class="list-group-item">
             <div class="row">
+                <div class="col-sm-3 hidden-xs">
+                    ID
+                </div>
                 <div class="col-sm-3 col-xs-5">
                     Username
                 </div>
                 <div class="col-sm-3 hidden-xs">
-                    Followers
-                </div>
-                <div class="col-sm-3 hidden-xs">
-                    Followings
+                    Email
                 </div>
                 <div class="col-sm-3 col-xs-6">
                     Role
@@ -20,16 +22,18 @@
 
         <li class="list-group-item">
             <div class="row">
+                <div class="col-sm-3 hidden-xs">
+                    <div ng-model="model.user._id"
+                           class="form-control">
+                    </div>
+                </div>
                 <div class="col-sm-3 col-xs-5">
                     <input ng-model="model.user.username"
                            class="form-control">
                 </div>
+
                 <div class="col-sm-3 hidden-xs">
-                    <input ng-model="model.user.followers"
-                           class="form-control">
-                </div>
-                <div class="col-sm-3 hidden-xs">
-                    <input ng-model="model.user.followings"
+                    <input ng-model="model.user.email"
                            class="form-control">
                 </div>
                 <div class="col-sm-2 col-xs-5">
@@ -46,14 +50,14 @@
         <li ng-repeat="user in model.users" class="list-group-item">
 
             <div class="row">
+                <div class="col-sm-3 hidden-xs">
+                    {{user._id}}
+                </div>
                 <div class="col-sm-3 col-xs-5">
                     {{user.username}}
                 </div>
                 <div class="col-sm-3 hidden-xs">
-                    {{user.followers}}
-                </div>
-                <div class="col-sm-3 hidden-xs">
-                    {{user.followings}}
+                    {{user.email}}
                 </div>
                 <div class="col-sm-2 col-xs-5">
                     {{user.role}}
@@ -69,3 +73,5 @@
         </li>
     </ul>
 </div>
+
+<div ng-include="'./views/common/footer.view.client.html'"></div>

@@ -1,3 +1,5 @@
+<div ng-include="'./views/common/header.view.client.html'"></div>
+
 <div class="container-fluid main-container">
     <img id="photo"
          class="imageToCenter"
@@ -8,11 +10,12 @@
           enctype="multipart/form-data"
           class="margin-top-15">
         <input name="myFile" type="file" class="form-control"/>
-        <!--<input name="width" value="{{model.user.photo.width}}" style="display: none"/>-->
-        <input name="userId" value="{{model.userId}}" style="display: none"/>
-        <button ng-click="#!/account"
+        <input name="userId" value="{{model.userId}}" class = "input-hidden"/>
+        <button href="#!/account"
                 class="btn btn-block btn-primary">
             Upload Photo
         </button>
     </form>
 </div>
+
+<div ng-include="'./views/common/footer.view.client.html'"></div>

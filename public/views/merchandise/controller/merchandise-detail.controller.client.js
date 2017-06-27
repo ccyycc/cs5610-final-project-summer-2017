@@ -3,7 +3,8 @@
         .module('FinalProject')
         .controller('merchandiseDetailController', merchandiseDetailController);
 
-    function merchandiseDetailController($location, $routeParams, merchandiseService, associationService, currentUser, storeService) {
+    function merchandiseDetailController($location, $routeParams, merchandiseService, associationService,
+                                         currentUser, storeService, userService) {
         var model = this;
         //event handler
         model.editMerchandise = editMerchandise;
@@ -12,11 +13,17 @@
         model.deleteComment = deleteComment;
         model.likeMerchandise = likeMerchandise;
         model.unlikeMerchandise = unlikeMerchandise;
+        model.logout = logout;
 
 
         init();
 
         function init() {
+
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
+
             model.sectionTitle = "Product Detail";
             model.storeId = $routeParams['storeId'];
             model.merchandiseId = $routeParams['merchandiseId'];
@@ -40,7 +47,7 @@
                         model.merchandise=merchandise;
 
                         storeService
-                            .findStoreById(model.merchandise._store)
+                            .findStoreById(model.storeId)
                             .then(function(store){
                             model.store = store;
                             model.canEdit=(store._owner===currentUser._id ||currentUser.role ==="ADMIN");
@@ -63,6 +70,12 @@
                                     model.likeAssociation=likes[0];
                                 }
                             })
+
+                        associationService
+                            .findAssociationForTarget("LIKE","merchandise", model.merchandiseId)
+                            .then(function (likes) {
+                                model.numLike = likes.length
+                            })
                     },
                     function(){
                         alert("cannot find merchandise for users");
@@ -70,6 +83,15 @@
                     }
                 );
         }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
+
 
         function editMerchandise() {
             $location.url("/store/"+model.storeId+"/merchandise/"+model.merchandiseId+"/edit");
@@ -104,7 +126,13 @@
                 .then(function (association) {
                     model.likeAssociation = association;
                     model.like=true;
-                });
+                    model.numLike++
+                })
+                .then(function () {
+                    currentUser.collectedProducts.push(model.merchandiseId);
+                    userService
+                        .updateProfile(currentUser);
+                })
         }
 
 
@@ -113,8 +141,16 @@
                 .deleteAssociationById(model.likeAssociation._id)
                 .then(function (res) {
                     model.like=false;
+                    model.numLike--;
                     delete model.likeAssociation['_id'];
-                });
+                })
+                .then(function () {
+                    var index = currentUser.collectedProducts.indexOf(model.merchandiseId);
+                    currentUser.collectedProducts.splice(index, 1);
+                    userService
+                        .updateProfile(currentUser);
+                })
+
         }
 
     }

@@ -4,8 +4,8 @@
         <div class="col-xs-12 col-sm-6 col-md-4 text-center recipeListImages"
              ng-repeat="recipe in model.recipes">
             <div class="wd-widget-toolbar">
-                <a ng-show="model.ifCreator()"
-                   href="#!/creator/{{model.creatorId}}/recipe/{{recipe._id}}">
+                <a ng-show="model.canEdit()"
+                   href="#!/auth_recipe_list/{{recipe._id}}">
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
             </div>
@@ -17,7 +17,7 @@
                 <p class="text-on-image">{{recipe.name}}</p>
             </a>
         </div>
-        <div ng-show="model.ifCreator()"
+        <div ng-show="model.canEdit()"
              class="col-xs-12 col-sm-6 col-md-4 text-center recipeListImages">
             <img class="recipeListImage"
                  src="/resource/defaultPics/addphoto.png"/>

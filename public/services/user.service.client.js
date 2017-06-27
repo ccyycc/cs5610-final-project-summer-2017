@@ -12,6 +12,7 @@
             findAllUsers: findAllUsers,
             findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
+            findUserByPartialUsername:findUserByPartialUsername,
             updateUser: updateUser,
             deleteUser: deleteUser,
             updateProfile: updateProfile,
@@ -30,7 +31,8 @@
             deleteLikedRecipe: deleteLikedRecipe,
             sendMessage: sendMessage,
             deleteMessage: deleteMessage,
-            renderMessage: renderMessage,
+            renderInMessage: renderInMessage,
+            renderOutMessage: renderOutMessage,
             populateArr: populateArr,
             countBmi: countBmi
 
@@ -51,16 +53,22 @@
 
         function deleteMessage(messageId) {
             var url='/api/association/comment/' + messageId;
-            // console.log('delete: '+ url);
-
             return $http.delete(url)
                 .then(function (response) {
                     return response.data;
                 })
         }
 
-        function renderMessage() {
-            var url = '/api/renderMessage';
+        function renderInMessage() {
+            var url = '/api/renderInMessage';
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function renderOutMessage() {
+            var url = '/api/renderOutMessage';
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
@@ -91,7 +99,7 @@
         }
 
         function deleteLikedRecipe(rId) {
-            getHelper('/api/deleteLikeRecipe/' + rId);
+            getHelper('/api/deleteLikedRecipe/' + rId);
         }
 
         function getHelper(url) {
@@ -128,7 +136,6 @@
 
         function register(user) {
             var url = "/api/register";
-            console.log('user.service.client user: ' + user);
             return $http.post(url, user)
                 .then(function (response) {
                     return response.data;
@@ -181,13 +188,18 @@
 
         function findUserByUsername(username) {
             var url = "/api/checkname?username=" + username;
-            console.log(url + '--url--uesr.service.client');
             return $http.get(url)
                 .then(function (response) {
                     // console.log(response);
                     return response.data;
                 });
         }
+        function findUserByPartialUsername(content){
+            var url = "/api/user/username/partial/"+content;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })        }
 
         function findMe() {
             var url = '/api/user/findme';
@@ -231,7 +243,6 @@
         function updateUser(userId, user) {
             // console.log(user);
             var url = '/api/user/' + userId;
-            console.log(user);
             return $http.put(url, user)
                 .then(function (response) {
                     // console.log(response.data);

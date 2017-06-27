@@ -1,13 +1,40 @@
-CollectedProducts
-<div ng-repeat="product in model.collectedProducts">
-    <div class="row">
-        <div class="col-xs-6">
-            <img id="photo" class="imageToCenter"
-                 ng-src="{{product.image}}" width="150px"/>
-        </div>
-        <div class="col-xs-6">
-            <b>{{product.name}} </b>
-            <p>{{product.price}} {{product.unit}}</p>
-        </div>
-    </div>
+<!--<div ng-repeat="product in model.collectedProducts">-->
+    <!--<div class="row">-->
+        <!--<div class="col-xs-6">-->
+            <!--<img id="photo" class="imageToCenter"-->
+                 <!--ng-src="{{product.image}}" width="150px"/>-->
+        <!--</div>-->
+        <!--<div class="col-xs-6">-->
+            <!--<b>{{product.name}} </b>-->
+            <!--<p>{{product.price}} {{product.unit}}</p>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover table-condensed">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price/Unit</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="product in model.collectedProducts track by $index">
+            <th>
+                <p><b class="description">{{product.name}}</b></p>
+            </th>
+            <th>
+                <p><b class="description">{{product.price}}/{{product.unit}}</b></p>
+            </th>
+            <th class="text-center">
+                <a href="#!/store/{{product._store}}/merchandise/{{product._id}}">
+                    <span class="glyphicon glyphicon glyphicon-arrow-right"></span>
+                </a>
+            </th>
+        </tr>
+        </tbody>
+    </table>
 </div>

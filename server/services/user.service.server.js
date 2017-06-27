@@ -5,23 +5,31 @@ var upload = multer({dest: __dirname + '/../../public/uploads'});
 
 var userModel = require('../models/user/user.model.server');
 
-const passport = require('passport');
 var bcrypt = require("bcrypt-nodejs");
 
+const passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+// var FacebookStrategy = require('passport-facebook').Strategy;
+// var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 
-// var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+// var facebookConfig = {
+//     clientID: process.env.FACEBOOK_CLIENT_ID,
+//     clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+//     callbackURL: process.env.FACEBOOK_CALLBACK_URL,
+//     profileFields: ['id', 'last_name', 'first_name', 'email']
+// };
 //
 // var googleConfig = {
 //     clientID: process.env.GOOGLE_CLIENT_ID,
 //     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
 //     callbackURL: process.env.GOOGLE_CALLBACK_URL
 // };
-//
+
+passport.use(new LocalStrategy(localStrategy));
+// passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 // passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 
 // :userId: path params
@@ -30,6 +38,8 @@ app.get('/api/user/findme', findMe);
 app.get('/api/userpop/:userId', popUserById);
 app.get('/api/checkname', findUserByName);
 app.get('/api/user', isAdmin, findAllUsers);
+app.get("/api/user/username/partial/:username", findUserByPartialUsername);
+
 
 app.post('/api/user', isAdmin, createUser);
 // TODO:changed the updateUser, without check isAdmin
@@ -53,10 +63,11 @@ app.get('/api/unfollow/:followingId', unfollow);
 app.get('/api/addLikedRecipe/:rId', addLikedRecipe);
 app.get('/api/deleteLikedRecipe/:rId', deleteLikedRecipe);
 
-
 app.put('/api/message/:userId', sendMessage);
 app.get('/api/user/populate/:arrName/:userId', populateArr);
-app.get('/api/renderMessage', renderMessage);
+app.get('/api/renderInMessage', renderInMessage);
+app.get('/api/renderOutMessage', renderOutMessage);
+
 // app.get('/api/showFollowings/:userId', showFollowings);
 // app.get('/api/showFollowers/:userId', showFollowers);
 app.post('/api/account/bmiCal', bmiCal);
@@ -70,6 +81,11 @@ app.get('/auth/google/callback',
         failureRedirect: '/index.html#!/login'
     }));
 
+app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+    successRedirect: '/index.html#!/profile',
+    failureRedirect: '/index.html#!/login'
+}));
 
 passport.isAdmin = isAdmin;
 passport.isMerchant = isMerchant;
@@ -208,6 +224,8 @@ function updateUser(req, res) {
     var user = req.body;
     var userId = req.params.userId;
 
+    console.log('update user -- user.service.server');
+    console.log(user);
     userModel
         .updateUser(userId, user)
         .then(function (status) {
@@ -253,6 +271,21 @@ function findUserById(req, res) {
         .then(function (user) {
             res.json(user);
         });
+}
+
+function findUserByPartialUsername(req,res){
+    var partialUsername = req.params.username;
+
+    userModel
+        .findUserByPartialUsername(partialUsername)
+        .then(
+            function (users) {
+                res.status(200).send(users);
+            },
+            function () {
+                res.sendStatus(500);
+            }
+        )
 }
 
 function popUserById(req, res) {
@@ -306,7 +339,7 @@ function deleteLikedRecipe(req, res) {
     var rId = req.params.rId;
 
     userModel
-        .deleteFromCollections(userId,rId,'likedRecipes')
+        .deleteFromCollections(userId, rId, 'likedRecipes')
         .then(function (user) {
             res.json(user);
         })
@@ -342,13 +375,24 @@ function populateArr(req, res) {
         })
 }
 
-function renderMessage(req, res) {
+function renderInMessage(req, res) {
     var userId = req.user._id;
     var associationModel = require('../models/association/association.model.server');
     associationModel
-        .renderMessage(userId)
+        .renderMessage(userId, 'in')
         .then(function (response) {
-            res.json(response);
+                res.json(response);
+            }
+        )
+}
+
+function renderOutMessage(req, res) {
+    var userId = req.user._id;
+    var associationModel = require('../models/association/association.model.server');
+    associationModel
+        .renderMessage(userId, 'out')
+        .then(function (response) {
+                res.json(response);
             }
         )
 }
@@ -482,6 +526,50 @@ function googleStrategy(token, refreshToken, profile, done) {
             }
         );
 }
+
+////////////////Facebook/////////////////////
+function facebookStrategy(token, refreshToken, profile, done) {
+    userModel
+        .findUserByFacebookId(profile.id)
+        .then(
+            function (user) {
+                if (user) {
+                    return done(null, user);
+                } else {
+
+                    var email = profile.emails[0].value;
+                    // var emailParts = email.split("@");
+                    var newFacebookUser = {
+                        username: email,
+                        firstName: profile.name.givenName,
+                        lastName: profile.name.familyName,
+                        email: email,
+                        facebook: {
+                            id: profile.id,
+                            token: token
+                        }
+                    };
+                    return userModel.createUser(newFacebookUser);
+                }
+            },
+            function (err) {
+                if (err) {
+                    return done(err);
+                }
+            }
+        )
+        .then(
+            function (user) {
+                return done(null, user);
+            },
+            function (err) {
+                if (err) {
+                    return done(err);
+                }
+            }
+        );
+}
+
 
 function uploadImage(req, res) {
     var myFile = req.file;

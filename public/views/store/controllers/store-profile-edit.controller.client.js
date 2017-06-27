@@ -3,19 +3,23 @@
         .module('FinalProject')
         .controller('storeProfileEditController', storeProfileEditController);
 
-    function storeProfileEditController($routeParams, $location, storeService, $sce, currentUser) {
+    function storeProfileEditController($routeParams, $location, storeService, $sce, currentUser,userService) {
         var model = this;
         model.updateStore = updateStore;
         model.createStore = createStore;
+        model.logout = logout;
 
         init();
 
         function init() {
             model.storeId = $routeParams['storeId'];
             model.mode = $routeParams['mode'];
-            console.log(model);
             model.user = currentUser;
             model.store = {};
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
+
             // model.store = storeService.findStoreById(model.storeId);
             model.days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
             if (model.mode === "new") {
@@ -42,7 +46,7 @@
                     .then(function (data) {
                         model.store = data[0];
                         model.canEdit = (model.store._owner === currentUser._id || currentUser.role === "ADMIN");
-                        if(!canEdit){
+                        if(!model.canEdit){
                             $location.url('/');
                         }
                         populateDateObject(model.store);
@@ -81,6 +85,14 @@
                 store.hours[i].open = new Date(store.hours[i].open);
                 store.hours[i].close = new Date(store.hours[i].close);
             }
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
         }
     }
 })();

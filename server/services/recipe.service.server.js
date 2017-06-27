@@ -125,7 +125,7 @@ function uploadImage(req, res) {
     var myFile = req.file;
     var userId = req.body.userId;
 
-    var callbackUrl = "/index.html#!/creator/" + userId + "/recipe/" + recipeId;
+    var callbackUrl = "/index.html#!/auth_recipe_list/" + recipeId;
 
     if (!myFile) {
         res.redirect(callbackUrl);

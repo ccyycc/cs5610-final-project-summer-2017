@@ -4,7 +4,7 @@ var storeSchema = mongoose.Schema({
     name: {type: String, required: true},
     description: String,
     hours: [{open: {type: Date}, close: {type: Date}}],
-    image: String,
+    image: {type: String, default: '/uploads/store/..'},
     address: {
         street: String,
         city: String,

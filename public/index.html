@@ -30,9 +30,7 @@
           crossorigin="anonymous">
     <script src="vendor/css/bootstrap/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="css/dashboard.css">
-    <link rel="stylesheet" href="css/nutritionChart.css">
-    <link rel="stylesheet" href="css/style.css">
+
 
     <!---------------------------------------------services------------------------------------------------------------>
     <script src="services/map.service.client.js"></script>
@@ -40,6 +38,10 @@
     <script src="services/store-profile.service.client.js"></script>
 
     <!--loadservicesvice -->
+
+
+    <!--user service-->
+    <script src="services/user.service.client.js"></script>
 
     <!--recipe service-->
     <script src="services/user.service.client.js"></script>
@@ -50,9 +52,9 @@
 
     <!---------------------------------------------controller---------------------------------------------------------->
 
-
     <!--search Controller-->
-    <script src="views/store/controllers/store-profile-list.controller.client.js"></script>
+    <script src="views/store/controllers/store-profile-search.controller.client.js"></script>
+    <script src="views/user/controllers/user-search.controller.client.js"></script>
 
 
     <!--merchandise controller-->
@@ -62,11 +64,10 @@
     <script src="views/merchandise/controller/merchandise-search-list.controller.client.js"></script>
 
     <!--store controller-->
-    <script src="views/store/controllers/store-search.controller.client.js"></script>
+    <script src="views/store/controllers/store-search-near-by.controller.client.js"></script>
     <script src="views/store/controllers/store-profile.controller.client.js"></script>
     <script src="views/store/controllers/store-profile-edit.controller.client.js"></script>
 
-    <!--loading controller-->
 
     <!--admin controllers-->
     <script src="views/admin/controllers/admin.controller.client.js"></script>
@@ -75,12 +76,10 @@
     <script src="views/admin/controllers/admin-recipes.controller.client.js"></script>
     <script src="views/admin/controllers/admin-stores.controller.client.js"></script>
     <script src="views/admin/controllers/admin-user-detail.controller.client.js"></script>
+    <script src="views/admin/controllers/admin-comments.controller.client.js"></script>
 
 
     <!--home controllers-->
-    <script src="views/home/controllers/home.controller.client.js"></script>
-
-    <!--home controller-->
     <script src="views/home/controllers/home.controller.client.js"></script>
 
     <!--user controllers-->
@@ -93,8 +92,6 @@
     <script src="views/user/controllers/inbox.controller.client.js"></script>
 
 
-    <!--user service-->
-    <script src="services/user.service.client.js"></script>
 
     <!--recipe Controller-->
     <script src="views/recipe/controllers/creator/recipe-edit.controller.client.js"></script>
@@ -112,7 +109,9 @@
     <script src="js/textAngular.min.js"></script>
 
     <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
-
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/nutritionChart.css">
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>

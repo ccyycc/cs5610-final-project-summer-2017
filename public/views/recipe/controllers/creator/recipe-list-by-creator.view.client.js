@@ -3,39 +3,55 @@
         .module("FinalProject")
         .controller("recipeListByCreatorController", RecipeListByCreatorController);
 
-    function RecipeListByCreatorController($routeParams, $location, recipeService, currentUser) {
+    function RecipeListByCreatorController($routeParams, $location, recipeService, currentUser, userService) {
 
         var model = this;
 
-        model.sectionTitle = 'Recipe List from ' + currentUser.username;
-        model.creatorId = $routeParams.creatorId;
-        model.ifCreator = ifCreator;
+        model.canEdit = canEdit;
         model.createRecipe = createRecipe;
+        model.logout = logout;
 
         function init() {
 
-            // if (currentUser.roles.indexOf('RECIPEPRO') === -1) {
-            //
-            //     // $location.url('/account')
-            // }
-            recipeService
-                .findAllRecipesForCreator(model.creatorId)
-                .then(function (recipes) {
-                    model.recipes = recipes;
-                })
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
 
-            // recipeService
-            //     .findAllRecipesForCreator(userId)
-            //     .then(function (recipes) {
-            //         model.recipes = recipes;
-            //     })
+            if ($routeParams.creatorId) {
+                userService
+                    .findUserById($routeParams.creatorId)
+                    .then(function (user) {
+                        model.creator = user;
+                        model.sectionTitle = 'Recipe List from ' + model.creator.username;
+                        recipeService
+                            .findAllRecipesForCreator(model.creator._id)
+                            .then(function (recipes) {
+                                model.recipes = recipes;
+                            });
+                    });
+            } else {
+                model.creator = currentUser;
+                model.sectionTitle = 'Recipe List from ' + model.creator.username;
+                recipeService
+                    .findAllRecipesForCreator(model.creator._id)
+                    .then(function (recipes) {
+                        model.recipes = recipes;
+                    })
+            }
         }
 
         init();
 
-        function ifCreator() {
-            console.log(currentUser._id === model.creatorId);
-            return currentUser._id === model.creatorId;
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
+
+        function canEdit() {
+            return ((currentUser._id === model.creator._id) || (currentUser.role === 'ADMIN'));
         }
 
         function createRecipe() {
@@ -43,15 +59,13 @@
                 name : "New Recipe"
             };
             recipeService
-                .createRecipe(model.creatorId, newRecipe)
+                .createRecipe(model.creator._id, newRecipe)
                 .then(function (recipe) {
-                    $location.url("/creator/" + model.creatorId + "/recipe/" + recipe._id + '#NEW');
+                    $location.url("/auth_recipe_list/" + recipe._id + '#NEW');
                 }, function () {
                     model.error = "can't create new recipe at this time, please try again";
                 })
         }
-
-
     }
 })();
 

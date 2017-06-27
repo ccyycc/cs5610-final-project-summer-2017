@@ -2,35 +2,80 @@
 
 
 <div class="container-fluid main-container">
+    <!--<div class="row">-->
+
+    <!--</div>-->
+    <!--<nav class="navbar navbar-light">-->
+    <!--&lt;!&ndash;<div class="collapes navbar-collape">&ndash;&gt;-->
+    <!--<ul class="nav nav-tabs nav-justified">-->
+    <!--&lt;!&ndash;<div class="col-xs-6">&ndash;&gt;-->
+    <!--<li class="active">-->
+    <!--<a-->
+    <!--href="#!/account/inbox">Inbox</a>-->
+    <!--</li>-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="col-xs-6">&ndash;&gt;-->
+    <!--<li >-->
+    <!--<a -->
+    <!--href="#!/account/inbox">Outbox</a>-->
+    <!--</li>-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--</ul>-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+    <!--</nav>-->
+    <!--<nav aria-label="...">-->
+    <ul class="nav nav-pills nav-justified" id="account-box-nav">
+        <li class="{{model.inboxActive}}"><a ng-click="model.showInbox()">Inbox</a></li>
+        <li class="{{model.outboxActive}}"><a ng-click="model.showOutbox()">Outbox</a></li>
+    </ul>
+    <!--</nav>-->
     <ul class="list-group">
         <li class="list-group-item">
             <div class="row">
-                <div class="col-xs-2">
+                <div class="col-sm-2 hidden-xs">
+                    <br>
                 </div>
-                <div class="col-xs-2">
-                    from
+                <div class="col-xs-2" ng-show="model.inboxActive">
+                    <b>From</b>
                 </div>
-                <div class="col-xs-5">
-                    content
+                <div class="col-xs-2" ng-show="model.outboxActive">
+                    <b>To</b>
                 </div>
-                <div class="col-xs-3">
-                    time
+                <div class="col-xs-5 text-center">
+                    <b>Content</b>
+                </div>
+                <div class="col-sm-3 hidden-xs">
+                    <b>Time</b>
                 </div>
             </div>
         </li>
+
         <div ng-repeat="message in model.messages">
             <li class="list-group-item">
                 <div class="row">
-                    <div class="col-xs-2">
+                    <!--<div ng-show="model.inboxActive">-->
+                    <div class="col-sm-2 hidden-xs" ng-show="model.inboxActive">
                         <img ng-src="{{message.fromWhom.photo}}" width="50%"/>
                     </div>
-                    <div class="col-xs-2">
-                        {{message.fromWhom.username}}
+                    <div class="col-xs-2" ng-show="model.inboxActive">
+                        <a ng-href="#!/profile/{{message.fromWhom._id}}">{{message.fromWhom.username}}</a>
                     </div>
-                    <div class="col-xs-5">
+                    <!--</div>-->
+
+                    <!--<div ng-show="model.outboxActive">-->
+                    <div class="col-sm-2 hidden-xs" ng-show="model.outboxActive">
+                        <img ng-src="{{message.toWhom.photo}}" width="50%"/>
+                    </div>
+                    <div class="col-xs-2" ng-show="model.outboxActive">
+                        <a ng-href="#!/profile/{{message.toWhom._id}}">{{message.toWhom.username}}</a>
+                    </div>
+                    <!--</div>-->
+
+                    <div class="col-sm-5 col-xs-8 message-content">
                         {{message.content}}
                     </div>
-                    <div class="col-xs-2">
+                    <div class="col-sm-2 hidden-xs">
                         {{message.time | date}}
                     </div>
                     <div class="col-xs-1">

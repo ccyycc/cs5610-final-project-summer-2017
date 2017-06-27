@@ -10,6 +10,7 @@ userModel.findUserById = findUserById;
 userModel.findUserByUsername = findUserByUsername;
 userModel.findUserByCredentials = findUserByCredentials;
 userModel.findAllUsers = findAllUsers;
+userModel.findUserByPartialUsername = findUserByPartialUsername;
 userModel.findUserByGoogleId = findUserByGoogleId;
 userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.uploadImage = uploadImage;
@@ -190,6 +191,10 @@ function findUserByFacebookId(facebookId) {
 
 function findUserByUsername(username) {
     return userModel.findOne({username: username});
+}
+function findUserByPartialUsername(username){
+    return userModel
+        .find({username: new RegExp(username, "i")})
 }
 
 function findUserByCredentials(username) {

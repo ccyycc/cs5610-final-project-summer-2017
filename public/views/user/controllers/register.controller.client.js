@@ -6,10 +6,13 @@
     function registerController($location, userService) {
 
         var model = this;
+
         model.sectionTitle = "Register";
+
         model.register = register;
 
         function register(username, password, password2, role) {
+
 
             if (username === null || username === '' || typeof username === 'undefined') {
                 model.error = 'username is required';
@@ -34,11 +37,10 @@
                             password: password,
                             role: role
                         };
-                        console.log('register.controller user: ' + newUser);
                         return userService
                             .register(newUser)
                             .then(function (user) {
-                                $location.url('/profile/'+user._id);
+                                $location.url('/profile/' + user._id);
                             });
 
                     }

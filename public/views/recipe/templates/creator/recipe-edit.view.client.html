@@ -43,7 +43,7 @@
                     <label for="description">Description</label>
                     <textarea id="description"
                               ng-model="model.recipe.description"
-                              rows="3"
+                              rows="2"
                               placeholder="please enter the description of the recipe"
                               class="form-control">
                     </textarea>
@@ -66,7 +66,16 @@
                        placeholder="please enter the total time"
                        id="totalTime"/>
             </div>
-            <h3 class="sub-header">Ingredient</h3>
+            <div class="form-group">
+                <label for="instruction">Instruction</label>
+                <textarea id="instruction"
+                          ng-model="model.recipe.instruction"
+                          rows="5"
+                          placeholder="please enter the instruction of the recipe"
+                          class="form-control">
+                    </textarea>
+            </div>
+            <label>Ingredient</label>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover table-condensed">
                         <thead>
@@ -132,7 +141,7 @@
                            accept="image/*"/>
                     <input name="userId"
                            value="{{model.creatorId}}"
-                           style="display: none"/>
+                           class="input-hidden"/>
                     <input name="recipeId"
                            value="{{model.recipeId}}"
                            style="display: none"/>

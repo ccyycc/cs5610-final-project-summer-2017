@@ -42,7 +42,7 @@
                     currentUser: checkLoggedin
                 }
             })
-            .when('/account/inbox', {
+            .when('/account/message', {
                 templateUrl: './views/user/templates/snippets/inbox.view.client.html',
                 controller: 'inboxController',
                 controllerAs: 'model',
@@ -123,6 +123,14 @@
                     currentUser: checkAdmin
                 }
             })
+            .when('/admin/comments', {
+                templateUrl: './views/admin/templates/admin-comments.view.client.html',
+                controller: 'adminCommentsController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
 
             .when("/recipe_list", {
                 templateUrl: "views/recipe/templates/recipe-list.view.client.html",
@@ -134,7 +142,6 @@
             })
 
             .when('/recipe_list/:recipeId', {
-                //TODO: permission?
                 templateUrl: 'views/recipe/templates/otherUser/recipe-detail.view.client.html',
                 controller: 'recipeDetailController',
                 controllerAs: 'model',
@@ -150,8 +157,7 @@
                     currentUser: checkLoggedin
                 }
             })
-            //TODO: could be the profile page of recipe provider
-            .when('/creator/:creatorId/recipe',{
+            .when('/auth_recipe_list', {
                 templateUrl: 'views/recipe/templates/creator/recipe-list-by-creator.view.client.html',
                 controller: 'recipeListByCreatorController',
                 controllerAs: 'model',
@@ -159,7 +165,7 @@
                     currentUser: checkLoggedin
                 }
             })
-            .when('/creator/:creatorId/recipe/:recipeId', {
+            .when('/auth_recipe_list/:recipeId', {
                 templateUrl: 'views/recipe/templates/creator/recipe-edit.view.client.html',
                 controller: 'recipeEditController',
                 controllerAs: 'model',
@@ -167,6 +173,22 @@
                     currentUser: checkLoggedin
                 }
             })
+            .when('/creator/:creatorId/recipe_list',{
+                templateUrl: 'views/recipe/templates/creator/recipe-list-by-creator.view.client.html',
+                controller: 'recipeListByCreatorController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedin
+                }
+            })
+            // .when('/creator/:creatorId/recipe/:recipeId', {
+            //     templateUrl: 'views/recipe/templates/creator/recipe-edit.view.client.html',
+            //     controller: 'recipeEditController',
+            //     controllerAs: 'model',
+            //     resolve: {
+            //         currentUser: checkLoggedin
+            //     }
+            // })
             .when('/store/:storeId/merchandise',{
                 templateUrl: './views/merchandise/templates/merchandise-list.view.client.html',
                 controller: 'merchandiseListController',
@@ -207,14 +229,25 @@
                     currentUser: checkLoggedin
                 }
             })
-            .when('/store-search',{
-                templateUrl: 'views/store/templates/store-search.view.client.html',
-                controller: 'StoreSearchController',
-                controllerAs: 'model'
+            .when('/store-search-near-by',{
+                templateUrl: 'views/store/templates/store-search-near-by.view.client.html',
+                controller: 'StoreSearchNearByController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
             })
             .when('/search/store',{
-                templateUrl: 'views/store/templates/store-profile-list.view.client.html',
+                templateUrl: 'views/store/templates/store-profile-search.view.client.html',
                 controller: 'storeProfileSearchController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
+            })
+            .when('/search/user',{
+                templateUrl: 'views/user/templates/user-search.view.client.html',
+                controller: 'userSearchController',
                 controllerAs: 'model',
                 resolve: {
                     currentUser: checkCurrentUser
@@ -223,7 +256,10 @@
             .when('/search/merchandise',{
                 templateUrl: 'views/merchandise/templates/merchandise-search-list.view.client.html',
                 controller: 'merchandiseSearchController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
             })
             .otherwise({redirectTo : '/'})
     }
@@ -245,11 +281,9 @@
 
     function checkCurrentUser(userService, $q, $location) {
         var deferred = $q.defer();
-        console.log('hello');
         userService
             .loggedin()
             .then(function (user) {
-                console.log(user);
                 if (user === '0') {
                     deferred.resolve({});
                 } else {
@@ -257,7 +291,7 @@
                 }
             })
             .catch(function (error) {
-                console.log(error);
+                // console.log(error);
             });
         return deferred.promise;
     }

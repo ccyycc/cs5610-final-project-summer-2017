@@ -1,16 +1,12 @@
 <div class="profile-container">
-    <nav class="navbar margin-top-15 container-fluid textToCenter profile-navbar">
-        <a ng-click="model.showLikedRecipes()">
-            <div class="col-xs-6 navbar-link active">
-                Liked Recipes
-            </div>
-        </a>
-        <a ng-click="model.showCollectedProducts()">
-            <div class="col-xs-6 navbar-link">
-                Collected Products
-            </div>
-        </a>
-    </nav>
+    <ul class="nav nav-pills margin-top-15">
+        <li role="presentation" ng-class="{'active': model.recipeOrProduct == 'RECIPE'}">
+            <a ng-click="model.showLikedRecipes()">Liked Recipes</a></li>
+        <li role="presentation" ng-class="{'active': model.recipeOrProduct == 'PRODUCT'}">
+            <a ng-click="model.showCollectedProducts()">Liked Products</a></li>
+        <li role="presentation" ng-class="{'active': model.recipeOrProduct == 'STORE'}">
+            <a ng-click="model.showLikedStores()">Liked Stores</a></li>
+    </ul>
 
     <div ng-switch="model.recipeOrProduct"
          class="profile-container">
@@ -21,6 +17,10 @@
         <div ng-switch-when="PRODUCT">
             <ng-include
                     src="'./views/user/templates/snippets/collectedProducts.view.client.html'"></ng-include>
+        </div>
+        <div ng-switch-when="STORE">
+            <ng-include
+                    src="'./views/user/templates/snippets/likedStores.view.client.html'"></ng-include>
         </div>
     </div>
 </div>

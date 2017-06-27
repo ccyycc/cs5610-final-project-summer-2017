@@ -69,8 +69,6 @@ function findAllMerchandises(req, res) {
     merchandiseModel
         .findAllMerchandises()
         .then(function (merchandises) {
-            console.log('find merchandises--merchandises.service.server');
-            console.log(merchandises);
             res.status(200).send(merchandises);
         });
 }

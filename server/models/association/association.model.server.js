@@ -239,14 +239,24 @@ function createMessage(myId, userId, message) {
         })
 }
 
-function renderMessage(userId) {
-    return associationModel
-        .find({toWhom: userId})
-        .populate('fromWhom')
-        .exec()
-        .then(function (messages) {
-            return messages;
-        })
+function renderMessage(userId, dir) {
+    if ( dir ==='in') {
+        return associationModel
+            .find({toWhom: userId})
+            .populate('fromWhom')
+            .exec()
+            .then(function (messages) {
+                return messages;
+            })
+    } else if (dir === 'out') {
+        return associationModel
+            .find({fromWhom: userId})
+            .populate('toWhom')
+            .exec()
+            .then(function (messages) {
+                return messages;
+            })
+    }
 }
 
 

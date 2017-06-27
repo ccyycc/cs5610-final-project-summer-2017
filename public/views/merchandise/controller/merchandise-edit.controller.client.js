@@ -3,62 +3,84 @@
         .module('FinalProject')
         .controller('merchandiseEditController', merchandiseEditController);
 
-    function merchandiseEditController($location, $routeParams, merchandiseService,currentUser) {
+    function merchandiseEditController($location, $routeParams, merchandiseService,
+                                       currentUser, userService,storeService) {
+
         var model = this;
+
         //event handler.
         model.createMerchandise = createMerchandise;
         model.updateMerchandise = updateMerchandise;
         model.deleteMerchandise = deleteMerchandise;
         model.cancelMerchandise = navToMerchandise;
+        model.logout = logout;
 
         init();
 
         function init() {
-            if(!(currentUser.role === "MERCHANT" || currentUser.role === "ADMIN")){
+            if (!(currentUser.role === "MERCHANT" || currentUser.role === "ADMIN")) {
                 $lcoation.url('/');
                 return;
+            }
+
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
             }
 
             model.storeId = $routeParams['storeId'];
             model.merchandiseId = $routeParams['merchandiseId'];
             model.mode = $routeParams['mode'];
 
-            model.sectionTitle = "Product "+ model.mode;
+            model.sectionTitle = "Product " + model.mode;
 
             model.merchandiseNameStyle = "";
 
-            model.merchandises = merchandiseService.findMerchandiseByStoreId(model.storeId)
+            merchandiseService.findMerchandiseByStoreId(model.storeId)
                 .then(
-                    function(merchandises){
-                        model.merchandises=merchandises;
+                    function (merchandises) {
+                        model.merchandises = merchandises;
                     },
-                    function(){
+                    function () {
                         alert("cannot find merchandises for users");
-                        $location.url('/store/'+model.storeId);
+                        $location.url('/store/' + model.storeId);
                     }
                 );
 
-            if(model.mode === "new"){
+            if (model.mode === "new") {
                 model.merchandise = {}
-            }else{
-                if(currentUser.role === "MERCHANT" || currentUser.role === "ADMIN") {
+            } else {
+                console.log(currentUser._id);
+                console.log(model.merchandiseId);
 
-                    merchandiseService.findMerchandiseById(model.merchandiseId)
-                        .then(
-                            function (merchandise) {
-                                model.merchandise = merchandise;
-                            },
-                            function () {
-                                alert("cannot find merchandise with merchandise id");
-                                navToMerchandise();
-                            }
-                        );
-                }else{
-                    $location.url('/');
-                }
+                storeService
+                    .findStoreById(model.storeId)
+                    .then(function (store) {
+                        if (currentUser._id === store._owner || currentUser.role === "ADMIN") {
+                            merchandiseService.findMerchandiseById(model.merchandiseId)
+                                .then(
+                                    function (merchandise) {
+                                        model.merchandise = merchandise;
+                                    },
+                                    function () {
+                                        alert("cannot find merchandise with merchandise id");
+                                        navToMerchandise();
+                                    }
+                                );
+                        } else {
+                            $location.url('/');
+                        }
+                    })
+
             }
         }
 
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
 
         function createMerchandise() {
             model.merchandiseNameStyle = "";
@@ -89,7 +111,6 @@
             merchandiseService.deleteMerchandise(model.merchandiseId)
                 .then(navToMerchandise, error);
         }
-
 
 
         function navToMerchandise() {

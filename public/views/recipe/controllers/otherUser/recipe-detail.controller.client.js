@@ -15,15 +15,22 @@
         model.createComment = createComment;
         model.submitComment = submitComment;
         model.clearComment = clearComment;
-        model.footerButtonFunc = footerButtonFunc;
-        // userId = currentUser._id;
-        model.recipeId = $routeParams.recipeId;
+        model.logout = logout;
+        model.goToEdit = goToEdit;
 
-        // console.log(model.recipeId);
+        model.numberOfLikes = 0;
 
         function init() {
+
+            model.sectionTitle = "Recipe Detail";
+
+            model.recipeId = $routeParams.recipeId;
+            model.showYummlyInstruction = false;
             model.reviews =[];
-            // console.log($location.hash());
+
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
 
             if ($location.hash() === "LOCAL") {
                 model.ifLocal = true;
@@ -33,6 +40,8 @@
                         model.recipeLocalId = recipe._id;
                         model.recipe = recipe;
                         model.recipeCreator = recipe._creator;
+                        model.canEdit = ((currentUser._id === model.recipeCreator._id)
+                        || (currentUser.role === 'ADMIN'));
                     })
                     .then(function () {
                         findAllAssociation();
@@ -59,12 +68,16 @@
 
         init();
 
-        function footerButtonFunc() {
-            if (model.like) {
-                unlikeRecipe();
-            } else {
-                likeRecipe();
-            }
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
+
+        function goToEdit() {
+            $location.url("/auth_recipe_list/"+ model.recipeId);
         }
 
         function trust(url) {
@@ -74,22 +87,27 @@
 
         function findAllAssociation() {
             associationService
-                .findAllRecipeReview(model.recipeLocalId)
+                .findAssociationForTarget('COMMENT', 'recipe', model.recipeLocalId)
                 .then(function (reviews) {
                     model.reviews = reviews;
                 });
             associationService
-                .findLikeForRecipe(currentUser._id, model.recipeLocalId)
-                .then(function (like) {
-                    if(like) {
-                        console.log(like);
-                        model.likeId = like._id;
+                .findAssociationForSourceTarget('LIKE', currentUser._id, 'recipe', model.recipeLocalId)
+                .then(function (likes) {
+                    if(likes.length !== 0) {
+                        // console.log(like);
+                        model.likeId = likes[0]._id;
                         model.like = true;
                         model.footerButton = "glyphicon glyphicon-heart";
                     } else {
                         model.like = false;
                         model.footerButton = "glyphicon glyphicon-heart-empty";
                     }
+                })
+            associationService
+                .findAssociationForTarget('LIKE', 'recipe', model.recipeLocalId)
+                .then(function (likes) {
+                    model.numberOfLikes = likes.length;
                 })
         }
 
@@ -108,7 +126,8 @@
             var recipeCopy = {
                 name: model.recipe.name,
                 yummlyId: model.recipeId,
-                source: 'YUMMLY'
+                source: 'YUMMLY',
+                ingredients: model.recipe.ingredients
             };
 
             return recipeService
@@ -137,27 +156,32 @@
             };
 
             associationService
-                .createLike(like)
+                .createAssociation(like)
                 .then(function (like) {
+                    model.numberOfLikes += 1;
                     model.likeId = like._id;
                     model.like = true;
                     model.footerButton = "glyphicon glyphicon-heart";
-                });
+                })
+                .then(function () {
+                    userService
+                        .addLikedRecipe(model.recipeLocalId);
+                })
 
-            userService
-                .addLikedRecipe(model.recipeLocalId);
         }
 
         function unlikeRecipe() {
             associationService
-                .deleteRecipeLike(model.likeId)
+                .deleteAssociationById(model.likeId)
                 .then(function () {
+                    model.numberOfLikes -= 1;
                     model.like = false;
                     model.footerButton = "glyphicon glyphicon-heart-empty";
-                });
-
-            userService
-                .deleteLikedRecipe(model.recipeLocalId);
+                })
+                .then(function () {
+                    userService
+                        .deleteLikedRecipe(model.recipeLocalId);
+                })
         }
 
         function createComment() {
@@ -183,7 +207,7 @@
             model.newComment.toRecipe = model.recipeLocalId;
             model.newComment.type =  'COMMENT';
             associationService
-                .createComment(model.newComment)
+                .createAssociation(model.newComment)
                 .then(function (comment) {
                     comment.fromWhom = {
                         username : currentUser.username
