@@ -153,7 +153,7 @@
 
         function showLikedStores() {
             userService
-                .populateArr(model.userId, 'likedStores')
+                .populateArr(model.profileId, 'likedStores')
                 .then(function (stores) {
                     // console.log(stores)
                     model.likedStores = stores;
