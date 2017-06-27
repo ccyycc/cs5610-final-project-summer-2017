@@ -11,7 +11,12 @@
 
         init();
         function init() {
-            console.log('home controller');
+            // console.log('home controller');
+
+            if (currentUser._id) {
+                model.ifLoggedIn = true;
+            }
+
 
             model.searchOptions = [
                 {

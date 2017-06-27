@@ -18,6 +18,7 @@
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }
+
             renderUser(currentUser)
         }
         init();
