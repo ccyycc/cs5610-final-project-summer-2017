@@ -1,16 +1,21 @@
 <div class="profile-container">
-    <nav class="navbar margin-top-15 container-fluid textToCenter profile-navbar">
-        <a ng-click="model.showLikedRecipes()">
-            <div class="col-xs-6 navbar-link active">
-                Liked Recipes
-            </div>
-        </a>
-        <a ng-click="model.showCollectedProducts()">
-            <div class="col-xs-6 navbar-link">
-                Collected Products
-            </div>
-        </a>
-    </nav>
+    <!--<nav class="navbar margin-top-15 container-fluid textToCenter profile-navbar">-->
+        <!--<a ng-click="model.showLikedRecipes()">-->
+            <!--<div class="col-xs-6 navbar-link active">-->
+                <!--Liked Recipes-->
+            <!--</div>-->
+        <!--</a>-->
+        <!--<a ng-click="model.showCollectedProducts()">-->
+            <!--<div class="col-xs-6 navbar-link">-->
+                <!--Collected Products-->
+            <!--</div>-->
+        <!--</a>-->
+    <!--</nav>-->
+
+    <ul class="nav nav-pills nav-justified margin-top-15" id="account-box-nav">
+        <li class="{{model.recipeActive}}"><a ng-click="model.showLikedRecipes()">Liked Recipes</a></li>
+        <li class="{{model.productActive}}"><a ng-click="model.showCollectedProducts()">Collected Products</a></li>
+    </ul>
 
     <div ng-switch="model.recipeOrProduct"
          class="profile-container">

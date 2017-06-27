@@ -118,7 +118,6 @@
                     } else {
                         model.followed = false;
                     }
-                    console.log(model.user.role);
                 })
         }
 
@@ -126,10 +125,10 @@
             userService
                 .populateArr(model.userId, 'likedRecipes')
                 .then(function (likedRecipes) {
-                    console.log(likedRecipes);
                     model.likedRecipes = likedRecipes;
                     model.recipeOrProduct = 'RECIPE';
-                    console.log(model.likedRecipes)
+                    model.recipeActive = 'active';
+                    model.productActive = '';
                 });
 
 
@@ -140,8 +139,11 @@
                 .populateArr(model.userId, 'collectedProducts')
                 .then(function (products) {
                     model.collectedProducts = products;
-                })
-            model.recipeOrProduct = 'PRODUCT';
+                    model.recipeActive = '';
+                    model.productActive = 'active';
+                    model.recipeOrProduct = 'PRODUCT';
+
+                });
         }
 
         function follow() {
@@ -202,7 +204,6 @@
         }
 
         function countPhotoWidth() {
-            console.log(screen.width);
             if (screen.width > 500) {
                 model.profilePhotoWidth = '40%';
             } else {

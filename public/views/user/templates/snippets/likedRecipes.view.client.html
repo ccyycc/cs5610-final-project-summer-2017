@@ -1,12 +1,14 @@
-<div ng-repeat="recipe in model.likedRecipes">
-    <div class="row">
+<ul class="list-group" >
+    <li class="row list-group-item" ng-repeat="recipe in model.likedRecipes">
         <div class="col-xs-4">
             <img id="photo" class="imageToCenter"
                  ng-src="{{recipe.image}}" width="150px"/>
         </div>
-        <div class="col-xs-8">
-            <p><b class="description">{{recipe.name}}  </b>
-            {{recipe.likedUsers.length}} people liked this recipe</p>
+        <div class="col-xs-4">
+            <b class="description">{{recipe.name}}  </b>
         </div>
-    </div>
-</div>
+        <div class="col-xs-4">
+            Ingredients: {{recipe.ingredient}}
+        </div>
+    </li>
+</ul>

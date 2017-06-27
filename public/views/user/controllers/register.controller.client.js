@@ -8,6 +8,7 @@
         var model = this;
         model.sectionTitle = "Register";
         model.register = register;
+        model.showDiscription = showDescription;
 
         function register(username, password, password2, role) {
 
@@ -43,6 +44,15 @@
                     }
                 )
 
+        }
+
+        function showDescription() {
+            // if (!model.discription) {
+            //     model.discription = 'show';
+            // } else {
+            //     model.discription = false;
+            // }
+            $("#role-description").collapse('toggle');
         }
     }
 })();

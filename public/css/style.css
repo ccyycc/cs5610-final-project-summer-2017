@@ -357,3 +357,8 @@ li.list-group-item > div.row > div {
 .customize-top-margin-20 {
     margin-top: 20px;
 }
+
+#role-description {
+    background-color: white;
+    padding:10px;
+}

@@ -27,22 +27,22 @@
                 <!--TODO: cannot click name to jump to another profile page-->
                 <div id="followDetail"
                      class="collapse">
-                    <div ng-repeat="follow in model.follows">
-                        <div class="row margin-top-15 card card-block">
+                    <ul class="list-group">
+                        <li class="row list-group-item"  ng-repeat="follow in model.follows">
                             <div class="col-sm-2 col-xs-6">
-                                <img src="{{follow.photo}}" width="30%"/>
+                                <img src="{{follow.photo}}" width="80%"/>
                             </div>
-                            <div class="col-sm-4 col-xs-6">
+                            <div class="col-sm-2 col-xs-6">
                                 <a ng-href="#!/profile/{{follow._id}}">{{follow.username}}</a>
                             </div>
-                            <div class="col-sm-3 hidden-xs">
+                            <div class="col-sm-4 hidden-xs">
                                 follower: {{follow.followers.length}}
                             </div>
-                            <div class="col-sm-3 hidden-xs" ng-show="follow.role == 'USER'">
+                            <div class="col-sm-4 hidden-xs" ng-show="follow.role == 'USER'">
                                 following: {{follow.followings.length}}
                             </div>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
 
                 <a class="btn btn-success toBottom form-control"
@@ -103,41 +103,6 @@
         </a>
     </div>
 </div>
-
-<!--<div ng-include="'./views/user/templates/snippets/user-profile.view.client.html'"></div>-->
-
-
-<!--<nav class="navbar navbar-default navbar-fixed-bottom">-->
-<!--<div class="container-fluid">-->
-<!--<div class="row textToCenter">-->
-<!--<div class="col-xs-3">-->
-<!--<a href="#!/account" class="navbar-link">-->
-<!--<span class="glyphicon glyphicon-user"></span>-->
-<!--</a>-->
-<!--</div>-->
-<!--<div class="col-xs-3">-->
-<!--<a href="#!/" class="navbar-link">-->
-<!--<span class="glyphicon glyphicon-user"></span>-->
-<!--</a>-->
-<!--</div>-->
-<!--<div class="col-xs-3">-->
-<!--<a href="#!/account" class="navbar-link">-->
-<!--<span class="glyphicon glyphicon-user"></span>-->
-<!--</a>-->
-<!--</div>-->
-<!--<div class="col-xs-3">-->
-<!--<a href="#!/account" class="navbar-link">-->
-<!--<span class="glyphicon glyphicon-user"></span>-->
-<!--</a>-->
-<!--</div>-->
-<!--</div>-->
-<!--&lt;!&ndash;<div class="pull-right navbar-text">&ndash;&gt;-->
-<!--&lt;!&ndash;<a href="#!/account" class="navbar-link">&ndash;&gt;-->
-<!--&lt;!&ndash;<span class="glyphicon glyphicon-user"></span>&ndash;&gt;-->
-<!--&lt;!&ndash;</a>&ndash;&gt;-->
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
-<!--</div>-->
-<!--</nav>-->
 
 
 <div ng-include="'./views/common/footer.view.client.html'"></div>
