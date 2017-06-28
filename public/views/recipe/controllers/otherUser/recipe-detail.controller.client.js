@@ -17,6 +17,7 @@
         model.clearComment = clearComment;
         model.logout = logout;
         model.goToEdit = goToEdit;
+        model.changeToHTTPS = changeToHTTPS;
 
         model.sectionTitle = "Recipe Detail";
         model.recipeId = $routeParams.recipeId;
@@ -235,6 +236,16 @@
 
         function goToIngredientDetail(ingredientName) {
             $location.url('/recipe_list/' + model.recipeId + '/ingredient/' + ingredientName);
+        }
+
+        function changeToHTTPS(url) {
+            model.showYummlyInstruction = true;
+            model.httpsUrl = url.replace('http', 'https');
+            // model.recipe.source.sourceRecipeUrl.replace('https', 'https');
+            // console.log( model.recipe.source.sourceRecipeUrl);
+
+            console.log(model.httpsUrl)
+
         }
     }
 })();
