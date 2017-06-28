@@ -39,29 +39,6 @@
                 });
         }
 
-        function findObjById(id, type) {
-            if (type === 'Recipe') {
-                return recipeService
-                    .findRecipeById(id)
-                    .then(function (data) {
-                        model.obj = data;
-                    })
-            } else if (type === 'Store') {
-                return storeService
-                    .findStoreById(id)
-                    .then(function (data) {
-                        model.obj = data;
-                    });
-            } else if (type === 'Merchandise') {
-                return merchandiseService
-                    .findMerchandiseById(id)
-                    .then(function (data) {
-                        // console.log(data);
-                        model.obj = data;
-                    });
-            }
-        }
-
         function updateComment(fromName, toType, comment) {
             model.message = false;
             model.error = false;
