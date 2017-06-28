@@ -575,7 +575,7 @@ function uploadImage(req, res) {
     var myFile = req.file;
     var userId = req.body.userId;
 
-    var filename = myFile.filename;
+    var filename = "user/profile/"+myFile.filename;
 
     userModel
         .uploadImage(userId, filename)
