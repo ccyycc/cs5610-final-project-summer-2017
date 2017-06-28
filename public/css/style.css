@@ -118,10 +118,6 @@ body {
     border: 6px;
 }
 
-.list-name-sidebar {
-    padding: 0;
-}
-
 .navbar .navbar-brand {
     color: whitesmoke;
 }
@@ -251,8 +247,7 @@ a:focus, a:hover, a:visited {
 }
 
 #sourceURL {
-    width: 106.48px;
-    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .home-search-bar {
@@ -387,6 +382,18 @@ a#numOfLikeShowCreator.btn:visited{
     width: 100%;
 }
 
+.glyphicon-heart {
+    color: red;
+}
+
+.glyphicon-heart-empty {
+    color: black;
+}
+
+.list-sm-img{
+    margin:0;
+}
+
 @media (min-width: 768px) {
     .navbar > .container-fluid .navbar-brand {
         margin-left: 0;
@@ -429,5 +436,9 @@ a#numOfLikeShowCreator.btn:visited{
         overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
         background-color: #CCBFA6;
         border-right: 1px solid #998F7C;
+    }
+
+    .list-name-sidebar {
+        padding: 0;
     }
 }
