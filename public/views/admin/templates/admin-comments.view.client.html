@@ -24,37 +24,54 @@
         <li class="list-group-item">
             <div class="row">
                 <div class="col-xs-3">
-                    <input ng-model="model.fromName"
+                    <input readonly
+                            ng-model="model.fromName"
                            class="form-control">
                 </div>
 
                 <div class="col-xs-3">
-                    <input ng-model="model.comment.toId"
+                    <input readonly
+                            ng-model="model.comment.toId"
                            class="form-control">
                 </div>
 
                 <div class="col-xs-4">
-                    <select class="form-control"
-                            data-ng-model="model.toType">
-                        <option ng-repeat="type in model.types"
-                                ng-init="model.toType = 'Recipe'"
-                                ng-selected="model.toType == type" value="{{type}}">
-                            {{type}}
-                        </option>
-                    </select>
+                    <input readonly
+                           ng-model="model.toType"
+                           class="form-control">
                 </div>
+
+                <!--<div class="col-xs-4">-->
+                    <!--<select class="form-control"-->
+                            <!--readonly-->
+                            <!--data-ng-model="model.toType">-->
+                        <!--<option ng-repeat="type in model.types"-->
+                                <!--ng-init="model.toType = 'Recipe'"-->
+                                <!--ng-selected="model.toType == type" value="{{type}}">-->
+                            <!--{{type}}-->
+                        <!--</option>-->
+                    <!--</select>-->
+                <!--</div>-->
                 <div class="col-xs-2 text-center">
-                    <span ng-click="model.createComment(model.fromName, model.toType, model.comment)"
-                          class="glyphicon glyphicon-plus"></span>
+                    <!--<span ng-click="model.createComment(model.fromName, model.toType, model.comment)"-->
+                          <!--class="glyphicon glyphicon-plus"></span>-->
                     <span ng-click="model.updateComment(model.fromName, model.toType, model.comment)"
                           class="glyphicon glyphicon-ok"></span>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12 message-content">
+                <div class="col-xs-10 message-content">
                     Content:
-                    <input ng-model="model.comment.content"
+                    <input ng-if="!model.comment.content"
+                           readonly
+                           ng-model="model.comment.content"
                            class="form-control">
+                    <input ng-if="model.comment.content"
+                           ng-model="model.comment.content"
+                           class="form-control">
+                </div>
+                <div class="col-xs-2 message-content">
+
                 </div>
             </div>
         </li>

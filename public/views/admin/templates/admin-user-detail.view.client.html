@@ -6,10 +6,10 @@
             <span class="input-group-addon" id="id">
                 ID
             </span>
-            <div class="form-control"
-                 aria-describedby="id">
-                {{model.user._id}}
-            </div>
+
+            <input ng-model="model.user._id"
+                   readonly
+                   class="form-control">
         </li>
         <li class="input-group">
             <span class="input-group-addon" id="username">

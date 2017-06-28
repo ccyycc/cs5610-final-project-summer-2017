@@ -26,7 +26,8 @@
         <li class="list-group-item">
             <div class="row">
                 <div class="col-xs-4">
-                    <input ng-model="model.merchandise._id"
+                    <input readonly
+                            ng-model="model.merchandise._id"
                            class="form-control">
                 </div>
                 <div class="col-xs-3">
@@ -47,7 +48,7 @@
                 <!--</div>-->
                 <div class="col-xs-2 text-center">
                     <span ng-click="model.createMerchandise(model.storeName, model.merchandise)"class="glyphicon glyphicon-plus"></span>
-                    <span ng-click="model.updateMerchandise(model.storeName, model.merchandise)"class="glyphicon glyphicon-ok"></span>
+                    <!--<span ng-click="model.updateMerchandise(model.storeName, model.merchandise)"class="glyphicon glyphicon-ok"></span>-->
                 </div>
             </div>
         </li>

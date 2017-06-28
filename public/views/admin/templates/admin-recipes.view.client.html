@@ -29,7 +29,10 @@
         <li class="list-group-item">
             <div class="row">
                 <div class="col-xs-4">
-                    {{model.recipe._id}}
+
+                    <input ng-model="model.recipe._id"
+                           readonly
+                           class="form-control">
                 </div>
                 <div class="col-xs-3">
                     <input ng-model="model.recipe.name"
@@ -46,7 +49,7 @@
 
                 <div class="col-xs-2 text-center">
                     <span ng-click="model.createRecipe(model.username, model.recipe)" class="glyphicon glyphicon-plus"></span>
-                    <span ng-click="model.updateRecipe(model.username, model.recipe)" class="glyphicon glyphicon-ok"></span>
+                    <!--<span ng-click="model.updateRecipe(model.username, model.recipe)" class="glyphicon glyphicon-ok"></span>-->
                 </div>
             </div>
         </li>

@@ -224,7 +224,7 @@
 
                     model.fromName = '';
                     model.comment = {};
-                    model.toType = 'Recipe';
+                    model.toType = '';
                     model.toId = '';
 
                 })
