@@ -257,7 +257,7 @@ function renderMessage(userId, dir) {
             })
     } else if (dir === 'out') {
         return associationModel
-            .find({fromWhom: userId})
+            .find({fromWhom: userId, toWhom: {$exists: true}})
             .populate('toWhom')
             .exec()
             .then(function (messages) {
