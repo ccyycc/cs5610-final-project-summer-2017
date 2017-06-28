@@ -1,7 +1,7 @@
 const app = require('../../express');
 var unirest = require('unirest');
 var multer = require('multer');
-var upload = multer({dest: __dirname + '/../../public/uploads'});
+var upload = multer({dest: __dirname + '/../../public/uploads/user/profile'});
 
 var userModel = require('../models/user/user.model.server');
 
