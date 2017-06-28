@@ -53,13 +53,13 @@
                         // console.log(recipe);
                         model.recipe = recipe;
                         combineIngredientAndDescription();
+                        checkValidationOnNetwork();
                         recipeService
                             .findYummlyRecipeCopyByYummlyId(model.recipeId)
                             .then(function (recipe) {
                                 if (recipe) {
                                     model.recipeLocalId = recipe._id;
                                     findAllAssociation();
-                                    checkValidationOnNetwork();
                                 }
                             });
                     });
