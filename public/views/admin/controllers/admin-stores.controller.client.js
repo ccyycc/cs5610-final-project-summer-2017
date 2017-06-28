@@ -65,6 +65,7 @@
 
             model.store = angular.copy(store);
             model.username = store._owner.username;
+            $location.url('/store/' + store._id);
         }
 
         function createStore(username, store) {

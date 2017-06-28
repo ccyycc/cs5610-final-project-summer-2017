@@ -1,7 +1,7 @@
 <div ng-include="'./views/common/header.view.client.html'"></div>
 <div class="container-fluid">
     <div class="row">
-        <div class="hidden-xs col-sm-2 sidebar">
+        <div class="col-sm-2 sidebar">
             <div class="nav nav-sidebar"
                  ng-if="model.ifLocal">
                 <h4>Recipe Provider:</h4>
@@ -41,16 +41,16 @@
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
                 <a id="numOfLikeShowCreator"
-                   class="btn pull-right hidden-xs"
+                   class="btn"
                    ng-if="!model.canLike">
                     <span class="glyphicon glyphicon-heart"></span> {{model.numberOfLikes}} Likes
                 </a>
-                <a class="btn pull-right"
+                <a class="btn"
                    ng-if="model.canLike && model.like"
                    ng-click="model.unlikeRecipe()">
                     <span class="glyphicon glyphicon-heart">{{model.numberOfLikes}}</span>
                 </a>
-                <a class="btn pull-right"
+                <a class="btn"
                    ng-if="model.canLike && !model.like"
                    ng-click="model.likeRecipe()">
                     <span class="glyphicon glyphicon-heart-empty">{{model.numberOfLikes}}</span>

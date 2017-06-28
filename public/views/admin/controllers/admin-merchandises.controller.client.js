@@ -59,6 +59,7 @@
 
             model.merchandise = merchandise;
             model.storeName = merchandise._store.name;
+            $location.url('/store/' + merchandise._store._id + '/merchandise/' + merchandise._id + '/edit');
         }
 
         function createMerchandise(storename, merchandise) {
@@ -75,7 +76,7 @@
                     if (store === undefined) {
                         model.error = "Store does not exist";
                     } else {
-                        merchandise._creator = store.id;
+                        merchandise._creator = store._id;
                         merchandiseService
                             .createMerchandise(store._id, merchandise)
                             .then(findAllMerchandises());

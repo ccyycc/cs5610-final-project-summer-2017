@@ -204,7 +204,7 @@
         }
 
         function submitComment() {
-            if (model.canCommentOrLike) {
+            if (model.canComment) {
                 if (!model.recipeLocalId) {
                     createYummlyRecipeCopy()
                         .then(function () {

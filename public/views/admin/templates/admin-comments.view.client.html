@@ -7,34 +7,33 @@
     <ul class="list-group table table-responsive">
         <li class="list-group-item">
             <div class="row">
-                <div class="col-xs-2">
+                <div class="col-xs-3">
                     From
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-3">
                     To
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-4">
                     Type
                 </div>
-                <div class="col-xs-6">
-                    Content
+                <div class="col-xs-2">
                 </div>
             </div>
         </li>
 
         <li class="list-group-item">
             <div class="row">
-                <div class="col-xs-2">
+                <div class="col-xs-3">
                     <input ng-model="model.fromName"
                            class="form-control">
                 </div>
 
-                <div class="col-xs-2">
+                <div class="col-xs-3">
                     <input ng-model="model.comment.toId"
                            class="form-control">
                 </div>
 
-                <div class="col-xs-2">
+                <div class="col-xs-4">
                     <select class="form-control"
                             data-ng-model="model.toType">
                         <option ng-repeat="type in model.types"
@@ -44,16 +43,18 @@
                         </option>
                     </select>
                 </div>
-
-                <div class="col-xs-5 message-content">
-                    <input ng-model="model.comment.content"
-                           class="form-control">
-                </div>
-                <div class="col-xs-1">
+                <div class="col-xs-2 text-center">
                     <span ng-click="model.createComment(model.fromName, model.toType, model.comment)"
                           class="glyphicon glyphicon-plus"></span>
                     <span ng-click="model.updateComment(model.fromName, model.toType, model.comment)"
-                          class="glyphicon glyphicon-ok pull-right"></span>
+                          class="glyphicon glyphicon-ok"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 message-content">
+                    Content:
+                    <input ng-model="model.comment.content"
+                           class="form-control">
                 </div>
             </div>
         </li>
@@ -61,22 +62,25 @@
         <li ng-repeat="comment in model.comments" class="list-group-item">
 
             <div class="row">
-                <div class="col-xs-2">
+                <div class="col-xs-3">
                     {{comment.fromWhom.username}}
                 </div>
-                <div class="col-xs-2 message-content">
+                <div class="col-xs-3 message-content">
                     {{comment.toName}}
                 </div>
-                <div class="col-xs-2 message-content">
+                <div class="col-xs-4 message-content">
                     {{comment.toType}}
                 </div>
-                <div class="col-xs-5 message-content">
-                    {{comment.content}}
-                </div>
-                <div class="col-xs-1 pull-right">
-                    <span ng-click="model.deleteComment(comment)" class="glyphicon glyphicon-remove pull-right"></span>
+                <div class="col-xs-2 text-center">
+                    <span ng-click="model.deleteComment(comment)" class="glyphicon glyphicon-remove"></span>
                     <span ng-click="model.selectComment(comment)" class="glyphicon glyphicon-pencil"></span>
 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 message-content">
+                    Content:
+                    {{comment.content}}
                 </div>
             </div>
         </li>
