@@ -4,7 +4,7 @@
         .controller('merchandiseListController', merchandiseListController);
 
     function merchandiseListController($location, $routeParams, merchandiseService,
-                                       currentUser, userService) {
+                                       currentUser, userService,storeService) {
         var model = this;
         //event handler
 
@@ -22,7 +22,16 @@
             model.sectionTitle = "Product List";
             model.storeId = $routeParams['storeId'];
             model.merchandises = [];
-            model.merchandises = merchandiseService.findMerchandiseByStoreId(model.storeId)
+
+
+            storeService
+                .findStoreById(model.storeId)
+                .then(function(store)
+                {
+                    model.canEdit = (currentUser.role === "ADMIN" ||  store._owner === currentUser._id);
+                })
+
+            merchandiseService.findMerchandiseByStoreId(model.storeId)
                 .then(
                     function(merchandises){
                         model.merchandises=merchandises;

@@ -50,7 +50,11 @@
                             .findStoreById(model.storeId)
                             .then(function(store){
                             model.store = store;
-                            model.canEdit=(store._owner===currentUser._id ||currentUser.role ==="ADMIN");
+                                model.canEdit = (currentUser.role === "ADMIN" ||  store._owner === currentUser._id);
+                                console.log(model.canEdit)
+                                console.log(currentUser.role)
+                                console.log(store._owner )
+                                console.log(currentUser._id )
                         });
 
 

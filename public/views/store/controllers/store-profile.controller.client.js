@@ -48,6 +48,7 @@
                 .then(function (res) {
                     model.store = res;
                     model.canEdit = (model.store._owner === currentUser._id || currentUser.role === "ADMIN");
+                    setPermission();
                     model.store.addressUrl = trust("https://www.google.com"
                                                    + "/maps/embed/v1/place?"
                                                    + "key=AIzaSyA0oVg3fT3ZdLkEExxVyC0jkciGfmaYBcI&q="
@@ -191,6 +192,17 @@
         function goToProfilePage() {
             $location.url('/profile/'+model.seller._id);
 
+        }
+
+        function setPermission() {
+            if (currentUser.role === 'USER' || currentUser.role === 'ADMIN') {
+                model.canComment = true;
+                model.canLike = true;
+            } else if (model.canEdit) {
+                model.canComment = true;
+            } else {
+                model.message = "Sorry, your role can only comment on your stuff."
+            }
         }
 
 

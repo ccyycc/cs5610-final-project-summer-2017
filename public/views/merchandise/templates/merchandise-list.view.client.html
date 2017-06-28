@@ -10,7 +10,7 @@
             <div class="wd-widget-toolbar">
                 <!--TODO: check if the logged in user is the owner-->
                 <!--TODO: ng-show="model.ifCreator()" IN THIS <a>-->
-                <a href="#!/store/{{model.storeId}}/merchandise/{{merchandise._id}}/edit">
+                <a ng-if="model.canEdit" href="#!/store/{{model.storeId}}/merchandise/{{merchandise._id}}/edit">
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
             </div>

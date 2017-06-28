@@ -42,10 +42,10 @@
                 };
             } else if (model.mode === "edit") {
                 storeService
-                    .findAllStoresForOwner(currentUser._id)
-                    .then(function (data) {
-                        model.store = data[0];
-                        model.canEdit = (model.store._owner === currentUser._id || currentUser.role === "ADMIN");
+                    .findStoreById(model.storeId)
+                    .then(function (store) {
+                        model.store = store;
+                        model.canEdit = (currentUser.role === "ADMIN" ||  model.store._owner === currentUser._id);
                         if(!model.canEdit){
                             $location.url('/');
                         }
