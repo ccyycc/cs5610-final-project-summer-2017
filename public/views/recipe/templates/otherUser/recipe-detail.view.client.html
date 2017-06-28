@@ -41,7 +41,7 @@
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
                 <a id="numOfLikeShowCreator"
-                   class="btn pull-right"
+                   class="btn pull-right hidden-xs"
                    ng-if="!model.canLike">
                     <span class="glyphicon glyphicon-heart"></span> {{model.numberOfLikes}} Likes
                 </a>
@@ -64,7 +64,7 @@
                     <h5>Description: </h5> {{model.recipe.description}}
                     </p>
                 </div>
-                <div class="col-xs-12 col-sm-8">
+                <div class="hidden-xs col-sm-8">
                     <img ng-if="model.ifLocal"
                          class="title-image img-rounded img-responsive"
                          ng-src="{{model.recipe.image}}"

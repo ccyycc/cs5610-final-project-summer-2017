@@ -55,7 +55,7 @@
                        id="numberOfServings"/>
             </div>
             <div class="form-group">
-                <label for="totalTime">Total time</label>
+                <label for="totalTime">Total time (in min)</label>
                 <input type="number"
                        min="0"
                        class="form-control"
@@ -76,7 +76,7 @@
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-hover table-condensed">
                     <thead>
-                    <tr>
+                    <tr class="list-group-item-info">
                         <th>Name</th>
                         <th>Description</th>
                         <th></th>
@@ -84,8 +84,17 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="ingredient in model.recipe.ingredients track by $index">
-                        <td ng-if="model.editIngredient == ingredient"><input ng-model="ingredient.name"/></td>
-                        <td ng-if="model.editIngredient == ingredient"><input ng-model="ingredient.description"/></td>
+                        <td ng-if="model.editIngredient == ingredient">
+                            <input class="input-responsive"
+                                   ng-model="ingredient.name"
+                                   placeholder="please enter the name of the ingredient"/>
+                        </td>
+                        <td ng-if="model.editIngredient == ingredient">
+                            <input class="input-responsive"
+                                   ng-model="ingredient.description"
+                                   placeholder="please enter the description of the ingredient"/>
+
+                        </td>
                         <td ng-if="model.editIngredient != ingredient">{{ingredient.name}}</td>
                         <td ng-if="model.editIngredient != ingredient">{{ingredient.description}}</td>
                         <td class="text-center">
@@ -103,8 +112,14 @@
                         </td>
                     </tr>
                     <tr class="info">
-                        <td><input ng-model="model.newIngredient.name"/></td>
-                        <td><input ng-model="model.newIngredient.description"/></td>
+                        <td><input class="input-responsive"
+                                   ng-model="model.newIngredient.name"
+                                   placeholder="please enter the name of the new ingredient"/>
+                        </td>
+                        <td><input class="input-responsive"
+                                   ng-model="model.newIngredient.description"
+                                   placeholder="please enter the description of the new ingredient"/>
+                        </td>
                         <td class="text-center">
                             <a ng-click="model.createSingleIngredient()">
                                 <span class="glyphicon glyphicon-plus"></span>

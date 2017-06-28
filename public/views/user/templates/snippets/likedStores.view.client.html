@@ -3,7 +3,7 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Addresses</th>
+            <th class="hidden-xs">Address</th>
             <th></th>
         </tr>
         </thead>
@@ -12,8 +12,11 @@
             <th>
                 <p><b class="description">{{store.name}}</b></p>
             </th>
-            <th>
-                <p><b class="description">{{store.description}}</b></p>
+            <th class="hidden-xs">
+                <p><b class="description">
+                    {{store.address.street.toUpperCase()+" "+store.address.city.toUpperCase()
+                    +", " +store.address.state.toUpperCase() +" "+store.address.zip}}
+                </b></p>
             </th>
             <th class="text-center">
                 <a href="#!/store/{{store._id}}">
