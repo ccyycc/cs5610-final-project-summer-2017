@@ -49,12 +49,8 @@
                         storeService
                             .findStoreById(model.storeId)
                             .then(function(store){
-                            model.store = store;
-                                model.canEdit = (currentUser.role === "ADMIN" ||  store._owner === currentUser._id);
-                                console.log(model.canEdit)
-                                console.log(currentUser.role)
-                                console.log(store._owner )
-                                console.log(currentUser._id )
+                             model.store = store;
+                                setPermission(store);
                         });
 
 
@@ -154,7 +150,19 @@
                     userService
                         .updateProfile(currentUser);
                 })
+        }
 
+        function setPermission(store) {
+            model.canEdit = (currentUser.role === "ADMIN" ||  store._owner === currentUser._id);
+
+            if (currentUser.role === 'USER' || currentUser.role === 'ADMIN') {
+                model.canComment = true;
+                model.canLike = true;
+            } else if (model.canEdit) {
+                model.canComment = true;
+            } else {
+                model.message = "Sorry, your role can only comment on your stuff."
+            }
         }
 
     }
