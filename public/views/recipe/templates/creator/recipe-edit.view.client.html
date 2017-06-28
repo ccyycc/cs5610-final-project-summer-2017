@@ -84,8 +84,12 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="ingredient in model.recipe.ingredients track by $index">
-                        <td ng-if="model.editIngredient == ingredient"><input ng-model="ingredient.name"/></td>
-                        <td ng-if="model.editIngredient == ingredient"><input ng-model="ingredient.description"/></td>
+                        <td ng-if="model.editIngredient == ingredient">
+                            <input class="input-responsive" ng-model="ingredient.name"/>
+                        </td>
+                        <td ng-if="model.editIngredient == ingredient">
+                            <input class="input-responsive" ng-model="ingredient.description"/>
+                        </td>
                         <td ng-if="model.editIngredient != ingredient">{{ingredient.name}}</td>
                         <td ng-if="model.editIngredient != ingredient">{{ingredient.description}}</td>
                         <td class="text-center">
@@ -103,8 +107,8 @@
                         </td>
                     </tr>
                     <tr class="info">
-                        <td><input ng-model="model.newIngredient.name"/></td>
-                        <td><input ng-model="model.newIngredient.description"/></td>
+                        <td><input class="input-responsive" ng-model="model.newIngredient.name"/></td>
+                        <td><input class="input-responsive" ng-model="model.newIngredient.description"/></td>
                         <td class="text-center">
                             <a ng-click="model.createSingleIngredient()">
                                 <span class="glyphicon glyphicon-plus"></span>

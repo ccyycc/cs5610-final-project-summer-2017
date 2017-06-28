@@ -383,6 +383,10 @@ a#numOfLikeShowCreator.btn:visited{
     margin-top: 0;
 }
 
+.input-responsive {
+    width: 100%;
+}
+
 @media (min-width: 768px) {
     .navbar > .container-fluid .navbar-brand {
         margin-left: 0;
