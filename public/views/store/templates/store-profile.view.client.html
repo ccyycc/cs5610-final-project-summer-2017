@@ -41,15 +41,15 @@
                 </a>
 
                 <a id="numOfLikeShowCreator"
-                   class="btn pull-right hidden-xs"
+                   class="btn"
                    ng-if="!model.canLike">
                     <span class="glyphicon glyphicon-heart"></span> {{model.numLike}} Likes
                 </a>
 
-                <a class="btn pull-right" ng-show="model.canLike&&model.like" ng-click="model.unlikeStore()">
+                <a class="btn" ng-show="model.canLike&&model.like" ng-click="model.unlikeStore()">
                     <span class="glyphicon glyphicon-heart">{{model.numLike}}</span>
                 </a>
-                <a class="btn pull-right" ng-show="model.canLike&&!model.like" ng-click="model.likeStore()">
+                <a class="btn" ng-show="model.canLike&&!model.like" ng-click="model.likeStore()">
                     <span class="glyphicon glyphicon-heart-empty">{{model.numLike}}</span>
                 </a>
 
