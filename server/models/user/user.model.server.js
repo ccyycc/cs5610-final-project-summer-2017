@@ -158,7 +158,7 @@ function createUser(user) {
     if (!user.role) {
         user.role = 'USER';
     }
-    user.photo = './uploads/default_profile.png';
+    user.photo = './resource/defaultPics/default_profile.png';
 
     console.log('createUser user.model.server ' + user);
     return userModel
