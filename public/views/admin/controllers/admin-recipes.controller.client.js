@@ -81,6 +81,7 @@
             } else {
                 model.username = 'YUMMLY provide';
             }
+            $location.url('/auth_recipe_list/' + recipe._id);
         }
 
         function createRecipe(username, recipe) {
