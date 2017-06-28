@@ -3,7 +3,7 @@
         .module('FinalProject')
         .controller('registerController', registerController);
 
-    function registerController($location, userService) {
+    function registerController($location, userService,currentUser) {
 
         var model = this;
 
@@ -12,7 +12,16 @@
         model.register = register;
         model.showDiscription = showDescription;
 
+
+        init()
+        function init(){
+            if(currentUser._id){
+                $location.url('/');
+            };
+        }
+
         function register(username, password, password2, role) {
+            console.log(currentUser)
 
 
             if (username === null || username === '' || typeof username === 'undefined') {

@@ -1,7 +1,7 @@
 <div ng-include="'./views/common/header.view.client.html'"></div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-2 sidebar">
+        <div class="hidden-xs col-sm-2 sidebar">
             <div class="nav nav-sidebar"
                  ng-if="model.ifLocal">
                 <h4>Recipe Provider:</h4>
@@ -40,13 +40,18 @@
                    ng-click="model.goToEdit()">
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
+                <a id="numOfLikeShowCreator"
+                   class="btn pull-right"
+                   ng-if="!model.canLike">
+                    <span class="glyphicon glyphicon-heart"></span> {{model.numberOfLikes}} Likes
+                </a>
                 <a class="btn pull-right"
-                   ng-if="model.like"
+                   ng-if="model.canLike && model.like"
                    ng-click="model.unlikeRecipe()">
                     <span class="glyphicon glyphicon-heart">{{model.numberOfLikes}}</span>
                 </a>
                 <a class="btn pull-right"
-                   ng-show="!model.like"
+                   ng-if="model.canLike && !model.like"
                    ng-click="model.likeRecipe()">
                     <span class="glyphicon glyphicon-heart-empty">{{model.numberOfLikes}}</span>
                 </a>
@@ -96,14 +101,17 @@
             <div>
                 <h3 class="sub-header">Comments
                     <a class="btn pull-right"
-                       ng-show="!model.newComment"
+                       ng-show="model.canComment && !model.newComment"
                        ng-click="model.createComment()">
                         <span class="glyphicon glyphicon-plus"></span>
                     </a>
                 </h3>
 
-
-                <p ng-if="model.reviews.length===0">Be the first one to comment!</p>
+                <div ng-if="!model.canComment"
+                     class="alert alert-danger">
+                    {{model.message}}
+                </div>
+                <p ng-if="model.canComment && model.reviews.length===0">Be the first one to comment!</p>
                 <div class="input-group">
                     <input class="form-control"
                            ng-show="model.newComment"

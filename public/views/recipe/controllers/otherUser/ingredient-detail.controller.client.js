@@ -10,10 +10,10 @@
 
         model.logout = logout;
 
-        function init() {
+        model.sectionTitle = "Ingredient Detail";
+        model.ingredientName = $routeParams.ingredientName;
 
-            model.sectionTitle = "Ingredient Detail";
-            model.ingredientName = $routeParams.ingredientName;
+        function init() {
 
             if (currentUser._id) {
                 model.ifLoggedIn = true;

@@ -17,11 +17,10 @@
         model.saveRecipe = saveRecipe;
         model.logout = logout;
 
-        function init() {
+        model.recipeId = $routeParams.recipeId;
+        model.newIngredient = {};
 
-            // model.creatorId = $routeParams.creatorId;
-            model.recipeId = $routeParams.recipeId;
-            model.newIngredient = {};
+        function init() {
 
             if (currentUser._id) {
                 model.ifLoggedIn = true;
@@ -34,8 +33,8 @@
                 .then(function (recipe) {
                     model.recipe = recipe;
                     if (!canEdit()) {
-                        console.log(currentUser._id)
-                        console.log(model.recipe._creator)
+                        // console.log(currentUser._id)
+                        // console.log(model.recipe._creator)
                         $location.url('/');
                     }
                 });

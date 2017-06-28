@@ -5,8 +5,8 @@
 
     function config($routeProvider) {
         $routeProvider
-            .when('/',{
-                templateUrl:'./views/home/templates/home.view.client.html',
+            .when('/', {
+                templateUrl: './views/home/templates/home.view.client.html',
                 controller: 'homeController',
                 controllerAs: 'model',
                 resolve: {
@@ -24,7 +24,11 @@
             .when('/register', {
                 templateUrl: './views/user/templates/register.view.client.html',
                 controller: 'registerController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
+
             })
             .when('/account', {
                 templateUrl: './views/user/templates/account.view.client.html',
@@ -173,7 +177,7 @@
                     currentUser: checkLoggedin
                 }
             })
-            .when('/creator/:creatorId/recipe_list',{
+            .when('/creator/:creatorId/recipe_list', {
                 templateUrl: 'views/recipe/templates/creator/recipe-list-by-creator.view.client.html',
                 controller: 'recipeListByCreatorController',
                 controllerAs: 'model',
@@ -189,7 +193,7 @@
             //         currentUser: checkLoggedin
             //     }
             // })
-            .when('/store/:storeId/merchandise',{
+            .when('/store/:storeId/merchandise', {
                 templateUrl: './views/merchandise/templates/merchandise-list.view.client.html',
                 controller: 'merchandiseListController',
                 controllerAs: 'model',
@@ -197,7 +201,7 @@
                     currentUser: checkLoggedin
                 }
             })
-            .when('/store/:storeId/merchandise/:merchandiseId',{
+            .when('/store/:storeId/merchandise/:merchandiseId', {
                 templateUrl: './views/merchandise/templates/merchandise-detail.view.client.html',
                 controller: 'merchandiseDetailController',
                 controllerAs: 'model',
@@ -205,7 +209,7 @@
                     currentUser: checkLoggedin
                 }
             })
-            .when('/store/:storeId/merchandise/:merchandiseId/:mode',{
+            .when('/store/:storeId/merchandise/:merchandiseId/:mode', {
                 templateUrl: './views/merchandise/templates/merchandise-edit.view.client.html',
                 controller: 'merchandiseEditController',
                 controllerAs: 'model',
@@ -213,7 +217,7 @@
                     currentUser: checkLoggedin
                 }
             })
-            .when('/store/:storeId',{
+            .when('/store/:storeId', {
                 templateUrl: 'views/store/templates/store-profile.view.client.html',
                 controller: 'storeProfileController',
                 controllerAs: 'model',
@@ -221,7 +225,7 @@
                     currentUser: checkLoggedin
                 }
             })
-            .when('/store/:storeId/:mode',{
+            .when('/store/:storeId/:mode', {
                 templateUrl: 'views/store/templates/store-profile-edit.view.client.html',
                 controller: 'storeProfileEditController',
                 controllerAs: 'model',
@@ -229,7 +233,7 @@
                     currentUser: checkLoggedin
                 }
             })
-            .when('/store-search-near-by',{
+            .when('/store-search-near-by', {
                 templateUrl: 'views/store/templates/store-search-near-by.view.client.html',
                 controller: 'StoreSearchNearByController',
                 controllerAs: 'model',
@@ -237,7 +241,7 @@
                     currentUser: checkCurrentUser
                 }
             })
-            .when('/search/store',{
+            .when('/search/store', {
                 templateUrl: 'views/store/templates/store-profile-search.view.client.html',
                 controller: 'storeProfileSearchController',
                 controllerAs: 'model',
@@ -245,7 +249,7 @@
                     currentUser: checkCurrentUser
                 }
             })
-            .when('/search/user',{
+            .when('/search/user', {
                 templateUrl: 'views/user/templates/user-search.view.client.html',
                 controller: 'userSearchController',
                 controllerAs: 'model',
@@ -253,7 +257,7 @@
                     currentUser: checkCurrentUser
                 }
             })
-            .when('/search/merchandise',{
+            .when('/search/merchandise', {
                 templateUrl: 'views/merchandise/templates/merchandise-search-list.view.client.html',
                 controller: 'merchandiseSearchController',
                 controllerAs: 'model',
@@ -261,7 +265,7 @@
                     currentUser: checkCurrentUser
                 }
             })
-            .otherwise({redirectTo : '/'})
+            .otherwise({redirectTo: '/'})
     }
 
     function checkLoggedin(userService, $q, $location) {
@@ -269,7 +273,7 @@
         userService
             .loggedin()
             .then(function (user) {
-                if(user === '0') {
+                if (user === '0') {
                     deferred.reject();
                     $location.url('/login');
                 } else {
@@ -301,7 +305,7 @@
         userService
             .checkAdmin()
             .then(function (user) {
-                if(user === '0') {
+                if (user === '0') {
                     deferred.reject();
                     $location.url('/');
                 } else {

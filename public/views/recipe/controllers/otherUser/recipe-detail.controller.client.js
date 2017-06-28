@@ -2,7 +2,7 @@
     angular
         .module("FinalProject")
         .controller("recipeDetailController", RecipeDetailController);
-    
+
     function RecipeDetailController($sce, currentUser, $location, $routeParams,
                                     recipeService, yummlyService, associationService, userService) {
 
@@ -18,15 +18,14 @@
         model.logout = logout;
         model.goToEdit = goToEdit;
 
+        model.sectionTitle = "Recipe Detail";
+        model.recipeId = $routeParams.recipeId;
+
+        model.showYummlyInstruction = false;
+        model.reviews = [];
         model.numberOfLikes = 0;
 
         function init() {
-
-            model.sectionTitle = "Recipe Detail";
-
-            model.recipeId = $routeParams.recipeId;
-            model.showYummlyInstruction = false;
-            model.reviews =[];
 
             if (currentUser._id) {
                 model.ifLoggedIn = true;
@@ -45,6 +44,7 @@
                     })
                     .then(function () {
                         findAllAssociation();
+                        checkValidationOnNetwork();
                     });
             } else {
                 yummlyService
@@ -53,6 +53,7 @@
                         // console.log(recipe);
                         model.recipe = recipe;
                         combineIngredientAndDescription();
+                        checkValidationOnNetwork();
                         recipeService
                             .findYummlyRecipeCopyByYummlyId(model.recipeId)
                             .then(function (recipe) {
@@ -62,11 +63,21 @@
                                 }
                             });
                     });
-
             }
         }
 
         init();
+
+        function checkValidationOnNetwork() {
+            if (currentUser.role === 'USER' || currentUser.role === 'ADMIN') {
+                model.canComment = true;
+                model.canLike = true;
+            } else if (model.canEdit) {
+                model.canComment = true;
+            } else {
+                model.message = "Sorry, your role can only comment on your stuff."
+            }
+        }
 
         function logout() {
             userService
@@ -77,7 +88,7 @@
         }
 
         function goToEdit() {
-            $location.url("/auth_recipe_list/"+ model.recipeId);
+            $location.url("/auth_recipe_list/" + model.recipeId);
         }
 
         function trust(url) {
@@ -94,7 +105,7 @@
             associationService
                 .findAssociationForSourceTarget('LIKE', currentUser._id, 'recipe', model.recipeLocalId)
                 .then(function (likes) {
-                    if(likes.length !== 0) {
+                    if (likes.length !== 0) {
                         // console.log(like);
                         model.likeId = likes[0]._id;
                         model.like = true;
@@ -103,7 +114,7 @@
                         model.like = false;
                         model.footerButton = "glyphicon glyphicon-heart-empty";
                     }
-                })
+                });
             associationService
                 .findAssociationForTarget('LIKE', 'recipe', model.recipeLocalId)
                 .then(function (likes) {
@@ -138,10 +149,10 @@
         }
 
         function likeRecipe() {
-            if(!model.recipeLocalId) {
+            if (!model.recipeLocalId) {
                 createYummlyRecipeCopy()
                     .then(function () {
-                       likeHelper();
+                        likeHelper();
                     })
             } else {
                 likeHelper();
@@ -150,8 +161,8 @@
 
         function likeHelper() {
             var like = {
-                fromWhom : currentUser._id,
-                toRecipe : model.recipeLocalId,
+                fromWhom: currentUser._id,
+                toRecipe: model.recipeLocalId,
                 type: 'LIKE'
             };
 
@@ -191,26 +202,31 @@
         function clearComment() {
             model.newComment = {};
         }
+
         function submitComment() {
-            if(!model.recipeLocalId) {
-                createYummlyRecipeCopy()
-                    .then(function () {
-                        commentHelper();
-                    })
+            if (model.canCommentOrLike) {
+                if (!model.recipeLocalId) {
+                    createYummlyRecipeCopy()
+                        .then(function () {
+                            commentHelper();
+                        })
+                } else {
+                    commentHelper();
+                }
             } else {
-                commentHelper();
+                model.message = "Sorry, your role can only comment on your stuff."
             }
         }
 
         function commentHelper() {
             model.newComment.fromWhom = currentUser._id;
             model.newComment.toRecipe = model.recipeLocalId;
-            model.newComment.type =  'COMMENT';
+            model.newComment.type = 'COMMENT';
             associationService
                 .createAssociation(model.newComment)
                 .then(function (comment) {
                     comment.fromWhom = {
-                        username : currentUser.username
+                        username: currentUser.username
                     };
                     model.reviews.push(comment);
                     model.newComment = null;

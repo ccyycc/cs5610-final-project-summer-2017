@@ -56,7 +56,7 @@
 
         function createRecipe() {
             var newRecipe = {
-                name : "New Recipe"
+                name: "New Recipe"
             };
             recipeService
                 .createRecipe(model.creator._id, newRecipe)

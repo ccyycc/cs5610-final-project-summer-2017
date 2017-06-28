@@ -1,25 +1,22 @@
 <div ng-include="'./views/common/header.view.client.html'"></div>
 <div class="container-fluid">
     <div class="row">
-        <div class="list-name-sidebar col-sm-2 sidebar">
+        <div class="list-name-sidebar hidden-xs col-sm-2 sidebar">
             <ul class="nav nav-sidebar">
-                <!--<li class=""><a>Recipe List<span class="sr-only"></span></a></li>-->
                 <li class="list-group-item active"><h5>Recipe List</h5></li>
                 <li ng-repeat="recipe in model.recipes"
                     ng-class="{active: recipe._id === model.recipeId}"
                     class="list-group-item">
-                <!--<li ng-class="{active: recipe._id === model.recipeId}"><a href="#"> {{recipe.name}}<span class="sr-only">(current)</span></a></li>-->
-
-                <div class="row">
-                    <div class="col-sm-8">
-                    {{recipe.name}}
-                    </div>
-                    <div class="col-sm-4">
-                        <a ng-if="recipe._id !== model.recipeId"
-                           href="#!/creator/{{model.creatorId}}/recipe/{{recipe._id}}">
-                            <span class="glyphicon glyphicon-cog pull-right"></span>
-                        </a>
-                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            {{recipe.name}}
+                        </div>
+                        <div class="col-sm-4">
+                            <a ng-if="recipe._id !== model.recipeId"
+                               href="#!/auth_recipe_list/{{recipe._id}}">
+                                <span class="glyphicon glyphicon-cog pull-right"></span>
+                            </a>
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -32,26 +29,26 @@
                  class="alert alert-danger">{{model.error}}
             </div>
 
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input class="form-control"
-                           ng-model="model.recipe.name"
-                           placeholder="please enter the name of the recipe"
-                           id="name"/>
-                </div>
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea id="description"
-                              ng-model="model.recipe.description"
-                              rows="2"
-                              placeholder="please enter the description of the recipe"
-                              class="form-control">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input class="form-control"
+                       ng-model="model.recipe.name"
+                       placeholder="please enter the name of the recipe"
+                       id="name"/>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description"
+                          ng-model="model.recipe.description"
+                          rows="2"
+                          placeholder="please enter the description of the recipe"
+                          class="form-control">
                     </textarea>
-                </div>
+            </div>
             <div class="form-group">
                 <label for="numberOfServings">Number of Servings</label>
-                <input type = "number"
-                       min = "0"
+                <input type="number"
+                       min="0"
                        class="form-control"
                        ng-model="model.recipe.numberOfServings"
                        placeholder="please enter the number of servings"
@@ -59,9 +56,9 @@
             </div>
             <div class="form-group">
                 <label for="totalTime">Total time</label>
-                <input type = "number"
-                       min = "0"
-                        class="form-control"
+                <input type="number"
+                       min="0"
+                       class="form-control"
                        ng-model="model.recipe.totalTime"
                        placeholder="please enter the total time"
                        id="totalTime"/>
@@ -76,51 +73,50 @@
                     </textarea>
             </div>
             <label>Ingredient</label>
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover table-condensed">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="ingredient in model.recipe.ingredients track by $index">
-                            <td ng-if="model.editIngredient == ingredient"><input ng-model = "ingredient.name"/></td>
-                            <td ng-if="model.editIngredient == ingredient"><input ng-model = "ingredient.description"/></td>
-                            <td ng-if="model.editIngredient != ingredient">{{ingredient.name}}</td>
-                            <td ng-if="model.editIngredient != ingredient">{{ingredient.description}}</td>
-                            <td class="text-center">
-                                <a ng-if="model.editIngredient == ingredient"
-                                   ng-click="model.editSingleIngredient(ingredient)">
-                                    <span class="glyphicon glyphicon-ok"></span>
-                                </a>
-                                <a ng-if="model.editIngredient != ingredient"
-                                   ng-click="model.selectSingleIngredient(ingredient)">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </a>
-                                <a ng-click="model.deleteSingleIngredient(ingredient)">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr class="info">
-                            <td><input ng-model = "model.newIngredient.name"/></td>
-                            <td><input ng-model = "model.newIngredient.description"/></td>
-                            <td class="text-center">
-                                <a ng-click="model.createSingleIngredient()">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </a>
-                                <a ng-click="model.clearSingleIngredient()">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover table-condensed">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="ingredient in model.recipe.ingredients track by $index">
+                        <td ng-if="model.editIngredient == ingredient"><input ng-model="ingredient.name"/></td>
+                        <td ng-if="model.editIngredient == ingredient"><input ng-model="ingredient.description"/></td>
+                        <td ng-if="model.editIngredient != ingredient">{{ingredient.name}}</td>
+                        <td ng-if="model.editIngredient != ingredient">{{ingredient.description}}</td>
+                        <td class="text-center">
+                            <a ng-if="model.editIngredient == ingredient"
+                               ng-click="model.editSingleIngredient(ingredient)">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </a>
+                            <a ng-if="model.editIngredient != ingredient"
+                               ng-click="model.selectSingleIngredient(ingredient)">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                            <a ng-click="model.deleteSingleIngredient(ingredient)">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td><input ng-model="model.newIngredient.name"/></td>
+                        <td><input ng-model="model.newIngredient.description"/></td>
+                        <td class="text-center">
+                            <a ng-click="model.createSingleIngredient()">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </a>
+                            <a ng-click="model.clearSingleIngredient()">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <div class="form-group">
                 <label for="image">Image</label>
                 <input type="url"
@@ -147,7 +143,7 @@
                            style="display: none"/>
                     <button type="submit"
                             onclick="window.alert('Changes are automatically saved.')"
-                            ng-click = "model.saveRecipe()"
+                            ng-click="model.saveRecipe()"
                             class="btn btn-warning btn-block">Upload Image
                     </button>
                 </form>
