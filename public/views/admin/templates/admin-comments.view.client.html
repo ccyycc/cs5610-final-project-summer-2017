@@ -37,8 +37,8 @@
                     <select class="form-control"
                             data-ng-model="model.toType">
                         <option ng-repeat="type in model.types"
-                                ng-init="model.toType == 'Recipe'"
-                                ng-selected="model.toType == type" value="{{type}}">
+                                ng-selected="model.toType = 'Recipe'"
+                                value="{{type}}">
                             {{type}}
                         </option>
                     </select>
@@ -117,8 +117,8 @@
                 <select class="form-control"
                         data-ng-model="model.toType">
                     <option ng-repeat="type in model.types"
-                            ng-init="model.toType == 'Recipe'"
-                            ng-selected="model.toType == type" value="{{type}}">
+                            ng-selected="model.toType = 'Recipe'"
+                            value="{{type}}">
                         {{type}}
                     </option>
                 </select>
