@@ -17,10 +17,17 @@
                 <a class="btn pull-right" ng-if="model.canEdit" ng-click="model.editMerchandise()">
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
-                <a class="btn pull-right" ng-show="model.like" ng-click="model.unlikeMerchandise()">
+
+                <a id="numOfLikeShowCreator"
+                   class="btn pull-right hidden-xs"
+                   ng-if="!model.canLike">
+                    <span class="glyphicon glyphicon-heart"></span> {{model.numLike}} Likes
+                </a>
+
+                <a class="btn pull-right" ng-show="model.canLike && model.like" ng-click="model.unlikeMerchandise()">
                     <span class="glyphicon glyphicon-heart">{{model.numLike}}</span>
                 </a>
-                <a class="btn pull-right" ng-show="!model.like" ng-click="model.likeMerchandise()">
+                <a class="btn pull-right" ng-show="model.canLike && !model.like" ng-click="model.likeMerchandise()">
                     <span class="glyphicon glyphicon-heart-empty">{{model.numLike}}</span>
                 </a>
             </h2>
