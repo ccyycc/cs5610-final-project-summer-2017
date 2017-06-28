@@ -108,7 +108,6 @@ function findStoreById(req, res) {
         .findStoreById(storeId)
         .then(
             function (store) {
-                var tmp = store;
                 res.status(200).send(store);
             },
             function () {

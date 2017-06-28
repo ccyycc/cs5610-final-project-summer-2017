@@ -141,8 +141,7 @@ a:focus, a:hover, a:visited {
 }
 
 .message-content {
-    white-space: nowrap;
-    overflow: scroll;
+    overflow-wrap: break-word;
 }
 
 .video-container {

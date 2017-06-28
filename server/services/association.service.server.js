@@ -19,7 +19,7 @@ app.get('/api/association/find/type/:type', findAllAssociationByType);
 app.get('/api/association/find/type/:type/from/:sourceId', findAssociationForSource);
 app.get('/api/association/find/type/:type/to/:targetType/:targetId', findAssociationForTarget);
 app.get('/api/association/find/type/:type/from/:sourceId/to/:targetType/:targetId', findAssociationForSourceTarget);
-
+app.get('/api/association/find/comments', isAdmin, findAllComments);
 
 
 function createAssociation(req, res) {
@@ -35,7 +35,7 @@ function createAssociation(req, res) {
 }
 function updateAssociation(req, res) {
     var association = req.body;
-    var associationId= req.params["id"]();
+    var associationId= req.params.id;
 
     associationModel
         .updateAssociation(associationId,association)
@@ -163,6 +163,17 @@ function findAllRecipeReview(req, res) {
             res.json(reviews);
         }, function () {
             res.sendStatus(500);
+        })
+}
+
+function findAllComments(req, res) {
+    associationModel
+        .findAllComments()
+        .then(function (comments) {
+            res.json(comments);
+        })
+        .catch(function (error) {
+            console.log('error at association.service.server--' + error);
         })
 }
 

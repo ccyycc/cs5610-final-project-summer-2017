@@ -3,15 +3,21 @@
         .module('FinalProject')
         .controller('adminCommentsController', adminCommentsController);
 
-    function adminCommentsController($location,storeService, associationService,currentUser) {
+    function adminCommentsController($location,
+                                     associationService,
+                                     userService,
+                                     storeService,
+                                     recipeService,
+                                     merchandiseService,
+                                     currentUser) {
         var model = this;
 
         model.sectionTitle = "Manage Comments";
 
-        model.deleteComments = deleteComments;
-        model.createComments = createComments;
-        model.selectComments = selectComments;
-        model.updateComments = updateComments;
+        model.deleteComment = deleteComment;
+        model.createComment = createComment;
+        model.selectComment = selectComment;
+        model.updateComment = updateComment;
         model.logout = logout;
 
         init();
@@ -20,7 +26,8 @@
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }
-            findAllCommentss();
+            findAllComments();
+            model.types = ['Recipe', 'Store', 'Merchandise']
         }
 
 
@@ -32,73 +39,194 @@
                 });
         }
 
-        function updateComments(storename, association) {
+        function findObjById(id, type) {
+            if (type === 'Recipe') {
+                return recipeService
+                    .findRecipeById(id)
+                    .then(function (data) {
+                        model.obj = data;
+                    })
+            } else if (type === 'Store') {
+                return storeService
+                    .findStoreById(id)
+                    .then(function (data) {
+                        model.obj = data;
+                    });
+            } else if (type === 'Merchandise') {
+                return merchandiseService
+                    .findMerchandiseById(id)
+                    .then(function (data) {
+                        // console.log(data);
+                        model.obj = data;
+                    });
+            }
+        }
+
+        function updateComment(fromName, toType, comment) {
             model.message = false;
             model.error = false;
 
-            console.log('storename: ' + storename);
-            storeService
-                .findStoreByName(storename)
-                .then(function (store) {
-                    if (store === undefined) {
-                        model.error = "Store does not exist";
+            var id = comment.toId;
+
+            userService.findUserByUsername(fromName)
+                .then(function (user) {
+                    if (user === undefined) {
+                        model.error = 'User ' + fromName + ' not find';
+                        return;
                     } else {
-                        association._creator = store._id;
-                        associationService
-                            .updateAssociation(association._id, association)
-                            .then(findAllCommentss());
+                        if (toType === 'Recipe') {
+                            return recipeService
+                                .findRecipeById(id)
+                                .then(function (data) {
+                                    checkData(data, user)
+                                })
+                        } else if (toType === 'Store') {
+                            return storeService
+                                .findStoreById(id)
+                                .then(function (data) {
+                                    checkData(data, user)
+                                });
+                        } else if (toType === 'Merchandise') {
+                            return merchandiseService
+                                .findMerchandiseById(id)
+                                .then(function (data) {
+                                    checkData(data, user)
+                                });
+                        }
                     }
                 });
 
+            function checkData(data, fromWhom) {
+                if (data === undefined) {
+                    model.error = toType + ' ' + comment.toId + ' not find';
+                    return;
+                } else {
+                    delete comment.toRecipe;
+                    delete comment.toStore;
+                    delete comment.toMerchandise;
+                    comment['to' + toType] = comment.toId;
+
+                    comment.fromWhom = fromWhom._id;
+                    comment.time = Date.now();
+
+                    delete comment.toId;
+                    delete comment.toType;
+
+                    // if (comment.toId === comment.to)
+                    console.log(comment);
+                    associationService
+                        .updateAssociation(comment._id, comment)
+                        .then(findAllComments());
+                }
+            }
+
         }
 
-        function selectComments(association) {
+        function selectComment(comment) {
+            model.message = "'To' field only accept objcet Id";
+            model.error = false;
+
+            // model.comment = {};
+            model.comment = angular.copy(comment);
+            model.fromName = comment.fromWhom.username;
+            model.toType = comment.toType;
+        }
+
+        function createComment(fromName, toType, comment) {
             model.message = false;
             model.error = false;
 
-            model.association = association;
-            model.storeName = association._store.name;
-        }
+            var id = comment.toId;
 
-        function createComments(storename, association) {
-            model.message = false;
-            model.error = false;
-
-            // var store = 'undefined';
-
-            console.log('storename: ' + storename);
-
-            storeService
-                .findStoreByName(storename)
-                .then(function (store) {
-                    if (store === undefined) {
-                        model.error = "Store does not exist";
+            userService.findUserByUsername(fromName)
+                .then(function (user) {
+                    if (user === undefined) {
+                        model.error = 'User ' + fromName + ' not find';
+                        return;
                     } else {
-                        association._creator = store.id;
-                        associationService
-                            .createAssociation(store._id, association)
-                            .then(findAllCommentss());
-
+                        if (toType === 'Recipe') {
+                            return recipeService
+                                .findRecipeById(id)
+                                .then(function (data) {
+                                    createData(data, user)
+                                })
+                        } else if (toType === 'Store') {
+                            return storeService
+                                .findStoreById(id)
+                                .then(function (data) {
+                                    createData(data, user)
+                                });
+                        } else if (toType === 'Merchandise') {
+                            return merchandiseService
+                                .findMerchandiseById(id)
+                                .then(function (data) {
+                                    createData(data, user)
+                                });
+                        }
                     }
                 });
+
+            function createData(data, fromWhom) {
+                if (data === undefined) {
+                    model.error = toType + ' ' + comment.toId + ' not find';
+                    return;
+                } else {
+                    comment['to' + toType] = comment.toId;
+
+                    comment.fromWhom = fromWhom._id;
+                    comment.time = Date.now();
+                    comment.type = 'COMMENT';
+
+                    delete comment.toId;
+                    delete comment.toType;
+                    delete comment._id;
+
+                    // if (comment.toId === comment.to)
+                    console.log(comment);
+                    associationService
+                        .createAssociation(comment)
+                        .then(findAllComments());
+                }
+            }
+
         }
 
-        function deleteComments(association) {
+        function deleteComment(association) {
             model.error = false;
             model.message = false;
 
             associationService
-                .deleteAssociation(association._id)
-                .then(findAllCommentss());
+                .deleteComment(association._id)
+                .then(findAllComments());
         }
 
-        function findAllCommentss() {
+        function findAllComments() {
             associationService
-                .findAllAssociations()
-                .then(function (associations) {
-                    model.associations = associations;
-                    model.association = {};
-                    model.storeName = '';
+                .findAllComments()
+                .then(function (comments) {
+                    console.log(comments);
+                    for (var c = 0; c < comments.length; c++) {
+                        if (comments[c].toRecipe !== undefined) {
+                            comments[c].toName = comments[c].toRecipe.name;
+                            comments[c].toId = comments[c].toRecipe._id;
+                            comments[c].toType = 'Recipe';
+                        } else if (comments[c].toStore !== undefined) {
+                            comments[c].toName = comments[c].toStore.name;
+                            comments[c].toId = comments[c].toStore._id;
+                            comments[c].toType = 'Store';
+                        } else if (comments[c].toMerchandise !== undefined) {
+                            comments[c].toName = comments[c].toMerchandise.name;
+                            comments[c].toId = comments[c].toMerchandise._id;
+                            comments[c].toType = 'Merchandise';
+                        }
+                    }
+                    model.comments = comments;
+
+                    model.fromName = '';
+                    model.comment = {};
+                    model.toType = 'Recipe';
+                    model.toId = '';
+
                 })
         }
 

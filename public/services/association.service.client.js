@@ -15,9 +15,16 @@
         this.findAssociationForSource = findAssociationForSource;
         this.findAssociationForTarget = findAssociationForTarget;
         this.findAssociationForSourceTarget = findAssociationForSourceTarget;
+        this.findAllComments = findAllComments;
 
 
-        function createAssociation(association){
+        function findAllComments() {
+            return $http.get('/api/association/find/comments')
+                .then(extractData);
+        }
+
+        　
+       function createAssociation(association){
                 var url = '/api/association';
                 return $http.post(url, association)
                     .then(extractData)
@@ -41,7 +48,7 @@
                 .then(extractData)
         }
         function findAllAssociationByType(associationType) {
-            var url = '/api/association/find/type/'+associationType
+            var url = '/api/association/find/type/'+associationType;
             return $http.get(url)
                 .then(extractData)
         }

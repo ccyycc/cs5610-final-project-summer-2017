@@ -25,6 +25,8 @@ associationModel.findAssociationForSourceTarget = findAssociationForSourceTarget
 
 associationModel.deleteAssociationById = deleteAssociationById;
 
+associationModel.findAllComments = findAllComments;
+
 
 module.exports = associationModel;
 
@@ -49,6 +51,16 @@ function findAssociationById(associationId) {
 function findAllAssociationByType(associationType) {
     return associationModel
         .find({"type": associationType});
+}
+
+function findAllComments() {
+    return associationModel
+        .find({'type': 'COMMENT', toWhom: undefined})
+        .populate('toRecipe')
+        .populate('toStore')
+        .populate('toMerchandise')
+        .populate('fromWhom')
+        .exec();
 }
 function findAssociationForSource(associationType, sourceId) {
     return associationModel
@@ -219,10 +231,6 @@ function deleteComment(userId,commentId) {
 
 function findCommentById(commentId) {
     return associationModel.findById(commentId);
-}
-
-function findAllComments() {
-    return associationModel.find();
 }
 
 function createMessage(myId, userId, message) {
