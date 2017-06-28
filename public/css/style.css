@@ -300,7 +300,7 @@ a:focus, a:hover, a:visited {
 }
 
 .home-search-option-width {
-    width: 80px;
+    width: 90px;
 }
 
 .input-hidden {
@@ -332,9 +332,9 @@ a:focus, a:hover, a:visited {
 .home-search-bar-position {
     position: absolute;
     top: 40%;
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%
 }
 
 .textToTop {
