@@ -5,10 +5,11 @@
         <input ng-model="model.searchText"
                type="text"
                placeholder="Search recipes"
-               class="form-control"
-       >
+               class="form-control">
         <span class="input-group-btn">
-        <a ng-click="model.searchRecipes()" class="btn btn-default" type="button">
+        <a ng-click="model.searchRecipes()"
+           class="btn btn-default"
+           type="button">
             <span class="glyphicon glyphicon-search"></span>
         </a>
     </span>
@@ -28,19 +29,17 @@
     <h3 class="sub-header">Yummly Recipe</h3>
 
     <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-4 text-center recipeListImages"
-                 ng-repeat="yummlyRecipe in model.yummlyRecipes">
-                <img class="recipeListImage"
-                     ng-src="{{yummlyRecipe.smallImageUrls[0]}}"
-                     onerror="this.onerror=null; this.src='/resource/defaultPics/placeholder-image10.jpg'"/>
-                <a ng-click="model.goToDetail(yummlyRecipe, yummlyRecipe.id)">
-                    <p class="text-on-image">{{yummlyRecipe.recipeName}}</p>
-                </a>
-            </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 text-center recipeListImages"
+             ng-repeat="yummlyRecipe in model.yummlyRecipes">
+            <img class="recipeListImage"
+                 ng-src="{{yummlyRecipe.smallImageUrls[0]}}"
+                 onerror="this.onerror=null; this.src='/resource/defaultPics/placeholder-image10.jpg'"/>
+            <a ng-click="model.goToDetail(yummlyRecipe, yummlyRecipe.id)">
+                <p class="text-on-image">{{yummlyRecipe.recipeName}}</p>
+            </a>
         </div>
+    </div>
     <div class="text-center"><a ng-click="model.getMoreYummlyRecipe()"><h3>Next</h3></a></div>
-
-</div>
 </div>
 
 <div ng-include="'views/common/footer.view.client.html'"></div>
