@@ -154,12 +154,9 @@ function unregister(req, res) {
 function register(req, res) {
     var user = req.body;
     user.password = bcrypt.hashSync(user.password);
-    // console.log('user.service.server user: ');
-    // user.password = passw
     userModel
         .createUser(user)
         .then(function (user) {
-            // res.send(user);
             req.login(user, function (status) {
                 res.send(user);
             });
@@ -172,7 +169,6 @@ function logout(req, res) {
 }
 
 function loggedin(req, res) {
-    // console.log(req.user);
     if (req.isAuthenticated()) {
         res.json(req.user);
     } else {
@@ -181,7 +177,6 @@ function loggedin(req, res) {
 }
 
 function checkAdmin(req, res) {
-    // console.log(req.user);
     if (req.isAuthenticated() && req.user.role === 'ADMIN') {
         res.json(req.user);
     } else {
@@ -224,8 +219,6 @@ function updateUser(req, res) {
     var user = req.body;
     var userId = req.params.userId;
 
-    console.log('update user -- user.service.server');
-    console.log(user);
     userModel
         .updateUser(userId, user)
         .then(function (status) {
@@ -237,8 +230,6 @@ function updateUser(req, res) {
 
 function updateProfile(req, res) {
     var user = req.body;
-    // console.log(user);
-    // var userId = req.params.userId;
 
     userModel
         .updateUser(req.user._id, user)
@@ -351,8 +342,6 @@ function sendMessage(req, res) {
     var message = req.body;
     var myId = req.user._id;
 
-    // console.log("sendMessage-user.service.server userId: " + userId +" myId: " + myId + "  message: " + message);
-
     userModel
         .sendMessage(myId, userId, message)
         .then(function (user) {
@@ -400,7 +389,6 @@ function renderOutMessage(req, res) {
 function bmiCal(req, res) {
     var weight = req.body.weight;
     var height = req.body.height * 2.54;
-    console.log(weight + " " + height);
 
     var sendJson = {
         "weight": {"value": weight, "unit": "lb"},
@@ -410,7 +398,6 @@ function bmiCal(req, res) {
         "waist": "35.00",
         "hip": "46.00"
     };
-    // console.log(sendJson);
 
     unirest.post("https://bmi.p.mashape.com/")
         .header("X-Mashape-Key", "XW5gPJqz7PmshypQe1SzDbLzDIxvp1Bf6F7jsntRZbPSjSpS2V")
@@ -418,7 +405,6 @@ function bmiCal(req, res) {
         .header("Accept", "application/json")
         .send(sendJson)
         .end(function (result) {
-            // console.log(result);
             res.send(result);
             userModel
                 .addbmr(req.user._id, result.body.bmr.value);

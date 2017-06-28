@@ -13,15 +13,15 @@
         model.showDiscription = showDescription;
 
 
-        init()
+        init();
         function init(){
             if(currentUser._id){
                 $location.url('/');
-            };
+            }
         }
 
         function register(username, password, password2, role) {
-            console.log(currentUser)
+            // console.log(currentUser);
 
 
             if (username === null || username === '' || typeof username === 'undefined') {
@@ -59,11 +59,6 @@
         }
 
         function showDescription() {
-            // if (!model.discription) {
-            //     model.discription = 'show';
-            // } else {
-            //     model.discription = false;
-            // }
             $("#role-description").collapse('toggle');
         }
     }

@@ -37,7 +37,6 @@
             model.message = false;
             model.error = false;
 
-            console.log('storename: ' + storename);
             storeService
                 .findStoreByName(storename)
                 .then(function (store) {
@@ -66,9 +65,6 @@
             model.message = false;
             model.error = false;
 
-            // var store = 'undefined';
-
-            console.log('storename: ' + storename);
 
             storeService
                 .findStoreByName(storename)

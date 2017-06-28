@@ -89,8 +89,6 @@
                     delete comment.toId;
                     delete comment.toType;
 
-                    // if (comment.toId === comment.to)
-                    console.log(comment);
                     associationService
                         .updateAssociation(comment._id, comment)
                         .then(findAllComments());
@@ -158,8 +156,6 @@
                     delete comment.toType;
                     delete comment._id;
 
-                    // if (comment.toId === comment.to)
-                    console.log(comment);
                     associationService
                         .createAssociation(comment)
                         .then(findAllComments());
@@ -181,7 +177,6 @@
             associationService
                 .findAllComments()
                 .then(function (comments) {
-                    console.log(comments);
                     for (var c = 0; c < comments.length; c++) {
                         if (comments[c].toRecipe !== undefined) {
                             comments[c].toName = comments[c].toRecipe.name;

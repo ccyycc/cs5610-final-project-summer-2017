@@ -219,7 +219,6 @@ function deleteComment(userId,commentId) {
             associationModel
                 .findByIdAndRemove(commentId)
                 .then(function (status) {
-                    // console.log('comment delete success -- ass model');
                     return status;
                 })
                 .catch(function (status) {

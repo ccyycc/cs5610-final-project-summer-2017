@@ -36,7 +36,6 @@
             model.error = false;
 
             var thisuser = 'undefined';
-            console.log('username: ' + username);
             userService
                 .findUserByUsername(username)
                 .then(function (user) {
@@ -74,7 +73,6 @@
 
             var thisuser = 'undefined';
 
-            console.log('username: ' + username);
 
             userService
                 .findUserByUsername(username)

@@ -24,20 +24,12 @@
         init();
 
         function countCalorie(user) {
-            // model.calorie = 'haha';
-            // if (user.gender === 'male') {
-            //     model.calorie = 66 + 6.23 * user.weight + 12.7 * user.height - 6.8 * user.age;
-            // } else {
-            //     model.calorie = 655 + 4.35 * user.weight + 4.7 * user.height - 4.7 * user.age;
-            // }
-            // console.log(model.calorie);
 
             var figure = {};
             figure.height = user.height;
             figure.weight = user.weight;
             figure.gender = user.gender.charAt(0);
             figure.age = user.age;
-            console.log(figure);
 
             userService
                 .countBmi(figure)

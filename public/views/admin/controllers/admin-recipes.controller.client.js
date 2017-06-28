@@ -38,14 +38,12 @@
             model.message = false;
             model.error = false;
 
-            console.log('username: ' + username);
             if (username === 'YUMMLY provide') {
                 updateRecipeHelper(undefined, recipe);
             } else {
                 userService
                     .findUserByUsername(username)
                     .then(function (user) {
-                        console.log(user);
                         if (!user) {
                             model.error = "Username does not exist";
                         } else if (user.role !== 'RECIPEPRO') {
@@ -88,9 +86,6 @@
             model.message = false;
             model.error = false;
 
-            // var user = 'undefined';
-
-            console.log('username: ' + username);
 
             userService
                 .findUserByUsername(username)

@@ -29,7 +29,6 @@
         init();
 
         function showInbox() {
-            // console.log(model.userId);
             userService
                 .renderInMessage()
                 .then(function (messages) {
