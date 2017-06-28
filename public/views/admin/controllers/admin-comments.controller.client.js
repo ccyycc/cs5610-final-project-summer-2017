@@ -169,7 +169,7 @@
             model.message = false;
 
             associationService
-                .deleteComment(association._id)
+                .deleteAssociationById(association._id)
                 .then(findAllComments());
         }
 
