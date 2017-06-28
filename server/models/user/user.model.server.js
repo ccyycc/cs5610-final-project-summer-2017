@@ -86,7 +86,7 @@ function deleteFollower(userId, fId) {
 function addFollower(userId, fId) {
     return addToCollections(userId, fId, 'followers')
         .then(function (status) {
-            console.log(userId + " followed by " + fId + " success");
+            // console.log(userId + " followed by " + fId + " success");
 
         })
         .catch(function (err) {
@@ -101,7 +101,7 @@ function deleteFollowing(userId, fId) {
 function addFollowing(userId, fId) {
     return addToCollections(userId, fId, 'followings')
         .then(function (status) {
-            console.log(userId + " follow " + fId + " success");
+            // console.log(userId + " follow " + fId + " success");
         })
         .catch(function (err) {
             console.log('addFollowing Error: ' + err);
@@ -159,12 +159,10 @@ function createUser(user) {
         user.role = 'USER';
     }
     user.photo = './resource/defaultPics/default_profile.png';
-
-    console.log('createUser user.model.server ' + user);
     return userModel
         .create(user)
         .then(function (user) {
-            console.log('createUser success -- user.model.server ' + user);
+            // console.log('createUser success -- user.model.server ' + user);
             return user;
         })
         .catch(function (status) {
