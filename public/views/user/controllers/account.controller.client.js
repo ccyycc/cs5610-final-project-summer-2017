@@ -21,6 +21,7 @@
 
             renderUser(currentUser)
         }
+
         init();
 
         function logout() {

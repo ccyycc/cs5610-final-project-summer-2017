@@ -24,8 +24,9 @@
 
 
             showInbox()
-                // .error(userError());
+            // .error(userError());
         }
+
         init();
 
         function showInbox() {
@@ -51,6 +52,7 @@
                     ///do not delete the console log!
                 })
         }
+
         function deleteMessage(message) {
             userService
                 .deleteMessage(message._id)
@@ -62,6 +64,7 @@
                     }
                 });
         }
+
         function logout() {
             userService
                 .logout()

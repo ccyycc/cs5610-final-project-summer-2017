@@ -136,7 +136,13 @@ a:focus, a:hover, a:visited {
     cursor: default;
 }
 
+.list-group-item > div.row > .message-content {
+    white-space: initial;
+    overflow-wrap: break-word;
+}
+
 .message-content {
+    white-space: initial;
     overflow-wrap: break-word;
 }
 
@@ -345,15 +351,15 @@ img#photo.imageToCenter {
 
 #role-description {
     background-color: white;
-    padding:10px;
+    padding: 10px;
 }
 
-a#numOfLikeShowCreator.btn{
+a#numOfLikeShowCreator.btn {
     color: black;
 }
 
 a#numOfLikeShowCreator.btn:hover,
-a#numOfLikeShowCreator.btn:visited{
+a#numOfLikeShowCreator.btn:visited {
     color: black;
     cursor: default;
 }
@@ -390,8 +396,8 @@ a#numOfLikeShowCreator.btn:visited{
     color: black;
 }
 
-.list-sm-img{
-    margin:0;
+.list-sm-img {
+    margin: 0;
 }
 
 .sidebar {

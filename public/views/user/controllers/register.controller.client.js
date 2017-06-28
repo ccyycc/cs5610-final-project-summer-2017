@@ -3,7 +3,7 @@
         .module('FinalProject')
         .controller('registerController', registerController);
 
-    function registerController($location, userService,currentUser) {
+    function registerController($location, userService, currentUser) {
 
         var model = this;
 
@@ -14,8 +14,8 @@
 
 
         init();
-        function init(){
-            if(currentUser._id){
+        function init() {
+            if (currentUser._id) {
                 $location.url('/');
             }
         }

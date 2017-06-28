@@ -4,7 +4,7 @@
     <div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
     <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
 
-    <ul class="list-group table table-responsive">
+    <ul class="list-group table table-responsive hidden-xs">
         <li class="list-group-item">
             <div class="row">
                 <div class="col-xs-3">
@@ -24,37 +24,29 @@
         <li class="list-group-item">
             <div class="row">
                 <div class="col-xs-3">
-                    <input readonly
-                            ng-model="model.fromName"
+                    <input ng-model="model.fromName"
                            class="form-control">
                 </div>
 
                 <div class="col-xs-3">
-                    <input readonly
-                            ng-model="model.comment.toId"
+                    <input ng-model="model.comment.toId"
                            class="form-control">
                 </div>
 
                 <div class="col-xs-4">
-                    <input readonly
-                           ng-model="model.toType"
-                           class="form-control">
+                    <select class="form-control"
+                            data-ng-model="model.toType">
+                        <option ng-repeat="type in model.types"
+                                ng-init="model.toType == 'Recipe'"
+                                ng-selected="model.toType == type" value="{{type}}">
+                            {{type}}
+                        </option>
+                    </select>
                 </div>
 
-                <!--<div class="col-xs-4">-->
-                    <!--<select class="form-control"-->
-                            <!--readonly-->
-                            <!--data-ng-model="model.toType">-->
-                        <!--<option ng-repeat="type in model.types"-->
-                                <!--ng-init="model.toType = 'Recipe'"-->
-                                <!--ng-selected="model.toType == type" value="{{type}}">-->
-                            <!--{{type}}-->
-                        <!--</option>-->
-                    <!--</select>-->
-                <!--</div>-->
                 <div class="col-xs-2 text-center">
-                    <!--<span ng-click="model.createComment(model.fromName, model.toType, model.comment)"-->
-                          <!--class="glyphicon glyphicon-plus"></span>-->
+                    <span ng-click="model.createComment(model.fromName, model.toType, model.comment)"
+                          class="glyphicon glyphicon-plus"></span>
                     <span ng-click="model.updateComment(model.fromName, model.toType, model.comment)"
                           class="glyphicon glyphicon-ok"></span>
                 </div>
@@ -62,12 +54,7 @@
             <div class="row">
                 <div class="col-xs-10 message-content">
                     Content:
-                    <input ng-if="!model.comment.content"
-                           readonly
-                           ng-model="model.comment.content"
-                           class="form-control">
-                    <input ng-if="model.comment.content"
-                           ng-model="model.comment.content"
+                    <input ng-model="model.comment.content"
                            class="form-control">
                 </div>
                 <div class="col-xs-2 message-content">
@@ -101,6 +88,82 @@
                 </div>
             </div>
         </li>
+    </ul>
+
+
+    <ul class="list-group table table-responsive visible-xs">
+        <li class="list-group-item">
+            <div class="input-group">
+                    <span class="input-group-addon">
+                        From
+                    </span>
+                <input
+                        ng-model="model.fromName"
+                        class="form-control">
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon">
+                        To
+                    </span>
+                <input
+                        ng-model="model.comment.toId"
+                        class="form-control">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon">
+                        Type
+                    </span>
+                <select class="form-control"
+                        data-ng-model="model.toType">
+                    <option ng-repeat="type in model.types"
+                            ng-init="model.toType == 'Recipe'"
+                            ng-selected="model.toType == type" value="{{type}}">
+                        {{type}}
+                    </option>
+                </select>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon">
+                        Content
+                    </span>
+                <input ng-model="model.comment.content"
+                       class="form-control">
+            </div>
+        </li>
+        <div class="btn btn-success form-control"
+             ng-if="!model.comment._id"
+             ng-click="model.createComment(model.fromName, model.toType, model.comment)">
+            Create
+        </div>
+        <div class="btn btn-primary form-control"
+             ng-if="model.comment._id"
+             ng-click="model.updateComment(model.fromName, model.toType, model.comment)">
+            Update
+        </div>
+
+        <div class="margin-top-15">
+            <li ng-repeat="comment in model.comments" class="list-group-item">
+                <div>
+                    <b>From:</b> {{comment.fromWhom.username}}
+                    <div class="col-xs-2 pull-right">
+                        <span ng-click="model.deleteComment(comment)" class="glyphicon glyphicon-remove"></span>
+                        <span ng-click="model.selectComment(comment)" class="glyphicon glyphicon-pencil"></span>
+                    </div>
+                </div>
+                <div>
+                    <b>To: </b>{{comment.toName}}
+                </div>
+                <div>
+                    <b>Type: </b>{{comment.toType}}
+                </div>
+
+                <div class="message-content">
+                    <b>Content: </b>
+                    {{comment.content}}
+                </div>
+            </li>
+        </div>
     </ul>
 </div>
 <div ng-include="'./views/common/footer.view.client.html'"></div>

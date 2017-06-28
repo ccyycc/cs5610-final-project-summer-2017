@@ -3,13 +3,13 @@
         .module('FinalProject')
         .controller('userSearchController', userSearchController);
 
-    function userSearchController($location, $routeParams, userService,currentUser) {
+    function userSearchController($location, $routeParams, userService, currentUser) {
         var model = this;
 
         model.sectionTitle = "User Search";
 
         model.logout = logout;
-        model.searchUser=searchUser ;
+        model.searchUser = searchUser;
 
 
         init();
@@ -21,21 +21,22 @@
             }
 
             var preSearch = $location.search();
-            if(preSearch.search && preSearch.search.length>0){
+            if (preSearch.search && preSearch.search.length > 0) {
                 model.searchContent = preSearch.search;
                 searchUser();
             }
 
         }
 
-        function searchUser(){
+        function searchUser() {
             userService
                 .findUserByPartialUsername(model.searchContent)
-                .then(function(users){
+                .then(function (users) {
                     model.users = users
                 })
 
         }
+
         function logout() {
             userService
                 .logout()
@@ -43,7 +44,6 @@
                     $location.url('/');
                 });
         }
-
 
 
     }

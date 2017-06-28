@@ -13,7 +13,7 @@
 
         init();
 
-        function init(){
+        function init() {
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }

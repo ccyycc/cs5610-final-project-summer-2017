@@ -85,7 +85,7 @@
                 .then(function (data) {
                     if (data.length > 0) {
                         $location.url('/store/' + data[0]._id);
-                    }else if (currentUser.role === "MERCHANT") {
+                    } else if (currentUser.role === "MERCHANT") {
                         storeService
                             .findAllStoresForOwner(currentUser._id)
                             .then(function (data) {
@@ -96,7 +96,7 @@
                                     }
                                 }
                             );
-                    }else{
+                    } else {
                         model.feedback.navToStorePage = "store has not been create yet.";
                     }
                 })
