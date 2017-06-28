@@ -16,7 +16,12 @@
             }
 
             model.sectionTitle = "Nearby search";
-            model.address = {};
+            model.address = {
+                street:'',
+                city:'',
+                state:'',
+                zip:''
+            };
         }
 
         init();
@@ -44,6 +49,7 @@
                 + "+" +model.address.state
                 + "+" +model.address.zip;
             fullAddress = fullAddress.replace(/\s/g, '+');
+
             MapService.searchWithAddress(fullAddress)
                 .then(
                     function (res) {
