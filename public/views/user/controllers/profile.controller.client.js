@@ -31,14 +31,14 @@
                 model.ifLoggedIn = true;
             }
 
-            if(!$routeParams.uid || currentUser._id === $routeParams.uid){
-                model.isMyProfile=true;
+            if (!$routeParams.uid || currentUser._id === $routeParams.uid) {
+                model.isMyProfile = true;
                 model.profileId = $routeParams.uid || currentUser._id;
-            }else{
-                model.isMyProfile=false;
+            } else {
+                model.isMyProfile = false;
                 model.profileId = $routeParams.uid;
             }
-            model.feedback={};
+            model.feedback = {};
 
             countPhotoWidth();
 
@@ -79,28 +79,28 @@
         // }
 
         function navToStorePage() {
-            if (model.profileId) {
-                storeService
-                    .findAllStoresForOwner(model.profileId)
-                    .then(function (data) {
-                        if (data.length > 0){
-                            $location.url('/store/' + data[0]._id);
-                        }
-                    })
-            } else {
-                if (currentUser.role === "MERCHANT") {
-                    storeService
-                        .findAllStoresForOwner(currentUser._id)
-                        .then(function (data) {
-                                if (data.length === 0) {
-                                    $location.url('/store/undefined/new');
-                                } else {
-                                    $location.url('/store/' + data[0]._id);
+
+            storeService
+                .findAllStoresForOwner(model.profileId)
+                .then(function (data) {
+                    if (data.length > 0) {
+                        $location.url('/store/' + data[0]._id);
+                    }else if (currentUser.role === "MERCHANT") {
+                        storeService
+                            .findAllStoresForOwner(currentUser._id)
+                            .then(function (data) {
+                                    if (data.length === 0) {
+                                        $location.url('/store/undefined/new');
+                                    } else {
+                                        $location.url('/store/' + data[0]._id);
+                                    }
                                 }
-                            }
-                        );
-                }
-            }
+                            );
+                    }else{
+                        model.feedback.navToStorePage = "store has not been create yet.";
+                    }
+                })
+
         }
 
         function navToRecipeListPage() {
@@ -187,7 +187,7 @@
                 .sendMessage(model.profileId, [message])
                 .then(function (user) {
                     model.message = "";
-                   alert("message sended successfully");
+                    alert("message sended successfully");
                 })
         }
 
