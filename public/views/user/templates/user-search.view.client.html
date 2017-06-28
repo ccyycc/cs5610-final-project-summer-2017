@@ -18,7 +18,7 @@
     <h3 class="sub-header">Users</h3>
     <div ng-repeat="user in model.users"
          class="col-sm-6">
-        <a href="#!/profile/{{user._id}}">
+        <a ng-click="model.navToUserProfile(user)">
             <div class="card-view ">
                 <div class="hidden-xs col-sm-4 ">
                     <div class="">
