@@ -405,6 +405,10 @@ a#numOfLikeShowCreator.btn:visited {
     display: none;
 }
 
+#recipe-image-show {
+    max-width: 360px;
+}
+
 @media (min-width: 768px) {
     .navbar > .container-fluid .navbar-brand {
         margin-left: 0;
