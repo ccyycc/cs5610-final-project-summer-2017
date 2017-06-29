@@ -4,7 +4,8 @@
     <div class="row">
         <div id="photoBlock" class="col-xs-12 col-sm-4">
             <img id="photo" class="imageToCenter img-responsive img-circle"
-                 ng-src="{{model.user.photo}}"/>
+                 ng-src="{{model.user.photo}}"
+                 onerror="this.onerror=null; this.src='/resource/defaultPics/default_profile.png'"/>
 
             <a ng-if="model.isMyProfile"
                class="btn btn-info form-control"

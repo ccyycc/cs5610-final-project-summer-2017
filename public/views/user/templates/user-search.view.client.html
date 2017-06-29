@@ -22,7 +22,9 @@
             <div class="card-view ">
                 <div class="hidden-xs col-sm-4 ">
                     <div class="">
-                        <img ng-src="{{user.photo}}" class="img-thumbnail card-view-image"/><br>
+                        <img ng-src="{{user.photo}}"
+                             class="img-thumbnail card-view-image"
+                             onerror="this.onerror=null; this.src='/resource/defaultPics/default_profile.png'"/><br>
                     </div>
                 </div>
                 <div class="col-xs-8 ">

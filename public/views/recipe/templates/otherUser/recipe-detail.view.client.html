@@ -7,7 +7,8 @@
                 <h4>Recipe Provider:</h4>
                 <img id="smallProfileImage"
                      class="img-responsive"
-                     ng-src="{{model.recipeCreator.photo}}"/>
+                     ng-src="{{model.recipeCreator.photo}}"
+                     onerror="this.onerror=null; this.src='/resource/defaultPics/placeholder-image10.jpg'"/>
                 <label for="username">Username</label>
                 <p id="username">{{model.recipeCreator.username}}</p>
                 <label for="name">Name</label>

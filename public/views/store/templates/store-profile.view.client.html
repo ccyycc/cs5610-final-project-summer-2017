@@ -4,7 +4,10 @@
         <div class="col-sm-2 sidebar">
             <div class="nav nav-sidebar">
                 <h4>Owner Info</h4>
-                <img id="smallProfileImage" class="img-responsive" ng-src="{{model.seller.image}}"/>
+                <img id="smallProfileImage"
+                     class="img-responsive"
+                     ng-src="{{model.seller.image}}"
+                     onerror="this.onerror=null; this.src='/resource/defaultPics/default_profile.png'"/>
 
                 <label for="username">UserName</label>
                 <p id="username">{{model.seller.username}}</p>
