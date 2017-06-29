@@ -12,9 +12,10 @@
 
         model.sectionTitle = "Ingredient Detail";
         model.ingredientName = $routeParams.ingredientName;
-        model.waitForData = true;
 
         function init() {
+
+            model.waitForData = true;
 
             if (currentUser._id) {
                 model.ifLoggedIn = true;

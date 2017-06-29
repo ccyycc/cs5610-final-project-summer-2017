@@ -7,12 +7,14 @@
 
         var model = this;
 
-        model.sectionTitle = "BMI Calculator";
-        model.userId = currentUser.userId;
-
         model.updateUser = updateUser;
         model.countCalorie = countCalorie;
         model.logout = logout;
+
+        model.sectionTitle = "BMI Calculator";
+        model.userId = currentUser.userId;
+
+        init();
 
         function init() {
             if (currentUser._id) {
@@ -21,7 +23,6 @@
             renderUser(currentUser)
         }
 
-        init();
 
         function countCalorie(user) {
 

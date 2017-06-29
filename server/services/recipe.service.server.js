@@ -6,16 +6,18 @@ var upload = multer({dest: __dirname + '/../../public/uploads/recipe'});
 var recipeModel = require('../models/recipe/recipe.model.server');
 
 app.post('/api/user/:userId/recipe', createRecipe);
-app.get('/api/user/:userId/recipe', findAllRecipesForCreator);
-app.get('/api/recipe/:recipeId', findRecipeById);
 app.put('/api/recipe/:recipeId', updateRecipe);
 app.delete('/api/recipe/:recipeId', deleteRecipe);
-app.get('/api/recipe', findRecipeByCriteria);
-app.post('/api/recipe/upload', upload.single('myFile'), uploadImage);
-app.post('/api/yummly/recipeCopy', createYummlyLocalRecipeCopy);
-app.get('/api/yummly/recipeCopy/:recipeId', findYummlyRecipeCopyByYummlyId);
 
 app.get('/api/recipes', isAdmin, findAllRecipes);
+app.get('/api/user/:userId/recipe', findAllRecipesForCreator);
+app.get('/api/recipe/:recipeId', findRecipeById);
+app.get('/api/recipe', findRecipeByCriteria);
+app.get('/api/yummly/recipeCopy/:recipeId', findYummlyRecipeCopyByYummlyId);
+
+app.post('/api/recipe/upload', upload.single('myFile'), uploadImage);
+app.post('/api/yummly/recipeCopy', createYummlyLocalRecipeCopy);
+
 
 
 function findYummlyRecipeCopyByYummlyId(req, res) {

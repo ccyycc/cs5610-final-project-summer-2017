@@ -7,12 +7,14 @@
 
         var model = this;
 
-        model.sectionTitle = "Account";
-        model.userId = currentUser.userId;
-
         model.updateUser = updateUser;
         model.logout = logout;
         model.unregister = unregister;
+
+        model.sectionTitle = "Account";
+        model.userId = currentUser.userId;
+
+        init();
 
         function init() {
             if (currentUser._id) {
@@ -22,7 +24,6 @@
             renderUser(currentUser)
         }
 
-        init();
 
         function logout() {
             userService

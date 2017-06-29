@@ -8,12 +8,16 @@
 
         var model = this;
 
-        //event handler.
         model.createMerchandise = createMerchandise;
         model.updateMerchandise = updateMerchandise;
         model.deleteMerchandise = deleteMerchandise;
         model.cancelMerchandise = navToMerchandise;
         model.logout = logout;
+
+        model.storeId = $routeParams['storeId'];
+        model.merchandiseId = $routeParams['merchandiseId'];
+        model.mode = $routeParams['mode'];
+        model.sectionTitle = "Product " + model.mode;
 
         init();
 
@@ -26,12 +30,6 @@
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }
-
-            model.storeId = $routeParams['storeId'];
-            model.merchandiseId = $routeParams['merchandiseId'];
-            model.mode = $routeParams['mode'];
-
-            model.sectionTitle = "Product " + model.mode;
 
             model.merchandiseNameStyle = "";
 
@@ -49,8 +47,6 @@
             if (model.mode === "new") {
                 model.merchandise = {}
             } else {
-                console.log(currentUser._id);
-                console.log(model.merchandiseId);
 
                 storeService
                     .findStoreById(model.storeId)

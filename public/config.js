@@ -295,7 +295,6 @@
                 }
             })
             .catch(function (error) {
-                // console.log(error);
             });
         return deferred.promise;
     }

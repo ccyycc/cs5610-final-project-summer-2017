@@ -5,16 +5,15 @@ var recipeModel = mongoose.model('recipeModel', recipeSchema);
 
 
 recipeModel.createRecipe = createRecipe;
-recipeModel.findAllRecipesForCreator = findAllRecipesForCreator;
-recipeModel.findRecipeById = findRecipeById;
+recipeModel.createYummlyLocalRecipeCopy = createYummlyLocalRecipeCopy;
 recipeModel.updateRecipe = updateRecipe;
 recipeModel.deleteRecipe = deleteRecipe;
+
+recipeModel.findRecipeById = findRecipeById;
+recipeModel.findAllRecipesForCreator = findAllRecipesForCreator;
 recipeModel.findRecipeByCriteria = findRecipeByCriteria;
-recipeModel.createYummlyLocalRecipeCopy = createYummlyLocalRecipeCopy;
 recipeModel.findYummlyRecipeCopyByYummlyId = findYummlyRecipeCopyByYummlyId;
 recipeModel.findAllRecipes = findAllRecipes;
-// recipeModel.findRecipeByName = findRecipeByName;
-// recipeModel.findRecipeByIngredient = findRecipeByIngredient;
 
 module.exports = recipeModel;
 

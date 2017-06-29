@@ -61,15 +61,13 @@ app.get('/api/follow/:followingId', follow);
 app.get('/api/unfollow/:followingId', unfollow);
 
 app.get('/api/addLikedRecipe/:rId', addLikedRecipe);
-app.get('/api/deleteLikedRecipe/:rId', deleteLikedRecipe);
+app.delete('/api/deleteLikedRecipe/:rId', deleteLikedRecipe);
 
 app.put('/api/message/:userId', sendMessage);
 app.get('/api/user/populate/:arrName/:userId', populateArr);
 app.get('/api/renderInMessage', renderInMessage);
 app.get('/api/renderOutMessage', renderOutMessage);
 
-// app.get('/api/showFollowings/:userId', showFollowings);
-// app.get('/api/showFollowers/:userId', showFollowers);
 app.post('/api/account/bmiCal', bmiCal);
 
 

@@ -4,17 +4,14 @@ var upload = multer({dest: __dirname + '/../../public/uploads/store/profile'});
 
 var storeModel = require('../models/store/store.model.server');
 
-var passport = require('./user.service.server');
-
 app.post('/api/owner/:ownerId/store', createStore);
+app.put('/api/store/:storeId', updateStore);
+app.delete('/api/store/:storeId', deleteStore);
+
 app.get('/api/owner/:ownerId/store', findAllStoresForOwner);
 app.get('/api/store/:storeId', findStoreById);
-// app.get('/api/store/:storeId', passport.isMerchant,findStoreById);
-app.put('/api/store/:storeId', updateStore);
 app.get('/api/store', findStoreByName);
-app.delete('/api/store/:storeId', deleteStore);
 app.get('/api/store/search/:storeName',findStoreByNameParams);
-
 app.get('/api/stores', isAdmin, findAllStores);
 
 app.post('/api/upload/store/picture', upload.single('myFile'), uploadImage);

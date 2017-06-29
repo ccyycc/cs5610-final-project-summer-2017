@@ -99,11 +99,17 @@
         }
 
         function deleteLikedRecipe(rId) {
-            getHelper('/api/deleteLikedRecipe/' + rId);
+            deleteHelper('/api/deleteLikedRecipe/' + rId);
         }
 
         function getHelper(url) {
             return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+        function deleteHelper(url) {
+            return $http.delete(url)
                 .then(function (response) {
                     return response.data;
                 })

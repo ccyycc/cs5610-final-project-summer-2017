@@ -8,9 +8,11 @@
         var model = this;
         //event handler
 
-        model. searchProduct=searchProduct ;
+        model.searchProduct = searchProduct;
         model.logout = logout;
         model.navToProductDetail = navToProductDetail;
+
+        model.sectionTitle = "Product Search";
 
         init();
 
@@ -20,10 +22,8 @@
                 model.ifLoggedIn = true;
             }
 
-            model.sectionTitle = "Product Search";
-
             var preSearch = $location.search();
-            if(preSearch.search &&preSearch.search.length>0){
+            if (preSearch.search && preSearch.search.length > 0) {
                 model.searchContent = preSearch.search;
                 searchProduct();
             }
@@ -38,10 +38,10 @@
                 });
         }
 
-        function searchProduct(){
+        function searchProduct() {
             merchandiseService
                 .findMerchandiseByName(model.searchContent)
-                .then(function(products){
+                .then(function (products) {
                     model.products = products
                 })
 

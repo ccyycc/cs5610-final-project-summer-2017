@@ -7,13 +7,13 @@
 
         var model = this;
 
-        model.sectionTitle = "Register";
-
         model.register = register;
         model.showDiscription = showDescription;
 
+        model.sectionTitle = "Register";
 
         init();
+
         function init() {
             if (currentUser._id) {
                 $location.url('/');
@@ -21,8 +21,6 @@
         }
 
         function register(username, password, password2, role) {
-            // console.log(currentUser);
-
 
             if (username === null || username === '' || typeof username === 'undefined') {
                 model.error = 'username is required';
@@ -55,7 +53,6 @@
 
                     }
                 )
-
         }
 
         function showDescription() {

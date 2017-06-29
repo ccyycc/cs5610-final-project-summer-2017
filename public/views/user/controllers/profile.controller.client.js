@@ -6,7 +6,6 @@
     function profileController($routeParams, userService, $location, currentUser, storeService) {
 
         var model = this;
-        model.sectionTitle = "Profile";
 
         model.logout = logout;
         model.render = render;
@@ -18,19 +17,18 @@
         model.showLikedRecipes = showLikedRecipes;
         model.showCollectedProducts = showCollectedProducts;
         model.showLikedStores = showLikedStores;
-        // model.countPhotoWidth = countPhotoWidth;
         model.navToStorePage = navToStorePage;
-
         model.navToRecipeListPage = navToRecipeListPage;
-        // model.showRecipes = showRecipes;
-        // model.showProducts = showProducts;
+
+        model.sectionTitle = "Profile";
 
         function init() {
+            model.feedback = {};
+            model.recipeOrProduct = 'RECIPE';
 
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }
-
             if (!$routeParams.uid || currentUser._id === $routeParams.uid) {
                 model.isMyProfile = true;
                 model.profileId = $routeParams.uid || currentUser._id;
@@ -38,45 +36,13 @@
                 model.isMyProfile = false;
                 model.profileId = $routeParams.uid;
             }
-            model.feedback = {};
 
             countPhotoWidth();
-
             render(model.profileId);
-
-            model.recipeOrProduct = 'RECIPE';
             showLikedRecipes();
         }
 
         init();
-
-        // function checkCurrentProfileRole() {
-        //     if (model.profileId) {
-        //         userService
-        //             .findUserById(model.profileId)
-        //             .then(function (user) {
-        //                 identifyRole(user);
-        //             });
-        //     } else {
-        //         identifyRole(currentUser);
-        //     }
-        // }
-        //
-        // function identifyRole(user) {
-        //     switch (user.role) {
-        //         case 'RECIPEPRO':
-        //             model.isRecipeProvider = true;
-        //             break;
-        //         case 'MERCHANT':
-        //             model.isMerchant = true;
-        //             break;
-        //         case 'ADMIN':
-        //             model.isAdmin = true;
-        //             break;
-        //         default:
-        //             model.generalUser = true;
-        //     }
-        // }
 
         function navToStorePage() {
 
@@ -131,11 +97,6 @@
                 .then(function (likedRecipes) {
                     model.likedRecipes = likedRecipes;
                     model.recipeOrProduct = 'RECIPE';
-
-                    // console.log(model.likedRecipes)
-                    // TODO:conflict style
-                    // model.recipeActive = 'active';
-                    // model.productActive = '';
                 });
 
 
@@ -147,10 +108,6 @@
                 .then(function (products) {
                     model.collectedProducts = products;
                     model.recipeOrProduct = 'PRODUCT';
-
-                    // TODO:conflict style
-                    // model.recipeActive = '';
-                    // model.productActive = 'active';
                 });
         }
 
@@ -160,9 +117,6 @@
                 .then(function (stores) {
                     model.likedStores = stores;
                     model.recipeOrProduct = 'STORE';
-                    // model.recipeActive = '';
-                    // model.productActive = 'active';
-                    // model.recipeOrProduct = 'PRODUCT';
                 });
         }
 
@@ -196,7 +150,6 @@
                 .populateArr(model.profileId, 'followings')
                 .then(function (followings) {
                     model.follows = followings;
-                    // $location.url = "#followDetail";
 
                     if (model.followType === 'followers') {
                         $("#followDetail").collapse('show');
@@ -212,7 +165,6 @@
                 .populateArr(model.profileId, 'followers')
                 .then(function (followers) {
                     model.follows = followers;
-                    // $location.url = "#followDetail";
                     if (model.followType === 'followings') {
                         $("#followDetail").collapse('show');
                     } else {
@@ -233,7 +185,6 @@
 
 
         function countPhotoWidth() {
-            // console.log(screen.width);
             if (screen.width > 500) {
                 model.profilePhotoWidth = '40%';
             } else {

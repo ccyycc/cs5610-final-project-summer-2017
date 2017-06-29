@@ -2,23 +2,19 @@ var mongoose = require('mongoose');
 var storeSchema = require('./store.schema.server');
 var storeModel = mongoose.model('storeModel', storeSchema);
 
-
 storeModel.createStore = createStore;
-storeModel.findAllStoresForOwner = findAllStoresForOwner;
-storeModel.findStoreById = findStoreById;
 storeModel.updateStore = updateStore;
 storeModel.deleteStore = deleteStore;
 
+storeModel.findAllStoresForOwner = findAllStoresForOwner;
+storeModel.findStoreById = findStoreById;
 storeModel.findAllStores = findAllStores;
-
 storeModel.findStoreByNameParams = findStoreByNameParams;
+storeModel.findStoreByName = findStoreByName;
 
 storeModel.uploadImage = uploadImage;
 
-storeModel.findStoreByName = findStoreByName;
-
 module.exports = storeModel;
-
 
 function findStoreByNameParams(storeName) {
     return storeModel
@@ -48,7 +44,7 @@ function findStoreByName(name) {
 function findAllStoresForOwner(owner) {
     return storeModel
         .find({_owner: owner})
-        .then(function(data){
+        .then(function (data) {
             var tmp = data;
             return data;
         })
@@ -75,7 +71,7 @@ function updateStore(storeId, store) {
 }
 
 function deleteStore(storeId) {
-    return storeModel.remove({_id:storeId}).exec();
+    return storeModel.remove({_id: storeId}).exec();
 }
 
 

@@ -3,19 +3,22 @@
         .module('FinalProject')
         .controller('storeProfileEditController', storeProfileEditController);
 
-    function storeProfileEditController($routeParams, $location, storeService, $sce, currentUser,userService) {
+    function storeProfileEditController($routeParams, $location, storeService, $sce, currentUser, userService) {
         var model = this;
+
         model.updateStore = updateStore;
         model.createStore = createStore;
         model.logout = logout;
 
+        model.storeId = $routeParams['storeId'];
+        model.mode = $routeParams['mode'];
+        model.user = currentUser;
+
         init();
 
         function init() {
-            model.storeId = $routeParams['storeId'];
-            model.mode = $routeParams['mode'];
-            model.user = currentUser;
             model.store = {};
+
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }
@@ -45,8 +48,8 @@
                     .findStoreById(model.storeId)
                     .then(function (store) {
                         model.store = store;
-                        model.canEdit = (currentUser.role === "ADMIN" ||  model.store._owner === currentUser._id);
-                        if(!model.canEdit){
+                        model.canEdit = (currentUser.role === "ADMIN" || model.store._owner === currentUser._id);
+                        if (!model.canEdit) {
                             $location.url('/');
                         }
                         populateDateObject(model.store);

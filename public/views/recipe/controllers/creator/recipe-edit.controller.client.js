@@ -18,9 +18,10 @@
         model.logout = logout;
 
         model.recipeId = $routeParams.recipeId;
-        model.newIngredient = {};
 
         function init() {
+
+            model.newIngredient = {};
 
             if (currentUser._id) {
                 model.ifLoggedIn = true;
@@ -33,8 +34,6 @@
                 .then(function (recipe) {
                     model.recipe = recipe;
                     if (!canEdit()) {
-                        // console.log(currentUser._id)
-                        // console.log(model.recipe._creator)
                         $location.url('/');
                     }
                 });

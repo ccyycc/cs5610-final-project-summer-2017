@@ -4,15 +4,16 @@ var merchandiseModel = mongoose.model('merchandiseModel', merchandiseSchema);
 
 
 merchandiseModel.createMerchandise = createMerchandise;
-merchandiseModel.findAllMerchandisesForStore = findAllMerchandisesForStore;
-merchandiseModel.findMerchandiseById = findMerchandiseById;
-merchandiseModel.findAllMerchandises = findAllMerchandises;
-merchandiseModel.findMerchandiseByName =findMerchandiseByName;
 merchandiseModel.updateMerchandise = updateMerchandise;
 merchandiseModel.deleteMerchandise = deleteMerchandise;
 
+merchandiseModel.findAllMerchandisesForStore = findAllMerchandisesForStore;
+merchandiseModel.findMerchandiseById = findMerchandiseById;
+merchandiseModel.findAllMerchandises = findAllMerchandises;
+merchandiseModel.findMerchandiseByName = findMerchandiseByName;
 
 merchandiseModel.uploadImage = uploadImage;
+
 
 module.exports = merchandiseModel;
 
@@ -38,7 +39,6 @@ function createMerchandise(store, merchandise) {
             return merchandise;
         })
 }
-
 
 
 function findAllMerchandisesForStore(store) {
@@ -68,7 +68,7 @@ function updateMerchandise(merchandiseId, merchandise) {
 }
 
 function deleteMerchandise(merchandiseId) {
-    return merchandiseModel.remove({_id:merchandiseId}).exec();
+    return merchandiseModel.remove({_id: merchandiseId}).exec();
 }
 
 

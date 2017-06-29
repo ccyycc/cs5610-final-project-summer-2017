@@ -2,15 +2,13 @@ var mongoose = require('mongoose');
 var commentSchema = require('./comment.schema.server');
 var commentModel = mongoose.model('commentModel', commentSchema);
 
+commentModel.createMessage = createMessage;
 commentModel.createComment = createComment;
 commentModel.deleteComment = deleteComment;
 commentModel.findCommentById = findCommentById;
 commentModel.findAllComments = findAllComments;
 
-commentModel.createMessage = createMessage;
-
 module.exports = commentModel;
-
 
 
 function deleteComment(commentId) {

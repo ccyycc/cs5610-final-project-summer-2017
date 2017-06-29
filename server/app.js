@@ -11,12 +11,9 @@ if(process.env.MLAB_USERNAME) {
 
 mongoose.connect(connectionString);
 
-
 require('./services/user.service.server');
 require('./services/recipe.service.server');
-
 require('./services/association.service.server');
-
 require('./services/map.service.server');
 require('./services/merchandise.service.server');
 require('./services/store.service.server');

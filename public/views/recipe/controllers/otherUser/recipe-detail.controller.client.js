@@ -22,11 +22,13 @@
         model.sectionTitle = "Recipe Detail";
         model.recipeId = $routeParams.recipeId;
 
-        model.showYummlyInstruction = false;
-        model.reviews = [];
-        model.numberOfLikes = 0;
+        init();
 
         function init() {
+
+            model.showYummlyInstruction = false;
+            model.reviews = [];
+            model.numberOfLikes = 0;
 
             if (currentUser._id) {
                 model.ifLoggedIn = true;
@@ -67,7 +69,6 @@
             }
         }
 
-        init();
 
         function checkValidationOnNetwork() {
             if (currentUser.role === 'USER' || currentUser.role === 'ADMIN') {

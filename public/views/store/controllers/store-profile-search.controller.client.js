@@ -10,12 +10,12 @@
         model.goToDetail = goToDetail;
         model.logout = logout;
         model.navToStoreProfile = navToStoreProfile;
-        // userId = currentUser._id;
+
+        model.sectionTitle = "Store Search Result";
 
         init();
 
         function init() {
-            model.sectionTitle = "Store Search Result";
 
             if (currentUser._id) {
                 model.ifLoggedIn = true;
@@ -41,7 +41,7 @@
             storeService
                 .findStoreByNameParams(model.searchText)
                 .then(function (data) {
-                    model.results=data;
+                    model.results = data;
                 })
         }
 

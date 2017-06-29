@@ -13,9 +13,12 @@
         model.logout = logout;
 
         model.sectionTitle = 'Recipe Search Result';
-        model.currentYummlyPage = 0;
+
+        init();
 
         function init() {
+
+            model.currentYummlyPage = 0;
 
             if (currentUser._id) {
                 model.ifLoggedIn = true;
@@ -28,7 +31,6 @@
             }
         }
 
-        init();
 
         function logout() {
             userService

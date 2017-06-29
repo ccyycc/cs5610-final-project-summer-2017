@@ -7,20 +7,19 @@
 
         var model = this;
 
-        model.sectionTitle = "Login";
         model.login = login;
 
-        init();
-        function init() {
+        model.sectionTitle = "Login";
 
+        init();
+
+        function init() {
             if (currentUser._id) {
-                // console.log(currentUser._id)
                 $location.url('/');
             }
         }
 
         function login(username, password) {
-            // var found = userService.findUserByCredentials(username, password);
             userService
                 .login(username, password)
                 .then(function (found) {
@@ -28,8 +27,8 @@
 
                 }, function (error) {
                     model.message = "login " + username + " unsuccessfully," +
-                        " please check the username and password and try" +
-                        " again";
+                                    " please check the username and password and try" +
+                                    " again";
                 })
         }
     }

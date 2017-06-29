@@ -15,6 +15,9 @@
         model.unlikeMerchandise = unlikeMerchandise;
         model.logout = logout;
 
+        model.sectionTitle = "Product Detail";
+        model.storeId = $routeParams['storeId'];
+        model.merchandiseId = $routeParams['merchandiseId'];
 
         init();
 
@@ -23,10 +26,6 @@
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }
-
-            model.sectionTitle = "Product Detail";
-            model.storeId = $routeParams['storeId'];
-            model.merchandiseId = $routeParams['merchandiseId'];
 
             model.comments = [];
             model.newComment = undefined;
@@ -38,48 +37,45 @@
             };
 
 
-
-
-
             model.merchandise = merchandiseService.findMerchandiseById(model.merchandiseId)
                 .then(
-                    function(merchandise){
-                        model.merchandise=merchandise;
+                    function (merchandise) {
+                        model.merchandise = merchandise;
 
                         storeService
                             .findStoreById(model.storeId)
-                            .then(function(store){
-                             model.store = store;
+                            .then(function (store) {
+                                model.store = store;
                                 setPermission(store);
-                        });
+                            });
 
 
                         associationService
-                            .findAssociationForTarget( "COMMENT","merchandise", model.merchandiseId)
+                            .findAssociationForTarget("COMMENT", "merchandise", model.merchandiseId)
                             .then(function (comments) {
 
                                 model.comments = comments;
                             });
                         associationService
-                            .findAssociationForSourceTarget( "LIKE",currentUser._id, "merchandise",model.merchandiseId)
+                            .findAssociationForSourceTarget("LIKE", currentUser._id, "merchandise", model.merchandiseId)
                             .then(function (likes) {
                                 if (likes.length === 0) {
                                     model.like = false;
                                 } else {
                                     model.like = true;
-                                    model.likeAssociation=likes[0];
+                                    model.likeAssociation = likes[0];
                                 }
                             })
 
                         associationService
-                            .findAssociationForTarget("LIKE","merchandise", model.merchandiseId)
+                            .findAssociationForTarget("LIKE", "merchandise", model.merchandiseId)
                             .then(function (likes) {
                                 model.numLike = likes.length
                             })
                     },
-                    function(){
+                    function () {
                         alert("cannot find merchandise for users");
-                        $location.url('/store/'+model.storeId);
+                        $location.url('/store/' + model.storeId);
                     }
                 );
         }
@@ -94,7 +90,7 @@
 
 
         function editMerchandise() {
-            $location.url("/store/"+model.storeId+"/merchandise/"+model.merchandiseId+"/edit");
+            $location.url("/store/" + model.storeId + "/merchandise/" + model.merchandiseId + "/edit");
         }
 
         function createComment() {
@@ -125,7 +121,7 @@
                 .createAssociation(model.likeAssociation)
                 .then(function (association) {
                     model.likeAssociation = association;
-                    model.like=true;
+                    model.like = true;
                     model.numLike++
                 })
                 .then(function () {
@@ -140,7 +136,7 @@
             associationService
                 .deleteAssociationById(model.likeAssociation._id)
                 .then(function (res) {
-                    model.like=false;
+                    model.like = false;
                     model.numLike--;
                     delete model.likeAssociation['_id'];
                 })
@@ -153,7 +149,7 @@
         }
 
         function setPermission(store) {
-            model.canEdit = (currentUser.role === "ADMIN" ||  store._owner === currentUser._id);
+            model.canEdit = (currentUser.role === "ADMIN" || store._owner === currentUser._id);
 
             if (currentUser.role === 'USER' || currentUser.role === 'ADMIN') {
                 model.canComment = true;

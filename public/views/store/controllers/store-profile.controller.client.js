@@ -18,11 +18,12 @@
 
         model.logout = logout;
 
+        model.storeId = $routeParams['storeId'];
+        model.days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        model.sectionTitle = "Store Profile";
+
+
         function init() {
-
-            //setup
-            model.storeId = $routeParams['storeId'];
-
 
             if (currentUser._id) {
                 model.ifLoggedIn = true;
@@ -31,15 +32,13 @@
             model.comments = [];
             model.newComment = undefined;
             model.like = false;
+
             model.likeAssociation = {
                 fromWhom: currentUser._id,
                 toStore: model.storeId,
                 type: 'LIKE'
             };
 
-            model.sectionTitle = "Store Profile";
-
-            model.days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
             model.store = {};
 
@@ -53,11 +52,11 @@
                                                    + "/maps/embed/v1/place?"
                                                    + "key=AIzaSyA0oVg3fT3ZdLkEExxVyC0jkciGfmaYBcI&q="
                                                    + getStoreURLAddress(model.store));
-                    model.displayAddress= getDisplayAddress(model.store);
+                    model.displayAddress = getDisplayAddress(model.store);
 
                     userService
                         .findUserById(model.store._owner)
-                        .then(function(owner){
+                        .then(function (owner) {
                             model.seller = owner;
                         });
 
@@ -79,7 +78,7 @@
                         })
 
                     associationService
-                        .findAssociationForTarget("LIKE","store", model.storeId)
+                        .findAssociationForTarget("LIKE", "store", model.storeId)
                         .then(function (likes) {
                             model.numLike = likes.length
                         })
@@ -125,7 +124,7 @@
                 .createAssociation(model.newComment)
                 .then(function (comment) {
                     comment.fromWhom = {};
-                    comment.fromWhom.username=currentUser.username;
+                    comment.fromWhom.username = currentUser.username;
                     model.comments.push(comment);
                     model.newComment = undefined;
                 });
@@ -178,7 +177,7 @@
             $location.url('/store/' + model.storeId + '/merchandise');
         }
 
-        function getDisplayAddress(store){
+        function getDisplayAddress(store) {
             var address = store.address;
             if (address) {
                 return address.street + " "
@@ -190,7 +189,7 @@
         }
 
         function goToProfilePage() {
-            $location.url('/profile/'+model.seller._id);
+            $location.url('/profile/' + model.seller._id);
 
         }
 

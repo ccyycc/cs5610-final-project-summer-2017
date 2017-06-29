@@ -4,23 +4,26 @@
         .controller('StoreSearchNearByController', StoreSearchNearByController);
 
     function StoreSearchNearByController($routeParams, $location, MapService, $window,
-                                   currentUser,userService) {
+                                         currentUser, userService) {
         var model = this;
-        this.searchWithCoords = searchWithCoords;
-        this.searchWithAddress = searchWithAddress;
+        model.searchWithCoords = searchWithCoords;
+        model.searchWithAddress = searchWithAddress;
+        model.logout = logout;
+
+        model.sectionTitle = "Nearby search";
 
 
         function init() {
+
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }
 
-            model.sectionTitle = "Nearby search";
             model.address = {
-                street:'',
-                city:'',
-                state:'',
-                zip:''
+                street: '',
+                city: '',
+                state: '',
+                zip: ''
             };
         }
 
@@ -45,9 +48,9 @@
 
         function searchWithAddress() {
             var fullAddress = model.address.street
-                + "+" +model.address.city
-                + "+" +model.address.state
-                + "+" +model.address.zip;
+                              + "+" + model.address.city
+                              + "+" + model.address.state
+                              + "+" + model.address.zip;
             fullAddress = fullAddress.replace(/\s/g, '+');
 
             MapService.searchWithAddress(fullAddress)

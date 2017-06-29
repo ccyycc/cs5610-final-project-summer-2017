@@ -2,20 +2,9 @@ var mongoose = require('mongoose');
 var associationSchema = require('./association.schema.server');
 var associationModel = mongoose.model('associationModel', associationSchema);
 
-associationModel.findAllRecipeReview = findAllRecipeReview;
-associationModel.deleteRecipeLike = deleteRecipeLike;
-associationModel.findLikeForRecipe = findLikeForRecipe;
-associationModel.deleteComment = deleteComment;
-associationModel.findCommentById = findCommentById;
-associationModel.findAllComments = findAllComments;
-associationModel.renderMessage = renderMessage;
-
-associationModel.createMessage = createMessage;
-
-
 associationModel.createAssociation = createAssociation;
-
 associationModel.updateAssociation = updateAssociation;
+associationModel.deleteAssociationById = deleteAssociationById;
 
 associationModel.findAssociationById = findAssociationById;
 associationModel.findAllAssociationByType = findAllAssociationByType;
@@ -23,9 +12,14 @@ associationModel.findAssociationForSource = findAssociationForSource;
 associationModel.findAssociationForTarget = findAssociationForTarget;
 associationModel.findAssociationForSourceTarget = findAssociationForSourceTarget;
 
-associationModel.deleteAssociationById = deleteAssociationById;
-
+associationModel.findAllRecipeReview = findAllRecipeReview;
+associationModel.deleteRecipeLike = deleteRecipeLike;
+associationModel.findLikeForRecipe = findLikeForRecipe;
+associationModel.findCommentById = findCommentById;
+associationModel.deleteComment = deleteComment;
 associationModel.findAllComments = findAllComments;
+associationModel.renderMessage = renderMessage;
+associationModel.createMessage = createMessage;
 
 
 module.exports = associationModel;

@@ -6,12 +6,11 @@
     function userSearchController($location, $routeParams, userService, currentUser) {
         var model = this;
 
-        model.sectionTitle = "User Search";
-
         model.logout = logout;
         model.searchUser = searchUser;
         model.navToUserProfile = navToUserProfile;
 
+        model.sectionTitle = "User Search";
 
         init();
 
@@ -26,7 +25,6 @@
                 model.searchContent = preSearch.search;
                 searchUser();
             }
-
         }
 
         function searchUser() {

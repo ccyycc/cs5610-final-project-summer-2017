@@ -4,8 +4,8 @@ var userModel = mongoose.model('userModel', userSchema);
 
 userModel.createUser = createUser;
 userModel.deleteUser = deleteUser;
-
 userModel.updateUser = updateUser;
+
 userModel.findUserById = findUserById;
 userModel.findUserByUsername = findUserByUsername;
 userModel.findUserByCredentials = findUserByCredentials;
@@ -13,7 +13,6 @@ userModel.findAllUsers = findAllUsers;
 userModel.findUserByPartialUsername = findUserByPartialUsername;
 userModel.findUserByGoogleId = findUserByGoogleId;
 userModel.findUserByFacebookId = findUserByFacebookId;
-userModel.uploadImage = uploadImage;
 
 userModel.addFollower = addFollower;
 userModel.deleteFollower = deleteFollower;
@@ -33,6 +32,8 @@ userModel.unfollow = unfollow;
 userModel.addMessage = addMessage;
 userModel.deleteMessage = deleteMessage;
 userModel.sendMessage = sendMessage;
+
+userModel.uploadImage = uploadImage;
 
 userModel.populateArr = populateArr;
 userModel.addbmr = addbmr;
