@@ -268,7 +268,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4 text-center recipeListImages"
                      ng-repeat="product in model.localProducts">
-                    <a href=" ">
+                    <a href="#!/store/{{product._store}}/merchandise/{{product._id}}">
                         <img class="recipeListImage"
                              ng-src="{{product.image}}"
                              onerror="this.onerror=null; this.src='/resource/defaultPics/placeholder-image10.jpg'"/>
