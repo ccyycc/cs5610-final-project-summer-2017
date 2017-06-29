@@ -62,9 +62,14 @@
         }
 
         function goToDetail(recipe, recipeId) {
-            recipeService
-                .tempYummlyIngredients(recipe.ingredients);
-            $location.url("/recipe_list/" + recipeId + "#" + recipe.source);
+            if (model.ifLoggedIn) {
+                recipeService
+                    .tempYummlyIngredients(recipe.ingredients);
+                $location.url("/recipe_list/" + recipeId + "#" + recipe.source);
+            } else {
+                alert('Please log in first.');
+                $location.url("/login");
+            }
         }
     }
 })();

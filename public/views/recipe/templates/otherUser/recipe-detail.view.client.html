@@ -86,9 +86,9 @@
                 <p>{{model.recipe.instruction}}</p>
             </div>
             <div ng-if="!model.ifLocal">
-                <a href="{{model.recipe.source.sourceRecipeUrl}}"
-                   target="embedded-content"
-                   ng-click="model.showYummlyInstruction = true">
+                <a target="embedded-content"
+                   ng-click="model.changeToHTTPS(model.recipe.source.sourceRecipeUrl)"
+                   href="{{model.httpsUrl}}">
                     Open instruction below
                 </a>
                 <div class="video-container"

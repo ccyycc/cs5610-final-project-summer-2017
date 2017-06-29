@@ -10,6 +10,7 @@
 
         model. searchProduct=searchProduct ;
         model.logout = logout;
+        model.navToProductDetail = navToProductDetail;
 
         init();
 
@@ -46,10 +47,13 @@
 
         }
 
-
-
-        function createMerchandise() {
-            $location.url("/store/"+model.storeId+"/merchandise/undefined/new");
+        function navToProductDetail(product) {
+            if (model.ifLoggedIn) {
+                $location.url("/store/" + product._store._id + "/merchandise/" + product._id);
+            } else {
+                alert('Please log in first.');
+                $location.url("/login");
+            }
         }
 
     }

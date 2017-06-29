@@ -9,11 +9,10 @@
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
             </div>
-
-            <img class="recipeListImage"
-                 ng-src="{{recipe.image}}"
-                 onerror="this.onerror=null; this.src='/resource/defaultPics/placeholder-image10.jpg'"/>
             <a href="#!/recipe_list/{{recipe._id}}#LOCAL">
+                <img class="recipeListImage"
+                     ng-src="{{recipe.image}}"
+                     onerror="this.onerror=null; this.src='/resource/defaultPics/placeholder-image10.jpg'"/>
                 <p class="text-on-image">{{recipe.name}}</p>
             </a>
         </div>

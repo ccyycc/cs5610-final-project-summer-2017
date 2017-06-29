@@ -10,6 +10,7 @@
 
         model.logout = logout;
         model.searchUser = searchUser;
+        model.navToUserProfile = navToUserProfile;
 
 
         init();
@@ -45,6 +46,14 @@
                 });
         }
 
+        function navToUserProfile(user) {
+            if (model.ifLoggedIn) {
+                $location.url("/profile/" + user._id);
+            } else {
+                alert('Please log in first.');
+                $location.url("/login");
+            }
+        }
 
     }
 })();

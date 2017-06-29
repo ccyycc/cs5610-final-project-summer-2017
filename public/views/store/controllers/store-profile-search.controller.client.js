@@ -9,6 +9,7 @@
         model.searchStores = searchStores;
         model.goToDetail = goToDetail;
         model.logout = logout;
+        model.navToStoreProfile = navToStoreProfile;
         // userId = currentUser._id;
 
         init();
@@ -48,6 +49,15 @@
             storeService
                 .tempYummlyRecipe(store.ingredients, storeId);
             $location.url("/store/" + storeId);
+        }
+
+        function navToStoreProfile(store) {
+            if (model.ifLoggedIn) {
+                $location.url("/store/" + store._id);
+            } else {
+                alert('Please log in first.');
+                $location.url("/login");
+            }
         }
     }
 })();

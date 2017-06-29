@@ -4,7 +4,7 @@
         .controller("ingredientDetailController", IngredientDetailController);
 
     function IngredientDetailController($routeParams, edamamService, merchandiseService,
-                                        currentUser, userService) {
+                                        currentUser, userService, $timeout) {
 
         var model = this;
 
@@ -12,6 +12,7 @@
 
         model.sectionTitle = "Ingredient Detail";
         model.ingredientName = $routeParams.ingredientName;
+        model.waitForData = true;
 
         function init() {
 
@@ -30,7 +31,9 @@
                 .findMerchandiseByName(model.ingredientName)
                 .then(function (products) {
                     model.localProducts = products;
-                })
+                });
+
+            timeOut(1500);
         }
 
         init();
@@ -41,6 +44,13 @@
                 .then(function () {
                     $location.url('/');
                 });
+        }
+
+        function timeOut(t) {
+            $timeout(
+                function () {
+                    model.waitForData = false;
+                }, t)
         }
     }
 })();

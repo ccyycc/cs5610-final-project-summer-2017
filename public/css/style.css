@@ -128,6 +128,7 @@ li.list-group-item > div.row > div {
 
 a:focus, a:hover, a:visited {
     text-decoration: none;
+    cursor: pointer;
 }
 
 .navbar .hover-focus-disable:hover,

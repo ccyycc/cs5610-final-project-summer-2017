@@ -20,7 +20,7 @@
     </label>
     <div ng-repeat="store in model.results"
          class="col-sm-6">
-        <a href="#!/store/{{store._id}}">
+        <a ng-click="model.navToStoreProfile(store)">
         <div class="card-view ">
             <div class="hidden-xs col-sm-3">
                 <div>

@@ -14,12 +14,11 @@
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
             </div>
-
-            <img class="recipeListImage"
-                 ng-src="{{merchandise.image}}"
-                 onerror="this.onerror=null; this.src='/resource/defaultPics/placeholder-image10.jpg'"/>
-            <!--TODO: merchandise detail page, tempo url here-->
             <a href="#!/store/{{model.storeId}}/merchandise/{{merchandise._id}}">
+                <img class="recipeListImage"
+                     ng-src="{{merchandise.image}}"
+                     onerror="this.onerror=null; this.src='/resource/defaultPics/placeholder-image10.jpg'"/>
+                <!--TODO: merchandise detail page, tempo url here-->
                 <p class="text-on-image">{{merchandise.name}}</p>
             </a>
         </div>
