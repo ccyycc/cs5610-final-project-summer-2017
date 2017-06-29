@@ -6,10 +6,10 @@
         Searching...
     </div>
     <div ng-if="!model.waitForData">
+        <div ng-show="!model.ingredient.ingredients[0].parsed[0].foodMatch">
+            Sorry, the food is not found in the database.
+        </div>
         <div class="row">
-            <div ng-show="!model.ingredient.ingredients[0].parsed[0].foodMatch">
-                Sorry, the food is not found in the database.
-            </div>
             <div ng-show="model.ingredient.ingredients[0].parsed[0].foodMatch"
                  class="col-sm-6">
                 <h3 class="sub-header">Name</h3>
