@@ -127,23 +127,37 @@
 
         function combineIngredientAndDescription() {
             var ingredients = recipeService.getTempYummlyIngredients();
+            var ingredientLines = model.recipe.ingredientLines;
             model.recipe.ingredients = [];
-            for (var i in model.recipe.ingredientLines) {
-                for (var j in ingredients) {
-                    if (model.recipe.ingredientLines[i].includes(ingredients[j])) {
+            console.log(ingredients)
+            if (ingredients.length === ingredientLines.length) {
+                for (var i in ingredientLines) {
+                    model.recipe.ingredients.push({
+                        name: ingredients[i],
+                        description: ingredientLines[i]
+                    });
+                }
+            } else {
+                for (var i in ingredientLines) {
+                    for (var j in ingredients) {
+                        if (ingredientLines[i].toLowerCase().includes(ingredients[j].toLowerCase())) {
+                            model.recipe.ingredients.push({
+                                name: ingredients[j],
+                                description: ingredientLines[i]
+                            });
+                            ingredientLines[i] = 'found';
+                            ingredients[j] = 'found';
+                            break;
+                        }
+                    }
+                    if (ingredientLines[i] !== 'found') {
                         model.recipe.ingredients.push({
-                            name: ingredients[j],
-                            description: model.recipe.ingredientLines[i]
+                            name: '(not found)',
+                            description: ingredientLines[i]
                         });
                     }
                 }
             }
-            // for (var i in model.recipe.ingredientLines) {
-            //     model.recipe.ingredients.push({
-            //         name: ingredients[i],
-            //         description: model.recipe.ingredientLines[i]
-            //     });
-            // }
         }
 
         function createYummlyRecipeCopy() {

@@ -152,7 +152,11 @@ a:focus, a:hover, a:visited {
     padding-bottom: 56.25%;
     padding-top: 30px;
     height: 0;
-    overflow: hidden;
+    /*overflow: hidden;*/
+    /*for mobile user*/
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+    /*for mobile user*/
 }
 
 .video-container iframe, .video-container object, .video-container embed {
