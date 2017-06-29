@@ -3,7 +3,7 @@
         .module('FinalProject')
         .controller('adminController', adminController);
 
-    function adminController($location, currentUser) {
+    function adminController($location, currentUser,userService) {
         var model = this;
 
         //variable & route params
