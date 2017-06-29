@@ -240,11 +240,14 @@
 
         function changeToHTTPS(url) {
             model.showYummlyInstruction = true;
-            model.httpsUrl = url.replace('http', 'https');
+            model.httpsUrl = url;
+            if (!url.includes('https')) {
+                model.httpsUrl = url.replace('http', 'https');
+            }
             // model.recipe.source.sourceRecipeUrl.replace('https', 'https');
             // console.log( model.recipe.source.sourceRecipeUrl);
 
-            console.log(model.httpsUrl)
+            // console.log(model.httpsUrl)
 
         }
     }
