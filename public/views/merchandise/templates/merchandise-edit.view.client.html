@@ -18,7 +18,7 @@
                             <a ng-if="merchandise._id !== model.merchandiseId"
                                href="#!/store/{{merchandise._store}}/merchandise/{{merchandise._id}}/edit">
                                 <span class="glyphicon glyphicon-cog pull-right"></span>
-                            </a >
+                            </a>
                         </div>
 
                     </div>
@@ -69,16 +69,24 @@
                        placeholder="please upload the image of your merchandise"/>
             </div>
 
-            <div class="form-group" ng-if="model.mode === 'edit'">
+            <div class="form-group"
+                 ng-if="model.mode === 'edit'">
                 <form action="/api/upload/merchandise/picture"
                       method="post"
                       enctype="multipart/form-data"
                       class="margin-top-15"
                       ng-if="model.mode==='edit'">
-                    <input name="myFile" type="file" class="form-control"/>
-                    <input name="storeId" value="{{model.storeId}}" class = "input-hidden"/>
-                    <input name="merchandiseId" class="input-hidden" value="{{model.merchandiseId}}" />
-                    <button type="submit" class="btn btn-block btn-primary">
+                    <input name="myFile"
+                           type="file"
+                           class="form-control"/>
+                    <input name="storeId"
+                           value="{{model.storeId}}"
+                           class="input-hidden"/>
+                    <input name="merchandiseId"
+                           class="input-hidden"
+                           value="{{model.merchandiseId}}"/>
+                    <button type="submit"
+                            class="btn btn-block btn-primary">
                         Upload Photo
                     </button>
                 </form>
@@ -86,16 +94,16 @@
 
             <a ng-if="model.mode === 'new'"
                ng-click="model.createMerchandise()"
-               class="btn btn-block btn-success">Create</a >
+               class="btn btn-block btn-success">Create</a>
             <a ng-if="model.mode === 'new'"
                ng-click="model.cancelMerchandise()"
-               class="btn btn-block btn-danger">cancel</a >
+               class="btn btn-block btn-danger">cancel</a>
             <a ng-if="model.mode === 'edit'"
                ng-click="model.updateMerchandise()"
-               class="btn btn-block btn-primary">Update</a >
+               class="btn btn-block btn-primary">Update</a>
             <a ng-if="model.mode === 'edit'"
                ng-click="model.deleteMerchandise()"
-               class="btn btn-block btn-danger">delete</a >
+               class="btn btn-block btn-danger">delete</a>
         </div>
     </div>
 </div>

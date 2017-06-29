@@ -23,48 +23,51 @@
                 .then(extractData);
         }
 
-        　
-       function createAssociation(association){
-                var url = '/api/association';
-                return $http.post(url, association)
-                    .then(extractData)
+
+        function createAssociation(association) {
+            var url = '/api/association';
+            return $http.post(url, association)
+                .then(extractData)
         }
 
-        function updateAssociation(associationId,association) {
-            var url = '/api/association/'+associationId
+        function updateAssociation(associationId, association) {
+            var url = '/api/association/' + associationId
             return $http.put(url, association)
                 .then(extractData)
         }
 
         function deleteAssociationById(associationId) {
-            var url = '/api/association/'+associationId
+            var url = '/api/association/' + associationId
             return $http.delete(url)
                 .then(extractData)
         }
 
         function findAssociationById(associationId) {
-            var url = '/api/association/find/id/'+associationId
-            return $http.get(url)
-                .then(extractData)
-        }
-        function findAllAssociationByType(associationType) {
-            var url = '/api/association/find/type/'+associationType;
+            var url = '/api/association/find/id/' + associationId
             return $http.get(url)
                 .then(extractData)
         }
 
-        function findAssociationForSource(associationType,sourceId) {
-            var url = '/api/association/find/type/'+associationType+'/from/'+sourceId;
+        function findAllAssociationByType(associationType) {
+            var url = '/api/association/find/type/' + associationType;
             return $http.get(url)
                 .then(extractData)
         }
-        function findAssociationForTarget(associationType,targetType,targetId) {
-            var url = '/api/association/find/type/'+associationType+'/to/'+targetType+'/'+targetId;
+
+        function findAssociationForSource(associationType, sourceId) {
+            var url = '/api/association/find/type/' + associationType + '/from/' + sourceId;
             return $http.get(url)
                 .then(extractData)
         }
-        function findAssociationForSourceTarget(associationType,sourceId,targetType,targetId) {
-            var url = '/api/association/find/type/'+associationType+'/from/'+sourceId+'/to/'+targetType+'/'+targetId;
+
+        function findAssociationForTarget(associationType, targetType, targetId) {
+            var url = '/api/association/find/type/' + associationType + '/to/' + targetType + '/' + targetId;
+            return $http.get(url)
+                .then(extractData)
+        }
+
+        function findAssociationForSourceTarget(associationType, sourceId, targetType, targetId) {
+            var url = '/api/association/find/type/' + associationType + '/from/' + sourceId + '/to/' + targetType + '/' + targetId;
             return $http.get(url)
                 .then(extractData)
         }

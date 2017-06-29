@@ -3,7 +3,7 @@
         .module('FinalProject')
         .controller('adminMerchandisesController', adminMerchandisesController);
 
-    function adminMerchandisesController($location,storeService, merchandiseService,currentUser) {
+    function adminMerchandisesController($location, storeService, merchandiseService, currentUser) {
         var model = this;
 
         //variable & route params

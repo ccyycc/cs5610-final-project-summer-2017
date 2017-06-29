@@ -15,7 +15,7 @@
 
         function createMerchandise(storeId, merchandise) {
             var url = "/api/store/" + storeId + "/merchandise";
-            return $http.post(url,merchandise)
+            return $http.post(url, merchandise)
                 .then(extractData);
         }
 
@@ -26,25 +26,25 @@
         }
 
         function findMerchandiseById(merchandiseId) {
-            var url = "/api/merchandise/"+merchandiseId;
+            var url = "/api/merchandise/" + merchandiseId;
             return $http.get(url)
                 .then(extractData);
         }
 
-        function findMerchandiseByName (content) {
-            var url = "/api/merchandise/name/"+content;
+        function findMerchandiseByName(content) {
+            var url = "/api/merchandise/name/" + content;
             return $http.get(url)
                 .then(extractData);
         }
 
         function updateMerchandise(merchandiseId, merchandise) {
-            var url = "/api/merchandise/"+merchandiseId;
-            return $http.put(url,merchandise)
+            var url = "/api/merchandise/" + merchandiseId;
+            return $http.put(url, merchandise)
                 .then(extractData);
         }
 
         function deleteMerchandise(merchandiseId) {
-            var url = "/api/merchandise/"+merchandiseId;
+            var url = "/api/merchandise/" + merchandiseId;
             return $http.delete(url)
                 .then(extractData);
         }

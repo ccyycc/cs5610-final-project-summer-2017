@@ -10,7 +10,8 @@
             <div class="wd-widget-toolbar">
                 <!--TODO: check if the logged in user is the owner-->
                 <!--TODO: ng-show="model.ifCreator()" IN THIS <a>-->
-                <a ng-if="model.canEdit" href="#!/store/{{model.storeId}}/merchandise/{{merchandise._id}}/edit">
+                <a ng-if="model.canEdit"
+                   href="#!/store/{{model.storeId}}/merchandise/{{merchandise._id}}/edit">
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
             </div>
@@ -22,8 +23,7 @@
                 <p class="text-on-image">{{merchandise.name}}</p>
             </a>
         </div>
-        <div
-             class="col-xs-12 col-sm-6 col-md-4 text-center recipeListImages">
+        <div class="col-xs-12 col-sm-6 col-md-4 text-center recipeListImages">
             <img class="recipeListImage"
                  src="/resource/defaultPics/addphoto.png"/>
             <a href="">

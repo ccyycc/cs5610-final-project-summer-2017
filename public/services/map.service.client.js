@@ -10,7 +10,7 @@
 
 
         function searchWithAddress(address) {
-            var url = "/api/map/searchWithAddress/"+address;
+            var url = "/api/map/searchWithAddress/" + address;
             return $http.get(url)
                 .then(extractData);
         }

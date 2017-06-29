@@ -79,9 +79,9 @@
 
         function getStoreAddress() {
             return model.address.street
-                   + " " + model.address.city
-                   + " " + model.address.state
-                   + " " + model.address.zip;
+                + " " + model.address.city
+                + " " + model.address.state
+                + " " + model.address.zip;
         }
 
 

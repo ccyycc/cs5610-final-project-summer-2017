@@ -45,9 +45,9 @@
                     model.canEdit = (model.store._owner === currentUser._id || currentUser.role === "ADMIN");
                     setPermission();
                     model.store.addressUrl = trust("https://www.google.com"
-                                                   + "/maps/embed/v1/place?"
-                                                   + "key=AIzaSyA0oVg3fT3ZdLkEExxVyC0jkciGfmaYBcI&q="
-                                                   + getStoreURLAddress(model.store));
+                        + "/maps/embed/v1/place?"
+                        + "key=AIzaSyA0oVg3fT3ZdLkEExxVyC0jkciGfmaYBcI&q="
+                        + getStoreURLAddress(model.store));
                     model.displayAddress = getDisplayAddress(model.store);
 
                     userService
@@ -96,9 +96,9 @@
             var address = store.address;
             if (address) {
                 return address.street + "+"
-                       + address.city + "+"
-                       + address.state + "+"
-                       + address.zip;
+                    + address.city + "+"
+                    + address.state + "+"
+                    + address.zip;
             }
             return "";
         }
@@ -177,9 +177,9 @@
             var address = store.address;
             if (address) {
                 return address.street + " "
-                       + address.city + " "
-                       + address.state + " "
-                       + address.zip;
+                    + address.city + " "
+                    + address.state + " "
+                    + address.zip;
             }
             return "";
         }

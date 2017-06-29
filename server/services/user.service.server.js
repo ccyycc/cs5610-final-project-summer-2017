@@ -262,7 +262,7 @@ function findUserById(req, res) {
         });
 }
 
-function findUserByPartialUsername(req,res){
+function findUserByPartialUsername(req, res) {
     var partialUsername = req.params.username;
 
     userModel
@@ -559,7 +559,7 @@ function uploadImage(req, res) {
     var myFile = req.file;
     var userId = req.body.userId;
 
-    var filename = "user/profile/"+myFile.filename;
+    var filename = "user/profile/" + myFile.filename;
 
     userModel
         .uploadImage(userId, filename)

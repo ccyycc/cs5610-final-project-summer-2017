@@ -11,14 +11,13 @@ app.delete('/api/store/:storeId', deleteStore);
 app.get('/api/owner/:ownerId/store', findAllStoresForOwner);
 app.get('/api/store/:storeId', findStoreById);
 app.get('/api/store', findStoreByName);
-app.get('/api/store/search/:storeName',findStoreByNameParams);
+app.get('/api/store/search/:storeName', findStoreByNameParams);
 app.get('/api/stores', isAdmin, findAllStores);
 
 app.post('/api/upload/store/picture', upload.single('myFile'), uploadImage);
 
 
-
-function findStoreByNameParams(req,res) {
+function findStoreByNameParams(req, res) {
     var storeName = req.params['storeName'];
     storeModel
         .findStoreByNameParams(storeName)
@@ -39,9 +38,9 @@ function uploadImage(req, res) {
     var filename = myFile.filename;
 
     storeModel
-        .uploadImage(storeId,filename)
+        .uploadImage(storeId, filename)
         .then(function (status) {
-            var callbackUrl = "/#!/store/"+storeId;
+            var callbackUrl = "/#!/store/" + storeId;
             res.redirect(callbackUrl)
         });
 }
@@ -78,7 +77,7 @@ function findAllStoresForOwner(req, res) {
     storeModel
         .findAllStoresForOwner(ownerId)
         .then(function (stores) {
-            var tmp = stores;
+                var tmp = stores;
                 res.status(200).send(stores);
 
             },

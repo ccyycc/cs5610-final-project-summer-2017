@@ -44,9 +44,14 @@
               enctype="multipart/form-data"
               class="margin-top-15"
               ng-if="model.mode==='edit'">
-            <input name="myFile" type="file" class="form-control"/>
-            <input name="storeId" value="{{model.storeId}}" class="input-hidden"/>
-            <button type="submit" class="btn btn-block btn-primary">
+            <input name="myFile"
+                   type="file"
+                   class="form-control"/>
+            <input name="storeId"
+                   value="{{model.storeId}}"
+                   class="input-hidden"/>
+            <button type="submit"
+                    class="btn btn-block btn-primary">
                 Upload Photo
             </button>
         </form>
@@ -82,7 +87,8 @@
     </form>
 
     <label for="hours">Hours</label>
-    <table id="hours" class="table table-striped">
+    <table id="hours"
+           class="table table-striped">
         <thead>
         <tr class="list-group-item-info">
             <th>#</th>
@@ -94,8 +100,16 @@
         <tr ng-repeat="hour in model.store.hours track by $index">
             <!--TODO USE NG-REPEAT RENDER THE FORM-->
             <td>{{model.days[$index]}}</td>
-            <td><input type=time min=0:00 max=23:59 ng-model="hour.open" step=900></td>
-            <td><input type=time min=0:00 max=23:59 ng-model="hour.close" step=900></td>
+            <td><input type=time
+                       min=0:00
+                       max=23:59
+                       ng-model="hour.open"
+                       step=900></td>
+            <td><input type=time
+                       min=0:00
+                       max=23:59
+                       ng-model="hour.close"
+                       step=900></td>
         </tr>
         </tbody>
     </table>

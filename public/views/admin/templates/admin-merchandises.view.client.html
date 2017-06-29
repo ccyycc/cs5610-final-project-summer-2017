@@ -1,7 +1,9 @@
 <div ng-include="'./views/common/header.view.client.html'"></div>
 
-<div class="container-fluid main-container hidden-sm-down" >
-    <div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
+<div class="container-fluid main-container hidden-sm-down">
+    <div ng-show="model.message"
+         class="alert alert-info">{{model.message}}
+    </div>
     <ul class="list-group">
         <li class="list-group-item">
             <div class="row">
@@ -15,7 +17,7 @@
                     Store Name
                 </div>
                 <!--<div class="col-sm-4 col-xs-6">-->
-                    <!--Description-->
+                <!--Description-->
                 <!--</div>-->
                 <div class="col-xs-2">
 
@@ -27,33 +29,35 @@
             <div class="row">
                 <div class="col-xs-4">
                     <input readonly
-                            ng-model="model.merchandise._id"
+                           ng-model="model.merchandise._id"
                            class="form-control">
                 </div>
                 <div class="col-xs-3">
                     <input ng-model="model.merchandise.name"
-                    class="form-control">
+                           class="form-control">
                 </div>
                 <div class="col-xs-3">
                     <input ng-model="model.storeName"
                            class="form-control">
                 </div>
                 <!--<div class="col-xs-3">-->
-                    <!--<input ng-model="model.merchandise.price"-->
-                           <!--class="form-control">-->
+                <!--<input ng-model="model.merchandise.price"-->
+                <!--class="form-control">-->
                 <!--</div>-->
                 <!--<div class="col-sm-3 col-xs-4">-->
-                    <!--<input ng-model="model.merchandise.description"-->
-                           <!--class="form-control">-->
+                <!--<input ng-model="model.merchandise.description"-->
+                <!--class="form-control">-->
                 <!--</div>-->
                 <div class="col-xs-2 text-center">
-                    <span ng-click="model.createMerchandise(model.storeName, model.merchandise)"class="glyphicon glyphicon-plus"></span>
+                    <span ng-click="model.createMerchandise(model.storeName, model.merchandise)"
+                          class="glyphicon glyphicon-plus"></span>
                     <!--<span ng-click="model.updateMerchandise(model.storeName, model.merchandise)"class="glyphicon glyphicon-ok"></span>-->
                 </div>
             </div>
         </li>
 
-        <li ng-repeat="merchandise in model.merchandises" class="list-group-item">
+        <li ng-repeat="merchandise in model.merchandises"
+            class="list-group-item">
 
             <div class="row">
                 <div class="col-xs-4">
@@ -66,14 +70,16 @@
                     {{merchandise._store.name}}
                 </div>
                 <!--<div class="col-xs-2">-->
-                    <!--{{merchandise.price}}-->
+                <!--{{merchandise.price}}-->
                 <!--</div>-->
                 <!--<div class="col-sm-3 col-xs-4">-->
                 <!--{{merchandise.description}}-->
                 <!--</div>-->
                 <div class="col-xs-2 text-center">
-                    <span ng-click="model.deleteMerchandise(merchandise)" class="glyphicon glyphicon-remove"></span>
-                    <span ng-click="model.selectMerchandise(merchandise)" class="glyphicon glyphicon-pencil"></span>
+                    <span ng-click="model.deleteMerchandise(merchandise)"
+                          class="glyphicon glyphicon-remove"></span>
+                    <span ng-click="model.selectMerchandise(merchandise)"
+                          class="glyphicon glyphicon-pencil"></span>
                 </div>
             </div>
         </li>

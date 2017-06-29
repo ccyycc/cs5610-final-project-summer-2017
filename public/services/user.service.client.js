@@ -12,7 +12,7 @@
             findAllUsers: findAllUsers,
             findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
-            findUserByPartialUsername:findUserByPartialUsername,
+            findUserByPartialUsername: findUserByPartialUsername,
             updateUser: updateUser,
             deleteUser: deleteUser,
             updateProfile: updateProfile,
@@ -44,7 +44,7 @@
         return api;
 
         function sendMessage(userId, message) {
-            var url='/api/message/' + userId;
+            var url = '/api/message/' + userId;
             return $http.put(url, message)
                 .then(function (response) {
                     return response.data;
@@ -52,7 +52,7 @@
         }
 
         function deleteMessage(messageId) {
-            var url='/api/association/comment/' + messageId;
+            var url = '/api/association/comment/' + messageId;
             return $http.delete(url)
                 .then(function (response) {
                     return response.data;
@@ -77,7 +77,7 @@
 
 
         function follow(followingId) {
-            var url='/api/follow/' + followingId;
+            var url = '/api/follow/' + followingId;
 
             return $http.get(url)
                 .then(function (response) {
@@ -86,7 +86,7 @@
         }
 
         function unfollow(followingId) {
-            var url='/api/unfollow/' + followingId;
+            var url = '/api/unfollow/' + followingId;
 
             return $http.get(url)
                 .then(function (response) {
@@ -108,6 +108,7 @@
                     return response.data;
                 })
         }
+
         function deleteHelper(url) {
             return $http.delete(url)
                 .then(function (response) {
@@ -116,7 +117,7 @@
         }
 
         function showFollowings(userId) {
-            var url='/api/showFollowings/' + userId;
+            var url = '/api/showFollowings/' + userId;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
@@ -124,7 +125,7 @@
         }
 
         function showFollowers(userId) {
-            var url='/api/showFollowers/' + userId;
+            var url = '/api/showFollowers/' + userId;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
@@ -200,12 +201,14 @@
                     return response.data;
                 });
         }
-        function findUserByPartialUsername(content){
-            var url = "/api/user/username/partial/"+content;
+
+        function findUserByPartialUsername(content) {
+            var url = "/api/user/username/partial/" + content;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
-                })        }
+                })
+        }
 
         function findMe() {
             var url = '/api/user/findme';
@@ -267,7 +270,7 @@
         }
 
         function findAllUsers() {
-            var url='/api/user';
+            var url = '/api/user';
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
@@ -283,7 +286,7 @@
         }
 
         function populateArr(userId, arrName) {
-            var url = '/api/user/populate/' + arrName +'/' + userId;
+            var url = '/api/user/populate/' + arrName + '/' + userId;
             return $http.get(url)
                 .then(function (response) {
                     // console.log(response.data);

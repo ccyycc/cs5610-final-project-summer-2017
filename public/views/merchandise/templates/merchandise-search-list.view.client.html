@@ -6,10 +6,11 @@
         <input ng-model="model.searchContent"
                type="text"
                placeholder="Search Product"
-               class="form-control"
-        >
+               class="form-control">
         <span class="input-group-btn">
-        <a ng-click="model.searchProduct()" class="btn btn-default" type="button">
+        <a ng-click="model.searchProduct()"
+           class="btn btn-default"
+           type="button">
             <span class="glyphicon glyphicon-search"></span>
         </a>
         </span>
@@ -18,7 +19,7 @@
 
     <div class="theme-showcase first-row"
          role="main"
-    ng-show="model.products">
+         ng-show="model.products">
         <ul class="list-group">
             <li class="list-group-item active">
                 <div class="row ">
@@ -33,7 +34,8 @@
                     </div>
                 </div>
             </li>
-            <li ng-repeat="product in model.products" class="list-group-item">
+            <li ng-repeat="product in model.products"
+                class="list-group-item">
 
                 <div class="row ">
                     <div class="col-xs-6 col-md-4">

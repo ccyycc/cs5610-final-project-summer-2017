@@ -69,8 +69,10 @@ function deleteRecipe(recipeId) {
 
 function findRecipeByCriteria(searchTerm) {
     return recipeModel
-        .find({$and: [{source: 'LOCAL'},
-            {$or: [{name: new RegExp(searchTerm, "i")}, {ingredients: new RegExp(searchTerm, "i")}]}]});
+        .find({
+            $and: [{source: 'LOCAL'},
+                {$or: [{name: new RegExp(searchTerm, "i")}, {ingredients: new RegExp(searchTerm, "i")}]}]
+        });
 }
 
 function findAllRecipes() {

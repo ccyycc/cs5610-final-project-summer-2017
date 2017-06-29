@@ -3,7 +3,7 @@
         .module('FinalProject')
         .controller('adminStoresController', adminStoresController);
 
-    function adminStoresController($location,userService, storeService,currentUser) {
+    function adminStoresController($location, userService, storeService, currentUser) {
         var model = this;
 
         //variable & route params
@@ -47,7 +47,7 @@
                         model.error = "Username does not exist";
                     } else if (thisuser.role !== 'MERCHANT') {
                         model.error = 'User is not a merchant';
-                    }else {
+                    } else {
                         var storeId = store._id;
                         store._owner = thisuser._id;
                         storeService
