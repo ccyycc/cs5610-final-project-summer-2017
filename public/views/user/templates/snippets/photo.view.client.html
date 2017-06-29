@@ -3,7 +3,8 @@
 <div class="container-fluid main-container">
     <img id="photo"
          class="imageToCenter"
-         ng-src="{{model.user.photo}}" width="50%"/>
+         ng-src="{{model.user.photo}}" width="50%"
+         onerror="this.onerror=null; this.src='/resource/defaultPics/default_profile.png'"/>
 
     <form action="/api/upload"
           method="post"
