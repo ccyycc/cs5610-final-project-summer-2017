@@ -43,8 +43,6 @@
                 </div>
 
                 <div class="col-xs-2 text-center">
-                    <!--<span ng-click="model.createComment(model.fromName, model.toType, model.comment)"-->
-                          <!--class="glyphicon glyphicon-plus"></span>-->
                     <span ng-click="model.updateComment(model.fromName, model.toType, model.comment)"
                           class="glyphicon glyphicon-ok"></span>
                 </div>
@@ -96,8 +94,8 @@
                         From
                     </span>
                 <input readonly
-                        ng-model="model.fromName"
-                        class="form-control">
+                       ng-model="model.fromName"
+                       class="form-control">
             </div>
 
             <div class="input-group">
@@ -105,16 +103,16 @@
                         To
                     </span>
                 <input readonly
-                        ng-model="model.comment.toId"
-                        class="form-control">
+                       ng-model="model.comment.toId"
+                       class="form-control">
             </div>
             <div class="input-group">
                 <span class="input-group-addon">
                         Type
                     </span>
-                    <input ng-model="model.toType"
-                           class="form-control"
-                           readonly>
+                <input ng-model="model.toType"
+                       class="form-control"
+                       readonly>
 
             </div>
             <div class="input-group">
