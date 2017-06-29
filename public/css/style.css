@@ -410,6 +410,9 @@ a#numOfLikeShowCreator.btn:visited {
     max-width: 360px;
 }
 
+
+
+
 @media (min-width: 768px) {
     .navbar > .container-fluid .navbar-brand {
         margin-left: 0;
@@ -458,4 +461,26 @@ a#numOfLikeShowCreator.btn:visited {
         padding: 0;
     }
 }
+
+@media (max-width: 767px){
+    .table-responsive-sm-screen.table-responsive>.table>tbody>tr>td {
+
+    }
+}
+
+.overflow-y-max-100{
+    white-space: normal;
+    max-height: 100px;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+
+.clear-float {
+    clear: both;
+}
+
 

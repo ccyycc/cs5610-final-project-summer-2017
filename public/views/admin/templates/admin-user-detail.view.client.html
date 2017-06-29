@@ -73,7 +73,9 @@
                 </select>
             </span>
         </li>
-        <li class="input-group">
+        <li class="input-group"
+            ng-if="model.user.role === 'USER'">
+
             <span class="input-group-addon"
                   id="followers">
                 Followers
@@ -83,7 +85,9 @@
                    aria-describedby="followers"
                    ng-model="model.user.followers">
         </li>
-        <li class="input-group">
+        <li class="input-group"
+            ng-if="model.user.role === 'USER'">
+
             <span class="input-group-addon"
                   id="followings">
                 Followings
@@ -93,7 +97,9 @@
                    aria-describedby="followings"
                    ng-model="model.user.followings">
         </li>
-        <li class="input-group">
+        <li class="input-group"
+            ng-if="model.user.role === 'USER'">
+
             <span class="input-group-addon"
                   id="likedRecipes">
                 Liked Recipes
@@ -103,16 +109,29 @@
                    aria-describedby="likedRecipes"
                    ng-model="model.user.likedRecipes">
         </li>
-        <li class="input-group">
+        <li class="input-group"
+            ng-if="model.user.role === 'USER'">
             <span class="input-group-addon"
                   id="collectedProducts">
-                Collected Products
+                Liked Products
             </span>
             <input type="text"
                    class="form-control"
                    aria-describedby="collectedProducts"
                    ng-model="model.user.collectedProducts">
         </li>
+        <li class="input-group"
+            ng-if="model.user.role === 'USER'">
+            <span class="input-group-addon"
+                  id="likeStore">
+                Liked Stores
+            </span>
+            <input type="text"
+                   class="form-control"
+                   aria-describedby="likeStore"
+                   ng-model="model.user.likedStores">
+        </li>
+
         <a class="btn btn-success form-control margin-top-15"
            ng-click="model.updateUser(model.user)">
             Update

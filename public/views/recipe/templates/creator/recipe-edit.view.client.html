@@ -73,7 +73,7 @@
                     </textarea>
             </div>
             <label>Ingredient</label>
-            <div class="table-responsive">
+            <div class="table-responsive-sm-screen table-responsive">
                 <table class="table table-striped table-bordered table-hover table-condensed">
                     <thead>
                     <tr class="list-group-item-info">
@@ -95,8 +95,16 @@
                                    placeholder="please enter the description of the ingredient"/>
 
                         </td>
-                        <td ng-if="model.editIngredient != ingredient">{{ingredient.name}}</td>
-                        <td ng-if="model.editIngredient != ingredient">{{ingredient.description}}</td>
+                        <td ng-if="model.editIngredient != ingredient">
+                            <div class = "overflow-y-max-100">
+                                {{ingredient.name}}
+                            </div>
+                        </td>
+                        <td ng-if="model.editIngredient != ingredient">
+                            <div class = "overflow-y-max-100">
+                                {{ingredient.description}}
+                            </div>
+                        </td>
                         <td class="text-center">
                             <a ng-if="model.editIngredient == ingredient"
                                ng-click="model.editSingleIngredient(ingredient)">

@@ -58,16 +58,16 @@
                 </a>
             </h2>
             <p>
-                <b>Number of servings: </b> {{model.recipe.numberOfServings}}<br>
-                <b>Total time (in min): </b> {{model.recipe.totalTime}}<br>
                 <img ng-if="model.ifLocal"
                      id="recipe-image-show"
                      class="hidden-xs img-rounded pull-right"
                      ng-src="{{model.recipe.image}}"
                      onerror="this.onerror=null; this.src='/resource/defaultPics/placeholder-image10.jpg'"/>
+                <b>Number of servings: </b> {{model.recipe.numberOfServings}}<br>
+                <b>Total time (in min): </b> {{model.recipe.totalTime}}<br>
                 <b>Description: </b><br> {{model.recipe.description}}<br>
             </p>
-            <h3 class="sub-header">Ingredients</h3>
+            <h3 class="sub-header clear-float">Ingredients</h3>
             <div ng-repeat="ingredient in model.recipe.ingredients">
                 <ul class="list-unstyled">
                     <li>
