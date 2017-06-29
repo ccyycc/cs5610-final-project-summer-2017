@@ -333,7 +333,7 @@ a:focus, a:hover, a:visited {
 
 .home-search-bar-position {
     position: absolute;
-    top: 40%;
+    top: 50%;
     width: 90%;
     margin-left: 5%;
     margin-right: 5%
