@@ -127,11 +127,21 @@
             var ingredients = recipeService.getTempYummlyIngredients();
             model.recipe.ingredients = [];
             for (var i in model.recipe.ingredientLines) {
-                model.recipe.ingredients.push({
-                    name: ingredients[i],
-                    description: model.recipe.ingredientLines[i]
-                });
+                for (var j in ingredients) {
+                    if (model.recipe.ingredientLines[i].includes(ingredients[j])) {
+                        model.recipe.ingredients.push({
+                            name: ingredients[j],
+                            description: model.recipe.ingredientLines[i]
+                        });
+                    }
+                }
             }
+            // for (var i in model.recipe.ingredientLines) {
+            //     model.recipe.ingredients.push({
+            //         name: ingredients[i],
+            //         description: model.recipe.ingredientLines[i]
+            //     });
+            // }
         }
 
         function createYummlyRecipeCopy() {
