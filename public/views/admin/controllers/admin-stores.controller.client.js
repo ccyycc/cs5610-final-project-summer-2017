@@ -87,6 +87,13 @@
                         model.error = 'User is not a merchant';
                     } else {
                         store._owner = thisuser.id;
+                        store.description = "";
+                        store.hours = [{}, {}, {}, {}, {}, {}, {}];
+                        store.image = "";
+                        store.address = {};
+                        store.dateCreated = Date.now();
+
+                        console.log(store);
 
                         storeService
                             .createStore(thisuser._id, store)

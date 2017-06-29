@@ -8,8 +8,8 @@
          class="alert alert-danger">{{model.error}}
     </div>
 
-    <h1 class="alert-info">Please create your store first</h1>
 
+    <h1 class="alert-info" ng-if="model.mode ==='new'">Please create your store first</h1>
     <div class="form-group">
         <label for="name">Store Name</label>
         <input class="form-control"
