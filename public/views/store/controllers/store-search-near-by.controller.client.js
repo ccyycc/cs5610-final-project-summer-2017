@@ -6,28 +6,28 @@
     function StoreSearchNearByController($routeParams, $location, MapService, $window,
                                          currentUser, userService) {
         var model = this;
+
+        //variable & route params
+        model.sectionTitle = "Nearby search";
+        model.address = {
+            street: '',
+            city: '',
+            state: '',
+            zip: ''
+        };
+
+        //event handler
         model.searchWithCoords = searchWithCoords;
         model.searchWithAddress = searchWithAddress;
         model.logout = logout;
 
-        model.sectionTitle = "Nearby search";
-
+        init();
 
         function init() {
-
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }
-
-            model.address = {
-                street: '',
-                city: '',
-                state: '',
-                zip: ''
-            };
         }
-
-        init();
 
         function logout() {
             userService
@@ -58,7 +58,7 @@
             MapService.searchWithAddress(fullAddress)
                 .then(
                     function (res) {
-                        model.isSearching=false;
+                        model.isSearching = false;
                         model.places = res.results;
                     }
                 );

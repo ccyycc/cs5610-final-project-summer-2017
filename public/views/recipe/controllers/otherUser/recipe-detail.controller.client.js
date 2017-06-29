@@ -8,6 +8,14 @@
 
         var model = this;
 
+        //variable && route params
+        model.sectionTitle = "Recipe Detail";
+        model.recipeId = $routeParams.recipeId;
+        model.showYummlyInstruction = false;
+        model.reviews = [];
+        model.numberOfLikes = 0;
+
+        //event handler
         model.trust = trust;
         model.goToIngredientDetail = goToIngredientDetail;
         model.likeRecipe = likeRecipe;
@@ -19,17 +27,10 @@
         model.goToEdit = goToEdit;
         model.changeToHTTPS = changeToHTTPS;
 
-        model.sectionTitle = "Recipe Detail";
-        model.recipeId = $routeParams.recipeId;
 
         init();
 
         function init() {
-
-            model.showYummlyInstruction = false;
-            model.reviews = [];
-            model.numberOfLikes = 0;
-
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }
@@ -43,7 +44,7 @@
                         model.recipe = recipe;
                         model.recipeCreator = recipe._creator;
                         model.canEdit = ((currentUser._id === model.recipeCreator._id)
-                        || (currentUser.role === 'ADMIN'));
+                                         || (currentUser.role === 'ADMIN'));
                     })
                     .then(function () {
                         findAllAssociation();

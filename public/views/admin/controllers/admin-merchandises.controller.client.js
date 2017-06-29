@@ -6,13 +6,16 @@
     function adminMerchandisesController($location,storeService, merchandiseService,currentUser) {
         var model = this;
 
+        //variable & route params
+        model.sectionTitle = "Manage Products";
+
+        //event handler
         model.logout = logout;
         model.deleteMerchandise = deleteMerchandise;
         model.createMerchandise = createMerchandise;
         model.selectMerchandise = selectMerchandise;
         model.updateMerchandise = updateMerchandise;
 
-        model.sectionTitle = "Manage Products";
 
         init();
 

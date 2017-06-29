@@ -13,13 +13,16 @@
 
         var model = this;
 
+        //variable & route params
+        model.sectionTitle = "Manage Comments";
+        model.types = ['Recipe', 'Store', 'Merchandise'];
+
+        //event handler
         model.deleteComment = deleteComment;
         model.createComment = createComment;
         model.selectComment = selectComment;
         model.updateComment = updateComment;
         model.logout = logout;
-
-        model.sectionTitle = "Manage Comments";
 
         init();
 
@@ -28,7 +31,6 @@
                 model.ifLoggedIn = true;
             }
             findAllComments();
-            model.types = ['Recipe', 'Store', 'Merchandise']
         }
 
 
@@ -106,6 +108,7 @@
             model.comment = angular.copy(comment);
             model.fromName = comment.fromWhom.username;
             model.toType = comment.toType;
+            console.log(model.toType)
         }
 
         function createComment(fromName, toType, comment) {

@@ -8,14 +8,15 @@
 
         var model = this;
 
+        //variable & route params
+        model.ingredientName = $routeParams.ingredientName;
+        model.sectionTitle = "Ingredient Detail";
+        model.waitForData = true;
+
+        //event handler
         model.logout = logout;
 
-        model.sectionTitle = "Ingredient Detail";
-        model.ingredientName = $routeParams.ingredientName;
-
         function init() {
-
-            model.waitForData = true;
 
             if (currentUser._id) {
                 model.ifLoggedIn = true;

@@ -7,19 +7,23 @@
 
         var model = this;
 
+        //variable & route params
+        model.createId = $routeParams['creatorId'];
+
+        //event handler
         model.canEdit = canEdit;
         model.createRecipe = createRecipe;
         model.logout = logout;
 
-        function init() {
 
+        function init() {
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }
 
-            if ($routeParams.creatorId) {
+            if (model.createId) {
                 userService
-                    .findUserById($routeParams.creatorId)
+                    .findUserById(model.createId)
                     .then(function (user) {
                         model.creator = user;
                         model.sectionTitle = 'Recipe List from ' + model.creator.username;

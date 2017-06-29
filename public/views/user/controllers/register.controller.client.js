@@ -7,10 +7,12 @@
 
         var model = this;
 
+        //variable & route params
+        model.sectionTitle = "Register";
+
+        //event handler
         model.register = register;
         model.showDiscription = showDescription;
-
-        model.sectionTitle = "Register";
 
         init();
 

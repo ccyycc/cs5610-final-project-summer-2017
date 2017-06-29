@@ -6,10 +6,13 @@
     function adminController($location,currentUser) {
         var model = this;
 
-        model.logout = logout;
-
+        //variable & route params
         model.sectionTitle = "Admin";
         model.currentUser = currentUser;
+
+        //event handler
+        model.logout = logout;
+
 
         init();
 

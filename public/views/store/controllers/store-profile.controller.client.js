@@ -7,40 +7,36 @@
                                     associationService, storeService, userService) {
         var model = this;
 
+        //variable & route params
+        model.storeId = $routeParams['storeId'];
+        model.days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        model.sectionTitle = "Store Profile";
+        model.comments = [];
+        model.newComment = undefined;
+        model.like = false;
+        model.likeAssociation = {
+            fromWhom: currentUser._id,
+            toStore: model.storeId,
+            type: 'LIKE'
+        };
+        model.store = {};
+
+        //event handler
         model.editStoreProfile = editStoreProfile;
         model.goToProductList = goToProductList;
         model.goToProfilePage = goToProfilePage;
-
         model.createComment = createComment;
         model.deleteComment = deleteComment;
         model.likeStore = likeStore;
         model.unlikeStore = unlikeStore;
-
         model.logout = logout;
-
-        model.storeId = $routeParams['storeId'];
-        model.days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-        model.sectionTitle = "Store Profile";
 
 
         function init() {
-
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }
 
-            model.comments = [];
-            model.newComment = undefined;
-            model.like = false;
-
-            model.likeAssociation = {
-                fromWhom: currentUser._id,
-                toStore: model.storeId,
-                type: 'LIKE'
-            };
-
-
-            model.store = {};
 
             storeService
                 .findStoreById(model.storeId)

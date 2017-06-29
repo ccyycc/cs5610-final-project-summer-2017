@@ -7,6 +7,12 @@
 
         var model = this;
 
+        //variable & route params
+        model.sectionTitle = "Profile";
+        model.feedback = {};
+        model.recipeOrProduct = 'RECIPE';
+
+        //event handler
         model.logout = logout;
         model.render = render;
         model.follow = follow;
@@ -20,18 +26,12 @@
         model.navToStorePage = navToStorePage;
         model.navToRecipeListPage = navToRecipeListPage;
 
-        model.sectionTitle = "Profile";
 
         function init() {
-            model.feedback = {};
-            model.recipeOrProduct = 'RECIPE';
-
             if (currentUser._id) {
                 model.ifLoggedIn = true;
                 model.isGeneralUser = currentUser.role === 'USER';
             }
-
-
             if (!$routeParams.uid || currentUser._id === $routeParams.uid) {
                 model.isMyProfile = true;
                 model.profileId = $routeParams.uid || currentUser._id;

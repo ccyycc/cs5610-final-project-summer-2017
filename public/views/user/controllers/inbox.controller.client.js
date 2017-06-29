@@ -7,13 +7,15 @@
 
         var model = this;
 
+        //variable & event handler
+        model.userId = currentUser._id;
+        model.sectionTitle = "Inbox";
+
+        //event handler
         model.deleteMessage = deleteMessage;
         model.showInbox = showInbox;
         model.showOutbox = showOutbox;
         model.logout = logout;
-
-        model.userId = currentUser._id;
-        model.sectionTitle = "Inbox";
 
         init();
 
@@ -21,7 +23,6 @@
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }
-
             showInbox()
         }
 

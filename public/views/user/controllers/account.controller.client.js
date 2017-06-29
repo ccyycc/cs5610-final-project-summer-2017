@@ -7,12 +7,14 @@
 
         var model = this;
 
+        //variable && route params
+        model.userId = currentUser.userId;
+        model.sectionTitle = "Account";
+
+        //event handler
         model.updateUser = updateUser;
         model.logout = logout;
         model.unregister = unregister;
-
-        model.sectionTitle = "Account";
-        model.userId = currentUser.userId;
 
         init();
 

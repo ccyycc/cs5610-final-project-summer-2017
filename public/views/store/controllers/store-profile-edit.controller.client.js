@@ -6,25 +6,27 @@
     function storeProfileEditController($routeParams, $location, storeService, $sce, currentUser, userService) {
         var model = this;
 
+        //variable & route params
+        model.storeId = $routeParams['storeId'];
+        model.mode = $routeParams['mode'];
+        model.user = currentUser;
+        model.sectionTitle = "New Store";
+        model.days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        model.store = {};
+
+        //event handler
         model.updateStore = updateStore;
         model.createStore = createStore;
         model.logout = logout;
 
-        model.storeId = $routeParams['storeId'];
-        model.mode = $routeParams['mode'];
-        model.user = currentUser;
 
         init();
 
         function init() {
-            model.store = {};
-
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }
 
-            // model.store = storeService.findStoreById(model.storeId);
-            model.days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
             if (model.mode === "new") {
                 model.canEdit = (currentUser.role === "MERCHANT" || currentUser.role === "ADMIN");
                 model.store = {

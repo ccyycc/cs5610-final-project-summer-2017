@@ -6,13 +6,15 @@
     function merchandiseSearchController($location, $routeParams, merchandiseService,
                                          userService, currentUser) {
         var model = this;
-        //event handler
 
+        //variable && route params
+        model.sectionTitle = "Product Search";
+
+        //event handler
         model.searchProduct = searchProduct;
         model.logout = logout;
         model.navToProductDetail = navToProductDetail;
 
-        model.sectionTitle = "Product Search";
 
         init();
 

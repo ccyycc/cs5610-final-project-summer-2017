@@ -7,19 +7,19 @@
 
         var model = this;
 
+        //variable & route params
+        model.sectionTitle = 'Recipe Search Result';
+        model.currentYummlyPage = 0;
+
+        //event handler
         model.searchRecipes = searchRecipes;
         model.goToDetail = goToDetail;
         model.getMoreYummlyRecipe = getMoreYummlyRecipe;
         model.logout = logout;
 
-        model.sectionTitle = 'Recipe Search Result';
-
         init();
 
         function init() {
-
-            model.currentYummlyPage = 0;
-
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }

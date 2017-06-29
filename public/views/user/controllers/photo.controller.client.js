@@ -6,11 +6,13 @@
     function photoController($routeParams, $location, currentUser) {
         var model = this;
 
-        model.logout = logout;
-
+        //variable and route params
         model.user = currentUser;
         model.userId = currentUser._id;
         model.sectionTitle = "Photo";
+
+        //event handler
+        model.logout = logout;
 
         init();
 
@@ -20,8 +22,6 @@
             }
         }
 
-
-        // models.uploadPhoto = uploadPhoto;
         function logout() {
             userService
                 .logout()

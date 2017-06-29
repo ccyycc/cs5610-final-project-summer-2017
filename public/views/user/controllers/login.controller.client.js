@@ -7,9 +7,11 @@
 
         var model = this;
 
-        model.login = login;
-
+        //variable & route params
         model.sectionTitle = "Login";
+
+        //event handler
+        model.login = login;
 
         init();
 

@@ -8,16 +8,19 @@
 
         var model = this;
 
+        //variable & params
+        model.storeId = $routeParams['storeId'];
+        model.merchandiseId = $routeParams['merchandiseId'];
+        model.mode = $routeParams['mode'];
+        model.sectionTitle = "Product " + model.mode;
+        model.merchandiseNameStyle = "";
+
+        //event handler
         model.createMerchandise = createMerchandise;
         model.updateMerchandise = updateMerchandise;
         model.deleteMerchandise = deleteMerchandise;
         model.cancelMerchandise = navToMerchandise;
         model.logout = logout;
-
-        model.storeId = $routeParams['storeId'];
-        model.merchandiseId = $routeParams['merchandiseId'];
-        model.mode = $routeParams['mode'];
-        model.sectionTitle = "Product " + model.mode;
 
         init();
 
@@ -31,7 +34,6 @@
                 model.ifLoggedIn = true;
             }
 
-            model.merchandiseNameStyle = "";
 
             merchandiseService.findMerchandiseByStoreId(model.storeId)
                 .then(

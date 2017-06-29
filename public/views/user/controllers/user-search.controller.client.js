@@ -6,16 +6,17 @@
     function userSearchController($location, $routeParams, userService, currentUser) {
         var model = this;
 
+        //variable & route params
+        model.sectionTitle = "User Search";
+
+        //event handler
         model.logout = logout;
         model.searchUser = searchUser;
         model.navToUserProfile = navToUserProfile;
 
-        model.sectionTitle = "User Search";
-
         init();
 
         function init() {
-
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }

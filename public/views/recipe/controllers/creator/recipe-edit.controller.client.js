@@ -7,6 +7,11 @@
 
         var model = this;
 
+        //variable && route params
+        model.recipeId = $routeParams.recipeId;
+        model.newIngredient = {};
+
+        //event handler
         model.createSingleIngredient = createSingleIngredient;
         model.selectSingleIngredient = selectSingleIngredient;
         model.editSingleIngredient = editSingleIngredient;
@@ -17,11 +22,9 @@
         model.saveRecipe = saveRecipe;
         model.logout = logout;
 
-        model.recipeId = $routeParams.recipeId;
 
         function init() {
 
-            model.newIngredient = {};
 
             if (currentUser._id) {
                 model.ifLoggedIn = true;

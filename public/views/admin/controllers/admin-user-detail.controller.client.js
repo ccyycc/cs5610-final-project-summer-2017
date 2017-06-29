@@ -6,11 +6,15 @@
     function adminUserDetailController($location,userService, $routeParams, $location, currentUser) {
         var model = this;
 
+        //variable & route params
+        model.userId = $routeParams.userId;
+        model.sectionTitle = "Manage User Detail";
+        model.roles = ['USER', 'ADMIN', 'RECIPEPRO', 'MERCHANT'];
+
+        //event handlers
         model.updateUser = updateUser;
         model.logout = logout;
 
-        model.userId = $routeParams.userId;
-        model.sectionTitle = "Manage User Detail";
 
         init();
 
@@ -18,7 +22,6 @@
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }
-            model.roles = ['USER', 'ADMIN', 'RECIPEPRO', 'MERCHANT']
             findUserById();
         }
 

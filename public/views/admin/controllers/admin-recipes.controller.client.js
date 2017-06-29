@@ -6,12 +6,14 @@
     function adminRecipesController($location,userService, recipeService,currentUser) {
         var model = this;
 
+        //event handler
         model.deleteRecipe = deleteRecipe;
         model.createRecipe = createRecipe;
         model.selectRecipe = selectRecipe;
         model.updateRecipe = updateRecipe;
         model.logout = logout;
 
+        //variable & route params
         model.sectionTitle = "Manage Recipes";
 
         init();

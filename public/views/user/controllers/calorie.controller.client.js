@@ -7,12 +7,14 @@
 
         var model = this;
 
+        //variable & route params
+        model.userId = currentUser.userId;
+        model.sectionTitle = "BMI Calculator";
+
+        //event handler
         model.updateUser = updateUser;
         model.countCalorie = countCalorie;
         model.logout = logout;
-
-        model.sectionTitle = "BMI Calculator";
-        model.userId = currentUser.userId;
 
         init();
 

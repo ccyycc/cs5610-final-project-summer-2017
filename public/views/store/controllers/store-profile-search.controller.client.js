@@ -6,12 +6,16 @@
     function storeProfileSearchController($location, storeService, userService, currentUser) {
 
         var model = this;
+
+        //variable & route params
+        model.sectionTitle = "Store Search Result";
+
+        //event handler
         model.searchStores = searchStores;
         model.goToDetail = goToDetail;
         model.logout = logout;
         model.navToStoreProfile = navToStoreProfile;
 
-        model.sectionTitle = "Store Search Result";
 
         init();
 

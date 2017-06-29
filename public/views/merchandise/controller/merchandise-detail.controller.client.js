@@ -6,36 +6,33 @@
     function merchandiseDetailController($location, $routeParams, merchandiseService, associationService,
                                          currentUser, storeService, userService) {
         var model = this;
+        //variable &&route params
+        model.storeId = $routeParams['storeId'];
+        model.merchandiseId = $routeParams['merchandiseId'];
+        model.sectionTitle = "Product Detail";
+        model.comments = [];
+        model.newComment = undefined;
+        model.like = false;
+        model.likeAssociation = {
+            fromWhom: currentUser._id,
+            toMerchandise: model.merchandiseId,
+            type: 'LIKE'
+        };
         //event handler
         model.editMerchandise = editMerchandise;
-
         model.createComment = createComment;
         model.deleteComment = deleteComment;
         model.likeMerchandise = likeMerchandise;
         model.unlikeMerchandise = unlikeMerchandise;
         model.logout = logout;
 
-        model.sectionTitle = "Product Detail";
-        model.storeId = $routeParams['storeId'];
-        model.merchandiseId = $routeParams['merchandiseId'];
 
         init();
 
         function init() {
-
             if (currentUser._id) {
                 model.ifLoggedIn = true;
             }
-
-            model.comments = [];
-            model.newComment = undefined;
-            model.like = false;
-            model.likeAssociation = {
-                fromWhom: currentUser._id,
-                toMerchandise: model.merchandiseId,
-                type: 'LIKE'
-            };
-
 
             model.merchandise = merchandiseService.findMerchandiseById(model.merchandiseId)
                 .then(
@@ -100,6 +97,8 @@
             associationService
                 .createAssociation(model.newComment)
                 .then(function (comment) {
+                    comment.fromWhom = {};
+                    comment.fromWhom.username = currentUser.username;
                     model.comments.push(comment);
                     model.newComment = undefined;
                 });

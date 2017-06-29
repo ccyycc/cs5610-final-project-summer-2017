@@ -7,11 +7,14 @@
                                        currentUser, userService, storeService) {
         var model = this;
 
+        //variable && route params
+        model.storeId = $routeParams['storeId'];
+        model.sectionTitle = "Product List";
+
+        //event handlers
         model.createMerchandise = createMerchandise;
         model.logout = logout;
 
-        model.storeId = $routeParams['storeId'];
-        model.sectionTitle = "Product List";
 
         init();
 
