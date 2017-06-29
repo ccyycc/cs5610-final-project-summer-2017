@@ -3,7 +3,8 @@
 <div class="container-fluid main-container">
     <ul class="list-group">
         <li class="input-group">
-            <span class="input-group-addon" id="id">
+            <span class="input-group-addon"
+                  id="id">
                 ID
             </span>
 
@@ -12,7 +13,8 @@
                    class="form-control">
         </li>
         <li class="input-group">
-            <span class="input-group-addon" id="username">
+            <span class="input-group-addon"
+                  id="username">
                 Username
             </span>
             <input type="text"
@@ -21,7 +23,8 @@
                    ng-model="model.user.username">
         </li>
         <li class="input-group">
-            <span class="input-group-addon" id="firstName">
+            <span class="input-group-addon"
+                  id="firstName">
                 FirstName
             </span>
             <input type="text"
@@ -30,7 +33,8 @@
                    ng-model="model.user.firstName">
         </li>
         <li class="input-group">
-            <span class="input-group-addon" id="lastName">
+            <span class="input-group-addon"
+                  id="lastName">
                 LastName
             </span>
             <input type="text"
@@ -39,7 +43,8 @@
                    ng-model="model.user.lastName">
         </li>
         <li class="input-group">
-            <span class="input-group-addon" id="email">
+            <span class="input-group-addon"
+                  id="email">
                 Email
             </span>
             <input type="text"
@@ -50,7 +55,8 @@
         <li class="input-group">
 
 
-            <span class="input-group-addon" id="role">
+            <span class="input-group-addon"
+                  id="role">
                 Role
             </span>
 
@@ -60,14 +66,16 @@
                         aria-describedby="role"
                         data-ng-model="model.user.role">
                     <option ng-repeat="role in model.roles"
-                            ng-selected="model.user.role == role" value="{{role}}">
+                            ng-selected="model.user.role == role"
+                            value="{{role}}">
                         {{role}}
                     </option>
                 </select>
             </span>
         </li>
         <li class="input-group">
-            <span class="input-group-addon" id="followers">
+            <span class="input-group-addon"
+                  id="followers">
                 Followers
             </span>
             <input type="text"
@@ -76,7 +84,8 @@
                    ng-model="model.user.followers">
         </li>
         <li class="input-group">
-            <span class="input-group-addon" id="followings">
+            <span class="input-group-addon"
+                  id="followings">
                 Followings
             </span>
             <input type="text"
@@ -85,7 +94,8 @@
                    ng-model="model.user.followings">
         </li>
         <li class="input-group">
-            <span class="input-group-addon" id="likedRecipes">
+            <span class="input-group-addon"
+                  id="likedRecipes">
                 Liked Recipes
             </span>
             <input type="text"
@@ -94,7 +104,8 @@
                    ng-model="model.user.likedRecipes">
         </li>
         <li class="input-group">
-            <span class="input-group-addon" id="collectedProducts">
+            <span class="input-group-addon"
+                  id="collectedProducts">
                 Collected Products
             </span>
             <input type="text"

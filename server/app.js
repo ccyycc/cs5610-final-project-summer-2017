@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
 mongoose.Promise = require('q').Promise;
 
-var connectionString ='mongodb://localhost/finalProject';
+var connectionString = 'mongodb://localhost/finalProject';
 
-if(process.env.MLAB_USERNAME) {
+if (process.env.MLAB_USERNAME) {
     connectionString = process.env.MLAB_USERNAME + ":" +
-                       process.env.MLAB_PASSWORD + "@ds139322.mlab.com:39322/heroku_3mxxkrfs";
+        process.env.MLAB_PASSWORD + "@ds139322.mlab.com:39322/heroku_3mxxkrfs";
 }
 
 

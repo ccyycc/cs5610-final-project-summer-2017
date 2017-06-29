@@ -8,13 +8,12 @@ app.post('/api/store/:storeId/merchandise', createMerchandise);
 app.get('/api/store/:storeId/merchandise', findAllMerchandisesForStore);
 app.get('/api/merchandise/:merchandiseId', findMerchandiseById);
 app.get('/api/merchandise/name/:name', findMerchandiseByName);
-app.get('/api/merchandises',isAdmin, findAllMerchandises);
+app.get('/api/merchandises', isAdmin, findAllMerchandises);
 
 app.put('/api/merchandise/:merchandiseId', updateMerchandise);
 app.delete('/api/merchandise/:merchandiseId', deleteMerchandise);
 
 app.post('/api/upload/merchandise/picture', upload.single('myFile'), uploadImage);
-
 
 
 function uploadImage(req, res) {

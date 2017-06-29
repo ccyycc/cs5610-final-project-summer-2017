@@ -18,7 +18,8 @@
          class="navbar-inverse navbar-collapse collapse">
         <ul class="nav navbar-nav">
             <li class="active"><a href="">Home</a></li>
-            <li><a ng-if="model.currentUser.role === 'ADMIN'" href="#!/admin">Admin</a></li>
+            <li><a ng-if="model.currentUser.role === 'ADMIN'"
+                   href="#!/admin">Admin</a></li>
             <li ng-show="!model.currentUser._id"><a href="#!/login">Login</a></li>
             <li ng-show="!model.currentUser._id"><a href="#!/register">Register</a></li>
             <li ng-show="model.currentUser._id"><a href="#!/profile">Profile</a></li>
@@ -27,31 +28,27 @@
     </div><!--/.navbar-collapse -->
 </nav>
 
-<div class="container-fluid">
-
-
-    <div class="home-picture-frame">
-        <img src="https://www.usnews.com/dims4/USNEWS/bcd7e97/2147483647/thumbnail/970x647/quality/85/?url=%2Fcmsmedia%2Fe6%2F4d%2F24ae69104af8a3325e4ec4323d2b%2F150526-variousfoods-stock.jpg"
-             class="img-thumbnail home-img-width" >
-        <div class=" input-group home-search-bar-position">
+<div id="home"
+     class="full-height">
+    <div class=" input-group home-search-bar-position">
              <span class="input-group-btn form-group home-search-option-width">
                 <select ng-model="model.searchType"
-                class="form-control"
-                ng-options="searchOption.value as searchOption.label for searchOption in model.searchOptions"
-                ng-init="model.model.searchOptions[0].value"></select>
+                        class="form-control"
+                        ng-options="searchOption.value as searchOption.label for searchOption in model.searchOptions"
+                        ng-init="model.model.searchOptions[0].value"></select>
             </span>
-            <input ng-model="model.searchContent"
-                   type="text"
-                   class="form-control">
+        <input ng-model="model.searchContent"
+               type="text"
+               class="form-control">
 
-            <span class="input-group-btn">
+        <span class="input-group-btn">
            <a ng-click="model.searchWithCoords()"
-              class="btn btn-default" type="button">
+              class="btn btn-default"
+              type="button">
                <span class="glyphicon glyphicon-search"></span>
            </a>
 
        </span>
-        </div>
     </div>
 </div>
 <div ng-include="'./views/common/footer.view.client.html'"></div>

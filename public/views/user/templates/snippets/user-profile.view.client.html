@@ -1,27 +1,28 @@
 <div class="profile-container">
-    <ul class="nav nav-pills nav-justified margin-top-15" id="account-box-nav">
+    <ul class="nav nav-pills nav-justified margin-top-15"
+        id="account-box-nav">
         <!--<li role="presentation" class="active"><a>Collections</a></li>-->
-        <li role="presentation" ng-class="{'active': model.recipeOrProduct == 'RECIPE'}">
+        <li role="presentation"
+            ng-class="{'active': model.recipeOrProduct == 'RECIPE'}">
             <a ng-click="model.showLikedRecipes()">Liked Recipes</a></li>
-        <li role="presentation" ng-class="{'active': model.recipeOrProduct == 'PRODUCT'}">
+        <li role="presentation"
+            ng-class="{'active': model.recipeOrProduct == 'PRODUCT'}">
             <a ng-click="model.showCollectedProducts()">Liked Products</a></li>
-        <li role="presentation" ng-class="{'active': model.recipeOrProduct == 'STORE'}">
+        <li role="presentation"
+            ng-class="{'active': model.recipeOrProduct == 'STORE'}">
             <a ng-click="model.showLikedStores()">Liked Stores</a></li>
     </ul>
 
     <div ng-switch="model.recipeOrProduct"
          class="profile-container">
         <div ng-switch-when="RECIPE">
-            <ng-include
-                    src="'./views/user/templates/snippets/likedRecipes.view.client.html'"></ng-include>
+            <ng-include src="'./views/user/templates/snippets/likedRecipes.view.client.html'"></ng-include>
         </div>
         <div ng-switch-when="PRODUCT">
-            <ng-include
-                    src="'./views/user/templates/snippets/collectedProducts.view.client.html'"></ng-include>
+            <ng-include src="'./views/user/templates/snippets/collectedProducts.view.client.html'"></ng-include>
         </div>
         <div ng-switch-when="STORE">
-            <ng-include
-                    src="'./views/user/templates/snippets/likedStores.view.client.html'"></ng-include>
+            <ng-include src="'./views/user/templates/snippets/likedStores.view.client.html'"></ng-include>
         </div>
     </div>
 </div>

@@ -1,8 +1,12 @@
 <div ng-include="'./views/common/header.view.client.html'"></div>
 
 <div class="container-fluid main-container">
-    <div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
-    <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
+    <div ng-show="model.message"
+         class="alert alert-info">{{model.message}}
+    </div>
+    <div ng-show="model.error"
+         class="alert alert-danger">{{model.error}}
+    </div>
 
     <ul class="list-group">
         <li class="list-group-item">
@@ -20,7 +24,7 @@
 
                 </div>
                 <!--<div class="col-xs-3">-->
-                    <!--Description-->
+                <!--Description-->
                 <!--</div>-->
 
             </div>
@@ -36,25 +40,27 @@
                 </div>
                 <div class="col-xs-3">
                     <input ng-model="model.recipe.name"
-                    class="form-control">
+                           class="form-control">
                 </div>
                 <div class="col-xs-3">
                     <input ng-model="model.username"
                            class="form-control">
                 </div>
                 <!--<div class="col-xs-2">-->
-                    <!--<input ng-model="model.recipe.description"-->
-                           <!--class="form-control">-->
+                <!--<input ng-model="model.recipe.description"-->
+                <!--class="form-control">-->
                 <!--</div>-->
 
                 <div class="col-xs-2 text-center">
-                    <span ng-click="model.createRecipe(model.username, model.recipe)" class="glyphicon glyphicon-plus"></span>
+                    <span ng-click="model.createRecipe(model.username, model.recipe)"
+                          class="glyphicon glyphicon-plus"></span>
                     <!--<span ng-click="model.updateRecipe(model.username, model.recipe)" class="glyphicon glyphicon-ok"></span>-->
                 </div>
             </div>
         </li>
 
-        <li ng-repeat="recipe in model.recipes" class="list-group-item">
+        <li ng-repeat="recipe in model.recipes"
+            class="list-group-item">
 
             <div class="row">
                 <div class="col-xs-4">
@@ -67,12 +73,14 @@
                     {{recipe._creator.username}}
                 </div>
                 <!--<div class="col-xs-2">-->
-                    <!--{{recipe.description}}-->
+                <!--{{recipe.description}}-->
                 <!--</div>-->
 
                 <div class="col-xs-2 text-center">
-                    <span ng-click="model.deleteRecipe(recipe)" class="glyphicon glyphicon-remove"></span>
-                    <span ng-click="model.selectRecipe(recipe)" class="glyphicon glyphicon-pencil"></span>
+                    <span ng-click="model.deleteRecipe(recipe)"
+                          class="glyphicon glyphicon-remove"></span>
+                    <span ng-click="model.selectRecipe(recipe)"
+                          class="glyphicon glyphicon-pencil"></span>
                 </div>
             </div>
         </li>

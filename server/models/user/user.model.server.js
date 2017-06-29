@@ -191,7 +191,7 @@ function findUserByFacebookId(facebookId) {
 function findUserByUsername(username) {
     return userModel.findOne({username: username});
 }
-function findUserByPartialUsername(username){
+function findUserByPartialUsername(username) {
     return userModel
         .find({username: new RegExp(username, "i")})
 }

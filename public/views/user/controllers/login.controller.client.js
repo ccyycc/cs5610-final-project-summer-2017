@@ -27,8 +27,8 @@
 
                 }, function (error) {
                     model.message = "login " + username + " unsuccessfully," +
-                                    " please check the username and password and try" +
-                                    " again";
+                        " please check the username and password and try" +
+                        " again";
                 })
         }
     }

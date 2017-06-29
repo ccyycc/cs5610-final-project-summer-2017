@@ -2,7 +2,8 @@
 
 
 <div class="container-fluid main-container">
-    <ul class="nav nav-pills nav-justified" id="account-box-nav">
+    <ul class="nav nav-pills nav-justified"
+        id="account-box-nav">
         <li class="{{model.inboxActive}}"><a ng-click="model.showInbox()">Inbox</a></li>
         <li class="{{model.outboxActive}}"><a ng-click="model.showOutbox()">Outbox</a></li>
     </ul>
@@ -13,10 +14,12 @@
                 <div class="col-sm-2 hidden-xs">
                     <br>
                 </div>
-                <div class="col-xs-2" ng-show="model.inboxActive">
+                <div class="col-xs-2"
+                     ng-show="model.inboxActive">
                     <b>From</b>
                 </div>
-                <div class="col-xs-2" ng-show="model.outboxActive">
+                <div class="col-xs-2"
+                     ng-show="model.outboxActive">
                     <b>To</b>
                 </div>
                 <div class="col-xs-5">
@@ -32,17 +35,23 @@
             <li class="list-group-item">
                 <div class="row">
 
-                    <div class="col-sm-2 hidden-xs" ng-show="model.inboxActive">
-                        <img ng-src="{{message.fromWhom.photo}}" width="50%"/>
+                    <div class="col-sm-2 hidden-xs"
+                         ng-show="model.inboxActive">
+                        <img ng-src="{{message.fromWhom.photo}}"
+                             width="50%"/>
                     </div>
-                    <div class="col-xs-2" ng-show="model.inboxActive">
+                    <div class="col-xs-2"
+                         ng-show="model.inboxActive">
                         <a ng-href="#!/profile/{{message.fromWhom._id}}">{{message.fromWhom.username}}</a>
                     </div>
 
-                    <div class="col-sm-2 hidden-xs" ng-show="model.outboxActive">
-                        <img ng-src="{{message.toWhom.photo}}" width="50%"/>
+                    <div class="col-sm-2 hidden-xs"
+                         ng-show="model.outboxActive">
+                        <img ng-src="{{message.toWhom.photo}}"
+                             width="50%"/>
                     </div>
-                    <div class="col-xs-2" ng-show="model.outboxActive">
+                    <div class="col-xs-2"
+                         ng-show="model.outboxActive">
                         <a ng-href="#!/profile/{{message.toWhom._id}}">{{message.toWhom.username}}</a>
                     </div>
 

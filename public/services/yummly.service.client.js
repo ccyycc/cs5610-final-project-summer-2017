@@ -21,7 +21,7 @@
                 .replace("app-id", id)
                 .replace("app-key", key)
                 .replace("your_search_parameters", searchTerm)
-                .replace("start_index", index*12);
+                .replace("start_index", index * 12);
             return $http.get(url)
                 .then(function (response) {
                     return response.data.matches;

@@ -50,15 +50,15 @@
         function searchWithAddress() {
             model.isSearching = true;
             var fullAddress = model.address.street
-                              + "+" + model.address.city
-                              + "+" + model.address.state
-                              + "+" + model.address.zip;
+                + "+" + model.address.city
+                + "+" + model.address.state
+                + "+" + model.address.zip;
             fullAddress = fullAddress.replace(/\s/g, '+');
 
             MapService.searchWithAddress(fullAddress)
                 .then(
                     function (res) {
-                        model.isSearching=false;
+                        model.isSearching = false;
                         model.places = res.results;
                     }
                 );

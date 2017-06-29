@@ -38,21 +38,21 @@
         }
 
 
-        function searchWithCoords(){
+        function searchWithCoords() {
 
 
-            switch(model.searchType) {
+            switch (model.searchType) {
                 case "recipe":
-                    $location.url('/recipe_list?search='+model.searchContent);
+                    $location.url('/recipe_list?search=' + model.searchContent);
                     break;
                 case "UserProfile":
-                    $location.url('/search/user?search='+model.searchContent);
+                    $location.url('/search/user?search=' + model.searchContent);
                     break;
                 case "StoreProfile":
-                    $location.url('/search/store?search='+model.searchContent);
+                    $location.url('/search/store?search=' + model.searchContent);
                     break;
                 case "merchandise":
-                    $location.url('/search/merchandise?search='+model.searchContent);
+                    $location.url('/search/merchandise?search=' + model.searchContent);
                     break;
                 default:
                     text = "I have never heard of that fruit...";

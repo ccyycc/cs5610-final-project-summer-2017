@@ -60,14 +60,14 @@
             <div class="row">
                 <div>
                     <p>
-                    <b>Number of servings: </b> {{model.recipe.numberOfServings}}<br>
-                    <b>Total time (in min): </b> {{model.recipe.totalTime}}<br>
+                        <b>Number of servings: </b> {{model.recipe.numberOfServings}}<br>
+                        <b>Total time (in min): </b> {{model.recipe.totalTime}}<br>
                         <img ng-if="model.ifLocal"
                              id="recipe-image-show"
                              class="hidden-xs img-rounded pull-right"
                              ng-src="{{model.recipe.image}}"
                              onerror="this.onerror=null; this.src='/resource/defaultPics/placeholder-image10.jpg'"/>
-                    <b>Description: </b><br> {{model.recipe.description}}<br>
+                        <b>Description: </b><br> {{model.recipe.description}}<br>
                     </p>
                 </div>
                 <!--</div>-->

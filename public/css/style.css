@@ -1,6 +1,6 @@
 #home {
-    background-image: url(../vendor/pics/food-wallpapers-high-quality-resolution-For-Desktop-Wallpaper.jpg);
-    background-size: auto;
+    background-image: url(https://www.usnews.com/dims4/USNEWS/bcd7e97/2147483647/thumbnail/970x647/quality/85/?url=%2Fcmsmedia%2Fe6%2F4d%2F24ae69104af8a3325e4ec4323d2b%2F150526-variousfoods-stock.jpg);
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
@@ -327,11 +327,10 @@ a:focus, a:hover, a:visited {
 
 .home-picture-frame {
     position: relative;
-    margin-top: 30px
 }
 
-.home-img-width {
-    width: 100%
+.full-height {
+    height: 100%;
 }
 
 .home-search-bar-position {

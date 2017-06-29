@@ -3,7 +3,7 @@
         .module('FinalProject')
         .controller('adminRecipesController', adminRecipesController);
 
-    function adminRecipesController($location,userService, recipeService,currentUser) {
+    function adminRecipesController($location, userService, recipeService, currentUser) {
         var model = this;
 
         model.deleteRecipe = deleteRecipe;
@@ -22,7 +22,6 @@
             }
             findAllRecipes();
         }
-
 
 
         function logout() {

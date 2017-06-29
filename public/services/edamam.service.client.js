@@ -17,7 +17,7 @@
             var url = urlBase
                 .replace("app-id", id)
                 .replace("app-key", key)
-                .replace("ingredient-name", 'a%20'+searchTerm)
+                .replace("ingredient-name", 'a%20' + searchTerm)
                 .replace(" ", '%20');
             return $http.get(url)
                 .then(function (response) {

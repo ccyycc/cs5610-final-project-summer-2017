@@ -205,7 +205,7 @@ function findAllRecipeReview(recipeId) {
 }
 
 
-function deleteComment(userId,commentId) {
+function deleteComment(userId, commentId) {
     var userModel = require('../user/user.model.server');
     return userModel
         .deleteMessage(userId, commentId)
@@ -231,7 +231,7 @@ function createMessage(myId, userId, message) {
         content: message,
         fromWhom: myId,
         toWhom: userId,
-        type:'COMMENT'
+        type: 'COMMENT'
     };
     return associationModel
         .createAssociation(comment)
@@ -241,7 +241,7 @@ function createMessage(myId, userId, message) {
 }
 
 function renderMessage(userId, dir) {
-    if ( dir ==='in') {
+    if (dir === 'in') {
         return associationModel
             .find({toWhom: userId})
             .populate('fromWhom')

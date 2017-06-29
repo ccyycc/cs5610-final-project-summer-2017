@@ -16,8 +16,8 @@
 
         this.findStoreByName = findStoreByName;
 
-        function findStoreByNameParams(storeName){
-            var url = "/api/store/search/"+storeName;
+        function findStoreByNameParams(storeName) {
+            var url = "/api/store/search/" + storeName;
             return $http.get(url)
                 .then(extractData);
         }
@@ -47,7 +47,7 @@
         }
 
         function findStoreByName(name) {
-            var url='/api/store?name=' + name;
+            var url = '/api/store?name=' + name;
             return $http.get(url)
                 .then(extractData);
         }

@@ -19,7 +19,6 @@ app.post('/api/recipe/upload', upload.single('myFile'), uploadImage);
 app.post('/api/yummly/recipeCopy', createYummlyLocalRecipeCopy);
 
 
-
 function findYummlyRecipeCopyByYummlyId(req, res) {
     var recipeId = req.params.recipeId;
     recipeModel

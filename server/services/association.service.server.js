@@ -35,10 +35,10 @@ function createAssociation(req, res) {
 }
 function updateAssociation(req, res) {
     var association = req.body;
-    var associationId= req.params.id;
+    var associationId = req.params.id;
 
     associationModel
-        .updateAssociation(associationId,association)
+        .updateAssociation(associationId, association)
         .then(function (association) {
             res.json(association);
         }, function () {
@@ -47,8 +47,8 @@ function updateAssociation(req, res) {
 }
 
 
-function findAssociationById(req,res){
-    var associationId= req.params["id"]();
+function findAssociationById(req, res) {
+    var associationId = req.params["id"]();
 
     associationModel
         .findAssociationById(associationId)
@@ -60,7 +60,7 @@ function findAssociationById(req,res){
 }
 
 
-function findAllAssociationByType(req,res) {
+function findAllAssociationByType(req, res) {
     var associationType = req.params['type'].toUpperCase();
     associationModel
         .findAllAssociationByType(associationType)
@@ -71,11 +71,11 @@ function findAllAssociationByType(req,res) {
         })
 }
 
-function findAssociationForSource(req,res){
+function findAssociationForSource(req, res) {
     var associationType = req.params['type'].toUpperCase();
     var sourceId = req.params['sourceId'];
     associationModel
-        .findAssociationForSource(associationType,sourceId)
+        .findAssociationForSource(associationType, sourceId)
         .then(function (association) {
             res.json(association);
         }, function () {
@@ -83,12 +83,12 @@ function findAssociationForSource(req,res){
         })
 }
 
-function findAssociationForTarget(req,res){
+function findAssociationForTarget(req, res) {
     var associationType = req.params['type'].toUpperCase();
     var targetId = req.params['targetId'];
     var targetType = req.params['targetType'];
     associationModel
-        .findAssociationForTarget(associationType,targetType,targetId)
+        .findAssociationForTarget(associationType, targetType, targetId)
         .then(function (association) {
             res.json(association);
         }, function () {
@@ -96,14 +96,14 @@ function findAssociationForTarget(req,res){
         })
 }
 
-function findAssociationForSourceTarget(req,res){
+function findAssociationForSourceTarget(req, res) {
     var associationType = req.params['type'].toUpperCase();
     var sourceId = req.params['sourceId'];
     var targetId = req.params['targetId'];
     var targetType = req.params['targetType'];
 
     associationModel
-        .findAssociationForSourceTarget(associationType,sourceId,targetType,targetId)
+        .findAssociationForSourceTarget(associationType, sourceId, targetType, targetId)
         .then(function (association) {
             res.json(association);
         }, function () {

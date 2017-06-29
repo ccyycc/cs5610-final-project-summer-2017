@@ -3,7 +3,7 @@
         .module('FinalProject')
         .controller('adminController', adminController);
 
-    function adminController($location,currentUser) {
+    function adminController($location, currentUser) {
         var model = this;
 
         model.logout = logout;
@@ -18,6 +18,7 @@
                 model.ifLoggedIn = true;
             }
         }
+
         function logout() {
             userService
                 .logout()

@@ -2,8 +2,12 @@
 
 <div class="container-fluid main-container">
 
-    <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
-    <div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
+    <div ng-show="model.error"
+         class="alert alert-danger">{{model.error}}
+    </div>
+    <div ng-show="model.message"
+         class="alert alert-info">{{model.message}}
+    </div>
 
 
     <form>
@@ -33,14 +37,19 @@
         </div>
         <div class="form-group">
             Gender:
-            <input type="radio" ng-model="model.user.gender" value="male"> Male
-            <input type="radio" ng-model="model.user.gender" value="female"> Female
+            <input type="radio"
+                   ng-model="model.user.gender"
+                   value="male"> Male
+            <input type="radio"
+                   ng-model="model.user.gender"
+                   value="female"> Female
         </div>
     </form>
     <a class="btn btn-primary btn-block form-control"
        ng-click="model.countCalorie(model.user)">Count BMR and BMI</a>
 
-    <div ng-show="model.calorie" class="alert alert-info">
+    <div ng-show="model.calorie"
+         class="alert alert-info">
         <div class="row">
             <div class="col-sm-8">
                 <h3>Your BMR (Basal Metabolic Rate) is {{model.calorie}}</h3>
