@@ -6,13 +6,13 @@
     function adminStoresController($location,userService, storeService,currentUser) {
         var model = this;
 
-        model.sectionTitle = "Manage Store Profile";
-
         model.deleteStore = deleteStore;
         model.createStore = createStore;
         model.selectStore = selectStore;
         model.updateStore = updateStore;
         model.logout = logout;
+
+        model.sectionTitle = "Manage Store Profile";
 
         init();
 

@@ -6,12 +6,11 @@
     function adminUserDetailController($location,userService, $routeParams, $location, currentUser) {
         var model = this;
 
-        model.sectionTitle = "Manage User Detail";
-        model.userId = $routeParams.userId;
-
-        model.logout = logout;
         model.updateUser = updateUser;
+        model.logout = logout;
 
+        model.userId = $routeParams.userId;
+        model.sectionTitle = "Manage User Detail";
 
         init();
 

@@ -10,15 +10,16 @@
                                      recipeService,
                                      merchandiseService,
                                      currentUser) {
-        var model = this;
 
-        model.sectionTitle = "Manage Comments";
+        var model = this;
 
         model.deleteComment = deleteComment;
         model.createComment = createComment;
         model.selectComment = selectComment;
         model.updateComment = updateComment;
         model.logout = logout;
+
+        model.sectionTitle = "Manage Comments";
 
         init();
 
