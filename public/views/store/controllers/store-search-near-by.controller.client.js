@@ -39,6 +39,7 @@
 
 
         function searchWithCoords() {
+            model.isSearching = true;
             if ($window.navigator.geolocation) {
                 return $window.navigator.geolocation.getCurrentPosition(requestSearchWithCoords);
             } else {
@@ -47,6 +48,7 @@
         }
 
         function searchWithAddress() {
+            model.isSearching = true;
             var fullAddress = model.address.street
                               + "+" + model.address.city
                               + "+" + model.address.state
@@ -56,6 +58,7 @@
             MapService.searchWithAddress(fullAddress)
                 .then(
                     function (res) {
+                        model.isSearching=false;
                         model.places = res.results;
                     }
                 );
@@ -66,6 +69,7 @@
             MapService.searchWithCoords(currentCoords)
                 .then(
                     function (res) {
+                        model.isSearching = false;
                         model.places = res.results;
                     }
                 );

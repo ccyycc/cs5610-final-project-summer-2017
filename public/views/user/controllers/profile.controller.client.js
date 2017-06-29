@@ -28,7 +28,10 @@
 
             if (currentUser._id) {
                 model.ifLoggedIn = true;
+                model.isGeneralUser = currentUser.role === 'USER';
             }
+
+
             if (!$routeParams.uid || currentUser._id === $routeParams.uid) {
                 model.isMyProfile = true;
                 model.profileId = $routeParams.uid || currentUser._id;

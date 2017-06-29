@@ -53,7 +53,7 @@
                         </a>
                     </span>
             </div>
-            <div ng-if="!model.isMyProfile">
+            <div ng-if="!model.isMyProfile && model.isGeneralUser">
                 <a class="margin-top-15 btn btn-primary toBottom form-control"
                    ng-show="model.followed == false"
                    ng-click="model.follow()">
