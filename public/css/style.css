@@ -2,6 +2,7 @@
     background-image: url(https://www.usnews.com/dims4/USNEWS/bcd7e97/2147483647/thumbnail/970x647/quality/85/?url=%2Fcmsmedia%2Fe6%2F4d%2F24ae69104af8a3325e4ec4323d2b%2F150526-variousfoods-stock.jpg);
     background-size: cover;
     background-repeat: no-repeat;
+    height: 100vh;
 }
 
 input.form-control,
@@ -329,9 +330,6 @@ a:focus, a:hover, a:visited {
     position: relative;
 }
 
-.full-height {
-    height: 100%;
-}
 
 .home-search-bar-position {
     position: absolute;
