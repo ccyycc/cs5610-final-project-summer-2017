@@ -183,15 +183,16 @@
                 .then(function (comments) {
                     console.log(comments)
                     for (var c = 0; c < comments.length; c++) {
-                        if (comments[c].toRecipe !== undefined) {
+                        if (comments[c].toRecipe) {
                             comments[c].toName = comments[c].toRecipe.name;
                             comments[c].toId = comments[c].toRecipe._id;
                             comments[c].toType = 'Recipe';
-                        } else if (comments[c].toStore !== undefined) {
+                        } else if (comments[c].toStore) {
                             comments[c].toName = comments[c].toStore.name;
                             comments[c].toId = comments[c].toStore._id;
                             comments[c].toType = 'Store';
-                        } else if (comments[c].toMerchandise !== undefined) {
+
+                        } else if (comments[c].toMerchandise) {
                             comments[c].toName = comments[c].toMerchandise.name;
                             comments[c].toId = comments[c].toMerchandise._id;
                             comments[c].toType = 'Merchandise';
