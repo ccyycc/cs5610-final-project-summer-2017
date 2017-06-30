@@ -16,13 +16,13 @@
                 <p class="text-on-image">{{recipe.name}}</p>
             </a>
         </div>
-        <div ng-show="model.canEdit()"
+        <div ng-click="model.createRecipe()"
+             ng-show="model.canEdit()"
              class="col-xs-12 col-sm-6 col-md-4 text-center recipeListImages">
             <img class="recipeListImage"
                  src="/resource/defaultPics/addphoto.png"/>
             <a href="">
-                <p ng-click="model.createRecipe()"
-                   class="text-on-image">Add New Recipe!</p>
+                <p class="text-on-image">Add New Recipe!</p>
             </a>
         </div>
     </div>

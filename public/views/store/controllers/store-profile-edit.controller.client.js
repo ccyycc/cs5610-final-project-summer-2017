@@ -9,8 +9,8 @@
         //variable & route params
         model.storeId = $routeParams['storeId'];
         model.mode = $routeParams['mode'];
+        model.sectionTitle = model.mode+" Store";
         model.user = currentUser;
-        model.sectionTitle = "New Store";
         model.days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
         model.store = {};
 

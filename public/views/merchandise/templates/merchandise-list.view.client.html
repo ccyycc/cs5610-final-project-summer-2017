@@ -23,12 +23,12 @@
                 <p class="text-on-image">{{merchandise.name}}</p>
             </a>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 text-center recipeListImages">
+        <div ng-click="model.createMerchandise()"
+             class="col-xs-12 col-sm-6 col-md-4 text-center recipeListImages">
             <img class="recipeListImage"
                  src="/resource/defaultPics/addphoto.png"/>
             <a href="">
-                <p ng-click="model.createMerchandise()"
-                   class="text-on-image">Add New Merchandise!</p>
+                <p class="text-on-image">Add New Merchandise!</p>
             </a>
         </div>
     </div>
