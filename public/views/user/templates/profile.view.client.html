@@ -47,7 +47,8 @@
             <p class="textToCenter"
                ng-if="model.user.role === 'ADMIN'">
                 Administer</p>
-            <div class="margin-top-15 input-group">
+            <div class="margin-top-15 input-group"
+            ng-if="!model.isMyProfile">
                 <input class="form-control"
                        ng-model="model.message">
                 <span class="input-group-btn">
