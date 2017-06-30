@@ -26,23 +26,29 @@
                 <div class="col-xs-3">
                     <input ng-model="model.fromName"
                            class="form-control"
-                           readonly>
+                           >
                 </div>
 
                 <div class="col-xs-3">
                     <input ng-model="model.comment.toId"
                            class="form-control"
-                           readonly>
+                           >
                 </div>
 
                 <div class="col-xs-4">
-                    <input ng-model="model.toType"
-                           class="form-control"
-                           readonly>
-
+                    <select class="form-control"
+                            data-ng-model="model.toType">
+                        <option ng-repeat="type in model.types"
+                                ng-init="model.toType='Recipe'"
+                                ng-selected="model.toType == type" value="{{type}}">
+                            {{type}}
+                        </option>
+                    </select>
                 </div>
 
                 <div class="col-xs-2 text-center">
+                    <span ng-click="model.createComment(model.fromName, model.toType, model.comment)"
+                          class="glyphicon glyphicon-plus"></span>
                     <span ng-click="model.updateComment(model.fromName, model.toType, model.comment)"
                           class="glyphicon glyphicon-ok"></span>
                 </div>
@@ -93,7 +99,7 @@
                     <span class="input-group-addon">
                         From
                     </span>
-                <input readonly
+                <input
                        ng-model="model.fromName"
                        class="form-control">
             </div>
@@ -102,7 +108,7 @@
                 <span class="input-group-addon">
                         To
                     </span>
-                <input readonly
+                <input
                        ng-model="model.comment.toId"
                        class="form-control">
             </div>
@@ -110,9 +116,15 @@
                 <span class="input-group-addon">
                         Type
                     </span>
-                <input ng-model="model.toType"
-                       class="form-control"
-                       readonly>
+
+                <select class="form-control"
+                        data-ng-model="model.toType">
+                    <option ng-repeat="type in model.types"
+                            ng-init="model.toType='Recipe'"
+                            ng-selected="model.toType == type" value="{{type}}">
+                        {{type}}
+                    </option>
+                </select>
 
             </div>
             <div class="input-group">
