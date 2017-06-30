@@ -181,6 +181,7 @@
             associationService
                 .findAllComments()
                 .then(function (comments) {
+                    console.log(comments)
                     for (var c = 0; c < comments.length; c++) {
                         if (comments[c].toRecipe !== undefined) {
                             comments[c].toName = comments[c].toRecipe.name;
