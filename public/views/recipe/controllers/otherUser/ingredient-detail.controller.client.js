@@ -3,7 +3,7 @@
         .module("FinalProject")
         .controller("ingredientDetailController", IngredientDetailController);
 
-    function IngredientDetailController($routeParams, edamamService, merchandiseService,
+    function IngredientDetailController($location, $routeParams, edamamService, merchandiseService,
                                         currentUser, userService, $timeout) {
 
         var model = this;
